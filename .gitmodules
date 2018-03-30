@@ -1,0 +1,18 @@
+[submodule "lib/cpgf"]
+	path = lib/cpgf
+	url = https://github.com/ErrorFlexXx/cpgf.git
+[submodule "lib/lua"]
+	path = lib/lua
+	url = https://github.com/LuaDist/lua.git
+[submodule "lib/python-cmake-buildsystem"]
+	path = lib/python-cmake-buildsystem
+	url = https://github.com/ErrorFlexXx/python-cmake-buildsystem.git
+[submodule "lib/RakNet"]
+	path = lib/RakNet
+	url = https://github.com/ErrorFlexXx/RakNet.git
+[submodule "lib/tinydir"]
+	path = lib/tinydir
+	url = https://github.com/cxong/tinydir.git
+[submodule "lib/ZenLib"]
+	path = lib/ZenLib
+	url = https://github.com/degenerated1123/ZenLib.git

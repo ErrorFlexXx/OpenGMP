@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Gothic">
+      <UniqueIdentifier>{50bb06ab-9339-4fc5-8357-6b0366e0c93a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gothic\Types">
+      <UniqueIdentifier>{459caf7a-bcd7-4aa3-913e-6a593fa789a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gothic\Objects">
+      <UniqueIdentifier>{fa21a6b1-3b06-4e96-99f4-05fd87bf976d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hooks">
+      <UniqueIdentifier>{1e48ddd9-9e5d-4da9-81c1-876b13bfec0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{42b3bce9-514d-4fef-9e7e-431389821227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Enumeration">
+      <UniqueIdentifier>{21c871b7-f293-4b34-b4f9-921056b55c32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gothic\Classes">
+      <UniqueIdentifier>{4a90c12a-07df-4994-8ce6-5fed1c3be700}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Gothic\xcall.h">
+      <Filter>Gothic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zSTRING.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zCOLOR.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zVEC2.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\cGameManager.hpp">
+      <Filter>Gothic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Objects\oCGame.hpp">
+      <Filter>Gothic\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Objects\oCWorldTimer.hpp">
+      <Filter>Gothic\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hook.hpp" />
+    <ClInclude Include="..\..\openGMP.hpp" />
+    <ClInclude Include="..\..\Hooks\otherHooks.hpp">
+      <Filter>Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Hooks\hGame.hpp">
+      <Filter>Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Core\inputHandler.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Core\Enumeration\virtualKeys.hpp">
+      <Filter>Core\Enumeration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\process.hpp" />
+    <ClInclude Include="..\..\Gothic\Classes\zCVob.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zVEC3.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zTBBox3D.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zTBSphere3D.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zTPlane.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zMAT4.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zVEC4.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zMAT3.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zTSound3DParams.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCFontMan.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCFont.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Objects\oCMob.hpp">
+      <Filter>Gothic\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Objects\oCVob.hpp">
+      <Filter>Gothic\Objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp">
+      <Filter>Gothic\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Gothic\Types\zVEC2.cpp">
+      <Filter>Gothic\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main.cpp" />
+    <ClCompile Include="..\..\hook.cpp" />
+    <ClCompile Include="..\..\openGMP.cpp" />
+    <ClCompile Include="..\..\Hooks\otherHooks.cpp">
+      <Filter>Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Hooks\hGame.cpp">
+      <Filter>Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Core\inputHandler.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\process.cpp" />
+    <ClCompile Include="..\..\Gothic\Types\zVEC3.cpp">
+      <Filter>Gothic\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Gothic\Types\zMAT3.cpp">
+      <Filter>Gothic\Types</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

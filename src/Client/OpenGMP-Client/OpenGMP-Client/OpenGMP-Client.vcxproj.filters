@@ -26,6 +26,24 @@
     <Filter Include="Gothic\Classes">
       <UniqueIdentifier>{4a90c12a-07df-4994-8ce6-5fed1c3be700}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shared">
+      <UniqueIdentifier>{04cfa2d9-b17a-48ef-8aa6-79b1f99022c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\GameObjects">
+      <UniqueIdentifier>{91c547a8-fb55-41c7-b7c5-6b30b21ca4f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\WorldObjects">
+      <UniqueIdentifier>{e9594b7f-d083-4015-af58-0a4bfac0610e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\Types">
+      <UniqueIdentifier>{446c817e-7a91-43ba-a93b-6b49a1932bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\WorldObjects\Instances">
+      <UniqueIdentifier>{aaab1275-807b-4519-b060-af00f8330ea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\WorldObjects\WorldGlobals">
+      <UniqueIdentifier>{1abc726c-2afc-46b4-8138-3bea77df6802}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Gothic\xcall.h">
@@ -103,6 +121,75 @@
     <ClInclude Include="..\..\Gothic\Objects\oCVob.hpp">
       <Filter>Gothic\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Shared\gameTime.hpp">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\GameObjects\collection.hpp">
+      <Filter>Shared\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\GameObjects\dynamicCollection.hpp">
+      <Filter>Shared\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\GameObjects\gameObject.hpp">
+      <Filter>Shared\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\GameObjects\idObject.hpp">
+      <Filter>Shared\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\GameObjects\staticCollection.hpp">
+      <Filter>Shared\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\angles.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\colorRGBA.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\forbiddenException.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\iVobTypeObject.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\npcMovement.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\vec3f.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\vobTypes.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\weatherTypes.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\worldTime.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\WorldObjects\baseVob.hpp">
+      <Filter>Shared\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\WorldObjects\vob.hpp">
+      <Filter>Shared\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\WorldObjects\world.hpp">
+      <Filter>Shared\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\barrierController.hpp">
+      <Filter>Shared\WorldObjects\WorldGlobals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\skyController.hpp">
+      <Filter>Shared\WorldObjects\WorldGlobals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\weatherController.hpp">
+      <Filter>Shared\WorldObjects\WorldGlobals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\worldClock.hpp">
+      <Filter>Shared\WorldObjects\WorldGlobals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\WorldObjects\Instances\baseVobInstance.hpp">
+      <Filter>Shared\WorldObjects\Instances</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp">
@@ -129,6 +216,60 @@
     </ClCompile>
     <ClCompile Include="..\..\Gothic\Types\zMAT3.cpp">
       <Filter>Gothic\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\gameTime.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\GameObjects\collection.cpp">
+      <Filter>Shared\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\GameObjects\dynamicCollection.cpp">
+      <Filter>Shared\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\GameObjects\gameObject.cpp">
+      <Filter>Shared\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\GameObjects\idObject.cpp">
+      <Filter>Shared\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\GameObjects\staticCollection.cpp">
+      <Filter>Shared\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Types\angles.cpp">
+      <Filter>Shared\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Types\colorRGBA.cpp">
+      <Filter>Shared\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Types\vec3f.cpp">
+      <Filter>Shared\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Types\worldTime.cpp">
+      <Filter>Shared\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\WorldObjects\baseVob.cpp">
+      <Filter>Shared\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\WorldObjects\vob.cpp">
+      <Filter>Shared\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\WorldObjects\world.cpp">
+      <Filter>Shared\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\barrierController.cpp">
+      <Filter>Shared\WorldObjects\WorldGlobals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\skyController.cpp">
+      <Filter>Shared\WorldObjects\WorldGlobals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\weatherController.cpp">
+      <Filter>Shared\WorldObjects\WorldGlobals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\worldClock.cpp">
+      <Filter>Shared\WorldObjects\WorldGlobals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\WorldObjects\Instances\baseVobInstance.cpp">
+      <Filter>Shared\WorldObjects\Instances</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

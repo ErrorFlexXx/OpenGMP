@@ -83,6 +83,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)../../..;$(ProjectDir)/../../../../lib/RakNet/Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -105,6 +106,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)../../..;$(ProjectDir)/../../../../lib/RakNet/Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -127,6 +129,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Shared\GameObjects\collection.hpp" />
+    <ClInclude Include="..\..\..\Shared\GameObjects\dynamicCollection.hpp" />
+    <ClInclude Include="..\..\..\Shared\GameObjects\gameObject.hpp" />
+    <ClInclude Include="..\..\..\Shared\GameObjects\idObject.hpp" />
+    <ClInclude Include="..\..\..\Shared\GameObjects\staticCollection.hpp" />
+    <ClInclude Include="..\..\..\Shared\gameTime.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\angles.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\colorRGBA.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\forbiddenException.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\iVobTypeObject.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\npcMovement.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\vec3f.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\vobTypes.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\weatherTypes.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\worldTime.hpp" />
+    <ClInclude Include="..\..\..\Shared\WorldObjects\baseVob.hpp" />
+    <ClInclude Include="..\..\..\Shared\WorldObjects\Instances\baseVobInstance.hpp" />
+    <ClInclude Include="..\..\..\Shared\WorldObjects\vob.hpp" />
+    <ClInclude Include="..\..\..\Shared\WorldObjects\world.hpp" />
+    <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\barrierController.hpp" />
+    <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\skyController.hpp" />
+    <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\weatherController.hpp" />
+    <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\worldClock.hpp" />
     <ClInclude Include="..\..\Core\Enumeration\virtualKeys.hpp" />
     <ClInclude Include="..\..\Core\inputHandler.hpp" />
     <ClInclude Include="..\..\Gothic\cGameManager.hpp" />
@@ -156,6 +181,24 @@
     <ClInclude Include="..\..\process.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Shared\GameObjects\collection.cpp" />
+    <ClCompile Include="..\..\..\Shared\GameObjects\dynamicCollection.cpp" />
+    <ClCompile Include="..\..\..\Shared\GameObjects\gameObject.cpp" />
+    <ClCompile Include="..\..\..\Shared\GameObjects\idObject.cpp" />
+    <ClCompile Include="..\..\..\Shared\GameObjects\staticCollection.cpp" />
+    <ClCompile Include="..\..\..\Shared\gameTime.cpp" />
+    <ClCompile Include="..\..\..\Shared\Types\angles.cpp" />
+    <ClCompile Include="..\..\..\Shared\Types\colorRGBA.cpp" />
+    <ClCompile Include="..\..\..\Shared\Types\vec3f.cpp" />
+    <ClCompile Include="..\..\..\Shared\Types\worldTime.cpp" />
+    <ClCompile Include="..\..\..\Shared\WorldObjects\baseVob.cpp" />
+    <ClCompile Include="..\..\..\Shared\WorldObjects\Instances\baseVobInstance.cpp" />
+    <ClCompile Include="..\..\..\Shared\WorldObjects\vob.cpp" />
+    <ClCompile Include="..\..\..\Shared\WorldObjects\world.cpp" />
+    <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\barrierController.cpp" />
+    <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\skyController.cpp" />
+    <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\weatherController.cpp" />
+    <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\worldClock.cpp" />
     <ClCompile Include="..\..\Core\inputHandler.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zMAT3.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp" />

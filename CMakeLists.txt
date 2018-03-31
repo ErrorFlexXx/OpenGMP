@@ -82,8 +82,8 @@ file(GLOB serverSources
 
 # Build commands server
 message("Will build server.")
-add_executable(server ${serverSources})
-target_link_libraries(server RakNetLibStatic liblua libpython-shared libCpgf utils )
+add_executable(OpenGMP-Server ${serverSources})
+target_link_libraries(OpenGMP-Server RakNetLibStatic liblua libpython-shared libCpgf utils )
 
 # Dirty hack for libpython shared lib not moved automatically by python cmake project.
 if(UNIX)
@@ -91,7 +91,7 @@ if(UNIX)
 else()
 	set(PYTHON_OUT_SHARED_LIB ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/lib/python-cmake-buildsystem/lib/python2.7.dll)
 endif(UNIX)
-add_custom_command(TARGET server
+add_custom_command(TARGET OpenGMP-Server
 		   PRE_LINK
 		   COMMAND ${CMAKE_COMMAND} -E copy ${PYTHON_OUT_SHARED_LIB} ${CMAKE_CURRENT_BINARY_DIR})
 

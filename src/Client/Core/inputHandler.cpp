@@ -78,7 +78,7 @@ void InputHandler::Update()
 			{
 				if(m_keys[i]) //Release key
 				{
-					keys[i] = false;
+					m_keys[i] = false;
 					if(OnKeyUp != NULL)
                         OnKeyUp((VirtualKeys::VirtualKeys) i);
 				}

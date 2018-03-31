@@ -263,6 +263,6 @@ public:
     }
 
 private:
-    unsigned int load[4]; // 4*4 Byte
+    unsigned int load[5]; // 5*4 Byte
 };
 

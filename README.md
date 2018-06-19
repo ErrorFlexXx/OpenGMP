@@ -34,6 +34,13 @@ Currently there is only one client implementation and it's designed for the orig
 Therefore it has to be compiled with a msvc microsoft compiler. To create this project open the .sln project located at 
 src/Client/OpenGMP-Client.
 
+### Known issues
+On Ubuntu systems there is a problem with the python2.7 packages, that causes the server to crash, if a phython script is going to be loaded.
+If the program crashs with a message like: `ImportError: No module named _sysconfigdata_nd` one can place a symbolic link to solve the problem.
+```bash
+sudo ln -fs /usr/lib/python2.7/plat-x86_64-linux-gnu/_sysconfigdata_nd.py /usr/lib/python2.7/
+```
+
 ## Special thanks to
  * A special thanks goes to the projects GUC and SumpfkrautOnline. The base structure of the project is mostly adopted from there.
  * Another one to all projects that are used as library in this project.

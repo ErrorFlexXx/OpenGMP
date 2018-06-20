@@ -27,6 +27,18 @@ VisualText::VisualText(const std::string &text, int x, int y, Visual *parent, bo
     shown = true;
 }
 
+Visual *VisualText::Create(const std::string &text, int x, int y)
+{
+    return Create(text, x, y, false);
+}
+
+Visual *VisualText::Create(const std::string &text, int x, int y, bool virtuals)
+{
+    Visual *newVisual = new Visual();
+    newVisual->CreateText(text, x, y, virtuals);
+    return newVisual;
+}
+
 void VisualText::Show()
 {
     if (!shown)
@@ -87,6 +99,11 @@ void VisualText::SetCenteredY(bool value)
 {
     centeredY = value;
     AlignText();
+}
+
+ViewPoint VisualText::GetPosition()
+{
+    return position;
 }
 
 View::Fonts VisualText::GetFont()

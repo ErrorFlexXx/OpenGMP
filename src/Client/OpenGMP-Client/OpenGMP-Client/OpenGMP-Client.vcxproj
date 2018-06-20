@@ -189,6 +189,8 @@
     <ClInclude Include="..\..\Gothic\Types\zVEC4.hpp" />
     <ClInclude Include="..\..\Gothic\xcall.h" />
     <ClInclude Include="..\..\GUI\3DVisual.hpp" />
+    <ClInclude Include="..\..\GUI\menuButton.hpp" />
+    <ClInclude Include="..\..\GUI\menuItem.hpp" />
     <ClInclude Include="..\..\GUI\textBox.hpp" />
     <ClInclude Include="..\..\GUI\view.hpp" />
     <ClInclude Include="..\..\GUI\visual.hpp" />
@@ -219,10 +221,13 @@
     <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\weatherController.cpp" />
     <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\worldClock.cpp" />
     <ClCompile Include="..\..\Core\inputHandler.cpp" />
+    <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zMAT3.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zVEC2.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zVEC3.cpp" />
+    <ClCompile Include="..\..\GUI\menuButton.cpp" />
+    <ClCompile Include="..\..\GUI\menuItem.cpp" />
     <ClCompile Include="..\..\GUI\view.cpp" />
     <ClCompile Include="..\..\GUI\visual.cpp" />
     <ClCompile Include="..\..\GUI\visualText.cpp" />

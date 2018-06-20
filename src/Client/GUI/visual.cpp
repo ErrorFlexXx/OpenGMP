@@ -226,3 +226,8 @@ zCView *Visual::GetZView()
 {
     return zView;
 }
+
+const std::list<VisualText*> &Visual::Texts()
+{
+    return texts;
+}

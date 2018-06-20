@@ -232,6 +232,12 @@
     <ClInclude Include="..\..\Gothic\Classes\zCOptionSection.hpp">
       <Filter>Gothic\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GUI\menuItem.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\menuButton.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp">
@@ -321,6 +327,15 @@
     </ClCompile>
     <ClCompile Include="..\..\GUI\visual.cpp">
       <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\menuItem.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\menuButton.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp">
+      <Filter>Gothic\Types</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

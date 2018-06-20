@@ -21,8 +21,8 @@ namespace OpenGMP
         {
         public:
             VisualText(const std::string &text, int x, int y, class Visual *parent, bool virtuals);
-            /*static Visual *Create(std::string text, int x, int y);
-            static Visual *Create(std::string text, int x, int y, bool virtuals);*/
+            static Visual *Create(const std::string &text, int x, int y);
+            static Visual *Create(const std::string &text, int x, int y, bool virtuals);
             virtual ~VisualText() {};
 
             virtual void Show() override;
@@ -36,6 +36,7 @@ namespace OpenGMP
             void SetCenteredX(bool value);
             bool GetCenteredY();
             void SetCenteredY(bool value);
+            ViewPoint GetPosition();
             View::Fonts GetFont();
             void SetFont(View::Fonts font);
             TextFormat GetFormat();

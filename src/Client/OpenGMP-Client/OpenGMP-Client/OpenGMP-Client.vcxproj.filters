@@ -44,6 +44,9 @@
     <Filter Include="Shared\WorldObjects\WorldGlobals">
       <UniqueIdentifier>{1abc726c-2afc-46b4-8138-3bea77df6802}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{d339b627-b557-4d0b-93c8-52205e3426ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Gothic\xcall.h">
@@ -190,6 +193,45 @@
     <ClInclude Include="..\..\..\Shared\WorldObjects\Instances\baseVobInstance.hpp">
       <Filter>Shared\WorldObjects\Instances</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCView.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCCamera.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCViewProgressBar.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCWorld.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\3DVisual.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\textBox.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\view.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\visual.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\visualText.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCViewText.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCOption.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCOptionEntry.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCOptionSection.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp">
@@ -270,6 +312,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Shared\WorldObjects\Instances\baseVobInstance.cpp">
       <Filter>Shared\WorldObjects\Instances</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\view.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\visualText.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\visual.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -21,7 +21,7 @@ public:
     /* Returns XCALLs FontManager (created in zUlfi::StartUp) */
     static zCFontMan *GetInstance()
     {
-        return *(zCFontMan**)((unsigned int)0x00AB39D4);
+        return *(zCFontMan**)(0x00AB39D4);
     }
 
     /* Return -- Maybe ID ? */

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../xcall.h"
-#include "../Types/zSTRING.h"
+#include "../Types/zSTRING.hpp"
 
 class zCOptionEntry
 {

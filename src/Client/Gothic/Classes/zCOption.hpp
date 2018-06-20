@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../xcall.h"
-#include "../Types/zSTRING.h"
+#include "../Types/zSTRING.hpp"
 
 #pragma warning(disable:4731) //Inline assembler modifies framepointer EBP
 

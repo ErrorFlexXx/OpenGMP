@@ -37,9 +37,9 @@ To create the project, you'll first have to compile the RakNet library. Open the
 
 After this one can open the .sln project located at src/Client/OpenGMP-Client and compile it.
 
-### Known issues
+## Known issues
 
-## Server (Linux build):
+### Server (Linux build):
 On Ubuntu systems there is a problem with the python2.7 packages, that causes the server to crash, if a phython script is going to be loaded.
 If the program crashs with a message like: `ImportError: No module named _sysconfigdata_nd` one can place a symbolic link to solve the problem.
 ```bash

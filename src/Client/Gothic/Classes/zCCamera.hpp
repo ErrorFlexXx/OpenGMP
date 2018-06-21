@@ -159,10 +159,12 @@ public:
         XCALL(0x0054B960);
     }
 
-    void DrawPolySimple(struct zCCamera::zTCamVertSimple *, int, class zCMaterial *, int)
+    /*
+    void DrawPolySimple(class zCCamera::zTCamVertSimple *, int, class zCMaterial *, int)
     {
         XCALL(0x0054BAB0);
     }
+    */
 
     void SetRenderScreenFade(zCOLOR)
     {
@@ -184,12 +186,12 @@ public:
         XCALL(0x0054BC20);
     }
 
-    int __fastcall ScreenProjectionTouchesPortalRough(struct zTBBox3D const &, struct zTBBox2D const &)
+    int __fastcall ScreenProjectionTouchesPortalRough(class zTBBox3D const &, struct zTBBox2D const &)
     {
         XCALL(0x0054BE80);
     }
 
-    int __fastcall ScreenProjectionTouchesPortal(struct zTBBox3D const &, struct zTBBox2D const &)
+    int __fastcall ScreenProjectionTouchesPortal(class zTBBox3D const &, struct zTBBox2D const &)
     {
         XCALL(0x0054C100);
     }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../xcall.h"
+#include "zCTree.hpp"
 
 class zCWorld
 {
@@ -81,10 +82,11 @@ public:
         XCALL(0x00620410);
     }
 
-    void SearchZoneListByClass(class zCClassDef *,class zCArray<class zCZone *> &)
+    /*void SearchZoneListByClass(class zCClassDef *,class zCArray<class zCZone *> &)
     {
         XCALL(0x00624400);
     }
+    */
 
     class zCZone * SearchZoneDefaultByClass(class zCClassDef *)
     {
@@ -95,7 +97,7 @@ public:
     {
         XCALL(0x006247B0);
     }
-
+    
     class zCTree<class zCVob> * AddVobAsChild(class zCVob *,class zCVob *)
     {
         XCALL(0x006247F0);
@@ -110,16 +112,16 @@ public:
     {
         XCALL(0x00624BA0);
     }
-
+    
     /*virtual*/ void RemoveVobSubtree(class zCVob *)
     {
         XCALL(0x00624D60);
     }
 
-    /*void RemoveVobSubtree(class zCTree<class zCVob> *)
+    void RemoveVobSubtree(class zCTree<class zCVob> *)
     {
         XCALL(0x00624D90);
-    }*/
+    }
 
     void MoveVobSubtreeTo(class zCVob *,class zCVob *)
     {

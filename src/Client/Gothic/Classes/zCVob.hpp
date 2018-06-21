@@ -30,7 +30,7 @@ public:
         lightColorStatDirty = 1 << 10,
         lightColorDynDirty = 1 << 11,
         movementMode = 1 << 12 // 2 bits
-    };
+    } BitFlag0;
 
     static const enum class zTVobType : unsigned char
     {
@@ -42,7 +42,7 @@ public:
         MOB = 128,
         ITEM = 129,
         NPC = 130
-    };
+    } zTVobType;
 
     static const struct VarOffsets
     {
@@ -323,12 +323,12 @@ public:
         XCALL(0x0061B0C0);
     }
         
-    void SetBBox3DWorld(struct zTBBox3D const &)
+    void SetBBox3DWorld(class zTBBox3D const &)
     {
         XCALL(0x0061B0E0);
     }
         
-    void SetBBox3DLocal(struct zTBBox3D const &)
+    void SetBBox3DLocal(class zTBBox3D const &)
     {
         XCALL(0x0061B140);
     }

@@ -64,7 +64,7 @@ void zCView::DrawItemsDetour()
             HView::rndrWorld->GetActiveSkyControler()->FillBackground(false);
 
             HView::camera = new zCCamera();
-            HView::camera->SetFarClipZ(INT_MAX);
+            HView::camera->SetFarClipZ((float)INT_MAX);
 
             HView::camVob = zCVob::_CreateNewInstance();
             HView::rndrWorld->AddVob(HView::camVob);

@@ -162,12 +162,15 @@
     <ClInclude Include="..\..\Core\inputHandler.hpp" />
     <ClInclude Include="..\..\Gothic\cGameManager.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCCamera.hpp" />
+    <ClInclude Include="..\..\Gothic\Classes\zCEventManager.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCFont.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCFontMan.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOption.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOptionEntry.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOptionSection.hpp" />
+    <ClInclude Include="..\..\Gothic\Classes\zCRenderer.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCSkyController.hpp" />
+    <ClInclude Include="..\..\Gothic\Classes\zCTree.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCView.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCViewProgressBar.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCViewText.hpp" />
@@ -189,12 +192,12 @@
     <ClInclude Include="..\..\Gothic\Types\zVEC3.hpp" />
     <ClInclude Include="..\..\Gothic\Types\zVEC4.hpp" />
     <ClInclude Include="..\..\Gothic\xcall.h" />
-    <ClInclude Include="..\..\GUI\3DVisual.hpp" />
     <ClInclude Include="..\..\GUI\menuButton.hpp" />
     <ClInclude Include="..\..\GUI\menuItem.hpp" />
     <ClInclude Include="..\..\GUI\textBox.hpp" />
     <ClInclude Include="..\..\GUI\view.hpp" />
     <ClInclude Include="..\..\GUI\visual.hpp" />
+    <ClInclude Include="..\..\GUI\visual3D.hpp" />
     <ClInclude Include="..\..\GUI\visualText.hpp" />
     <ClInclude Include="..\..\hook.hpp" />
     <ClInclude Include="..\..\Hooks\hGame.hpp" />
@@ -232,6 +235,7 @@
     <ClCompile Include="..\..\GUI\menuItem.cpp" />
     <ClCompile Include="..\..\GUI\view.cpp" />
     <ClCompile Include="..\..\GUI\visual.cpp" />
+    <ClCompile Include="..\..\GUI\visual3D.cpp" />
     <ClCompile Include="..\..\GUI\visualText.cpp" />
     <ClCompile Include="..\..\hook.cpp" />
     <ClCompile Include="..\..\Hooks\hGame.cpp" />

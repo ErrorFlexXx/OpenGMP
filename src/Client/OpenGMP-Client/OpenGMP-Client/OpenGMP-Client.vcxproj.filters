@@ -205,9 +205,6 @@
     <ClInclude Include="..\..\Gothic\Classes\zCWorld.hpp">
       <Filter>Gothic\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GUI\3DVisual.hpp">
-      <Filter>GUI</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GUI\textBox.hpp">
       <Filter>GUI</Filter>
     </ClInclude>
@@ -242,6 +239,18 @@
       <Filter>Hooks</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Gothic\Classes\zCSkyController.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCRenderer.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCEventManager.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\visual3D.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCTree.hpp">
       <Filter>Gothic\Classes</Filter>
     </ClInclude>
   </ItemGroup>
@@ -345,6 +354,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Hooks\hView.cpp">
       <Filter>Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\visual3D.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

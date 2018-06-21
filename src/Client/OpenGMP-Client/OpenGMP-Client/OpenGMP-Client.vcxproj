@@ -194,6 +194,7 @@
     <ClInclude Include="..\..\Gothic\xcall.h" />
     <ClInclude Include="..\..\GUI\menuButton.hpp" />
     <ClInclude Include="..\..\GUI\menuItem.hpp" />
+    <ClInclude Include="..\..\GUI\menuTextBox.hpp" />
     <ClInclude Include="..\..\GUI\textBox.hpp" />
     <ClInclude Include="..\..\GUI\view.hpp" />
     <ClInclude Include="..\..\GUI\visual.hpp" />
@@ -233,6 +234,8 @@
     <ClCompile Include="..\..\Gothic\Types\zVEC3.cpp" />
     <ClCompile Include="..\..\GUI\menuButton.cpp" />
     <ClCompile Include="..\..\GUI\menuItem.cpp" />
+    <ClCompile Include="..\..\GUI\menuTextBox.cpp" />
+    <ClCompile Include="..\..\GUI\textBox.cpp" />
     <ClCompile Include="..\..\GUI\view.cpp" />
     <ClCompile Include="..\..\GUI\visual.cpp" />
     <ClCompile Include="..\..\GUI\visual3D.cpp" />

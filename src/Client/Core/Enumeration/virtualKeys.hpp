@@ -1,6 +1,6 @@
 #pragma once
 
-namespace VirtualKeys
+namespace OpenGMP
 {
 typedef enum VirtualKeys : unsigned short
 {

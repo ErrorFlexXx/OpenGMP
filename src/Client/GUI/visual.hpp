@@ -40,6 +40,7 @@ namespace OpenGMP
             ViewPoint GetSize();
             View *GetParent();
             zCView *GetZView();
+            bool Shown();
             const std::list<VisualText*> &Texts();
         
         protected:

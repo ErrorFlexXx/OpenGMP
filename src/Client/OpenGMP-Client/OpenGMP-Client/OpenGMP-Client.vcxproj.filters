@@ -253,6 +253,9 @@
     <ClInclude Include="..\..\Gothic\Classes\zCTree.hpp">
       <Filter>Gothic\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GUI\menuTextBox.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp">
@@ -356,6 +359,12 @@
       <Filter>Hooks</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GUI\visual3D.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\menuTextBox.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\textBox.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>

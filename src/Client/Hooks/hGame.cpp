@@ -3,6 +3,9 @@
 #include "../Gothic/Objects/oCGame.hpp"
 #include "../Core/inputHandler.hpp"
 
+using namespace OpenGMP;
+using namespace OpenGMP::Hooks;
+
 HGame *HGame::instance = nullptr;
 
 HGame::HGame()

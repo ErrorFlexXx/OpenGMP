@@ -80,56 +80,64 @@ int WorldTime::GetSecond()
 
 /* Operators */
 
-WorldTime& WorldTime::operator -(const WorldTime& rhs)
+WorldTime WorldTime::operator -(const WorldTime& rhs)
 {
-    return *(new WorldTime(m_totalSeconds - rhs.m_totalSeconds));
+    WorldTime result(m_totalSeconds - rhs.m_totalSeconds);
+    return result;
 }
 
-WorldTime& WorldTime::operator -(const int rhs)
+WorldTime WorldTime::operator -(const int rhs)
 {
-    return *(new WorldTime(m_totalSeconds - rhs));
+    WorldTime result(m_totalSeconds - rhs);
+    return result;
 }
 
-WorldTime& WorldTime::operator +(const WorldTime& rhs)
+WorldTime WorldTime::operator +(const WorldTime& rhs)
 {
-    return *(new WorldTime(m_totalSeconds + rhs.m_totalSeconds));
+    WorldTime  result(m_totalSeconds + rhs.m_totalSeconds);
+    return result;
 }
 
-WorldTime& WorldTime::operator +(const int rhs)
+WorldTime WorldTime::operator +(const int rhs)
 {
-    return *(new WorldTime(m_totalSeconds + rhs));
+    WorldTime  result(m_totalSeconds + rhs);
+    return result;
 }
 
-WorldTime& WorldTime::operator ++()
+WorldTime &WorldTime::operator ++()
 {
     m_totalSeconds++;
     return *(this);
 }
 
-WorldTime& WorldTime::operator --()
+WorldTime &WorldTime::operator --()
 {
     m_totalSeconds--;
     return *(this);
 }
 
-WorldTime& WorldTime::operator *(const float rhs)
+WorldTime WorldTime::operator *(const float rhs)
 {
-    return *(new WorldTime(m_totalSeconds * rhs));
+    WorldTime result((int)(m_totalSeconds * rhs));
+    return result;
 }
 
-WorldTime& WorldTime::operator *(const int rhs)
+WorldTime WorldTime::operator *(const int rhs)
 {
-    return *(new WorldTime(m_totalSeconds * rhs));
+    WorldTime result(m_totalSeconds * rhs);
+    return result;
 }
 
-WorldTime& WorldTime::operator /(const float rhs)
+WorldTime WorldTime::operator /(const float rhs)
 {
-    return *(new WorldTime(m_totalSeconds / rhs));
+    WorldTime result((int)(m_totalSeconds / rhs));
+    return result;
 }
 
-WorldTime& WorldTime::operator /(const int rhs)
+WorldTime WorldTime::operator /(const int rhs)
 {
-    return *(new WorldTime(m_totalSeconds / rhs));
+    WorldTime result(m_totalSeconds / rhs);
+    return result;
 }
 
 bool WorldTime::operator <(const WorldTime& rhs)

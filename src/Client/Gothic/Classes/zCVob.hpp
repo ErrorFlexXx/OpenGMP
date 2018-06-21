@@ -15,6 +15,7 @@ class zCVisual;
 
 class zCVob
 {
+public:
     static const enum class BitFlag0 : unsigned int
     {
         showVisual = 1 << 0,
@@ -43,9 +44,53 @@ class zCVob
         NPC = 130
     };
 
+    static const struct VarOffsets
+    {
+        static const unsigned int globalVobTreeNode = 0x0024;
+        static const unsigned int lastTimeDrawn = 0x0028;
+        static const unsigned int lastTimeCollected = 0x002C;
+        static const unsigned int vobLeafList = 0x0030;//zCArray<zCBspLeaf*>
+        static const unsigned int trafoObjToWorld = 0x003C;//int[16]
+        static const unsigned int bbox3D = 0x007C;
+        static const unsigned int bsphere3D = 0x0094;
+        static const unsigned int touchVobList = 0x00A4;//zCArray<zCVob*>
+        static const unsigned int type = 0x00B0;
+        static const unsigned int groundShadowSizePacked = 0x00b4;
+        static const unsigned int homeWorld = 0x00B8;
+        static const unsigned int groundPoly = 0x00BC;
+        static const unsigned int callback_ai = 0x00C0;
+        static const unsigned int trafo = 0x00C4;
+        static const unsigned int visual = 0x00C8;
+        static const unsigned int visualAlpha = 0x00CC;
+        static const unsigned int vobFarClipZScale = 0x00D0;
+        static const unsigned int aniMode = 0x00D4;
+        static const unsigned int aniModeStrength = 0x00D8;
+        static const unsigned int zBias = 0x00DC;
+        static const unsigned int rigidBody = 0x00E0;
+        static const unsigned int lightColorStat = 0x00E4;
+        static const unsigned int lightColorDyn = 0x00E8;
+        static const unsigned int lightDirectionStat = 0x00EC;
+        static const unsigned int vobPresetName = 0x00F8;
+        static const unsigned int eventManager = 0x00FC;
+        static const unsigned int nextOnTimer = 0x0100;
+        static const unsigned int bitfield = 0x0104;
+        static const unsigned int CollisionObjectClass = 0x0118;
+        static const unsigned int CollisionObject = 0x011C;
+    } VarOffsets;    
+
     static zCVob * _CreateNewInstance()
     {
         XCALL(0x005FD940);
+    }
+
+    ~zCVob()
+    {
+        ScalarDeletingDestructor(1);
+    }
+
+    /*protected*/ /*virtual*/void *ScalarDeletingDestructor(unsigned int)
+    {
+        XCALL(0x005FE440);
     }
 
     static unsigned long GetNextFreeVobID()
@@ -166,6 +211,11 @@ class zCVob
     zSTRING GetVobInfo()
     {
         XCALL(0x00602100);
+    }
+
+    /*virtual*/ void SetVisual(class zSTRING const &)
+    {
+        XCALL(0x00602680);
     }
         
     void CalcRenderAlpha(float, class zCVisual * &, float &)
@@ -526,5 +576,50 @@ class zCVob
     void __fastcall DestroyCollisionObject(int)
     {
         XCALL(0x0061E6D0);
+    }
+
+    int GetGroundPoly()
+    {
+        return *((int*)(this + VarOffsets::groundPoly));
+    }
+
+    void SetGroundPoly(int value)
+    {
+        *((int*)(this + VarOffsets::groundPoly)) = value;
+    }
+
+    class zMAT4 *GetTrafoObjToWorld()
+    {
+        return (zMAT4*)(this + VarOffsets::trafoObjToWorld);
+    }
+
+    zVEC3 Position()
+    {
+        return GetTrafoObjToWorld()->Position();
+    }
+
+    void Position(const zVEC3 &newPos)
+    {
+        GetTrafoObjToWorld()->Position(newPos);
+    }
+
+    zVEC3 Direction()
+    {
+        return GetTrafoObjToWorld()->Direction();
+    }
+
+    void Direction(const zVEC3 &newDir)
+    {
+        GetTrafoObjToWorld()->Direction(newDir);
+    }
+
+    int LastTimeDrawn()
+    {
+        return *(int*)(this + VarOffsets::lastTimeDrawn);
+    }
+
+    void LastTimeDrawn(int value)
+    {
+        *(int*)(this + VarOffsets::lastTimeDrawn) = value;
     }
 };

@@ -238,6 +238,12 @@
     <ClInclude Include="..\..\GUI\menuButton.hpp">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Hooks\hView.hpp">
+      <Filter>Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCSkyController.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp">
@@ -336,6 +342,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp">
       <Filter>Gothic\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Hooks\hView.cpp">
+      <Filter>Hooks</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

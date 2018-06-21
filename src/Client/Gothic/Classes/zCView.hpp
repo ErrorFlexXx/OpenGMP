@@ -18,9 +18,34 @@ enum zEViewFX
     VIEW_FX_MAX
 };
 
-class zCView
+class zCViewBase
 {
+};
+
+class zCView : public zCViewBase
+{
+    static const struct VarOffsets
+    {
+        static const unsigned int m_bFillZ = 8;
+        static const unsigned int next = 12;
+        static const unsigned int text_lines = 132;
+        static const unsigned int psizex = 0x5C;
+        static const unsigned int psizey = 0x60;
+        static const unsigned int font = 0x64;
+    } VarOffsets;
+
 public:
+
+    /**
+    * @brief struct for with addresses used for hooks
+    */
+    static const struct Addresses
+    {
+        static const unsigned int DrawItems = 0x007A6750;
+    } Addresses;
+
+    void DrawItemsDetour(); //Defined in HView class.
+
     static zCView *GetScreen()
     {
         return *(zCView**)(0x00AB6468);
@@ -470,6 +495,16 @@ public:
     class zCViewText * CreateText(int, int, class zSTRING const &)
     {
         XCALL(0x007AA2B0);
+    }
+
+    bool FillZ()
+    {
+        return (*(int*)(this + VarOffsets::m_bFillZ)) >= 1;
+    }
+
+    void FillZ(bool value)
+    {
+        *(bool*)(this + VarOffsets::m_bFillZ) = value;
     }
 
 protected:

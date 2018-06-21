@@ -8,15 +8,25 @@
 
 class zCCamera
 {
-  public:
+public:
+    static const struct VarOffsets
+    {
+        static const unsigned int CamVob = 0x920;
+    } VarOffsets;
+
     static zVEC3 GetActiveCamPos()
     {
-    return *(zVEC3*)0x008D7F88);
+        return *(zVEC3*)0x008D7F88;
     }
 
     static zCCamera *GetActiveCam()
     {
         return *((zCCamera **)0x008D7F94);
+    }
+
+    static void SetActiveCam(zCCamera *value)
+    {
+        *((zCCamera **)0x008D7F94) = value;
     }
 
     zCCamera(void)
@@ -189,7 +199,19 @@ class zCCamera
         XCALL(0x0056BD00);
     }
 
-  private:
+    class zCVob *CamVob()
+    {
+        return *(zCVob**)(this + VarOffsets::CamVob);
+    }
+
+    void CamVob(class zCVob *value)
+    {
+        *(zCVob**)(this + VarOffsets::CamVob) = value;
+    }
+
+private:
+    unsigned char load[0x934];
+
     void CreateProjectionMatrix(class zMAT4 &, float, float, float, float)
     {
         XCALL(0x0054A810);

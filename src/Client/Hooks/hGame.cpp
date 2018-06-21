@@ -33,10 +33,12 @@ void HGame::RunIngame()
 
 void HGame::DoHook()
 {
-
+    m_hookIngame.DoHook();
+    m_hookOutgame.DoHook();
 }
 
 void HGame::UndoHook()
 {
-
+    m_hookIngame.UndoHook();
+    m_hookOutgame.UndoHook();
 }

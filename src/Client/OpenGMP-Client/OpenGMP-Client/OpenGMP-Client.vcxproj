@@ -167,6 +167,7 @@
     <ClInclude Include="..\..\Gothic\Classes\zCOption.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOptionEntry.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOptionSection.hpp" />
+    <ClInclude Include="..\..\Gothic\Classes\zCSkyController.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCView.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCViewProgressBar.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCViewText.hpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="..\..\GUI\visualText.hpp" />
     <ClInclude Include="..\..\hook.hpp" />
     <ClInclude Include="..\..\Hooks\hGame.hpp" />
+    <ClInclude Include="..\..\Hooks\hView.hpp" />
     <ClInclude Include="..\..\Hooks\otherHooks.hpp" />
     <ClInclude Include="..\..\openGMP.hpp" />
     <ClInclude Include="..\..\process.hpp" />
@@ -233,6 +235,7 @@
     <ClCompile Include="..\..\GUI\visualText.cpp" />
     <ClCompile Include="..\..\hook.cpp" />
     <ClCompile Include="..\..\Hooks\hGame.cpp" />
+    <ClCompile Include="..\..\Hooks\hView.cpp" />
     <ClCompile Include="..\..\Hooks\otherHooks.cpp" />
     <ClCompile Include="..\..\main.cpp" />
     <ClCompile Include="..\..\openGMP.cpp" />

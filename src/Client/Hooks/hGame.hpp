@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../hook.hpp"
+#include <Client/Gothic/Types/zCOLOR.hpp>
 #include "../Menus/ogmpMainMenu.hpp"
 
 namespace OpenGMP
@@ -29,7 +30,7 @@ namespace OpenGMP
             Hook m_hookOutgame;     //!< Outgame hook (menus).
             Hook m_hookIngame;      //!< Outgame hook (game rendering).
             static bool outgameStarted; //!< Flag to create initial outgame
-            static OpenGMP::Menus::OGMPMainMenu mainMenu; //!< Main menu
+            static OpenGMP::Menus::OGMPMainMenu *mainMenu; //!< Main menu
             static zCOLOR blankColor;
 
             /**

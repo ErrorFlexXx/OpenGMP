@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,9 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{075A1EBE-ECAA-464D-AC69-E576B8D0DD1A}</ProjectGuid>
-    <RootNamespace>OpenGMPClient</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{BC035E39-397B-4017-9F87-16D3FC460004}</ProjectGuid>
+    <RootNamespace>OpenGMP</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -69,27 +70,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <TargetName>OpenGMP</TargetName>
-    <TargetExt>.dll</TargetExt>
-    <IncludePath>$(ProjectDir)../../..;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../../lib/RakNet/Source;$(ProjectDir)../../../;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <TargetName>OpenGMP</TargetName>
-    <TargetExt>.dll</TargetExt>
-    <IncludePath>$(ProjectDir)../../..;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../../lib/RakNet/Source;$(ProjectDir)../../../;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)../../..;$(ProjectDir)/../../../../lib/RakNet/Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\lib\Raknet\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>RakNetLibStaticDebug.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;RakNetLibStaticDebug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)../../../../lib/RakNet/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -98,9 +92,6 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -109,15 +100,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)../../..;$(ProjectDir)/../../../../lib/RakNet/Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\lib\Raknet\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>RakNetLibStatic.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;RakNetLibStatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)../../../../lib/RakNet/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -129,35 +117,40 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Shared\GameObjects\collection.hpp" />
-    <ClInclude Include="..\..\..\Shared\GameObjects\dynamicCollection.hpp" />
-    <ClInclude Include="..\..\..\Shared\GameObjects\gameObject.hpp" />
-    <ClInclude Include="..\..\..\Shared\GameObjects\idObject.hpp" />
-    <ClInclude Include="..\..\..\Shared\GameObjects\staticCollection.hpp" />
+    <ClCompile Include="..\..\..\Shared\gameTime.cpp" />
+    <ClCompile Include="..\..\Controls\keyHoldHelper.cpp" />
+    <ClCompile Include="..\..\Core\inputHandler.cpp" />
+    <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp" />
+    <ClCompile Include="..\..\Gothic\Types\zMAT3.cpp" />
+    <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp" />
+    <ClCompile Include="..\..\Gothic\Types\zVEC2.cpp" />
+    <ClCompile Include="..\..\Gothic\Types\zVEC3.cpp" />
+    <ClCompile Include="..\..\GUI\mainMenu.cpp" />
+    <ClCompile Include="..\..\GUI\menu.cpp" />
+    <ClCompile Include="..\..\GUI\menuButton.cpp" />
+    <ClCompile Include="..\..\GUI\menuItem.cpp" />
+    <ClCompile Include="..\..\GUI\menuTextBox.cpp" />
+    <ClCompile Include="..\..\GUI\textBox.cpp" />
+    <ClCompile Include="..\..\GUI\view.cpp" />
+    <ClCompile Include="..\..\GUI\visual.cpp" />
+    <ClCompile Include="..\..\GUI\visual3D.cpp" />
+    <ClCompile Include="..\..\GUI\visualText.cpp" />
+    <ClCompile Include="..\..\hook.cpp" />
+    <ClCompile Include="..\..\Hooks\hGame.cpp" />
+    <ClCompile Include="..\..\Hooks\hView.cpp" />
+    <ClCompile Include="..\..\Hooks\otherHooks.cpp" />
+    <ClCompile Include="..\..\main.cpp" />
+    <ClCompile Include="..\..\Menus\ogmpMainMenu.cpp" />
+    <ClCompile Include="..\..\openGMP.cpp" />
+    <ClCompile Include="..\..\process.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="..\..\..\Shared\gameTime.hpp" />
-    <ClInclude Include="..\..\..\Shared\Types\angles.hpp" />
-    <ClInclude Include="..\..\..\Shared\Types\colorRGBA.hpp" />
-    <ClInclude Include="..\..\..\Shared\Types\forbiddenException.hpp" />
-    <ClInclude Include="..\..\..\Shared\Types\iVobTypeObject.hpp" />
-    <ClInclude Include="..\..\..\Shared\Types\npcMovement.hpp" />
-    <ClInclude Include="..\..\..\Shared\Types\vec3f.hpp" />
-    <ClInclude Include="..\..\..\Shared\Types\vobTypes.hpp" />
-    <ClInclude Include="..\..\..\Shared\Types\weatherTypes.hpp" />
-    <ClInclude Include="..\..\..\Shared\Types\worldTime.hpp" />
-    <ClInclude Include="..\..\..\Shared\WorldObjects\baseVob.hpp" />
-    <ClInclude Include="..\..\..\Shared\WorldObjects\Instances\baseVobInstance.hpp" />
-    <ClInclude Include="..\..\..\Shared\WorldObjects\vob.hpp" />
-    <ClInclude Include="..\..\..\Shared\WorldObjects\world.hpp" />
-    <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\barrierController.hpp" />
-    <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\skyController.hpp" />
-    <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\weatherController.hpp" />
-    <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\worldClock.hpp" />
     <ClInclude Include="..\..\Controls\keyHoldHelper.hpp" />
     <ClInclude Include="..\..\Core\Enumeration\virtualKeys.hpp" />
     <ClInclude Include="..\..\Core\inputHandler.hpp" />
@@ -180,6 +173,7 @@
     <ClInclude Include="..\..\Gothic\Objects\oCGame.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCMob.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCVob.hpp" />
+    <ClInclude Include="..\..\Gothic\Objects\oCWorld.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCWorldTimer.hpp" />
     <ClInclude Include="..\..\Gothic\Types\zCOLOR.hpp" />
     <ClInclude Include="..\..\Gothic\Types\zMAT3.hpp" />
@@ -210,51 +204,6 @@
     <ClInclude Include="..\..\Menus\ogmpMainMenu.hpp" />
     <ClInclude Include="..\..\openGMP.hpp" />
     <ClInclude Include="..\..\process.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\Shared\GameObjects\collection.cpp" />
-    <ClCompile Include="..\..\..\Shared\GameObjects\dynamicCollection.cpp" />
-    <ClCompile Include="..\..\..\Shared\GameObjects\gameObject.cpp" />
-    <ClCompile Include="..\..\..\Shared\GameObjects\idObject.cpp" />
-    <ClCompile Include="..\..\..\Shared\GameObjects\staticCollection.cpp" />
-    <ClCompile Include="..\..\..\Shared\gameTime.cpp" />
-    <ClCompile Include="..\..\..\Shared\Types\angles.cpp" />
-    <ClCompile Include="..\..\..\Shared\Types\colorRGBA.cpp" />
-    <ClCompile Include="..\..\..\Shared\Types\vec3f.cpp" />
-    <ClCompile Include="..\..\..\Shared\Types\worldTime.cpp" />
-    <ClCompile Include="..\..\..\Shared\WorldObjects\baseVob.cpp" />
-    <ClCompile Include="..\..\..\Shared\WorldObjects\Instances\baseVobInstance.cpp" />
-    <ClCompile Include="..\..\..\Shared\WorldObjects\vob.cpp" />
-    <ClCompile Include="..\..\..\Shared\WorldObjects\world.cpp" />
-    <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\barrierController.cpp" />
-    <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\skyController.cpp" />
-    <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\weatherController.cpp" />
-    <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\worldClock.cpp" />
-    <ClCompile Include="..\..\Controls\keyHoldHelper.cpp" />
-    <ClCompile Include="..\..\Core\inputHandler.cpp" />
-    <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp" />
-    <ClCompile Include="..\..\Gothic\Types\zMAT3.cpp" />
-    <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp" />
-    <ClCompile Include="..\..\Gothic\Types\zVEC2.cpp" />
-    <ClCompile Include="..\..\Gothic\Types\zVEC3.cpp" />
-    <ClCompile Include="..\..\GUI\mainMenu.cpp" />
-    <ClCompile Include="..\..\GUI\menu.cpp" />
-    <ClCompile Include="..\..\GUI\menuButton.cpp" />
-    <ClCompile Include="..\..\GUI\menuItem.cpp" />
-    <ClCompile Include="..\..\GUI\menuTextBox.cpp" />
-    <ClCompile Include="..\..\GUI\textBox.cpp" />
-    <ClCompile Include="..\..\GUI\view.cpp" />
-    <ClCompile Include="..\..\GUI\visual.cpp" />
-    <ClCompile Include="..\..\GUI\visual3D.cpp" />
-    <ClCompile Include="..\..\GUI\visualText.cpp" />
-    <ClCompile Include="..\..\hook.cpp" />
-    <ClCompile Include="..\..\Hooks\hGame.cpp" />
-    <ClCompile Include="..\..\Hooks\hView.cpp" />
-    <ClCompile Include="..\..\Hooks\otherHooks.cpp" />
-    <ClCompile Include="..\..\main.cpp" />
-    <ClCompile Include="..\..\Menus\ogmpMainMenu.cpp" />
-    <ClCompile Include="..\..\openGMP.cpp" />
-    <ClCompile Include="..\..\process.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

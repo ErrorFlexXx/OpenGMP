@@ -47,9 +47,13 @@ add_subdirectory(lib/lua)
 include_directories(lib/lua/src)
 include_directories(lib/lua/etc)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/lua) #luaconf.h generated from lua cmake file.
-add_subdirectory(lib/python-cmake-buildsystem)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/Python-2.7.6/Include)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/python-cmake-buildsystem/bin) # generated from python cmake file.
+if(UNIX)
+	add_subdirectory(lib/python-cmake-buildsystem)
+	include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/python-cmake-buildsystem/bin) # generated from python cmake file.
+	include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/Python-2.7.6/Include)
+else()
+	find_package(PythonLibs 2.7 EXACT REQUIRED)
+endif()
 add_subdirectory(lib/cpgf)
 include_directories(lib/cpgf/include)
 include_directories(lib/json)

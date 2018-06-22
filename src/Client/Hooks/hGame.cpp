@@ -12,7 +12,7 @@ using namespace OpenGMP::GUI;
 
 HGame *HGame::instance = nullptr;
 bool HGame::outgameStarted = false;
-OpenGMP::Menus::OGMPMainMenu HGame::mainMenu;
+OpenGMP::Menus::OGMPMainMenu *HGame::mainMenu = nullptr;
 zCOLOR HGame::blankColor = zCOLOR(0, 0, 0, 0);
 
 typedef void (*SysEventPtr)();
@@ -74,5 +74,6 @@ void HGame::UndoHook()
 
 void HGame::StartOutgame()
 {
-    mainMenu.Open();
+    HGame::mainMenu = new OpenGMP::Menus::OGMPMainMenu();
+    mainMenu->Open();
 }

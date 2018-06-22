@@ -37,9 +37,9 @@ namespace OpenGMP
             const int fontSizeDefault = 18;
             const int fontSizeMenu = 32;
             static const std::map<Fonts, std::string> fontDict;
-            static std::vector<double> charWidths;
             static const std::map<char, double> allChars;
             static const std::map<char, float> gothicChars;
+            static std::vector<double> charWidths;
             
             static ViewPoint GetScreenSize();
             static ViewPoint PixelToVirtual(int x, int y);

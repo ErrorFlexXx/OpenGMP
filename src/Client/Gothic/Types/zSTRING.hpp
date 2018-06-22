@@ -91,7 +91,7 @@ public:
         XCALL(0x0046AC10);
     }
         
-    zSTRING & Align(enum zTSTR_ALIGN, int, char)
+    zSTRING & Align(enum zTSTR_ALIGN, int availCharWidth , char fillChar)
     {
         XCALL(0x0046AD60);
     }

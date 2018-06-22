@@ -19,7 +19,7 @@ namespace OpenGMP
             virtual void Hide() override;
 
             VisualText *InputText();
-            void Update(long now);
+            void Update(unsigned long long now);
             void KeyPressed(VirtualKeys key);
             bool Enabled();
             void Enabled(bool value);
@@ -58,7 +58,7 @@ namespace OpenGMP
             Visual cursorVis;
             Visual leftArrow;
             Visual rightArrow;
-            long cursorTime;
+            unsigned long long cursorTime;
             std::string input;
         };
     }

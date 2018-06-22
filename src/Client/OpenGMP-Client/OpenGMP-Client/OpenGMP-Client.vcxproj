@@ -158,6 +158,7 @@
     <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\skyController.hpp" />
     <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\weatherController.hpp" />
     <ClInclude Include="..\..\..\Shared\WorldObjects\WorldGlobals\worldClock.hpp" />
+    <ClInclude Include="..\..\Controls\keyHoldHelper.hpp" />
     <ClInclude Include="..\..\Core\Enumeration\virtualKeys.hpp" />
     <ClInclude Include="..\..\Core\inputHandler.hpp" />
     <ClInclude Include="..\..\Gothic\cGameManager.hpp" />
@@ -192,6 +193,8 @@
     <ClInclude Include="..\..\Gothic\Types\zVEC3.hpp" />
     <ClInclude Include="..\..\Gothic\Types\zVEC4.hpp" />
     <ClInclude Include="..\..\Gothic\xcall.h" />
+    <ClInclude Include="..\..\GUI\mainMenu.hpp" />
+    <ClInclude Include="..\..\GUI\menu.hpp" />
     <ClInclude Include="..\..\GUI\menuButton.hpp" />
     <ClInclude Include="..\..\GUI\menuItem.hpp" />
     <ClInclude Include="..\..\GUI\menuTextBox.hpp" />
@@ -226,12 +229,15 @@
     <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\skyController.cpp" />
     <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\weatherController.cpp" />
     <ClCompile Include="..\..\..\Shared\WorldObjects\WorldGlobals\worldClock.cpp" />
+    <ClCompile Include="..\..\Controls\keyHoldHelper.cpp" />
     <ClCompile Include="..\..\Core\inputHandler.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zMAT3.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zVEC2.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zVEC3.cpp" />
+    <ClCompile Include="..\..\GUI\mainMenu.cpp" />
+    <ClCompile Include="..\..\GUI\menu.cpp" />
     <ClCompile Include="..\..\GUI\menuButton.cpp" />
     <ClCompile Include="..\..\GUI\menuItem.cpp" />
     <ClCompile Include="..\..\GUI\menuTextBox.cpp" />

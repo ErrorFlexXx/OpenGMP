@@ -47,6 +47,9 @@
     <Filter Include="GUI">
       <UniqueIdentifier>{d339b627-b557-4d0b-93c8-52205e3426ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Controls">
+      <UniqueIdentifier>{857764ae-bd91-4c9e-aef9-a26296f294b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Gothic\xcall.h">
@@ -256,6 +259,15 @@
     <ClInclude Include="..\..\GUI\menuTextBox.hpp">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GUI\mainMenu.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\menu.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Controls\keyHoldHelper.hpp">
+      <Filter>Controls</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp">
@@ -366,6 +378,15 @@
     </ClCompile>
     <ClCompile Include="..\..\GUI\textBox.cpp">
       <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\mainMenu.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\menu.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Controls\keyHoldHelper.cpp">
+      <Filter>Controls</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

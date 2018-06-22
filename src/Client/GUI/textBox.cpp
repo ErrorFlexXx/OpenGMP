@@ -63,7 +63,7 @@ VisualText *TextBox::InputText()
     return inputVis.Texts().front();
 }
 
-void TextBox::Update(long now)
+void TextBox::Update(unsigned long long now)
 {
     if (!enabled)
         return;

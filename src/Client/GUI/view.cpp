@@ -3,6 +3,7 @@
 #include "../Gothic/Classes/zCOption.hpp"
 #include "../Gothic/Classes/zCOptionSection.hpp"
 #include "../Gothic/Classes/zCOptionEntry.hpp"
+#include <iostream>
 
 using namespace OpenGMP::GUI;
 
@@ -12,8 +13,6 @@ const std::map<View::Fonts, std::string> View::fontDict =
         { Menu, "Font_Old_20_White.tga" },
         { Menu_Hi, "Font_Old_20_White_Hi.tga" }
     };
-
-std::vector<double> View::charWidths = InitCharWidths();
 
 const std::map<char, double> View::allChars = { 
 { 'A', 14.998571428571428571428571428571 }, { 'B', 11.998857142857142857142857142857 }, { 'C', 10.998857142857142857142857142857 }, { 'D', 11.998857142857142857142857142857 }, { 'E', 11.998857142857142857142857142857 }, { 'F', 10.999142857142857142857142857143 }, { 'G', 12.998857142857142857142857142857 }, { 'H', 11.998857142857142857142857142857 }, { 'I', 4.9997142857142857142857142857143 }, { 'J', 10.999142857142857142857142857143 }, { 'K', 12.998857142857142857142857142857 },
@@ -39,29 +38,31 @@ const std::map<char, float> View::gothicChars = {
 { '|', 2.99971f }, { '#', 12.99886f }, { '\'', 4.99971f }, { '+', 8.99914f }, { '~', 9.99914f }, { '{', 5.99943f }, { '}', 5.99943f }, { '@', 13.99857f }, { ' ', 9.99914f }
 };
 
+std::vector<double> View::charWidths = InitCharWidths();
+
 std::vector<double> View::InitCharWidths()
 {
     std::vector<double> buildCharWidths;
 
     int findMaxKey = 0;
 
-    //Find maximum key.
+    ////Find maximum key.
     for (auto it = allChars.begin(); it != allChars.end(); it++)
     {
-        if (findMaxKey < it->first)
-            findMaxKey = it->first;
+        if (findMaxKey <= (unsigned char)it->first)
+            findMaxKey = (unsigned char)it->first;
     }
     
-    //Fill vector with inital zero elements.
-    buildCharWidths.clear();
-    buildCharWidths.insert(buildCharWidths.begin(), findMaxKey, 0.0); //Insert findMaxKey 0.0 elements.
+    ////Fill vector with inital zero elements.
+    
+    buildCharWidths.insert(buildCharWidths.begin(), findMaxKey + 1, 0.0); //Insert findMaxKey 0.0 elements.
 
-    //Fill in correct widths for existent elements.
+    ////Fill in correct widths for existent elements.
     for (auto it = allChars.begin(); it != allChars.end(); it++)
     {
-        buildCharWidths[it->first] = it->second;
+        buildCharWidths[(unsigned char)it->first] = it->second;
     }
-
+   
     return buildCharWidths;
 }
 

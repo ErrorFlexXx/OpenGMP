@@ -11,6 +11,9 @@ const std::string MenuTextBox::defaultBackTexture = "Menu_Choice_Back.tga";
 MenuTextBox::MenuTextBox(const std::string &help, int x, int y, int width, std::function<void()> action)
     : MenuTextBox("", help, x, y, width, defaultHeight, 0, action) {}
 
+MenuTextBox::MenuTextBox(const std::string &title, const std::string &help, int x, int y, int width, int titleX, std::function<void()> action)
+    : MenuTextBox(title, help, x, y, width, defaultHeight, titleX, action) {}
+
 MenuTextBox::MenuTextBox(const std::string &title, const std::string &help, int x, int y, int width, int height, int titleX, std::function<void()> action)
     : MenuTextBox(title, help, x, y, width, height, titleX, y + (height - fontSizeMenu) / 2, action) {}
 
@@ -30,7 +33,7 @@ MenuTextBox::MenuTextBox(const std::string &backTexture, const std::string &titl
     vis.SetBackTexture(backTexture);
     
     tb.allowSpaces = false;
-    update = [=](long now) { tb.Update(now); };
+    Update = [=](unsigned long long now) { tb.Update(now); };
 }
 
 void MenuTextBox::Select()
@@ -57,11 +60,6 @@ void MenuTextBox::Hide()
     titleVis->Hide();
     vis.Hide();
     tb.Hide();
-}
-
-std::function<void(long)> &MenuTextBox::Update()
-{
-    return update;
 }
 
 void MenuTextBox::KeyPressed(VirtualKeys key)

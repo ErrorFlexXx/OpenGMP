@@ -17,7 +17,7 @@ namespace OpenGMP
 
         class InputReceiver
         {
-        private:
+        public:
             virtual void KeyPressed(VirutalKeys key) = 0;
         };
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../hook.hpp"
+#include "../Menus/ogmpMainMenu.hpp"
 
 namespace OpenGMP
 {
@@ -27,6 +28,9 @@ namespace OpenGMP
             static HGame *instance; //!< Singleton instance of HGame.
             Hook m_hookOutgame;     //!< Outgame hook (menus).
             Hook m_hookIngame;      //!< Outgame hook (game rendering).
+            static bool outgameStarted; //!< Flag to create initial outgame
+            static OpenGMP::Menus::OGMPMainMenu mainMenu; //!< Main menu
+            static zCOLOR blankColor;
 
             /**
              * @brief RunOutgame - To be hooked, to get hook on outgame rendering process.
@@ -39,6 +43,11 @@ namespace OpenGMP
              *  Ingame can be used for main game rendering.
              */
             static void RunIngame();
+
+            /**
+             * @brief StartOutgame - Does setup tasks to create outgame resources.
+             */
+            static void StartOutgame();
         };
     }
 }

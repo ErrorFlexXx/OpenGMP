@@ -16,6 +16,7 @@ enum zTRnd_AlphaBlendFunc
 class zCRenderer
 {
 public:
+
     static zCRenderer *GetRenderer()
     {
         return *(zCRenderer**)(0x00982F08);

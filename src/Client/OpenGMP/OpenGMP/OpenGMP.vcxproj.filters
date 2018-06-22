@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Hooks">
+      <UniqueIdentifier>{c0213d79-7873-4407-b209-d5ea467d4e1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared">
+      <UniqueIdentifier>{d6d61e34-7414-4b56-9c55-f3f717650c68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{4f506139-ccdf-41e3-ab68-6289e4b42f66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Enumeration">
+      <UniqueIdentifier>{dd7e7034-24d0-4d0e-bf34-366acc53b89a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gothic">
+      <UniqueIdentifier>{e277647f-f22a-4008-b679-75f96ce032e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gothic\Classes">
+      <UniqueIdentifier>{91c9b460-c28d-423a-a786-468335e5ab87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gothic\Objects">
+      <UniqueIdentifier>{51971c71-1738-491b-8cbb-2caf3b302d80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gothic\Types">
+      <UniqueIdentifier>{78ea0db8-b79f-4948-b053-5a963975a9cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controls">
+      <UniqueIdentifier>{f45df1b6-3ede-4595-b6f1-7540ca7df5bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{435b7f02-e668-4809-afbb-73bfb790c34b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menus">
+      <UniqueIdentifier>{52c664d0-82cf-4d80-a152-26789e00bf5c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\main.cpp" />
+    <ClCompile Include="..\..\openGMP.cpp" />
+    <ClCompile Include="..\..\Hooks\hGame.cpp">
+      <Filter>Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Hooks\hView.cpp">
+      <Filter>Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Hooks\otherHooks.cpp">
+      <Filter>Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\gameTime.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\hook.cpp" />
+    <ClCompile Include="..\..\Core\inputHandler.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\process.cpp" />
+    <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp">
+      <Filter>Gothic\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Gothic\Types\zMAT3.cpp">
+      <Filter>Gothic\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp">
+      <Filter>Gothic\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Gothic\Types\zVEC2.cpp">
+      <Filter>Gothic\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Gothic\Types\zVEC3.cpp">
+      <Filter>Gothic\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Controls\keyHoldHelper.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\view.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\mainMenu.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\menu.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\menuButton.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\menuItem.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\menuTextBox.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\textBox.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\visual.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\visual3D.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GUI\visualText.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Menus\ogmpMainMenu.cpp">
+      <Filter>Menus</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\openGMP.hpp" />
+    <ClInclude Include="..\..\Hooks\hGame.hpp">
+      <Filter>Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Hooks\hView.hpp">
+      <Filter>Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Hooks\otherHooks.hpp">
+      <Filter>Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\gameTime.hpp">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hook.hpp" />
+    <ClInclude Include="..\..\Core\inputHandler.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Core\Enumeration\virtualKeys.hpp">
+      <Filter>Core\Enumeration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\process.hpp" />
+    <ClInclude Include="..\..\Gothic\cGameManager.hpp">
+      <Filter>Gothic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\xcall.h">
+      <Filter>Gothic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCCamera.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCEventManager.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCFont.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCFontMan.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCOption.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCOptionEntry.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCOptionSection.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCRenderer.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCSkyController.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCTree.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCView.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCViewProgressBar.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCViewText.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCVob.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCWorld.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zCOLOR.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zMAT3.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zMAT4.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zSTRING.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zTBBox3D.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zTBSphere3D.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zTPlane.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zTSound3DParams.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zVEC2.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zVEC3.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Types\zVEC4.hpp">
+      <Filter>Gothic\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Objects\oCGame.hpp">
+      <Filter>Gothic\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Objects\oCMob.hpp">
+      <Filter>Gothic\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Objects\oCVob.hpp">
+      <Filter>Gothic\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Objects\oCWorld.hpp">
+      <Filter>Gothic\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Objects\oCWorldTimer.hpp">
+      <Filter>Gothic\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Controls\keyHoldHelper.hpp">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\view.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\mainMenu.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\menu.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\menuButton.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\menuItem.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\menuTextBox.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\textBox.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\visual.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\visual3D.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GUI\visualText.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Menus\ogmpMainMenu.hpp">
+      <Filter>Menus</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

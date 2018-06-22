@@ -23,16 +23,16 @@ public:
     int GetSecond();
 
     /* Operators */
-    WorldTime& operator- (const WorldTime& rhs);
-    WorldTime& operator- (const int rhs);
-    WorldTime& operator+ (const WorldTime& rhs);
-    WorldTime& operator+ (const int rhs);
-    WorldTime& operator++ ();
-    WorldTime& operator-- ();
-    WorldTime& operator* (const float rhs);
-    WorldTime& operator* (const int rhs);
-    WorldTime& operator/ (const float rhs);
-    WorldTime& operator/ (const int rhs);
+    WorldTime operator- (const WorldTime& rhs);
+    WorldTime operator- (const int rhs);
+    WorldTime operator+ (const WorldTime& rhs);
+    WorldTime operator+ (const int rhs);
+    WorldTime &operator++ ();
+    WorldTime &operator-- ();
+    WorldTime operator* (const float rhs);
+    WorldTime operator* (const int rhs);
+    WorldTime operator/ (const float rhs);
+    WorldTime operator/ (const int rhs);
     bool operator< (const WorldTime& rhs);
     bool operator<= (const WorldTime& rhs);
     bool operator> (const WorldTime& rhs);

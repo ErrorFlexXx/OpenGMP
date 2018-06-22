@@ -1,0 +1,44 @@
+#include "zCOLOR.hpp"
+
+/* Some colors from GII data segment: */
+zCOLOR *zCOLOR_RED() { return (zCOLOR*)(0x00AB39E0); }
+zCOLOR *zCOLOR_PALEGREEN() { return (zCOLOR*)(0x00AB39E4); }
+zCOLOR *zCOLOR_SKY() { return (zCOLOR*)(0x00AB39E8); }
+zCOLOR *zCOLOR_BROWN() { return (zCOLOR*)(0x00AB39F0); }
+zCOLOR *zCOLOR_DOCHRE() { return (zCOLOR*)(0x00AB39F4); }
+zCOLOR *zCOLOR_GREEN() { return (zCOLOR*)(0x00AB3DF8); }
+zCOLOR *zCOLOR_IVORY() { return (zCOLOR*)(0x00AB3DFC); }
+zCOLOR *zCOLOR_YELLOW() { return (zCOLOR*)(0x00AB3E00); }
+zCOLOR *zCOLOR_PINK() { return (zCOLOR*)(0x00AB3E04); }
+zCOLOR *zCOLOR_ORCHID() { return (zCOLOR*)(0x00AB3E08); }
+zCOLOR *zCOLOR_DGREEN() { return (zCOLOR*)(0x00AB3E10); }
+zCOLOR *zCOLOR_OCHRE() { return (zCOLOR*)(0x00AB3E14); }
+zCOLOR *zCOLOR_PURPLE() { return (zCOLOR*)(0x00AB3E18); }
+zCOLOR *zCOLOR_ORANGE() { return (zCOLOR*)(0x00AB3E1C); }
+zCOLOR *zCOLOR_BLACK() { return (zCOLOR*)(0x00AB3E20); }
+zCOLOR *zCOLOR_BLUE() { return (zCOLOR*)(0x00AB3E24); }
+zCOLOR *zCOLOR_DPINK() { return (zCOLOR*)(0x00AB3E28); }
+zCOLOR *zCOLOR_AQUA() { return (zCOLOR*)(0x00AB3E2C); }
+zCOLOR *zCOLOR_FLESH() { return (zCOLOR*)(0x00AB3E30); }
+zCOLOR *zCOLOR_LPINK() { return (zCOLOR*)(0x00AB3E34); }
+zCOLOR *zCOLOR_STEEL() { return (zCOLOR*)(0x00AB3E38); }
+zCOLOR *zCOLOR_DBLUE() { return (zCOLOR*)(0x00AB3E3C); }
+zCOLOR *zCOLOR_VIOLET() { return (zCOLOR*)(0x00AB3E40); }
+zCOLOR *zCOLOR_DRED() { return (zCOLOR*)(0x00AB3E44); }
+zCOLOR *zCOLOR_LBLUE() { return (zCOLOR*)(0x00AB3E48); }
+zCOLOR *zCOLOR_WARMGREY() { return (zCOLOR*)(0x00AB3E4C); }
+zCOLOR *zCOLOR_CYAN() { return (zCOLOR*)(0x00AB3E50); }
+zCOLOR *zCOLOR_KHAKI() { return (zCOLOR*)(0x00AB3E54); }
+zCOLOR *zCOLOR_INDIGO() { return (zCOLOR*)(0x00AB3E58); }
+zCOLOR *zCOLOR_LYELLOW() { return (zCOLOR*)(0x00AB3E5C); }
+zCOLOR *zCOLOR_COLDGREY() { return (zCOLOR*)(0x00AB4060); }
+zCOLOR *zCOLOR_CARROT() { return (zCOLOR*)(0x00AB4064); }
+zCOLOR *zCOLOR_GOLD() { return (zCOLOR*)(0x00AB4068); }
+zCOLOR *zCOLOR_WHITE() { return (zCOLOR*)(0x00AB4070); }
+zCOLOR *zCOLOR_GREY() { return (zCOLOR*)(0x00AB4074); }
+zCOLOR *zCOLOR_MBLUE() { return (zCOLOR*)(0x00AB4078); }
+zCOLOR *zCOLOR_MAGENTA() { return (zCOLOR*)(0x00AB407C); }
+zCOLOR *zCOLOR_OLIVE() { return (zCOLOR*)(0x00AB4080); }
+zCOLOR *zCOLOR_BEIGE() { return (zCOLOR*)(0x00AB4084); }
+zCOLOR *zCOLOR_LGREY() { return (zCOLOR*)(0x00AB4088); }
+zCOLOR *zCOLOR_DORANGE() { return (zCOLOR*)(0x00AB408C); }

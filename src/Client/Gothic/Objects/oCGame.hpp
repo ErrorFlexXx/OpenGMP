@@ -14,7 +14,7 @@ public:
     {
         static const unsigned int Menu = 0x004292D0;
         static const unsigned int Render = 0x006C86A0;
-    };
+    } Addresses;
 
     void LoadWorld(int, class zSTRING const &)
     {

@@ -5,6 +5,8 @@
 
 #define KEYCOUNT 255
 
+using namespace OpenGMP;
+
 KeyEventHandler InputHandler::OnKeyDown = NULL;
 KeyEventHandler InputHandler::OnKeyUp   = NULL;
 bool InputHandler::MouseShown = false;
@@ -70,7 +72,7 @@ void InputHandler::Update()
                     }
 					else if(OnKeyDown != NULL)
                     {
-                        OnKeyDown((VirtualKeys::VirtualKeys) i);
+                        OnKeyDown((VirtualKeys) i);
                     }
 				}
 			}
@@ -80,7 +82,7 @@ void InputHandler::Update()
 				{
 					m_keys[i] = false;
 					if(OnKeyUp != NULL)
-                        OnKeyUp((VirtualKeys::VirtualKeys) i);
+                        OnKeyUp((VirtualKeys) i);
 				}
 			}
 		}
@@ -98,7 +100,7 @@ void InputHandler::Update()
 	}
 }
 
-bool InputHandler::IsPressed(VirtualKeys::VirtualKeys key)
+bool InputHandler::IsPressed(VirtualKeys key)
 {
     return m_keys[(int)key];
 }

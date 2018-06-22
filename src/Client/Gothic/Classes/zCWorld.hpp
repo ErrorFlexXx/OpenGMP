@@ -1,10 +1,18 @@
 #pragma once
 
 #include "../xcall.h"
+#include "zCTree.hpp"
 
 class zCWorld
 {
 public:
+    static const struct VarOffsets
+    {
+        static const int bIsInventoryWorld = 136;
+        static const int bDrawVobBBox3D = 0x224;
+        static const int BspTreeMode = 0x204;
+    } VarOffsets;
+
     static zCWorld * _CreateInstance(void)
     {
         XCALL(0x0061F9B0);
@@ -23,6 +31,36 @@ public:
         XCALL(0x006200F0);
     }
     */
+
+    bool IsInventoryWorld()
+    {
+        return *((bool*)(this + VarOffsets::bIsInventoryWorld));
+    }
+
+    void IsInventoryWorld(bool value)
+    {
+        *((bool*)(this + VarOffsets::bIsInventoryWorld)) = value;
+    }
+
+    bool DrawVobBBox3D()
+    {
+        return *((bool*)(this + VarOffsets::bDrawVobBBox3D));
+    }
+
+    void DrawVobBBox3D(bool value)
+    {
+        *((bool*)(this + VarOffsets::bDrawVobBBox3D)) = value;
+    }
+
+    int BspTreeMode()
+    {
+        return *((int*)(this + VarOffsets::BspTreeMode));
+    }
+
+    void BspTreeMode(int value)
+    {
+        *((int*)(this + VarOffsets::BspTreeMode)) = value;
+    }
     
     void Render(class zCCamera &)
     {
@@ -44,10 +82,11 @@ public:
         XCALL(0x00620410);
     }
 
-    void SearchZoneListByClass(class zCClassDef *,class zCArray<class zCZone *> &)
+    /*void SearchZoneListByClass(class zCClassDef *,class zCArray<class zCZone *> &)
     {
         XCALL(0x00624400);
     }
+    */
 
     class zCZone * SearchZoneDefaultByClass(class zCClassDef *)
     {
@@ -58,7 +97,7 @@ public:
     {
         XCALL(0x006247B0);
     }
-
+    
     class zCTree<class zCVob> * AddVobAsChild(class zCVob *,class zCVob *)
     {
         XCALL(0x006247F0);
@@ -72,6 +111,11 @@ public:
     void RemoveVob(class zCTree<class zCVob> *)
     {
         XCALL(0x00624BA0);
+    }
+    
+    /*virtual*/ void RemoveVobSubtree(class zCVob *)
+    {
+        XCALL(0x00624D60);
     }
 
     void RemoveVobSubtree(class zCTree<class zCVob> *)

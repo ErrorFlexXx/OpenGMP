@@ -1,6 +1,6 @@
 #include "angles.hpp"
 #include "vec3f.hpp"
-#include <cmath>
+#include <math.h>
 
 const float Angles::Pi = 3.1415926535897931f;
 const float Angles::TwoPi = 6.2831853071795865f;
@@ -30,15 +30,15 @@ float Angles::Rad2Deg(float radians)
 
 float Angles::ClampTo360(float degrees)
 {
-    degrees = fmod(degrees, 360);
+    degrees = fmodf(degrees, 360);
     if(degrees < 0)
-        degrees += 360;
+        degrees += 360.f;
     return degrees;
 }
 
 float Angles::ClampTo2Pi(float radians)
 {
-    radians = fmod(radians, TwoPi);
+    radians = fmodf(radians, TwoPi);
     if(radians < 0)
         radians += TwoPi;
     return radians;
@@ -46,7 +46,7 @@ float Angles::ClampTo2Pi(float radians)
 
 float Angles::ClampTo180(float degrees)
 {
-    degrees = fmod((degrees + 180), 360);
+    degrees = fmodf((degrees + 180), 360);
     if(degrees < 0)
         degrees += 360;
     return degrees - 180;
@@ -54,7 +54,7 @@ float Angles::ClampTo180(float degrees)
 
 float Angles::ClampToPi(float radians)
 {
-    radians = fmod((radians + Pi),(2 * Pi));
+    radians = fmodf((radians + Pi),(2 * Pi));
     if(radians < 0)
         radians += 2 * Pi;
     return radians - Pi;

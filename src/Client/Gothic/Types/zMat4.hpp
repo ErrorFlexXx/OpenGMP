@@ -221,6 +221,38 @@ public:
     {
         XCALL(0x00514FF0);
     }
+
+    zVEC3 Position()
+    {
+        zVEC3 position;
+        position[0] = matrix[3];
+        position[1] = matrix[7];
+        position[2] = matrix[11];
+        return position;
+    }
+
+    void Position(zVEC3 newPos)
+    {
+        matrix[3] = newPos[0];
+        matrix[7] = newPos[1];
+        matrix[11] = newPos[2];
+    }
+
+    zVEC3 Direction()
+    {
+        zVEC3 direction;
+        direction[0] = matrix[2];
+        direction[1] = matrix[6];
+        direction[2] = matrix[10];
+        return direction;
+    }
+
+    void Direction(zVEC3 newDir)
+    {
+        matrix[2] = newDir[0];
+        matrix[6] = newDir[1];
+        matrix[10] = newDir[2];
+    }
 };
 
 zMAT4 __cdecl Alg_Translation3D(const zVEC3 &vec);

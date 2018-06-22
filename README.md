@@ -31,8 +31,20 @@ make -j4 # Or open generated sln on windows. 4 are used threads to compile.
 
 ### Building the client
 Currently there is only one client implementation and it's designed for the original Gothic II the night of the raven.
-Therefore it has to be compiled with a msvc microsoft compiler. To create this project open the .sln project located at 
-src/Client/OpenGMP-Client.
+Therefore it has to be compiled with a msvc microsoft compiler. 
+
+To create the project, you'll first have to compile the RakNet library. Open the project `lib/Raknet/Lib/LibStatic/LibStatic.sln` and compile a release and debug build of the project.
+
+After this one can open the .sln project located at src/Client/OpenGMP-Client and compile it.
+
+## Known issues
+
+### Server (Linux build):
+On Ubuntu systems there is a problem with the python2.7 packages, that causes the server to crash, if a phython script is going to be loaded.
+If the program crashs with a message like: `ImportError: No module named _sysconfigdata_nd` one can place a symbolic link to solve the problem.
+```bash
+sudo ln -fs /usr/lib/python2.7/plat-x86_64-linux-gnu/_sysconfigdata_nd.py /usr/lib/python2.7/
+```
 
 ## Special thanks to
  * A special thanks goes to the projects GUC and SumpfkrautOnline. The base structure of the project is mostly adopted from there.

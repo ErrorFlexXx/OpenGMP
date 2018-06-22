@@ -11,9 +11,41 @@ enum zTviewID
     VIEW_ITEM
 };
 
-class zCView
+enum zEViewFX
 {
+    VIEW_FX_NONE,
+    VIEW_FX_ZOOM,
+    VIEW_FX_MAX
+};
+
+class zCViewBase
+{
+};
+
+class zCView : public zCViewBase
+{
+    static const struct VarOffsets
+    {
+        static const unsigned int m_bFillZ = 8;
+        static const unsigned int next = 12;
+        static const unsigned int text_lines = 132;
+        static const unsigned int psizex = 0x5C;
+        static const unsigned int psizey = 0x60;
+        static const unsigned int font = 0x64;
+    } VarOffsets;
+
 public:
+
+    /**
+    * @brief struct for with addresses used for hooks
+    */
+    static const struct Addresses
+    {
+        static const unsigned int DrawItems = 0x007A6750;
+    } Addresses;
+
+    void DrawItemsDetour(); //Defined in HView class.
+
     static zCView *GetScreen()
     {
         return *(zCView**)(0x00AB6468);
@@ -84,10 +116,10 @@ public:
         XCALL(0x007A5CC0);
     }
 
-    void Create(class zSTRING const &,enum zCView::zEViewFX,enum zCView::zEViewFX,float,int)
+    /*void Create(class zSTRING const &,enum zCView::zEViewFX,enum zCView::zEViewFX,float,int)
     {
         XCALL(0x007A6810);
-    }
+    }*/
 
     /*virtual*/ int nax(int)
     {
@@ -124,7 +156,7 @@ public:
         XCALL(0x007A6070);
     }
 
-    void SetColor(struct zCOLOR const &)
+    void SetColor(zCOLOR const &)
     {
         XCALL(0x007A6080);
     }
@@ -264,7 +296,7 @@ public:
         XCALL(0x007A79F0);
     }
 
-    zCViewText * CreateText(int,int,class zSTRING const &,float,struct zCOLOR &,int,int)
+    class zCViewText * CreateText(int,int,class zSTRING const &,float,zCOLOR &,int,int)
     {
         XCALL(0x007A7AB0);
     }
@@ -274,72 +306,72 @@ public:
         XCALL(0x007A7C50);
     }
 
-    void PrintTimed(int,int,class zSTRING const &,float,struct zCOLOR *)
+    void PrintTimed(int,int,class zSTRING const &,float,zCOLOR *)
     {
         XCALL(0x007A7D20);
     }
 
-    void PrintTimedCX(int,class zSTRING const &,float,struct zCOLOR *)
+    void PrintTimedCX(int,class zSTRING const &,float,zCOLOR *)
     {
         XCALL(0x007A7DB0);
     }
 
-    void PrintTimedCY(int,class zSTRING const &,float,struct zCOLOR *)
+    void PrintTimedCY(int,class zSTRING const &,float,zCOLOR *)
     {
         XCALL(0x007A7F00);
     }
 
-    void PrintTimedCXY(class zSTRING const &,float,struct zCOLOR *)
+    void PrintTimedCXY(class zSTRING const &,float, zCOLOR *)
     {
         XCALL(0x007A7FC0);
     }
 
-    void PrintMessage(class zSTRING const &,class zSTRING const &,float,struct zCOLOR &)
+    void PrintMessage(class zSTRING const &,class zSTRING const &,float, zCOLOR &)
     {
         XCALL(0x007A8140);
     }
 
-    void PrintMessageCXY(class zSTRING const &,class zSTRING const &,float,struct zCOLOR &)
+    void PrintMessageCXY(class zSTRING const &,class zSTRING const &,float, zCOLOR &)
     {
         XCALL(0x007A8450);
     }
 
-    void PrintSelection(class zSTRING const &,class zSTRING const &,struct zCOLOR &,struct zCOLOR &)
+    void PrintSelection(class zSTRING const &,class zSTRING const &, zCOLOR &, zCOLOR &)
     {
         XCALL(0x007A8BB0);
     }
 
-    void Dialog(int,int,class zSTRING const &,float,struct zCOLOR *)
+    void Dialog(int,int,class zSTRING const &,float, zCOLOR *)
     {
         XCALL(0x007A8D40);
     }
 
-    void DialogCX(int,class zSTRING const &,float,struct zCOLOR *)
+    void DialogCX(int,class zSTRING const &,float, zCOLOR *)
     {
         XCALL(0x007A8E10);
     }
 
-    void DialogCY(int,class zSTRING const &,float,struct zCOLOR *)
+    void DialogCY(int,class zSTRING const &,float, zCOLOR *)
     {
         XCALL(0x007A8E70);
     }
 
-    void DialogCXY(class zSTRING const &,float,struct zCOLOR *)
+    void DialogCXY(class zSTRING const &,float, zCOLOR *)
     {
         XCALL(0x007A8F60);
     }
 
-    void DialogMessage(class zSTRING const &,class zSTRING const &,float,struct zCOLOR &)
+    void DialogMessage(class zSTRING const &,class zSTRING const &,float, zCOLOR &)
     {
         XCALL(0x007A8FB0);
     }
 
-    void DialogMessageCXY(class zSTRING const &,class zSTRING const &,float,struct zCOLOR &)
+    void DialogMessageCXY(class zSTRING const &,class zSTRING const &,float, zCOLOR &)
     {
         XCALL(0x007A9240);
     }
 
-    void DialogSelection(class zSTRING const &,class zSTRING const &,struct zCOLOR &,struct zCOLOR &,float)
+    void DialogSelection(class zSTRING const &,class zSTRING const &, zCOLOR &, zCOLOR &,float)
     {
         XCALL(0x007A94D0);
     }
@@ -349,7 +381,7 @@ public:
         XCALL(0x007A98F0);
     }
 
-    void SetFontColor(struct zCOLOR const &)
+    void SetFontColor(zCOLOR const &)
     {
         XCALL(0x007A9910);
     }
@@ -444,7 +476,7 @@ public:
         XCALL(0x007ABD10);
     }
 
-    /*virtual*/ void Line(int,int,int,int,struct zCOLOR const &)
+    /*virtual*/ void Line(int,int,int,int, zCOLOR const &)
     {
         XCALL(0x007ABF70);
     }
@@ -457,6 +489,22 @@ public:
     void Render(void)
     {
         XCALL(0x007AC210);
+    }
+
+    /* private */
+    class zCViewText * CreateText(int, int, class zSTRING const &)
+    {
+        XCALL(0x007AA2B0);
+    }
+
+    bool FillZ()
+    {
+        return (*(int*)(this + VarOffsets::m_bFillZ)) >= 1;
+    }
+
+    void FillZ(bool value)
+    {
+        *(bool*)(this + VarOffsets::m_bFillZ) = value;
     }
 
 protected:
@@ -486,19 +534,15 @@ protected:
     }
 
 private:
-    unsigned char load[0x100];
 
-    class zCViewText * CreateText(int,int,class zSTRING const &)
-    {
-        XCALL(0x007AA2B0);
-    }
+    unsigned char load[0x100];
 
     class zSTRING GetFirstText(void)
     {
         XCALL(0x007AA420);
     }
 
-    void Nextline(class zSTRING const &,float,struct zCOLOR *,int *)
+    void Nextline(class zSTRING const &,float, zCOLOR *,int *)
     {
         XCALL(0x007AA4A0);
     }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../xcall.h"
+#include <string>
 
 int __cdecl operator==(class zSTRING const &, char const * const);
 int __cdecl operator==(class zSTRING const &, class zSTRING const &);
@@ -29,6 +30,11 @@ public:
     zSTRING(char const *)
     {
         XCALL(0x004010C0);
+    }
+
+    zSTRING(const std::string &text)
+        : zSTRING(text.c_str())
+    {
     }
         
     zSTRING(double number, int precision)
@@ -261,8 +267,5 @@ public:
     {
         XCALL(0x00445A20);
     }
-
-private:
-    unsigned int load[5]; // 5*4 Byte
 };
 

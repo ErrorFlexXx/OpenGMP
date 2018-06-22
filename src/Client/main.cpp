@@ -2,7 +2,7 @@
 #include <windows.h>
 #include "openGMP.hpp"
 
-OpenGMP *openGMPInstance = nullptr;
+OGMP *openGMPInstance = nullptr;
 
 BOOL APIENTRY DllMain(HINSTANCE hInstance, DWORD reason, LPVOID reserved)
 {
@@ -10,7 +10,7 @@ BOOL APIENTRY DllMain(HINSTANCE hInstance, DWORD reason, LPVOID reserved)
     {
         case DLL_PROCESS_ATTACH:
         {
-            openGMPInstance = OpenGMP::GetInstance(); //Start OpenGMP instance
+            openGMPInstance = OGMP::GetInstance(); //Start OpenGMP instance
             break;
         }
         case DLL_PROCESS_DETACH:

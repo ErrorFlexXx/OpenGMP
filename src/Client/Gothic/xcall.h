@@ -1,5 +1,7 @@
 #pragma once
 
+#pragma warning(disable:4731) //Assembler frame pointer register ebp modified by inline assembly
+
 // -- call macro from GD3D11 (thx, atauilien!)
 // ataulien: -- call macro from GothicX (thx, Zerxes!)
 #define XCALL(uAddr)       \

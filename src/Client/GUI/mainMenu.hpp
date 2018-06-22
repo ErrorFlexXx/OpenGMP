@@ -22,6 +22,7 @@ namespace OpenGMP
             MenuItem *CurrentItem();
             bool IsOpen();
 
+            virtual void OnCreate() = 0;
             virtual void Open() override;
             virtual void Close() override;
 
@@ -60,6 +61,7 @@ namespace OpenGMP
 
         private:
             OpenGMP::Controls::KeyHoldHelper scrollHelper;
+            bool init;
         };
     }
 }

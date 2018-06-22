@@ -21,6 +21,7 @@ namespace OpenGMP
 
             virtual void Show() override;
             virtual void Hide() override;
+            class VisualText *CreateTextCenterX(const std::string &text, int y);
             class VisualText *CreateText(const std::string &text);
             class VisualText *CreateText(const std::string &text, int x, int y);
             class VisualText *CreateText(const std::string &text, int x, int y, bool virtuals);

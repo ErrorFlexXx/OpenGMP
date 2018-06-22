@@ -71,6 +71,13 @@ void Visual::Hide()
     }
 }
 
+VisualText *Visual::CreateTextCenterX(const std::string &text, int y)
+{
+    VisualText *newText = CreateText(text, 0, y, false);
+    newText->SetCenteredX(true);
+    return newText;
+}
+
 VisualText *Visual::CreateText(const std::string &text)
 {
     VisualText * newText = CreateText(text, 0, 0, true);

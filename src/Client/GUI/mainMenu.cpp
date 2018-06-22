@@ -14,6 +14,7 @@ MainMenu::MainMenu()
     , back(pos.x, pos.y, 640, 480)
     , isOpen(false)
     , helpTextNextUpdateTime(0)
+    , init(false)
 {
     back.SetBackTexture("Menu_Ingame.tga");
     back.SetFont(Visual::Fonts::Menu);
@@ -53,6 +54,12 @@ bool MainMenu::IsOpen()
 void MainMenu::Open()
 {
     CloseActiveMenus(); //MainMenus never overlap
+
+    if (!init)
+    {
+        OnCreate();
+        init = true;
+    }
 
     Menu::Open();
     back.Show();

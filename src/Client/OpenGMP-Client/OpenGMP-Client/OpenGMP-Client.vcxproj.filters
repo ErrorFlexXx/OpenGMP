@@ -50,6 +50,9 @@
     <Filter Include="Controls">
       <UniqueIdentifier>{857764ae-bd91-4c9e-aef9-a26296f294b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menus">
+      <UniqueIdentifier>{d803b527-66ef-4211-b16b-eaeca7414fdf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Gothic\xcall.h">
@@ -268,6 +271,9 @@
     <ClInclude Include="..\..\Controls\keyHoldHelper.hpp">
       <Filter>Controls</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Menus\ogmpMainMenu.hpp">
+      <Filter>Menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp">
@@ -387,6 +393,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Controls\keyHoldHelper.cpp">
       <Filter>Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Menus\ogmpMainMenu.cpp">
+      <Filter>Menus</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

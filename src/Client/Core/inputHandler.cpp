@@ -1,5 +1,4 @@
 #include "inputHandler.hpp"
-#include <iostream>
 #include <Shared/GameTime.hpp>
 #include "../process.hpp"
 
@@ -7,8 +6,8 @@
 
 using namespace OpenGMP;
 
-KeyEventHandler InputHandler::OnKeyDown = NULL;
-KeyEventHandler InputHandler::OnKeyUp   = NULL;
+std::function<void(VirtualKeys key)> InputHandler::keyDownReceipient;
+std::function<void(VirtualKeys key)> InputHandler::keyUpReceipient;
 bool InputHandler::MouseShown = false;
 int InputHandler::movedX = 0;
 int InputHandler::movedY = 0;
@@ -17,7 +16,6 @@ const int InputHandler::DefaultMousePosX = 320;
 const int InputHandler::DefaultMousePosY = 240;
 bool InputHandler::m_keys[KEYCOUNT];
 bool InputHandler::m_shown = false;
-std::map<unsigned short, GlobalEventCallback> InputHandler::m_globalEvents;
 
 int InputHandler::MouseDistX()
 {
@@ -63,16 +61,10 @@ void InputHandler::Update()
 				if(!m_keys[i]) //Was not pressed, so set it pressed
 				{
 					m_keys[i] = true;
-					std::map<unsigned short, GlobalEventCallback>::iterator it;
-	
-					it = m_globalEvents.find(i);
-					if(it != m_globalEvents.end())
+					
+					if(keyDownReceipient)
                     {
-                        (it->second)();
-                    }
-					else if(OnKeyDown != NULL)
-                    {
-                        OnKeyDown((VirtualKeys) i);
+                        keyDownReceipient((VirtualKeys) i);
                     }
 				}
 			}
@@ -81,8 +73,8 @@ void InputHandler::Update()
 				if(m_keys[i]) //Release key
 				{
 					m_keys[i] = false;
-					if(OnKeyUp != NULL)
-                        OnKeyUp((VirtualKeys) i);
+					if(keyUpReceipient != NULL)
+                        keyUpReceipient((VirtualKeys) i);
 				}
 			}
 		}

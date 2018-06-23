@@ -67,7 +67,7 @@ public:
         XCALL(0x006CFE50);
     }
         
-    /* virtual */ ~zSTRING()
+    ~zSTRING()
     {
         XCALL(0x00401160);
     }
@@ -267,5 +267,8 @@ public:
     {
         XCALL(0x00445A20);
     }
+
+private:
+     unsigned char load[4 * 5];
 };
 

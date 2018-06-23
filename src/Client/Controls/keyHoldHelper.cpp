@@ -33,18 +33,23 @@ void KeyHoldHelper::Update(unsigned long long now)
                 break;
             }
         }
-        if (pair != current)
+        if (allCombinationKeysPressed)
         {
-            current = pair;
-            nextTime = now + holdTime * TICKS_PER_MILLISECOND;
-            pair->action();
+            if (pair != current)
+            {
+                current = pair;
+                nextTime = now + holdTime * TICKS_PER_MILLISECOND;
+                if(pair->action)
+                    pair->action();
+            }
+            else if (now > nextTime)
+            {
+                nextTime = now + rate * TICKS_PER_MILLISECOND;
+                if (pair->action)
+                    pair->action();
+            }
+            return;
         }
-        else if (now > nextTime)
-        {
-            nextTime = now + rate * TICKS_PER_MILLISECOND;
-            pair->action();
-        }
-        return;
     }
     current = nullptr;
 }

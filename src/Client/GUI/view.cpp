@@ -48,7 +48,7 @@ std::vector<double> View::InitCharWidths()
     ////Find maximum key.
     for (auto it = allChars.begin(); it != allChars.end(); it++)
     {
-        if (findMaxKey <= (unsigned char)it->first)
+        if (findMaxKey < (unsigned char)it->first)
             findMaxKey = (unsigned char)it->first;
     }
     

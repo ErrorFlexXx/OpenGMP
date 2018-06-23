@@ -1,7 +1,6 @@
 #include "openGMP.hpp"
 #define _WINSOCKAPI_ //Stop windows.h from including winsock.h (colliding with RakNet)
 #include <windows.h>
-#include <iostream>
 #include "Hooks/otherHooks.hpp"
 #include "Hooks/hGame.hpp"
 

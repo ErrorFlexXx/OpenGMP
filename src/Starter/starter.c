@@ -8,7 +8,7 @@
 
 using namespace std;
 
-bool injectDll(int procID, const char *dllPath)
+bool injectDll(int procID, HANDLE hThread, const char *dllPath)
 {
 	HANDLE process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, procID);
 	if(process == NULL) {
@@ -53,6 +53,7 @@ bool injectDll(int procID, const char *dllPath)
 	/*
 	* Close the handle to the process, becuase we've already injected the DLL.
 	*/
+	ResumeThread(hThread);
 	CloseHandle(process);
 	return true;
 }
@@ -102,7 +103,7 @@ int main(int argc, char **argv)
 		NULL,		// Process handle not inheritable
 		NULL,		// Thread handle not inheritable
 		FALSE,		// Set handle inheritance to FALSE
-		0,		// No creation flags
+		CREATE_SUSPENDED,		// No creation flags
 		NULL,		// Use parent's environment block
 		NULL,		// Use parent's starting directory 
 		&si,		// Pointer to STARTUPINFO structure
@@ -114,7 +115,7 @@ int main(int argc, char **argv)
 
 	DWORD result = WaitForInputIdle(pi.hProcess, 5000);
 
-	injectDll((int)pi.dwProcessId, cinjectDllFullpath);
+	injectDll((int)pi.dwProcessId, pi.hThread, cinjectDllFullpath);
 
 	// Wait until child process exits.
 	WaitForSingleObject( pi.hProcess, INFINITE );

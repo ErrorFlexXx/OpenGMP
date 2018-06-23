@@ -499,12 +499,12 @@ public:
 
     bool FillZ()
     {
-        return (*(int*)(this + VarOffsets::m_bFillZ)) >= 1;
+        return (*(int*)((unsigned int)this + VarOffsets::m_bFillZ)) >= 1;
     }
 
     void FillZ(bool value)
     {
-        *(bool*)(this + VarOffsets::m_bFillZ) = value;
+        *(bool*)((unsigned int)this + VarOffsets::m_bFillZ) = value;
     }
 
 protected:

@@ -14,7 +14,7 @@ MenuButton::MenuButton(const std::string &text, const std::string &help, int x, 
     visual = VisualText::Create(text, x, y);
     visualText = visual->Texts().front();
     visualText->SetFormat(TextFormat::Center);
-    visualText->SetFont(font);
+    visual->SetFont(font);
     this->onAction = action;
 }
 

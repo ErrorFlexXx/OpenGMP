@@ -20,7 +20,8 @@ VisualText::VisualText(const std::string &text, int x, int y, Visual *parent, bo
     ViewPoint parentSize = parent->GetSize();
     position.x = position.x * 0x2000 / parentSize.x;
     position.y = position.y * 0x2000 / parentSize.y;
-    parent->GetZView()->CreateText(position.x, position.y, text);
+    zViewText = parent->GetZView()->CreateText(position.x, position.y, text);
+    this->text = text;
     centeredX = false;
     centeredY = false;
     format = TextFormat::Left;
@@ -59,7 +60,7 @@ void VisualText::Hide()
 
 zCOLOR VisualText::GetColor()
 {
-    return zViewText->GetColor();
+    return *zViewText->GetColor();
 }
 
 void VisualText::SetColor(const zCOLOR &color)

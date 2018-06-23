@@ -2,20 +2,18 @@
 
 #define _WINSOCKAPI_ //Stop windows.h from including winsock.h (colliding with RakNet)
 #include <windows.h>
+#include <functional>
 #include <map>
 #include "Enumeration/VirtualKeys.hpp"
 
 namespace OpenGMP
 {
-    typedef void(*KeyEventHandler)(VirtualKeys key);
-    typedef void(*GlobalEventCallback)();
-
     class InputHandler
     {
     public:
         static void Update();
-        static KeyEventHandler OnKeyDown;   //KeyDown Callback
-        static KeyEventHandler OnKeyUp;     //KeyUp Callback
+        static std::function<void(VirtualKeys key)> keyDownReceipient;
+        static std::function<void(VirtualKeys key)> keyUpReceipient;
         static bool MouseShown;
         static int movedX;
         static int movedY;
@@ -26,7 +24,6 @@ namespace OpenGMP
         static const int DefaultMousePosY;
         static bool m_shown;
         static bool IsPressed(VirtualKeys key);
-        static std::map<unsigned short, GlobalEventCallback> m_globalEvents;
 
     private:
         InputHandler(); //Abstract class

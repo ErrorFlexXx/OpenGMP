@@ -1,4 +1,5 @@
 #include "menu.hpp"
+#include <Client/Core/inputHandler.hpp>
 
 using namespace OpenGMP::GUI;
 
@@ -36,7 +37,9 @@ bool Menu::KeyUpUpdateMenus(OpenGMP::VirtualKeys key)
 void Menu::UpdateMenus(unsigned long long now)
 {
     for (Menu *menu : activeMenus)
+    {
         menu->Update(now);
+    }
 }
 
 void Menu::CloseActiveMenus()
@@ -61,6 +64,7 @@ void Menu::Open()
     if (opened)
         activeMenus.remove(this);
     activeMenus.push_front(this);
+    InputHandler::keyDownReceipient = [=](VirtualKeys key) { this->KeyDown(key); };
     opened = true;
 }
 
@@ -69,6 +73,7 @@ void Menu::Close()
     if (opened)
     {
         activeMenus.remove(this);
+        InputHandler::keyDownReceipient = nullptr;
         opened = false;
     }
 }

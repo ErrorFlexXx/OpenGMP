@@ -7,6 +7,7 @@ class oCGame;
 
 class CGameManager
 {
+public:
     static CGameManager *GetInstance()
     {
         return *(CGameManager**)(0x008C2958);
@@ -60,6 +61,11 @@ class CGameManager
     void ShowRealPlayTime()
     {
         XCALL(0x0042BDE0);
+    }
+
+    int ExitGame(void)
+    {
+        XCALL(0x00425780);
     }
 
 private:

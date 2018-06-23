@@ -8,17 +8,22 @@
 using namespace OpenGMP::GUI;
 
 MainMenu::MainMenu()
-    : cursor(0)
-    , preferredCursorItem(0)
-    , pos((View::GetScreenSize().x - 640) / 2, (View::GetScreenSize().y - 480) / 2)
-    , back(pos.x, pos.y, 640, 480)
-    , isOpen(false)
-    , helpTextNextUpdateTime(0)
-    , init(false)
 {
-    back.SetBackTexture("Menu_Ingame.tga");
-    back.SetFont(Visual::Fonts::Menu);
-    helpVis = VisualText::Create("", 0, pos.y + 455);
+    cursor = 0;
+    preferredCursorItem = 0;
+    ViewPoint screenSize = View::GetScreenSize();
+    ViewPoint dim;
+    dim.x = (int)((double)screenSize.x * 1.6 / 3.0);
+    dim.y = (int)((double)screenSize.y * 2.0 / 3.0);
+    pos.x = (screenSize.x - dim.x) / 2;
+    pos.y = (screenSize.y - dim.y) / 2;
+    isOpen = false;
+    init = false;
+    helpTextNextUpdateTime = 0;
+    back = new Visual(pos.x, pos.y, dim.x, dim.y);
+    back->SetBackTexture("Menu_Ingame.tga");
+    back->SetFont(Visual::Fonts::Menu);
+    helpVis = VisualText::Create("", 0, pos.y + (int)((double)dim.y * 9.0 / 10.0));
     HelpText()->SetCenteredX(true);
     
     //Setup key strokes for actions:
@@ -28,10 +33,8 @@ MainMenu::MainMenu()
     combDown.push_back(VirtualKeys::Down);
     std::list<VirtualKeys> combTab;
     combTab.push_back(VirtualKeys::Tab);
-
     std::function<void()> actionScrollUp = [=]() { this->MoveCursor(true); };
     std::function<void()> actionScrollDown = [=]() { this->MoveCursor(false); };
-
     scrollHelper.Add(combUp, actionScrollUp);
     scrollHelper.Add(combDown, actionScrollDown);
     scrollHelper.Add(combTab, actionScrollDown);
@@ -62,7 +65,7 @@ void MainMenu::Open()
     }
 
     Menu::Open();
-    back.Show();
+    back->Show();
     helpVis->Show();
     for (MenuItem *item : items)
     {
@@ -84,7 +87,7 @@ void MainMenu::Open()
 void MainMenu::Close()
 {
     Menu::Close();
-    back.Hide();
+    back->Hide();
     helpVis->Hide();
     for (MenuItem *item : items)
         item->Hide();
@@ -185,7 +188,7 @@ void MainMenu::MoveCursor(bool up)
         if (up)
         {
             cursor--;
-            if (cursor < 0)
+            if (cursor >= items.size()) //unsigned underflow
                 cursor = items.size() - 1;
         }
         else //down
@@ -214,7 +217,7 @@ void MainMenu::KeyDown(OpenGMP::VirtualKeys key)
     case VirtualKeys::Return:
     {
         MenuItem *item = CurrentItem();
-        if(item->onAction)
+        if (item->onAction)
             item->onAction();
         break;
     }
@@ -243,8 +246,12 @@ void MainMenu::Update(unsigned long long now)
     MenuItem *item = CurrentItem();
     MenuTextBox *tb = dynamic_cast<MenuTextBox*>(item);
     if (tb)
-        if(tb->Update)
+    {
+        if (tb->Update)
+        {
             tb->Update(now);
+        }
+    }
 }
 
 VisualText *MainMenu::HelpText()

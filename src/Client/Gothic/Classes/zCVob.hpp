@@ -580,17 +580,17 @@ public:
 
     int GetGroundPoly()
     {
-        return *((int*)(this + VarOffsets::groundPoly));
+        return *((int*)((unsigned int)this + VarOffsets::groundPoly));
     }
 
     void SetGroundPoly(int value)
     {
-        *((int*)(this + VarOffsets::groundPoly)) = value;
+        *((int*)((unsigned int)this + VarOffsets::groundPoly)) = value;
     }
 
     class zMAT4 *GetTrafoObjToWorld()
     {
-        return (zMAT4*)(this + VarOffsets::trafoObjToWorld);
+        return (zMAT4*)((unsigned int)this + VarOffsets::trafoObjToWorld);
     }
 
     zVEC3 Position()
@@ -615,11 +615,11 @@ public:
 
     int LastTimeDrawn()
     {
-        return *(int*)(this + VarOffsets::lastTimeDrawn);
+        return *(int*)((unsigned int)this + VarOffsets::lastTimeDrawn);
     }
 
     void LastTimeDrawn(int value)
     {
-        *(int*)(this + VarOffsets::lastTimeDrawn) = value;
+        *(int*)((unsigned int)this + VarOffsets::lastTimeDrawn) = value;
     }
 };

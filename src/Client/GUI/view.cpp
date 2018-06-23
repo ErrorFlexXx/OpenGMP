@@ -3,7 +3,6 @@
 #include "../Gothic/Classes/zCOption.hpp"
 #include "../Gothic/Classes/zCOptionSection.hpp"
 #include "../Gothic/Classes/zCOptionEntry.hpp"
-#include <iostream>
 
 using namespace OpenGMP::GUI;
 
@@ -49,7 +48,7 @@ std::vector<double> View::InitCharWidths()
     ////Find maximum key.
     for (auto it = allChars.begin(); it != allChars.end(); it++)
     {
-        if (findMaxKey <= (unsigned char)it->first)
+        if (findMaxKey < (unsigned char)it->first)
             findMaxKey = (unsigned char)it->first;
     }
     
@@ -81,7 +80,6 @@ ViewPoint View::GetScreenSize()
         screenSize.x = options->GetEntryByName(section, "zVidResFullscreenX", 1)->GetVarValue()->ToInt();
         screenSize.y = options->GetEntryByName(section, "zVidResFullscreenY", 1)->GetVarValue()->ToInt();
     }
-
     return screenSize;
 }
 

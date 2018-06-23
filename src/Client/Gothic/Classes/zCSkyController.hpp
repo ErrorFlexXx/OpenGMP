@@ -13,11 +13,11 @@ public:
 
     bool FillBackground()
     {
-        return *((bool*)(this + VarOffsets::bFillBackground));
+        return *((bool*)((unsigned int)this + VarOffsets::bFillBackground));
     }
 
     void FillBackground(bool value)
     {
-        *((bool*)(this + VarOffsets::bFillBackground)) = value;
+        *((bool*)((unsigned int)this + VarOffsets::bFillBackground)) = value;
     }
 };

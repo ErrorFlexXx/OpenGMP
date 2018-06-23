@@ -38,7 +38,7 @@ OBJECT_FILES = starter.o
 EXE_FILE = Starter.exe
 #CC= i686-w64-mingw32-g++
 CFLAGS = -Wall -O
-LFLAGS = -static-libstdc++ -static-libgcc
+LFLAGS = -static-libstdc++ -static-libgcc -mwindows
 
 all: $(EXE_FILE)
 

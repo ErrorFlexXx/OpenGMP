@@ -41,18 +41,15 @@ namespace OpenGMP
             virtual void KeyDown(VirtualKeys key) override;
             virtual void Update(unsigned long long now) override;
 
-            Visual back;
+            Visual *back;
             Visual *helpVis;
             VisualText *HelpText();
             std::vector<MenuItem*> items;
             size_t cursor;
             struct Pos
             {
-                Pos(int x, int y)
-                    : x(x)
-                    , y(y) {}
-                int x;
-                int y;
+                int x = 0;
+                int y = 0;
             } pos;
             int preferredCursorItem;
             std::function<void()> onEscape;

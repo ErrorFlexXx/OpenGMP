@@ -35,24 +35,23 @@ HGame *HGame::GetInstance()
 
 void HGame::RunOutgame()
 {
-    GameTime::Update();
-    unsigned long long now = GameTime::GetTicks();
-    InputHandler::Update();
-    if (!HGame::outgameStarted)
-    {
-        HGame::StartOutgame();
-        HGame::outgameStarted = true;
-    }
-    Menu::UpdateMenus(now);
-
-    //Rendering:
-    sysEvent();
-    zCRenderer *renderer = zCRenderer::GetRenderer();
-    renderer->Vid_Clear(blankColor, 3);
-    renderer->BeginFrame();
-    zCView::GetScreen()->Render();
-    renderer->EndFrame();
-    renderer->Vid_Blit(1, 0, 0);
+        GameTime::Update();
+        unsigned long long now = GameTime::GetTicks();
+        InputHandler::Update();
+        if (!HGame::outgameStarted)
+        {
+            HGame::StartOutgame();
+            HGame::outgameStarted = true;
+        }
+        Menu::UpdateMenus(now);
+        //Rendering:
+        sysEvent();
+        zCRenderer *renderer = zCRenderer::GetRenderer();
+        renderer->Vid_Clear(blankColor, 3);
+        renderer->BeginFrame();
+        zCView::GetScreen()->Render();
+        renderer->EndFrame();
+        renderer->Vid_Blit(1, 0, 0);
 }
 
 void HGame::RunIngame()

@@ -13,7 +13,7 @@ MainMenu::MainMenu()
     preferredCursorItem = 0;
     ViewPoint screenSize = View::GetScreenSize();
     ViewPoint dim;
-    dim.x = (int)((double)screenSize.x * 1.0 / 3.0);
+    dim.x = (int)((double)screenSize.x * 1.6 / 3.0);
     dim.y = (int)((double)screenSize.y * 2.0 / 3.0);
     pos.x = (screenSize.x - dim.x) / 2;
     pos.y = (screenSize.y - dim.y) / 2;

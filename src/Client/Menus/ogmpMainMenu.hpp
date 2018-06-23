@@ -2,6 +2,8 @@
 
 #include "../GUI/mainMenu.hpp"
 
+class CGameManager;
+
 namespace OpenGMP
 {
     namespace GUI
@@ -22,6 +24,7 @@ namespace OpenGMP
             GUI::MenuButton *btnLogin;
             GUI::MenuButton *btnRegister;
             GUI::MenuButton *btnQuit;
+            CGameManager *gameManager;
             bool ingame;
         };
     }

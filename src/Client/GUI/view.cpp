@@ -3,7 +3,6 @@
 #include "../Gothic/Classes/zCOption.hpp"
 #include "../Gothic/Classes/zCOptionSection.hpp"
 #include "../Gothic/Classes/zCOptionEntry.hpp"
-#include <iostream>
 
 using namespace OpenGMP::GUI;
 
@@ -81,7 +80,6 @@ ViewPoint View::GetScreenSize()
         screenSize.x = options->GetEntryByName(section, "zVidResFullscreenX", 1)->GetVarValue()->ToInt();
         screenSize.y = options->GetEntryByName(section, "zVidResFullscreenY", 1)->GetVarValue()->ToInt();
     }
-
     return screenSize;
 }
 

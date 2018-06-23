@@ -34,32 +34,32 @@ public:
 
     bool IsInventoryWorld()
     {
-        return *((bool*)(this + VarOffsets::bIsInventoryWorld));
+        return *((bool*)((unsigned int)this + VarOffsets::bIsInventoryWorld));
     }
 
     void IsInventoryWorld(bool value)
     {
-        *((bool*)(this + VarOffsets::bIsInventoryWorld)) = value;
+        *((bool*)((unsigned int)this + VarOffsets::bIsInventoryWorld)) = value;
     }
 
     bool DrawVobBBox3D()
     {
-        return *((bool*)(this + VarOffsets::bDrawVobBBox3D));
+        return *((bool*)((unsigned int)this + VarOffsets::bDrawVobBBox3D));
     }
 
     void DrawVobBBox3D(bool value)
     {
-        *((bool*)(this + VarOffsets::bDrawVobBBox3D)) = value;
+        *((bool*)((unsigned int)this + VarOffsets::bDrawVobBBox3D)) = value;
     }
 
     int BspTreeMode()
     {
-        return *((int*)(this + VarOffsets::BspTreeMode));
+        return *((int*)((unsigned int)this + VarOffsets::BspTreeMode));
     }
 
     void BspTreeMode(int value)
     {
-        *((int*)(this + VarOffsets::BspTreeMode)) = value;
+        *((int*)((unsigned int)this + VarOffsets::BspTreeMode)) = value;
     }
     
     void Render(class zCCamera &)

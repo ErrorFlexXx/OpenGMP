@@ -203,12 +203,12 @@ public:
 
     class zCVob *CamVob()
     {
-        return *(zCVob**)(this + VarOffsets::CamVob);
+        return *(zCVob**)((unsigned int)this + VarOffsets::CamVob);
     }
 
     void CamVob(class zCVob *value)
     {
-        *(zCVob**)(this + VarOffsets::CamVob) = value;
+        *(zCVob**)((unsigned int)this + VarOffsets::CamVob) = value;
     }
 
 private:

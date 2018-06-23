@@ -22,6 +22,6 @@ public:
 
     int OwnerAddress()
     {
-        return *(int*)(this + VarOffsets::OwnerAddress);
+        return *(int*)((unsigned int)this + VarOffsets::OwnerAddress);
     }
 };

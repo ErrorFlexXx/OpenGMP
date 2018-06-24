@@ -19,7 +19,6 @@ GameServer::GameServer(int gameport, int playerslots, const string &scriptDirect
 
 GameServer::~GameServer()
 {
-    LogInfo() << testAttribute;
 }
 
 /**

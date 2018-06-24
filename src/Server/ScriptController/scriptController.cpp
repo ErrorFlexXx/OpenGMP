@@ -4,6 +4,15 @@
 #include "luaScript.hpp"
 #include "pythonScript.hpp"
 
+//Script library includes:
+#include <cpgf/metatraits/gmetaconverter_string.h>
+#include <cpgf/gmetadefine.h>
+#include <cpgf/goutmain.h>
+//Script interface classes:
+#include "../Objects/serverClient.hpp"
+#include "../gameServer.hpp"
+#include "../Systems/loginSystem.hpp"
+
 using namespace std;
 
 //Statics attributes
@@ -48,6 +57,8 @@ void ScriptController::LoadScriptsFromDir(std::string &dir)
         tinydir_next(&directory);
     }
     tinydir_close(&directory);
+
+    InvokeScriptFunction("init");
 }
 
 bool ScriptController::UnloadScript(std::string &filename)
@@ -84,4 +95,26 @@ void ScriptController::RegisterClass(const string &classname)
 const std::list<std::pair<const std::string, const std::string>> &ScriptController::GetRegisteredClasses()
 {
     return m_registeredClasses;
+}
+
+void ScriptController::InvokeScriptFunction(const std::string &functionName)
+{
+    for(Script *script : m_registeredScripts)
+        script->InvokeScriptFunction(functionName);
+}
+
+//Script interface registration:
+G_AUTO_RUN_BEFORE_MAIN()
+{
+    using namespace cpgf;
+
+    GDefineMetaClass<GameServer>
+            ::define("method::GameServer")
+            //._constructor<void *(const string, const string)>()
+            ._method("GetGameServerInstance", &GameServer::GetGameServerInstance)
+            ._method("Shutdown", &GameServer::Shutdown)
+            //._property("testAttribute", &GameServer::GetTestAttribute, &GameServer::SetTestAttribute)
+            ;
+    ScriptController::RegisterClass(std::string("GameServer"));
+
 }

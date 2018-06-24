@@ -22,6 +22,7 @@ bool Script::LoadClasses()
         GScopedInterface<IMetaClass> metaClass(m_service->get()->findClassByName(metaClassPair.first.c_str()));
         scriptSetValue(m_binding->get(), metaClassPair.second.c_str(), GScriptValue::fromClass(metaClass.get()));
     }
+
     return true;
 }
 
@@ -47,4 +48,9 @@ bool Script::ReadStringFromFile(const std::string & fileName, std::string * outC
 std::string Script::filename() const
 {
     return m_filename;
+}
+
+void Script::InvokeScriptFunction(const std::string &functionName)
+{
+    invokeScriptFunction(m_binding->get(), functionName.c_str());
 }

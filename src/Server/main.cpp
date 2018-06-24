@@ -12,18 +12,16 @@ namespace Flags
     Cli::Flag scriptDirectory("sd", "script-dir", 1, "Script directory", {"scripts"}, "Serversettings");
 }
 
-GameServer *gameserver = nullptr; //Global gameserver object.
-
 void exitHandler(int signum)
 {
     if(signum == SIGINT  ||
-       signum == SIGABRT ||
-       signum == SIGTERM)
+            signum == SIGABRT ||
+            signum == SIGTERM)
     {
-        if(gameserver)
+        if(GameServer::gameServer)
         {
-            gameserver->Shutdown();
-            delete gameserver;
+            GameServer::gameServer->Shutdown();
+            delete GameServer::gameServer;
         }
         exit(0); //Quit this programm
     }
@@ -60,11 +58,13 @@ int main(int argc, char **argv)
         signal(SIGTERM, exitHandler);   //to support clean Ctrl+C shutdown
         signal(SIGABRT, exitHandler);
 
-        gameserver = new GameServer(std::stoi(Flags::gameport.getParam(0).c_str()),
+        GameServer::gameServer = new GameServer(std::stoi(Flags::gameport.getParam(0).c_str()),
                                     std::stoi(Flags::gameSlots.getParam(0).c_str()),
                                     Flags::scriptDirectory.getParam(0));
         LogInfo() << "Starting the server...";
-        gameserver->Startup();
+        GameServer::gameServer->Startup();
+        GameServer::gameServer->Process();
+        delete GameServer::gameServer;
     }
     catch(std::bad_alloc& ba) //Out of memory
     {

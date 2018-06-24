@@ -8,7 +8,6 @@ using namespace std;
 using namespace cpgf;
 
 ServerWorld::ServerWorld(const string worldName, const string worldFilename)
-    : World(worldName, worldFilename)
 {
 }
 
@@ -18,9 +17,9 @@ G_AUTO_RUN_BEFORE_MAIN()
     using namespace cpgf;
 
     GDefineMetaClass<ServerWorld>
-        ::define("method::ServerWorld")
-        ._constructor<void *(const string, const string)>()
-        ._method("GetWorldName", &World::GetWorldname)
-    ;
+            ::define("method::ServerWorld")
+            ._constructor<void *(const string, const string)>()
+            ._method("GetWorldName", &World::GetWorldname)
+            ;
     ScriptController::RegisterClass(std::string("ServerWorld"));
 }

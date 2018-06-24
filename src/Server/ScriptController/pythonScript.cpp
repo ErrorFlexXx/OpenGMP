@@ -31,7 +31,6 @@ bool PythonScript::Load()
     m_scope = new GScopedInterface<IScriptObject>(m_binding->get()->createScriptObject("OpenGMP").toScriptObject());
 
     LoadClasses();
-    invokeScriptFunction(m_binding->get(), "hello");
     return true;
 }
 
@@ -39,6 +38,6 @@ bool PythonScript::Unload()
 {
     Py_XDECREF(m_pyDict);
     Py_XDECREF(m_pyObject);
-    Py_Finalize();    
+    Py_Finalize();
     return true;
 }

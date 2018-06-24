@@ -2,6 +2,8 @@
 #include "vec3f.hpp"
 #include <math.h>
 
+using namespace OpenGMP::Types;
+
 const float Angles::Pi = 3.1415926535897931f;
 const float Angles::TwoPi = 6.2831853071795865f;
 
@@ -183,7 +185,7 @@ Angles Angles::operator +(const Angles& rhs)
 
 float Angles::operator *(const Angles& rhs)
 {
-     return m_pitch * rhs.m_pitch + m_yaw * rhs.m_yaw + m_roll * rhs.m_roll;
+    return m_pitch * rhs.m_pitch + m_yaw * rhs.m_yaw + m_roll * rhs.m_roll;
 }
 
 Angles Angles::operator *(float factor)

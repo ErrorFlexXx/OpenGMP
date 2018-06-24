@@ -1,11 +1,14 @@
 #pragma once
 
-namespace Types
+namespace OpenGMP
 {
-    enum WeatherTypes : unsigned char
+    namespace Types
     {
-        Snow,
-        Rain,
-        Snowrain
-    };
+        enum WeatherTypes : unsigned char
+        {
+            Snow,
+            Rain,
+            Snowrain
+        };
+    }
 }

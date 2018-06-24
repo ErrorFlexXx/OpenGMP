@@ -1,9 +1,8 @@
 #pragma once
 
-#include <Shared/WorldObjects/world.hpp>
 #include <string>
 
-class ServerWorld : public World
+class ServerWorld
 {
 public:
     ServerWorld(const std::string worldName, const std::string worldFilename);

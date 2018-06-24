@@ -32,8 +32,6 @@ bool LuaScript::Load()
 
     LoadClasses();
 
-    invokeScriptFunction(m_binding->get(), "hello");
-
     return true;
 }
 

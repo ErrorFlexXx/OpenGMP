@@ -1,8 +1,6 @@
 #pragma once
 
 #include <string>
-#include "../GameObjects/staticCollection.hpp"
-#include "../GameObjects/dynamicCollection.hpp"
 #include "WorldGlobals/worldClock.hpp"
 #include "WorldGlobals/weatherController.hpp"
 #include "WorldGlobals/barrierController.hpp"
@@ -32,8 +30,6 @@ private:
     WorldClock m_worldClock;
     WeatherController m_weatherCtrl;
     BarrierController m_barrierCtrl;
-    DynamicCollection <BaseVob> m_vobsDynamic;
-    StaticCollection <BaseVob> m_vobsById;
     std::string m_worldName;        //!< Name of the world.
     std::string m_worldFilename;    //!< Filename of the world.
 };

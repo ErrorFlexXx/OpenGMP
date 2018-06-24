@@ -1,4 +1,5 @@
-def hello():
-	print("Hello World from Python!")
-	serverWorld = ServerWorld("WorldName", "WorldFileName")
-	print("Created ServerWorld with name: " + serverWorld.GetWorldName())	
+def init():
+	print("Script init...")
+	inst = GameServer.GetGameServerInstance()
+	inst.testAttribute = 10
+	inst.Shutdown()

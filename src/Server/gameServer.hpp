@@ -3,18 +3,22 @@
 #include <string>
 #include <vector>
 #include <RakNetTypes.h>
-#include "networkController.hpp"
+#include "Systems/networkSystem.hpp"
+#include "Systems/loginSystem.hpp"
 
 //Forward declarations:
-class World;
+class NetworkSystem;
+class IClient;
+class IPlayer;
+class IWorld;
 
 /**
  * @brief The GameServer class
  */
-class GameServer : public NetworkController
+class GameServer
 {
 public:
-    GameServer(int gameport, int playerslots, const std::string scriptDirectory);
+    GameServer(int gameport, int playerslots, const std::string &scriptDirectory);
     virtual ~GameServer();
 
     /**
@@ -28,7 +32,29 @@ public:
      */
     void Shutdown();
 
+    /**
+     * @brief Process GameServer Loop
+     */
+    void Process();
+
+    /**
+     * @brief GetGlobalGameServer returns a reference to global
+     * @return
+     */
+    static GameServer &GetGameServerInstance();
+
+    /* Global Systems */
+    static GameServer *gameServer;
+    NetworkSystem networkSystem;
+    LoginSystem loginSystem;
+
+    /* Global Collections */
+    std::vector<IClient*> clientList;
+    std::vector<IPlayer*> playerList;
+    std::vector<IWorld*>  worldList;
+
 private:
-    std::vector<World*> m_worlds;   //!< Loaded world objects.
-    std::string m_scriptDirectory;  //!< Directory to load server scripts from.
+    bool serverRunning;
+    bool serverStopped;
+    std::string scriptDirectory;  //!< Directory to load server scripts from.
 };

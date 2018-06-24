@@ -32,3 +32,13 @@ unsigned long long GameTime::GetTicks()
 {
     return GameTime::ticks;
 }
+
+void GameTime::WriteStream(RakNet::BitStream &stream)
+{
+    stream.Write(ticks);
+}
+
+void GameTime::ReadStream(RakNet::BitStream &stream)
+{
+    stream.Read(ticks);
+}

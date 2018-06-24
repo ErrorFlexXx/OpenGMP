@@ -2,6 +2,8 @@
 #include <limits.h>
 #include <stdexcept>
 
+using namespace OpenGMP::Types;
+
 WorldTime::WorldTime()
     : WorldTime(0)
 {
@@ -25,9 +27,9 @@ WorldTime::WorldTime(int day, int hour, int minute)
 WorldTime::WorldTime(int day, int hour, int minute, int second)
 {
     long long totalSeconds = (long long) second +
-                             (long long) minute * SECONDS_PER_MINUTE +
-                             (long long) hour * SECONDS_PER_HOUR +
-                             (long long) day * SECONDS_PER_DAY;
+            (long long) minute * SECONDS_PER_MINUTE +
+            (long long) hour * SECONDS_PER_HOUR +
+            (long long) day * SECONDS_PER_DAY;
     if(INT_MIN <= totalSeconds && totalSeconds <= INT_MAX)
     {   //Valid
         m_totalSeconds = (int) totalSeconds;
@@ -55,7 +57,7 @@ float WorldTime::GetTotalMinutes()
 
 int WorldTime::GetTotalSeconds()
 {
-   return m_totalSeconds;
+    return m_totalSeconds;
 }
 
 int WorldTime::GetDay()

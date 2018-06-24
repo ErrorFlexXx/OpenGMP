@@ -32,6 +32,12 @@ public:
     virtual bool Unload() = 0;
 
     /**
+     * @brief InvokeScriptFunction calls a script function in all registered scripts with matching name
+     * @param functionName to be called
+     */
+    void InvokeScriptFunction(const std::string &functionName);
+
+    /**
      * @brief filename getter of filename attribute.
      */
     std::string filename() const;

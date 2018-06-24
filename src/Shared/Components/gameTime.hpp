@@ -1,11 +1,12 @@
 #pragma once
 
 #include <GetTime.h>
+#include "../Objects/iStreamObject.hpp"
 
 #define TICKS_PER_SECOND        1000
 #define TICKS_PER_MILLISECOND   1
 
-class GameTime
+class GameTime : public IStreamObject
 {
 public:
     /**
@@ -18,7 +19,12 @@ public:
      * @return current ticks in unsigned long long.
      */
     static unsigned long long GetTicks();
-private:
+
+    virtual void WriteStream(RakNet::BitStream &stream) override;
+    virtual void ReadStream(RakNet::BitStream &stream) override;
+
     static unsigned long long ticks;    //!< Current ticks.
-    static RakNet::TimeMS oldTicks;     //!< old ticks to impl. a 32-bit overflowing prevention.
+
+private:
+    static RakNet::TimeMS oldTicks;     //!< old ticks to impl. a 32-bit overflowing prevention. <- ToDo: Move to system.
 };

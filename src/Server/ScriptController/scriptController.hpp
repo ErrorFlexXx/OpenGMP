@@ -52,6 +52,8 @@ public:
      */
     static const std::list<std::pair<const std::string, const std::string>> &GetRegisteredClasses();
 
+    static void InvokeScriptFunction(const std::string &functionName);
+
 private:
     ScriptController(); //Abstract class - The one and only script controller
     static std::list<Script*> m_registeredScripts; //!< Container to hold loaded script objects in.

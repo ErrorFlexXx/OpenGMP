@@ -1,7 +1,6 @@
 #pragma once
 
 #include <BitStream.h>
-#include <Shared/GameObjects/gameObject.hpp>
 #include <Shared/Types/worldTime.hpp>
 
 class WorldInst;

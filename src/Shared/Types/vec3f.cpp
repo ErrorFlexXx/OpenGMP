@@ -1,6 +1,8 @@
 #include "vec3f.hpp"
 #include <math.h>
 
+using namespace OpenGMP::Types;
+
 Vec3f::Vec3f()
     : Vec3f(0.f, 0.f, 0.f)
 {
@@ -78,8 +80,8 @@ Vec3f Vec3f::cross(Vec3f &value)
 bool Vec3f::isNull()
 {
     if(m_x < NULL_LIMIT && m_x > -NULL_LIMIT &&
-       m_y < NULL_LIMIT && m_y > -NULL_LIMIT &&
-       m_z < NULL_LIMIT && m_z > -NULL_LIMIT)
+            m_y < NULL_LIMIT && m_y > -NULL_LIMIT &&
+            m_z < NULL_LIMIT && m_z > -NULL_LIMIT)
         return true;
     else
         return false;

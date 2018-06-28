@@ -1,5 +1,5 @@
 #include "menu.hpp"
-#include <Client/Core/inputHandler.hpp>
+#include <Client/Controls/inputHandler.hpp>
 
 using namespace OpenGMP::GUI;
 
@@ -8,51 +8,6 @@ std::list<Menu*> Menu::activeMenus;
 Menu::Menu()
     : opened(false)
 {}
-
-bool Menu::IsMenuActive()
-{
-    return 0 < activeMenus.size();
-}
-
-bool Menu::KeyDownUpdateMenus(OpenGMP::VirtualKeys key)
-{
-    if (0 < activeMenus.size())
-    {
-        activeMenus.front()->KeyDown(key);
-        return true;
-    }
-    return false;
-}
-
-bool Menu::KeyUpUpdateMenus(OpenGMP::VirtualKeys key)
-{
-    if (0 < activeMenus.size())
-    {
-        activeMenus.front()->KeyUp(key);
-        return true;
-    }
-    return false;
-}
-
-void Menu::UpdateMenus(unsigned long long now)
-{
-    for (Menu *menu : activeMenus)
-    {
-        menu->Update(now);
-    }
-}
-
-void Menu::CloseActiveMenus()
-{
-    if (0 < activeMenus.size())
-    {
-        auto it = activeMenus.end();
-        while(it-- != activeMenus.begin())
-        {
-            (*it)->Close();
-        }
-    }
-}
 
 bool Menu::Opened()
 {

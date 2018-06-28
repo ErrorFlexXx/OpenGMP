@@ -1,5 +1,5 @@
 #include "inputHandler.hpp"
-#include <Shared/GameTime.hpp>
+#include <Shared/Components/GameTime.hpp>
 #include "../process.hpp"
 
 #define KEYCOUNT 255

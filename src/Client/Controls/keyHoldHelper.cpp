@@ -1,6 +1,6 @@
 #include "keyHoldHelper.hpp"
-#include "../Core/inputHandler.hpp"
-#include <Shared/gameTime.hpp>
+#include "../Controls/inputHandler.hpp"
+#include <Shared/Components/gameTime.hpp>
 
 using namespace OpenGMP;
 using namespace OpenGMP::Controls;
@@ -39,7 +39,7 @@ void KeyHoldHelper::Update(unsigned long long now)
             {
                 current = pair;
                 nextTime = now + holdTime * TICKS_PER_MILLISECOND;
-                if(pair->action)
+                if (pair->action)
                     pair->action();
             }
             else if (now > nextTime)

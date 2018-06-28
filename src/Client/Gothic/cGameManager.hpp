@@ -22,42 +22,42 @@ public:
     {
         XCALL(0x0042B1C0);
     }
-        
+
     void InsertMenuWorld(class zSTRING &, class zSTRING &)
     {
         XCALL(0x0042B1E0);
     }
-        
+
     void RemoveMenuWorld()
     {
         XCALL(0x0042B1F0);
     }
-        
+
     int IsGameRunning()
     {
         XCALL(0x0042B200);
     }
-        
+
     int IntroduceChapter()
     {
         XCALL(0x0042B220);
     }
-        
+
     int IntroduceChapter(class zSTRING, class zSTRING, class zSTRING, class zSTRING, int)
     {
         XCALL(0x0042B7E0);
     }
-        
+
     int PlayVideo(class zSTRING)
     {
         XCALL(0x0042B940);
     }
-        
+
     int PlayVideoEx(class zSTRING, short, int)
     {
         XCALL(0x0042BB10);
     }
-        
+
     void ShowRealPlayTime()
     {
         XCALL(0x0042BDE0);

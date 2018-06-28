@@ -4,7 +4,7 @@
 #include <windows.h>
 #include <functional>
 #include <map>
-#include "Enumeration/VirtualKeys.hpp"
+#include "virtualKeys.hpp"
 
 namespace OpenGMP
 {

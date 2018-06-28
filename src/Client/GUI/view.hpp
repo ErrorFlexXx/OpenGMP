@@ -3,7 +3,7 @@
 #include <map>
 #include <vector>
 #include <string>
-#include "../Core/Enumeration/virtualKeys.hpp"
+#include "../Controls/virtualKeys.hpp"
 
 namespace OpenGMP
 {
@@ -41,12 +41,13 @@ namespace OpenGMP
             static const std::map<char, float> gothicChars;
             static std::vector<double> charWidths;
             
-            static ViewPoint GetScreenSize();
+            static ViewPoint GetVirtualScreenSize();
+            static ViewPoint GetPixelScreenSize();
             static ViewPoint PixelToVirtual(int x, int y);
             static ViewPoint PixelToVirtual(ViewPoint point);
             static int PixelToVirtualX(int x);
             static int PixelToVirtualY(int y);
-            static inline double OGMPGetCharWidth(char c) { return (size_t)c < charWidths.size() ? charWidths[c] : 0.0; }
+            static inline double OGMPGetCharWidth(char c) { return (size_t)(unsigned char)c < charWidths.size() ? charWidths[(unsigned char)c] : 0.0; }
             static bool GothicContainsChar(char c);
             static double StringPixelWidth(const std::string &str);
 

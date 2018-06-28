@@ -13,7 +13,7 @@ namespace OpenGMP
         class TextBox : public View
         {
         public:
-            TextBox(int x, int y, int w, bool fixedBorders);
+            TextBox(int x, int y, int w, bool fixedBorders, bool passwordText = false);
 
             virtual void Show() override;
             virtual void Hide() override;
@@ -25,6 +25,8 @@ namespace OpenGMP
             void Enabled(bool value);
             std::string Input();
             void Input(const std::string &value);
+            bool GetPasswordText();
+            void SetPasswordText(bool value);
 
             size_t characterLimit;
             bool allowSpaces;
@@ -48,10 +50,11 @@ namespace OpenGMP
             int width;
             int height;
             bool fixedBorders;
+            bool passwordText;
             Visual inputVis;
             int startPos;
             static const size_t cursorSize;
-            static const size_t cursorOffsetX;
+            static const int cursorOffsetX;
             static const size_t cursorOffsetY;
             static const size_t arrowSize;
             size_t cursorPos;

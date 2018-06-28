@@ -3,7 +3,7 @@
 #include "menuItem.hpp"
 #include "menuButton.hpp"
 #include "menuTextBox.hpp"
-#include <Shared\gameTime.hpp>
+#include <Shared/Components/gameTime.hpp>
 
 using namespace OpenGMP::GUI;
 
@@ -11,10 +11,10 @@ MainMenu::MainMenu()
 {
     cursor = 0;
     preferredCursorItem = 0;
-    ViewPoint screenSize = View::GetScreenSize();
+    ViewPoint screenSize = View::GetPixelScreenSize();
     ViewPoint dim;
-    dim.x = (int)((double)screenSize.x * 1.6 / 3.0);
-    dim.y = (int)((double)screenSize.y * 2.0 / 3.0);
+    dim.x = (int)(640);
+    dim.y = (int)(480);
     pos.x = (screenSize.x - dim.x) / 2;
     pos.y = (screenSize.y - dim.y) / 2;
     isOpen = false;
@@ -23,9 +23,9 @@ MainMenu::MainMenu()
     back = new Visual(pos.x, pos.y, dim.x, dim.y);
     back->SetBackTexture("Menu_Ingame.tga");
     back->SetFont(Visual::Fonts::Menu);
-    helpVis = VisualText::Create("", 0, pos.y + (int)((double)dim.y * 9.0 / 10.0));
+    helpVis = VisualText::Create("", 0, pos.y + 450);
     HelpText()->SetCenteredX(true);
-    
+
     //Setup key strokes for actions:
     std::list<VirtualKeys> combUp;
     combUp.push_back(VirtualKeys::Up);
@@ -56,14 +56,11 @@ bool MainMenu::IsOpen()
 
 void MainMenu::Open()
 {
-    CloseActiveMenus(); //MainMenus never overlap
-
     if (!init)
     {
         OnCreate();
         init = true;
     }
-
     Menu::Open();
     back->Show();
     helpVis->Show();
@@ -109,24 +106,24 @@ MenuButton * MainMenu::AddButton(const std::string &text, const std::string &hel
     return newButton;
 }
 
-MenuTextBox * MainMenu::AddTextBox(const std::string &title, const std::string &help, int y, int width, std::function<void()> onActivate)
+MenuTextBox * MainMenu::AddTextBox(const std::string &title, const std::string &help, int y, int width, std::function<void()> onActivate, bool passwordText)
 {
-    int borderOffset = 70;
-    MenuTextBox *newTextBox = new MenuTextBox(title, help, pos.x + 640 - width - borderOffset, pos.y + y, width, pos.x + borderOffset, onActivate);
+    int borderOffset = 50;
+    MenuTextBox *newTextBox = new MenuTextBox(title, help, pos.x + 640 - width - borderOffset, pos.y + y, width, pos.x + borderOffset, onActivate, passwordText);
     items.push_back(newTextBox);
     return newTextBox;
 }
 
-MenuTextBox * MainMenu::AddTextBox(const std::string &title, const std::string &help, int x, int y, int width, int titleX, std::function<void()> onActivate)
+MenuTextBox * MainMenu::AddTextBox(const std::string &title, const std::string &help, int x, int y, int width, int titleX, std::function<void()> onActivate, bool passwordText)
 {
-    MenuTextBox *newTextBox = new MenuTextBox(title, help, pos.x + x, pos.y + y, width, pos.x + titleX, onActivate);
+    MenuTextBox *newTextBox = new MenuTextBox(title, help, pos.x + x, pos.y + y, width, pos.x + titleX, onActivate, passwordText);
     items.push_back(newTextBox);
     return newTextBox;
 }
 
-MenuTextBox * MainMenu::AddTextBox(const std::string &title, const std::string &help, int x, int y, int width, int titleX, int titleY, std::function<void()> onActivate)
+MenuTextBox * MainMenu::AddTextBox(const std::string &title, const std::string &help, int x, int y, int width, int titleX, int titleY, std::function<void()> onActivate, bool passwordText)
 {
-    MenuTextBox *newTextBox = new MenuTextBox(title, help, pos.x + x, pos.y + y, width, pos.x + titleX, pos.y + titleY, onActivate);
+    MenuTextBox *newTextBox = new MenuTextBox(title, help, pos.x + x, pos.y + y, width, pos.x + titleX, pos.y + titleY, onActivate, passwordText);
     items.push_back(newTextBox);
     return newTextBox;
 }
@@ -211,7 +208,7 @@ void MainMenu::MoveCursor(bool up)
 void MainMenu::KeyDown(OpenGMP::VirtualKeys key)
 {
     unsigned long long now = GameTime::GetTicks();
-    
+
     switch (key)
     {
     case VirtualKeys::Return:

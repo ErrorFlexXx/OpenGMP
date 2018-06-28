@@ -1,9 +1,10 @@
 #include "hGame.hpp"
-#include <Shared/GameTime.hpp>
+#include <Shared/Components/GameTime.hpp>
 #include "../Gothic/Objects/oCGame.hpp"
 #include "../Gothic/Classes/zCRenderer.hpp"
 #include "../Gothic/Classes/zCView.hpp"
-#include "../Core/inputHandler.hpp"
+#include "../Controls/inputHandler.hpp"
+#include "../Systems/menuSystem.hpp"
 #include "../GUI/menu.hpp"
 
 using namespace OpenGMP;
@@ -43,7 +44,7 @@ void HGame::RunOutgame()
             HGame::StartOutgame();
             HGame::outgameStarted = true;
         }
-        Menu::UpdateMenus(now);
+        OpenGMP::Systems::MenuSystem::UpdateMenus(now);
         //Rendering:
         sysEvent();
         zCRenderer *renderer = zCRenderer::GetRenderer();
@@ -73,6 +74,5 @@ void HGame::UndoHook()
 
 void HGame::StartOutgame()
 {
-    HGame::mainMenu = new OpenGMP::Menus::OGMPMainMenu();
-    mainMenu->Open();
+    OpenGMP::Systems::MenuSystem::OpenMainMenu();
 }

@@ -25,22 +25,22 @@ namespace OpenGMP
             virtual void OnCreate() = 0;
             virtual void Open() override;
             virtual void Close() override;
+            virtual void KeyDown(VirtualKeys key) override;
+            virtual void Update(unsigned long long now) override;
 
         protected:
             MenuButton * AddButton(const std::string &text, const std::string &help, int y, std::function<void()> onActivate);
             MenuButton * AddButton(const std::string &text, const std::string &help, int x, int y, std::function<void()> onActivate);
-            MenuTextBox * AddTextBox(const std::string &title, const std::string &help, int y, int width, std::function<void()> onActivate);
-            MenuTextBox * AddTextBox(const std::string &title, const std::string &help, int x, int y, int width, int titleX, std::function<void()> onActivate);
-            MenuTextBox * AddTextBox(const std::string &title, const std::string &help, int x, int y, int width, int titleX, int titleY, std::function<void()> onActivate);
+            MenuTextBox * AddTextBox(const std::string &title, const std::string &help, int y, int width, std::function<void()> onActivate, bool passwordText = false);
+            MenuTextBox * AddTextBox(const std::string &title, const std::string &help, int x, int y, int width, int titleX, std::function<void()> onActivate, bool passwordText = false);
+            MenuTextBox * AddTextBox(const std::string &title, const std::string &help, int x, int y, int width, int titleX, int titleY, std::function<void()> onActivate, bool passwordText = false);
             void UpdateHelpText();
             void SetHelpText(const std::string &text);
             void SetCursor(size_t i);
             void SetCursor(MenuItem *item);
             void MoveCursor();
             void MoveCursor(bool up);
-            virtual void KeyDown(VirtualKeys key) override;
-            virtual void Update(unsigned long long now) override;
-
+            
             Visual *back;
             Visual *helpVis;
             VisualText *HelpText();

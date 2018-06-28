@@ -7,13 +7,13 @@
 using namespace OpenGMP::GUI;
 
 const std::map<View::Fonts, std::string> View::fontDict =
-    {   { Default, "Font_Old_10_White.tga" },
-        { Default_Hi, "Font_Old_10_White_Hi.tga" },
-        { Menu, "Font_Old_20_White.tga" },
-        { Menu_Hi, "Font_Old_20_White_Hi.tga" }
-    };
+{ { Default, "Font_Old_10_White.tga" },
+    { Default_Hi, "Font_Old_10_White_Hi.tga" },
+    { Menu, "Font_Old_20_White.tga" },
+    { Menu_Hi, "Font_Old_20_White_Hi.tga" }
+};
 
-const std::map<char, double> View::allChars = { 
+const std::map<char, double> View::allChars = {
 { 'A', 14.998571428571428571428571428571 }, { 'B', 11.998857142857142857142857142857 }, { 'C', 10.998857142857142857142857142857 }, { 'D', 11.998857142857142857142857142857 }, { 'E', 11.998857142857142857142857142857 }, { 'F', 10.999142857142857142857142857143 }, { 'G', 12.998857142857142857142857142857 }, { 'H', 11.998857142857142857142857142857 }, { 'I', 4.9997142857142857142857142857143 }, { 'J', 10.999142857142857142857142857143 }, { 'K', 12.998857142857142857142857142857 },
 { 'L', 10.999142857142857142857142857143 }, { 'M', 14.998571428571428571428571428571 }, { 'N', 10.999142857142857142857142857143 }, { 'O', 12.998857142857142857142857142857 }, { 'P', 11.998857142857142857142857142857 }, { 'Q', 12.998857142857142857142857142857 }, { 'R', 11.998571428571428571428571428571 }, { 'S', 11.998857142857142857142857142857 }, { 'T', 11.998857142857142857142857142857 }, { 'U', 11.998857142857142857142857142857 }, { 'V', 11.998857142857142857142857142857 },
 { 'W', 14.998571428571428571428571428571 }, { 'X', 13.998571428571428571428571428571 }, { 'Y', 10.999142857142857142857142857143 }, { 'Z', 10.999142857142857142857142857143 }, { 'a', 10.999142857142857142857142857143 }, { 'b', 10.999142857142857142857142857143 }, { 'c', 9.9991428571428571428571428571429 }, { 'd', 10.999142857142857142857142857143 }, { 'e', 10.999142857142857142857142857143 }, { 'f', 8.9991428571428571428571428571429 }, { 'g', 10.999142857142857142857142857143 },
@@ -51,9 +51,8 @@ std::vector<double> View::InitCharWidths()
         if (findMaxKey < (unsigned char)it->first)
             findMaxKey = (unsigned char)it->first;
     }
-    
+
     ////Fill vector with inital zero elements.
-    
     buildCharWidths.insert(buildCharWidths.begin(), findMaxKey + 1, 0.0); //Insert findMaxKey 0.0 elements.
 
     ////Fill in correct widths for existent elements.
@@ -61,11 +60,11 @@ std::vector<double> View::InitCharWidths()
     {
         buildCharWidths[(unsigned char)it->first] = it->second;
     }
-   
+
     return buildCharWidths;
 }
 
-ViewPoint View::GetScreenSize()
+ViewPoint View::GetVirtualScreenSize()
 {
     zCView *screen = zCView::GetScreen();
     ViewPoint screenSize;
@@ -74,22 +73,32 @@ ViewPoint View::GetScreenSize()
 
     if (screenSize.x <= 0 || screenSize.y <= 0) //Invalid screen size ?
     {
-        //Try read screen size via ini.
-        zCOption *options = zCOption::GetZOptions();
-        zCOptionSection *section = options->GetSectionByName("VIDEO", 1);
-        screenSize.x = options->GetEntryByName(section, "zVidResFullscreenX", 1)->GetVarValue()->ToInt();
-        screenSize.y = options->GetEntryByName(section, "zVidResFullscreenY", 1)->GetVarValue()->ToInt();
+        screenSize.x = 0x2000;
+        screenSize.y = 0x2000;
     }
+    return screenSize;
+}
+
+ViewPoint View::GetPixelScreenSize()
+{
+    zCView *screen = zCView::GetScreen();
+    ViewPoint screenSize;
+
+    zCOption *options = zCOption::GetZOptions();
+    zCOptionSection *section = options->GetSectionByName("VIDEO", 1);
+    screenSize.x = options->GetEntryByName(section, "zVidResFullscreenX", 1)->GetVarValue()->ToInt();
+    screenSize.y = options->GetEntryByName(section, "zVidResFullscreenY", 1)->GetVarValue()->ToInt();
+
     return screenSize;
 }
 
 ViewPoint View::PixelToVirtual(int x, int y)
 {
-    ViewPoint screenSize = GetScreenSize();
+    ViewPoint screenSize = GetPixelScreenSize();
     ViewPoint virtualSize;
 
-    virtualSize.x = x * 0x2000 / screenSize.x;
-    virtualSize.y = y * 0x2000 / screenSize.y;
+    virtualSize.x = (int)((double)x * (double)0x2000 / (double)screenSize.x);
+    virtualSize.y = (int)((double)y * (double)0x2000 / (double)screenSize.y);
 
     return virtualSize;
 }
@@ -101,36 +110,37 @@ ViewPoint View::PixelToVirtual(ViewPoint point)
 
 int View::PixelToVirtualX(int x)
 {
-    ViewPoint screenSize = GetScreenSize();
+    ViewPoint screenSize = GetPixelScreenSize();
     int virtualX;
 
-    virtualX = x * 0x2000 / screenSize.x;
+    virtualX = (int)((double)x * (double)0x2000 / (double)screenSize.x);
 
     return virtualX;
 }
 
 int View::PixelToVirtualY(int y)
 {
-    ViewPoint screenSize = GetScreenSize();
+    ViewPoint screenSize = GetPixelScreenSize();
     int virtualY;
 
-    virtualY = y * 0x2000 / screenSize.y;
+    virtualY = (int)((double)y * (double)0x2000 / (double)screenSize.y);
 
     return virtualY;
 }
 
 bool View::GothicContainsChar(char c)
 {
-    if (0 <= c && (size_t) c < charWidths.size())
-        return charWidths[c] != 0.0;
-    
+    unsigned char uc = c;
+    if (0 <= uc && (size_t)uc < charWidths.size())
+        return charWidths[uc] != 0.0;
+
     return false; //Out of range.
 }
 
 double View::StringPixelWidth(const std::string &str)
 {
     double width = 0.0;
-    
+
     for (const char &c : str)
     {
         width += OGMPGetCharWidth(c);

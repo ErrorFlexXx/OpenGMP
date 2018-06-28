@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Core/Enumeration/virtualKeys.hpp"
+#include "virtualKeys.hpp"
 #include <list>
 #include <functional>
 

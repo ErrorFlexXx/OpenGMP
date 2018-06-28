@@ -1,24 +1,24 @@
 #include "textBox.hpp"
 #include "visualText.hpp"
-#include <Shared/gameTime.hpp>
-#include "../Core/inputHandler.hpp"
-#include "../Core/Enumeration/virtualKeys.hpp"
+#include <Shared/Components/gameTime.hpp>
+#include "../Controls/inputHandler.hpp"
+#include "../Controls/virtualKeys.hpp"
 
 using namespace OpenGMP;
 using namespace OpenGMP::GUI;
 
 const size_t TextBox::cursorSize = 16;
-const size_t TextBox::cursorOffsetX = 1 - TextBox::cursorSize / 2;
+const int TextBox::cursorOffsetX = 1 - TextBox::cursorSize / 2;
 const size_t TextBox::cursorOffsetY = 1;
 const size_t TextBox::arrowSize = 10;
 
-TextBox::TextBox(int x, int y, int w, bool fixedBorders)
+TextBox::TextBox(int x, int y, int w, bool fixedBorders, bool passwordText)
     : width(w)
     , height(fontSizeDefault)
     , inputVis(x, y, w, height)
     , cursorVis(x + cursorOffsetX, y + cursorOffsetY, cursorSize, cursorSize)
-    , leftArrow(x, y + (height - arrowSize) / 2, arrowSize, arrowSize)
-    , rightArrow(x + w - arrowSize, y + (height - arrowSize) / 2, arrowSize, arrowSize)
+    , leftArrow(x, y + (fontSizeDefault - arrowSize) / 2, arrowSize, arrowSize)
+    , rightArrow(x + w - arrowSize, y + (fontSizeDefault - arrowSize) / 2, arrowSize, arrowSize)
 {
     characterLimit = 512;
     allowSpaces = true;
@@ -29,14 +29,15 @@ TextBox::TextBox(int x, int y, int w, bool fixedBorders)
     leftArrowShown = false;
     rightArrowShown = false;
     enabled = false;
+    this->passwordText = passwordText;
     pos.x = x;
     pos.y = y;
 
     this->fixedBorders = fixedBorders;
     inputVis.CreateText("", 0, 0);
     cursorVis.SetBackTexture("CURSOR.TGA");
-    leftArrow.SetBackTexture("L.TGA");
-    rightArrow.SetBackTexture("R.TGA");
+    leftArrow.SetBackTexture("L.tga");
+    rightArrow.SetBackTexture("R.tga");
 }
 
 void TextBox::Show()
@@ -159,6 +160,17 @@ void TextBox::Input(const std::string &value)
     UpdateInputVisual();
 }
 
+bool TextBox::GetPasswordText()
+{
+    return passwordText;
+}
+
+void TextBox::SetPasswordText(bool value)
+{
+    passwordText = value;
+    UpdateInputVisual();
+}
+
 void TextBox::UpdateInputVisual()
 {
     size_t sub = 0;
@@ -166,9 +178,22 @@ void TextBox::UpdateInputVisual()
         sub = hideChars;
 
     std::string substractedText = input.substr(sub);
-    InputText()->SetText(substractedText);
-    int cursorLen = (int)StringPixelWidth(substractedText.substr(0, cursorPos - sub));
-    int inputLen = (int)StringPixelWidth(substractedText);
+    int cursorLen;
+    int inputLen;
+    if (passwordText) //Password text - show stars
+    {
+        std::string starText;
+        starText.insert(0, substractedText.length(), '#');
+        InputText()->SetText(starText);
+        cursorLen = (int)StringPixelWidth(starText.substr(0, cursorPos - sub));
+        inputLen = (int)StringPixelWidth(starText);
+    }
+    else //No password - show text
+    {
+        InputText()->SetText(substractedText);
+        cursorLen = (int)StringPixelWidth(substractedText.substr(0, cursorPos - sub));
+        inputLen = (int)StringPixelWidth(substractedText);
+    }
 
     if (fixedBorders)
         cursorVis.SetPosX(pos.x + cursorOffsetX + cursorLen - sub);

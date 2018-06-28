@@ -8,17 +8,17 @@ BOOL APIENTRY DllMain(HINSTANCE hInstance, DWORD reason, LPVOID reserved)
 {
     switch (reason)
     {
-        case DLL_PROCESS_ATTACH:
-        {
-            OGMP::Startup();
-            break;
-        }
-        case DLL_PROCESS_DETACH:
-        {
-            if(openGMPInstance != nullptr)
-                openGMPInstance->Stop();
-            break;
-        }
+    case DLL_PROCESS_ATTACH:
+    {
+        OGMP::Startup();
+        break;
+    }
+    case DLL_PROCESS_DETACH:
+    {
+        if (openGMPInstance != nullptr)
+            openGMPInstance->Stop();
+        break;
+    }
     }
     return 1;
 }

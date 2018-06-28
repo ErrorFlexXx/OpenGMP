@@ -122,9 +122,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Shared\gameTime.cpp" />
+    <ClCompile Include="..\..\..\Shared\Components\gameTime.cpp" />
+    <ClCompile Include="..\..\Controls\inputHandler.cpp" />
     <ClCompile Include="..\..\Controls\keyHoldHelper.cpp" />
-    <ClCompile Include="..\..\Core\inputHandler.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zMAT3.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp" />
@@ -146,14 +146,16 @@
     <ClCompile Include="..\..\Hooks\otherHooks.cpp" />
     <ClCompile Include="..\..\main.cpp" />
     <ClCompile Include="..\..\Menus\ogmpMainMenu.cpp" />
+    <ClCompile Include="..\..\Menus\ogmpRegisterMenu.cpp" />
     <ClCompile Include="..\..\openGMP.cpp" />
     <ClCompile Include="..\..\process.cpp" />
+    <ClCompile Include="..\..\Systems\menuSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Shared\gameTime.hpp" />
+    <ClInclude Include="..\..\..\Shared\Components\gameTime.hpp" />
+    <ClInclude Include="..\..\Controls\inputHandler.hpp" />
     <ClInclude Include="..\..\Controls\keyHoldHelper.hpp" />
-    <ClInclude Include="..\..\Core\Enumeration\virtualKeys.hpp" />
-    <ClInclude Include="..\..\Core\inputHandler.hpp" />
+    <ClInclude Include="..\..\Controls\virtualKeys.hpp" />
     <ClInclude Include="..\..\Gothic\cGameManager.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCCamera.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCEventManager.hpp" />
@@ -202,8 +204,10 @@
     <ClInclude Include="..\..\Hooks\hView.hpp" />
     <ClInclude Include="..\..\Hooks\otherHooks.hpp" />
     <ClInclude Include="..\..\Menus\ogmpMainMenu.hpp" />
+    <ClInclude Include="..\..\Menus\ogmpRegisterMenu.hpp" />
     <ClInclude Include="..\..\openGMP.hpp" />
     <ClInclude Include="..\..\process.hpp" />
+    <ClInclude Include="..\..\Systems\menuSystem.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

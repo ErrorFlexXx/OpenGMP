@@ -11,12 +11,6 @@
     <Filter Include="Shared">
       <UniqueIdentifier>{d6d61e34-7414-4b56-9c55-f3f717650c68}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core">
-      <UniqueIdentifier>{4f506139-ccdf-41e3-ab68-6289e4b42f66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Enumeration">
-      <UniqueIdentifier>{dd7e7034-24d0-4d0e-bf34-366acc53b89a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Gothic">
       <UniqueIdentifier>{e277647f-f22a-4008-b679-75f96ce032e4}</UniqueIdentifier>
     </Filter>
@@ -38,6 +32,15 @@
     <Filter Include="Menus">
       <UniqueIdentifier>{52c664d0-82cf-4d80-a152-26789e00bf5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{56c6c9a8-d2ba-4e68-935c-de3257f30fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{5e9b1a64-c6c0-4aa0-a2eb-5244fa40e643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\Components">
+      <UniqueIdentifier>{67429c78-f796-4f5b-ac93-576240065692}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main.cpp" />
@@ -51,13 +54,7 @@
     <ClCompile Include="..\..\Hooks\otherHooks.cpp">
       <Filter>Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Shared\gameTime.cpp">
-      <Filter>Shared</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\hook.cpp" />
-    <ClCompile Include="..\..\Core\inputHandler.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\process.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp">
       <Filter>Gothic\Types</Filter>
@@ -110,6 +107,18 @@
     <ClCompile Include="..\..\Menus\ogmpMainMenu.cpp">
       <Filter>Menus</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Menus\ogmpRegisterMenu.cpp">
+      <Filter>Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Systems\menuSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Controls\inputHandler.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\gameTime.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\openGMP.hpp" />
@@ -122,16 +131,7 @@
     <ClInclude Include="..\..\Hooks\otherHooks.hpp">
       <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Shared\gameTime.hpp">
-      <Filter>Shared</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\hook.hpp" />
-    <ClInclude Include="..\..\Core\inputHandler.hpp">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Core\Enumeration\virtualKeys.hpp">
-      <Filter>Core\Enumeration</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\process.hpp" />
     <ClInclude Include="..\..\Gothic\cGameManager.hpp">
       <Filter>Gothic</Filter>
@@ -267,6 +267,21 @@
     </ClInclude>
     <ClInclude Include="..\..\Menus\ogmpMainMenu.hpp">
       <Filter>Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Menus\ogmpRegisterMenu.hpp">
+      <Filter>Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Systems\menuSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Controls\inputHandler.hpp">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Controls\virtualKeys.hpp">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\gameTime.hpp">
+      <Filter>Shared\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

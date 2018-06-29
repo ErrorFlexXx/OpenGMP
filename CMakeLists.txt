@@ -38,6 +38,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 # Add used libraries to project
 add_subdirectory(lib/RakNet)
 include_directories(lib/RakNet/Source)
+include_directories(lib/RakNet/DependentExtensions)
 add_subdirectory(lib/ZenLib)
 include_directories(lib/ZenLib)
 	# Temporarily disabled - cpgf breaks with v8.
@@ -102,6 +103,8 @@ endif(UNIX)
 add_custom_command(TARGET OpenGMP-Server
 		   PRE_LINK
 		   COMMAND ${CMAKE_COMMAND} -E copy ${PYTHON_OUT_SHARED_LIB} ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/lib/BashSupportScripts/binFileToAsciHexInitList.sh
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 # Build commands client (Windows only)
 if(MSVC)

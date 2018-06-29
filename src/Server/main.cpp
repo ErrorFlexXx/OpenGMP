@@ -3,6 +3,14 @@
 #include <utils/logger.h>
 #include "Utils/cli.h"
 #include "gameServer.hpp"
+#include <NativeFeatureIncludes.h>
+#include <SecureHandshake.h>
+
+#if LIBCAT_SECURITY!=1
+#error "Define LIBCAT_SECURITY 1 in lib/RakNet/Source/NativeFeatureIncludesOverrides.h to enable Encryption"
+#endif
+
+using namespace RakNet;
 
 namespace Flags
 {
@@ -10,6 +18,7 @@ namespace Flags
     Cli::Flag gameport("gp", "game-port", 1, "Network listening port", {"1760"}, "Serversettings");
     Cli::Flag gameSlots("s", "slots", 1, "Player slots", {"200"}, "Gamesettings");
     Cli::Flag scriptDirectory("sd", "script-dir", 1, "Script directory", {"scripts"}, "Serversettings");
+    Cli::Flag genKeys("gk", "generate-keys", 0, "Generates encryption keys.");
 }
 
 void exitHandler(int signum)
@@ -42,10 +51,43 @@ int main(int argc, char **argv)
     // Overwrite flags set from config using the commandline
     Cli::setCommandlineArgs(argc, argv);
 
-    // Check if the user just wanted to see the list of commands
+    // Check if the user just wants to see the list of commands
     if (Flags::help.isSet())
     {
         Cli::printHelp();
+        return 0;
+    }
+
+    //Check if the user wants to build new encryption keys
+    if(Flags::genKeys.isSet())
+    {
+        cat::EasyHandshake::Initialize();
+        cat::EasyHandshake handshake;
+        char public_key[cat::EasyHandshake::PUBLIC_KEY_BYTES];
+        char private_key[cat::EasyHandshake::PRIVATE_KEY_BYTES];
+        handshake.GenerateServerKey(public_key, private_key);
+
+        //Write public key to file:
+        FILE *fp = fopen("public_key.bin", "w");
+        if(!fp)
+        {
+            LogError() << "Cannot write public key to file!";
+            return 1;
+        }
+        fwrite(public_key, sizeof(public_key), 1, fp);
+        fclose(fp);
+
+        //Write private key to file:
+        fp = fopen("private_key.bin", "w");
+        if(!fp)
+        {
+            LogError() << "Cannot write private key to file!";
+            return 1;
+        }
+        fwrite(private_key, sizeof(private_key), 1, fp);
+        fclose(fp);
+
+        LogInfo() << "New generated keys successfully written to files. Exiting now.";
         return 0;
     }
 

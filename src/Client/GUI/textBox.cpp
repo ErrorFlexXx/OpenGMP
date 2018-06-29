@@ -3,6 +3,7 @@
 #include <Shared/Components/gameTime.hpp>
 #include "../Controls/inputHandler.hpp"
 #include "../Controls/virtualKeys.hpp"
+#include <functional>
 
 using namespace OpenGMP;
 using namespace OpenGMP::GUI;
@@ -19,6 +20,7 @@ TextBox::TextBox(int x, int y, int w, bool fixedBorders, bool passwordText)
     , cursorVis(x + cursorOffsetX, y + cursorOffsetY, cursorSize, cursorSize)
     , leftArrow(x, y + (fontSizeDefault - arrowSize) / 2, arrowSize, arrowSize)
     , rightArrow(x + w - arrowSize, y + (fontSizeDefault - arrowSize) / 2, arrowSize, arrowSize)
+    , keyRepeater([=](VirtualKeys key) { this->KeyPressedNoRepeatUpdate(key); })
 {
     characterLimit = 512;
     allowSpaces = true;
@@ -69,6 +71,8 @@ void TextBox::Update(unsigned long long now)
     if (!enabled)
         return;
 
+    keyRepeater.Update(now);
+
     if (now > cursorTime)
     {
         if (cursorVis.Shown())
@@ -80,6 +84,14 @@ void TextBox::Update(unsigned long long now)
 }
 
 void TextBox::KeyPressed(VirtualKeys key)
+{
+    if (!enabled)
+        return;
+    keyRepeater.KeyDown(key, GameTime::GetTicks());
+    KeyPressedNoRepeatUpdate(key);
+}
+
+void TextBox::KeyPressedNoRepeatUpdate(VirutalKeys key)
 {
     if (!enabled)
         return;
@@ -106,6 +118,14 @@ void TextBox::KeyPressed(VirtualKeys key)
     {
         if (cursorPos < input.length())
             cursorPos++;
+    }
+    else if (key == VirtualKeys::Home)
+    {
+        cursorPos = 0;
+    }
+    else if (key == VirtualKeys::End)
+    {
+        cursorPos = input.length();
     }
     else
     {

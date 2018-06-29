@@ -119,6 +119,9 @@
     <ClCompile Include="..\..\..\Shared\Components\gameTime.cpp">
       <Filter>Shared\Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Controls\keyDownRepeatHelper.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\openGMP.hpp" />
@@ -282,6 +285,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Shared\Components\gameTime.hpp">
       <Filter>Shared\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Controls\keyDownRepeatHelper.hpp">
+      <Filter>Controls</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

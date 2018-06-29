@@ -124,6 +124,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Shared\Components\gameTime.cpp" />
     <ClCompile Include="..\..\Controls\inputHandler.cpp" />
+    <ClCompile Include="..\..\Controls\keyDownRepeatHelper.cpp" />
     <ClCompile Include="..\..\Controls\keyHoldHelper.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zMAT3.cpp" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\Shared\Components\gameTime.hpp" />
     <ClInclude Include="..\..\Controls\inputHandler.hpp" />
+    <ClInclude Include="..\..\Controls\keyDownRepeatHelper.hpp" />
     <ClInclude Include="..\..\Controls\keyHoldHelper.hpp" />
     <ClInclude Include="..\..\Controls\virtualKeys.hpp" />
     <ClInclude Include="..\..\Gothic\cGameManager.hpp" />

@@ -2,6 +2,7 @@
 
 #include "view.hpp"
 #include "visual.hpp"
+#include "../Controls/keyDownRepeatHelper.hpp"
 #include <string>
 
 namespace OpenGMP
@@ -21,6 +22,7 @@ namespace OpenGMP
             VisualText *InputText();
             void Update(unsigned long long now);
             void KeyPressed(VirtualKeys key);
+            void KeyPressedNoRepeatUpdate(VirutalKeys key);
             bool Enabled();
             void Enabled(bool value);
             std::string Input();
@@ -63,6 +65,7 @@ namespace OpenGMP
             Visual rightArrow;
             unsigned long long cursorTime;
             std::string input;
+            Controls::KeyDownRepeatHelper keyRepeater;
         };
     }
 }

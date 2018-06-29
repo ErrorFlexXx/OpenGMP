@@ -70,10 +70,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)../../../../lib/RakNet/Source;$(ProjectDir)../../../;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../../lib/RakNet/DependentExtensions;$(ProjectDir)../../../../lib/RakNet/Source;$(ProjectDir)../../../;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)../../../../lib/RakNet/Source;$(ProjectDir)../../../;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../../lib/RakNet/DependentExtensions;$(ProjectDir)../../../../lib/RakNet/Source;$(ProjectDir)../../../;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -152,12 +152,15 @@
     <ClCompile Include="..\..\Menus\ogmpMainMenu.cpp" />
     <ClCompile Include="..\..\Menus\ogmpRegisterMenu.cpp" />
     <ClCompile Include="..\..\Systems\menuSystem.cpp" />
+    <ClCompile Include="..\..\Systems\networkSystem.cpp" />
     <ClCompile Include="..\..\Systems\windowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Shared\Components\gameTime.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\version.h" />
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\Messages\loginSystemMessages.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\Messages\networkSystemMessages.hpp" />
     <ClInclude Include="..\..\Controls\inputHandler.hpp" />
     <ClInclude Include="..\..\Controls\keyDownRepeatHelper.hpp" />
     <ClInclude Include="..\..\Controls\keyHoldHelper.hpp" />
@@ -213,6 +216,7 @@
     <ClInclude Include="..\..\Menus\ogmpMainMenu.hpp" />
     <ClInclude Include="..\..\Menus\ogmpRegisterMenu.hpp" />
     <ClInclude Include="..\..\Systems\menuSystem.hpp" />
+    <ClInclude Include="..\..\Systems\networkSystem.hpp" />
     <ClInclude Include="..\..\Systems\windowSystem.hpp" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

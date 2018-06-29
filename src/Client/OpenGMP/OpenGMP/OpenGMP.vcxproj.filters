@@ -46,6 +46,12 @@
     <Filter Include="Shared\Systems">
       <UniqueIdentifier>{1e1303cc-2b1a-4ba7-adf4-12f9789e8aa5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shared\Types">
+      <UniqueIdentifier>{3ec58422-6e3b-4508-8cd6-cc831924181b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\Types\Messages">
+      <UniqueIdentifier>{f2b0be59-f255-414f-bb53-4693856693c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main.cpp" />
@@ -137,6 +143,9 @@
       <Filter>Hooks</Filter>
     </ClCompile>
     <ClCompile Include="..\..\gameClient.cpp" />
+    <ClCompile Include="..\..\Systems\networkSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Hooks\hGame.hpp">
@@ -315,6 +324,15 @@
       <Filter>Hooks</Filter>
     </ClInclude>
     <ClInclude Include="..\..\gameClient.hpp" />
+    <ClInclude Include="..\..\Systems\networkSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\Messages\loginSystemMessages.hpp">
+      <Filter>Shared\Types\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\Messages\networkSystemMessages.hpp">
+      <Filter>Shared\Types\Messages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\Shared\Resources\appIcon.ico">

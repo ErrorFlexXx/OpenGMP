@@ -34,6 +34,14 @@ public:
         XCALL(0x0078AEF0);
     }
 
+    zCOLOR(const zCOLOR &color)
+    {
+        this->m_r = color.r();
+        this->m_g = color.g();
+        this->m_b = color.b();
+        this->m_a = color.a();
+    }
+
     /**
      * @brief Reset: Sets all components to zero.
      */
@@ -74,36 +82,64 @@ public:
         XCALL(0x0062A740);
     }
 
+    void SetRGBA(const zCOLOR &color)
+    {
+        m_r = color.r();
+        m_g = color.g();
+        m_b = color.b();
+        m_a = color.a();
+    }
+
     /**
      * @brief Returns the current red value.
      */
-    unsigned char r()
+    unsigned char r() const
     {
         return m_r;
+    }
+
+    void r(unsigned char value)
+    {
+        m_r = value;
     }
 
     /**
      * @brief Returns the current green value.
      */
-    unsigned char g()
+    unsigned char g() const
     {
         return m_g;
+    }
+
+    void g(unsigned char value)
+    {
+        m_g = value;
     }
 
     /**
      * @brief Returns the current blue value.
      */
-    unsigned char b()
+    unsigned char b() const
     {
         return m_b;
+    }
+
+    void b(unsigned char value)
+    {
+        m_b = value;
     }
 
     /**
      * @brief Returns the current alpha value.
      */
-    unsigned char a()
+    unsigned char a() const
     {
         return m_a;
+    }
+
+    void a(unsigned char value)
+    {
+        m_a = value;
     }
 
 private:

@@ -4,8 +4,12 @@
 #include "menuButton.hpp"
 #include "menuTextBox.hpp"
 #include <Shared/Components/gameTime.hpp>
+#include <Shared/Systems/versionSystem.hpp>
+#include <iostream>
+#include "../Gothic/Classes/zCViewText.hpp"
 
 using namespace OpenGMP::GUI;
+using namespace OpenGMP::Systems;
 
 MainMenu::MainMenu()
 {
@@ -25,7 +29,11 @@ MainMenu::MainMenu()
     back->SetFont(Visual::Fonts::Menu);
     helpVis = VisualText::Create("", 0, pos.y + 450);
     HelpText()->SetCenteredX(true);
-
+    std::string versionString = "Client Version: ";
+    versionString.append(VersionSystem::GetVersionString(VersionSystem::version.version));
+    versionVis = VisualText::Create(versionString, 10, screenSize.y - 30);
+    versionVis->Texts().back()->SetColor(*zCOLOR_GREY());
+    
     //Setup key strokes for actions:
     std::list<VirtualKeys> combUp;
     combUp.push_back(VirtualKeys::Up);
@@ -64,6 +72,7 @@ void MainMenu::Open()
     Menu::Open();
     back->Show();
     helpVis->Show();
+    versionVis->Show();
     for (MenuItem *item : items)
     {
         item->Show();
@@ -86,6 +95,7 @@ void MainMenu::Close()
     Menu::Close();
     back->Hide();
     helpVis->Hide();
+    versionVis->Hide();
     for (MenuItem *item : items)
         item->Hide();
     CurrentItem()->Deselect();

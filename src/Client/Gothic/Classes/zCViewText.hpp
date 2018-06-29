@@ -97,6 +97,13 @@ public:
         return (zCOLOR *)((unsigned int)this + VarOffsets::color);
     }
 
+    void SetColor(const zCOLOR &color)
+    {
+        SetColored(1);
+        zCOLOR *thisColor = (zCOLOR *)((unsigned int)this + VarOffsets::color);
+        thisColor->SetRGBA(color);
+    }
+
     float GetTimer()
     {
         return *(float*)((unsigned int)this + VarOffsets::timer);

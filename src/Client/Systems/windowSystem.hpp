@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../hook.hpp"
 #include <string>
 #include <windows.h>
 
@@ -7,6 +8,8 @@ namespace OpenGMP
 {
     namespace Systems
     {
+        HBITMAP WINAPI DetourLoadBitmap(HINSTANCE inst, LPCSTR lpBitmapName);
+
         class WindowSystem
         {
         public:
@@ -16,6 +19,7 @@ namespace OpenGMP
 
         private:
             static DWORD procId;
+            static Hook splashHook;
         };
     }
 }

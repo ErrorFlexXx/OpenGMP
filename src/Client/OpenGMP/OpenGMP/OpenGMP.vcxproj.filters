@@ -43,6 +43,9 @@
     <Filter Include="Shared\Resources">
       <UniqueIdentifier>{7d22a608-0477-4407-95d4-69d813ce98d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shared\Systems">
+      <UniqueIdentifier>{1e1303cc-2b1a-4ba7-adf4-12f9789e8aa5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main.cpp" />
@@ -125,6 +128,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Systems\windowSystem.cpp">
       <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\version.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Systems\versionSystem.cpp">
+      <Filter>Shared\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -296,10 +305,19 @@
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="..\..\..\Shared\Components\version.h">
+      <Filter>Shared\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp">
+      <Filter>Shared\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\Shared\Resources\appIcon.ico">
       <Filter>Shared\Resources</Filter>
+    </Image>
+    <Image Include="..\..\Resources\gmp-splash.bmp">
+      <Filter>Resources</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

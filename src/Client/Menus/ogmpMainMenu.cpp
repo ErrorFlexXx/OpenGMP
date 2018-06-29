@@ -4,6 +4,7 @@
 #include "../Systems/menuSystem.hpp"
 
 using namespace OpenGMP::Menus;
+using namespace OpenGMP::Systems;
 
 OGMPMainMenu::OGMPMainMenu()
     : ingame(false)
@@ -14,11 +15,12 @@ OGMPMainMenu::OGMPMainMenu()
 void OGMPMainMenu::OnCreate()
 {
     back->CreateTextCenterX("Hauptmenü", 70);
+
     const int offset = 200;
     const int dist = 38;
 
     btnLogin = AddButton("Anmelden", "In einen bestehenden Account einloggen.", offset + dist * 0, nullptr);
-    btnRegister = AddButton("Registrieren", "Einen neuen Account erstellen.", offset + dist * 1, []() { Systems::MenuSystem::OpenRegisterMenu(); });
+    btnRegister = AddButton("Registrieren", "Einen neuen Account erstellen.", offset + dist * 1, []() { MenuSystem::OpenRegisterMenu(); });
     btnQuit = AddButton("Beenden", "Beendet das Spiel. Wechsel zum Desktop.", offset + dist * 3, [=]() { gameManager->ExitGame(); });
 }
 

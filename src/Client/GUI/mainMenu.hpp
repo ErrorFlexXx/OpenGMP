@@ -43,6 +43,7 @@ namespace OpenGMP
             
             Visual *back;
             Visual *helpVis;
+            Visual *versionVis;
             VisualText *HelpText();
             std::vector<MenuItem*> items;
             size_t cursor;

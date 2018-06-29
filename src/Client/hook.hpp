@@ -4,7 +4,7 @@
 #include <windows.h>
 
 /**
-* @brief The CHook class
+* @brief The Hook class
 *  CHook is class that covers all relevant informations to hook a function and actually
 *  can apply a hook and revert a placed hook. This class is designed for windows.
 * @date 03-17-2018

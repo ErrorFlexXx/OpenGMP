@@ -1,8 +1,6 @@
 #define _WINSOCKAPI_ //Stop windows.h from including winsock.h (colliding with RakNet)
 #include <windows.h>
-#include "openGMP.hpp"
-
-OGMP *openGMPInstance = nullptr;
+#include "gameClient.hpp"
 
 BOOL APIENTRY DllMain(HINSTANCE hInstance, DWORD reason, LPVOID reserved)
 {
@@ -10,13 +8,12 @@ BOOL APIENTRY DllMain(HINSTANCE hInstance, DWORD reason, LPVOID reserved)
     {
     case DLL_PROCESS_ATTACH:
     {
-        OGMP::Startup(hInstance);
+        GameClient::Startup(hInstance);
         break;
     }
     case DLL_PROCESS_DETACH:
     {
-        if (openGMPInstance != nullptr)
-            openGMPInstance->Stop();
+        GameClient::Stop();
         break;
     }
     }

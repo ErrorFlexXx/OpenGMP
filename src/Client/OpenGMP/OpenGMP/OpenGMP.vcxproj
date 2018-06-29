@@ -128,6 +128,7 @@
     <ClCompile Include="..\..\Controls\inputHandler.cpp" />
     <ClCompile Include="..\..\Controls\keyDownRepeatHelper.cpp" />
     <ClCompile Include="..\..\Controls\keyHoldHelper.cpp" />
+    <ClCompile Include="..\..\gameClient.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zMAT3.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zSTRING.cpp" />
@@ -143,14 +144,13 @@
     <ClCompile Include="..\..\GUI\visual.cpp" />
     <ClCompile Include="..\..\GUI\visual3D.cpp" />
     <ClCompile Include="..\..\GUI\visualText.cpp" />
-    <ClCompile Include="..\..\hook.cpp" />
     <ClCompile Include="..\..\Hooks\hGame.cpp" />
+    <ClCompile Include="..\..\Hooks\hook.cpp" />
     <ClCompile Include="..\..\Hooks\hView.cpp" />
     <ClCompile Include="..\..\Hooks\otherHooks.cpp" />
     <ClCompile Include="..\..\main.cpp" />
     <ClCompile Include="..\..\Menus\ogmpMainMenu.cpp" />
     <ClCompile Include="..\..\Menus\ogmpRegisterMenu.cpp" />
-    <ClCompile Include="..\..\openGMP.cpp" />
     <ClCompile Include="..\..\Systems\menuSystem.cpp" />
     <ClCompile Include="..\..\Systems\windowSystem.cpp" />
   </ItemGroup>
@@ -162,6 +162,7 @@
     <ClInclude Include="..\..\Controls\keyDownRepeatHelper.hpp" />
     <ClInclude Include="..\..\Controls\keyHoldHelper.hpp" />
     <ClInclude Include="..\..\Controls\virtualKeys.hpp" />
+    <ClInclude Include="..\..\gameClient.hpp" />
     <ClInclude Include="..\..\Gothic\cGameManager.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCCamera.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCEventManager.hpp" />
@@ -205,13 +206,12 @@
     <ClInclude Include="..\..\GUI\visual.hpp" />
     <ClInclude Include="..\..\GUI\visual3D.hpp" />
     <ClInclude Include="..\..\GUI\visualText.hpp" />
-    <ClInclude Include="..\..\hook.hpp" />
     <ClInclude Include="..\..\Hooks\hGame.hpp" />
+    <ClInclude Include="..\..\Hooks\hook.hpp" />
     <ClInclude Include="..\..\Hooks\hView.hpp" />
     <ClInclude Include="..\..\Hooks\otherHooks.hpp" />
     <ClInclude Include="..\..\Menus\ogmpMainMenu.hpp" />
     <ClInclude Include="..\..\Menus\ogmpRegisterMenu.hpp" />
-    <ClInclude Include="..\..\openGMP.hpp" />
     <ClInclude Include="..\..\Systems\menuSystem.hpp" />
     <ClInclude Include="..\..\Systems\windowSystem.hpp" />
     <ClInclude Include="resource.h" />

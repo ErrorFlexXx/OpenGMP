@@ -1,5 +1,5 @@
 #include "windowSystem.hpp"
-#include "../openGMP.hpp"
+#include "../gameClient.hpp"
 #include "../OpenGMP/OpenGMP/resource.h"
 
 using namespace OpenGMP::Systems;
@@ -9,7 +9,7 @@ Hook WindowSystem::splashHook(true, (DWORD)GetProcAddress(LoadLibrary("user32.dl
 
 HBITMAP WINAPI OpenGMP::Systems::DetourLoadBitmap(HINSTANCE inst, LPCSTR lpBitmapName)
 {
-    return (HBITMAP)LoadImageA(OGMP::dllInstance, MAKEINTRESOURCE(Splash), IMAGE_BITMAP, 0, 0, LR_SHARED);
+    return (HBITMAP)LoadImageA(GameClient::dllInstance, MAKEINTRESOURCE(Splash), IMAGE_BITMAP, 0, 0, LR_SHARED);
 }
 
 void WindowSystem::SetWindowTitle(const std::string &title)
@@ -22,10 +22,10 @@ void WindowSystem::SetWindowTitle(const std::string &title)
 
 void WindowSystem::UpdateWindowIcon()
 {
-    if (IsForeground() && OGMP::dllInstance)
+    if (IsForeground() && GameClient::dllInstance)
     {
         HWND wnd = GetForegroundWindow();
-        HICON hicon = (HICON)LoadImage(OGMP::dllInstance, MAKEINTRESOURCE(APP_ICON), IMAGE_ICON, 32, 32, LR_SHARED);
+        HICON hicon = (HICON)LoadImage(GameClient::dllInstance, MAKEINTRESOURCE(APP_ICON), IMAGE_ICON, 32, 32, LR_SHARED);
         if (hicon)
         {
             SendMessage(wnd, (UINT)WM_SETICON, ICON_SMALL, (LPARAM)hicon);

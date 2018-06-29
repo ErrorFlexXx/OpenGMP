@@ -1,14 +1,14 @@
-#include "openGMP.hpp"
+#include "gameClient.hpp"
 #include "Hooks/otherHooks.hpp"
 #include "Hooks/hGame.hpp"
 
 using namespace std;
 using namespace OpenGMP::Hooks;
 
-bool OGMP::inited = false;
-HINSTANCE OGMP::dllInstance = nullptr;
+bool GameClient::inited = false;
+HINSTANCE GameClient::dllInstance = nullptr;
 
-void OGMP::Startup(HINSTANCE inst)
+void GameClient::Startup(HINSTANCE inst)
 {
     if (!inited) //If no instance created yet
     {
@@ -19,7 +19,7 @@ void OGMP::Startup(HINSTANCE inst)
     }
 }
 
-void OGMP::Stop()
+void GameClient::Stop()
 {
     ;
 }

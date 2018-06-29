@@ -89,7 +89,7 @@ void LoginSystem::AddEntryToList(const std::string &filename, const std::string 
 
     if(Utils::fileExists(filepath))
         fileContents = Utils::readFileContents(filepath);
-    fileContents.append(entry.append("\r\n"));
+    fileContents.append(std::string(entry).append("\r\n"));
 
     if (!Utils::mkdir(userdata))
         LogWarn() << "Failed to create userdata-directory at: " << userdata;

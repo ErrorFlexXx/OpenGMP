@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 class GameServer;
 class ServerClient;
 

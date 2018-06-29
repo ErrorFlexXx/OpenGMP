@@ -7,7 +7,7 @@ Version::Version(BitStream &stream)
     ReadStream(stream);
 }
 
-Version::Version(int version)
+Version::Version(const uint32_t &version)
     : version(version)
 {}
 

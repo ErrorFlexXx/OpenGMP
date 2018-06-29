@@ -128,6 +128,10 @@ bool NetworkSystem::Update()
                     gameServer.loginSystem.Process(packet);
                     break;
                 }
+                default:
+                {
+                    LogInfo() << "Got unhandled package with id: " << packet->data[0];
+                }
             }
         }
         peerInterface->DeallocatePacket(packet);

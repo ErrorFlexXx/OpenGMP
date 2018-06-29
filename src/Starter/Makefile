@@ -55,7 +55,7 @@ $(EXE_FILE): $(OBJECT_FILES) resources.res
 
 clean:
 ifeq ($(OS),Windows_NT)
-	del /F $(OBJECT_FILES) $(EXE_FILE)
+	del /F $(OBJECT_FILES) $(EXE_FILE) resources.res
 else
-	rm -f $(OBJECT_FILES) $(EXE_FILE)
+	rm -f $(OBJECT_FILES) $(EXE_FILE) resources.res
 endif

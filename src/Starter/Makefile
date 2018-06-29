@@ -1,6 +1,7 @@
 ## Detect the current operating system
 ifeq ($(OS),Windows_NT)
 	CC = mingw32-g++
+	RESC = mingw32-windres
 	CFLAGS += -D WIN32
 		ifeq ($(PROCESSOR_ARCHITEW6432),AMD64)
 		CFLAGS += -D AMD64
@@ -16,6 +17,7 @@ else
 	UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Linux)
 		CC = i686-w64-mingw32-g++
+		RESC = i686-w64-mingw32-windres
 		CFLAGS += -D LINUX
 	endif
 	ifeq ($(UNAME_S),Darwin)
@@ -42,11 +44,14 @@ LFLAGS = -static-libstdc++ -static-libgcc -mwindows
 
 all: $(EXE_FILE)
 
+resources.res : resources.rc
+	$(RESC) resources.rc -O coff -o resources.res
+
 %.o: %.c $(HEADER_FILES)
 	$(CC) $(CFLAGS) -c $<
 
-$(EXE_FILE): $(OBJECT_FILES)
-	$(CC) $(LFLAGS) $(OBJECT_FILES) -o $(EXE_FILE)
+$(EXE_FILE): $(OBJECT_FILES) resources.res
+	$(CC) $(LFLAGS) $(OBJECT_FILES) resources.res -o $(EXE_FILE)
 
 clean:
 ifeq ($(OS),Windows_NT)

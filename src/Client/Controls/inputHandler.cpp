@@ -1,10 +1,11 @@
 #include "inputHandler.hpp"
 #include <Shared/Components/GameTime.hpp>
-#include "../process.hpp"
+#include "../Systems/windowSystem.hpp"
 
 #define KEYCOUNT 255
 
 using namespace OpenGMP;
+using namespace OpenGMP::Systems;
 
 std::function<void(VirtualKeys key)> InputHandler::keyDownReceipient;
 std::function<void(VirtualKeys key)> InputHandler::keyUpReceipient;
@@ -30,7 +31,7 @@ int InputHandler::MouseDistY()
 void InputHandler::Update()
 {
     unsigned long long ticks = GameTime::GetTicks();
-	if(Process::IsForeground())
+	if(WindowSystem::IsForeground())
 	{
 		if(!m_shown)
 		{

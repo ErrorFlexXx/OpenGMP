@@ -5,6 +5,7 @@
 #include "../Gothic/Classes/zCView.hpp"
 #include "../Controls/inputHandler.hpp"
 #include "../Systems/menuSystem.hpp"
+#include "../Systems/windowSystem.hpp"
 #include "../GUI/menu.hpp"
 
 using namespace OpenGMP;
@@ -74,5 +75,7 @@ void HGame::UndoHook()
 
 void HGame::StartOutgame()
 {
+    OpenGMP::Systems::WindowSystem::SetWindowTitle("OpenGMP");
+    OpenGMP::Systems::WindowSystem::UpdateWindowIcon();
     OpenGMP::Systems::MenuSystem::OpenMainMenu();
 }

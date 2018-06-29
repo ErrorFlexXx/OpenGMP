@@ -10,7 +10,7 @@ BOOL APIENTRY DllMain(HINSTANCE hInstance, DWORD reason, LPVOID reserved)
     {
     case DLL_PROCESS_ATTACH:
     {
-        OGMP::Startup();
+        OGMP::Startup(hInstance);
         break;
     }
     case DLL_PROCESS_DETACH:

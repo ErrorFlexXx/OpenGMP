@@ -149,8 +149,8 @@
     <ClCompile Include="..\..\Menus\ogmpMainMenu.cpp" />
     <ClCompile Include="..\..\Menus\ogmpRegisterMenu.cpp" />
     <ClCompile Include="..\..\openGMP.cpp" />
-    <ClCompile Include="..\..\process.cpp" />
     <ClCompile Include="..\..\Systems\menuSystem.cpp" />
+    <ClCompile Include="..\..\Systems\windowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Shared\Components\gameTime.hpp" />
@@ -208,8 +208,16 @@
     <ClInclude Include="..\..\Menus\ogmpMainMenu.hpp" />
     <ClInclude Include="..\..\Menus\ogmpRegisterMenu.hpp" />
     <ClInclude Include="..\..\openGMP.hpp" />
-    <ClInclude Include="..\..\process.hpp" />
     <ClInclude Include="..\..\Systems\menuSystem.hpp" />
+    <ClInclude Include="..\..\Systems\windowSystem.hpp" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\Shared\Resources\appIcon.ico" />
+    <Image Include="Shared\Resources\appIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="OpenGMP.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

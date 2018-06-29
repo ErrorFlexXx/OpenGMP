@@ -214,7 +214,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\Shared\Resources\appIcon.ico" />
-    <Image Include="Shared\Resources\appIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OpenGMP.rc" />

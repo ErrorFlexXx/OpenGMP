@@ -301,7 +301,6 @@
     <Image Include="..\..\..\Shared\Resources\appIcon.ico">
       <Filter>Shared\Resources</Filter>
     </Image>
-    <Image Include="Shared\Resources\appIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OpenGMP.rc" />

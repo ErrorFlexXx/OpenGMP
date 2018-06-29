@@ -40,11 +40,6 @@ public:
      */
     bool IsHooked();
 
-    /**
-     * @brief playes a hook without the possibility to recover the original header.
-     */
-    static void OneWayHook(DWORD originAddress, DWORD destAddress);
-
 private:
     DWORD m_origAddress;		    //!< Address to place the hook at.
     DWORD m_targetAddress;          //!< Address the hook show point to.

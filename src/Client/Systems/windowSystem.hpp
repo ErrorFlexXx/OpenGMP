@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../hook.hpp"
+#include "../Hooks/hook.hpp"
 #include <string>
 #include <windows.h>
 

@@ -59,7 +59,6 @@
     <ClCompile Include="..\..\Hooks\otherHooks.cpp">
       <Filter>Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\hook.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp">
       <Filter>Gothic\Types</Filter>
     </ClCompile>
@@ -135,6 +134,9 @@
     <ClCompile Include="..\..\..\Shared\Systems\versionSystem.cpp">
       <Filter>Shared\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Hooks\hook.cpp">
+      <Filter>Hooks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\openGMP.hpp" />
@@ -147,7 +149,6 @@
     <ClInclude Include="..\..\Hooks\otherHooks.hpp">
       <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\hook.hpp" />
     <ClInclude Include="..\..\Gothic\cGameManager.hpp">
       <Filter>Gothic</Filter>
     </ClInclude>
@@ -310,6 +311,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp">
       <Filter>Shared\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Hooks\hook.hpp">
+      <Filter>Hooks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

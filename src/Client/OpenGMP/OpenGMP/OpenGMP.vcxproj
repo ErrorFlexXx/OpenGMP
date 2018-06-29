@@ -143,8 +143,8 @@
     <ClCompile Include="..\..\GUI\visual.cpp" />
     <ClCompile Include="..\..\GUI\visual3D.cpp" />
     <ClCompile Include="..\..\GUI\visualText.cpp" />
-    <ClCompile Include="..\..\hook.cpp" />
     <ClCompile Include="..\..\Hooks\hGame.cpp" />
+    <ClCompile Include="..\..\Hooks\hook.cpp" />
     <ClCompile Include="..\..\Hooks\hView.cpp" />
     <ClCompile Include="..\..\Hooks\otherHooks.cpp" />
     <ClCompile Include="..\..\main.cpp" />
@@ -205,8 +205,8 @@
     <ClInclude Include="..\..\GUI\visual.hpp" />
     <ClInclude Include="..\..\GUI\visual3D.hpp" />
     <ClInclude Include="..\..\GUI\visualText.hpp" />
-    <ClInclude Include="..\..\hook.hpp" />
     <ClInclude Include="..\..\Hooks\hGame.hpp" />
+    <ClInclude Include="..\..\Hooks\hook.hpp" />
     <ClInclude Include="..\..\Hooks\hView.hpp" />
     <ClInclude Include="..\..\Hooks\otherHooks.hpp" />
     <ClInclude Include="..\..\Menus\ogmpMainMenu.hpp" />

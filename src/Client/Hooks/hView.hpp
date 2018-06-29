@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../hook.hpp"
+#include "hook.hpp"
 #include <map>
 
 class zCView;

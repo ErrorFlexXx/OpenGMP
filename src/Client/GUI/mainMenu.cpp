@@ -5,7 +5,6 @@
 #include "menuTextBox.hpp"
 #include <Shared/Components/gameTime.hpp>
 #include <Shared/Systems/versionSystem.hpp>
-#include <iostream>
 #include "../Gothic/Classes/zCViewText.hpp"
 
 using namespace OpenGMP::GUI;

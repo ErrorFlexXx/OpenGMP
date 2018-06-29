@@ -7,7 +7,6 @@
 #include "Systems/loginSystem.hpp"
 
 //Forward declarations:
-class NetworkSystem;
 class IClient;
 class IPlayer;
 class IWorld;
@@ -18,7 +17,12 @@ class IWorld;
 class GameServer
 {
 public:
-    GameServer(int gameport, int playerslots, const std::string &scriptDirectory);
+    GameServer(int gameport,
+               int playerslots,
+               const std::string &scriptDirectory,
+               const std::string &keyDir,
+               const std::string &pubKeyfileName,
+               const std::string &privKeyfileName);
     virtual ~GameServer();
 
     /**
@@ -45,8 +49,8 @@ public:
 
     /* Global Systems */
     static GameServer *gameServer;
-    NetworkSystem networkSystem;
-    LoginSystem loginSystem;
+    OpenGMP::Systems::NetworkSystem networkSystem;
+    OpenGMP::Systems::LoginSystem loginSystem;
 
     /* Global Collections */
     std::vector<IClient*> clientList;

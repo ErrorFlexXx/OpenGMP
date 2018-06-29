@@ -3,14 +3,7 @@
 #include <utils/logger.h>
 #include "Utils/cli.h"
 #include "gameServer.hpp"
-#include <NativeFeatureIncludes.h>
-#include <SecureHandshake.h>
-
-#if LIBCAT_SECURITY!=1
-#error "Define LIBCAT_SECURITY 1 in lib/RakNet/Source/NativeFeatureIncludesOverrides.h to enable Encryption"
-#endif
-
-using namespace RakNet;
+#include "Systems/networkSystem.hpp"
 
 namespace Flags
 {
@@ -19,7 +12,12 @@ namespace Flags
     Cli::Flag gameSlots("s", "slots", 1, "Player slots", {"200"}, "Gamesettings");
     Cli::Flag scriptDirectory("sd", "script-dir", 1, "Script directory", {"scripts"}, "Serversettings");
     Cli::Flag genKeys("gk", "generate-keys", 0, "Generates encryption keys.");
+    Cli::Flag keyDir("kd", "key-dir", 1, "Encryption key directory.", {"."}, "Serversettings");
+    Cli::Flag pubKeyFilename("pubk", "public-key", 1, "Filename of public key.", {"public_key.bin"}, "Serversettings");
+    Cli::Flag privKeyFilename("privk", "private-key", 1, "Filename of private key.", {"private_key.bin"}, "Serversettings");
 }
+
+using namespace OpenGMP::Systems;
 
 void exitHandler(int signum)
 {
@@ -61,33 +59,9 @@ int main(int argc, char **argv)
     //Check if the user wants to build new encryption keys
     if(Flags::genKeys.isSet())
     {
-        cat::EasyHandshake::Initialize();
-        cat::EasyHandshake handshake;
-        char public_key[cat::EasyHandshake::PUBLIC_KEY_BYTES];
-        char private_key[cat::EasyHandshake::PRIVATE_KEY_BYTES];
-        handshake.GenerateServerKey(public_key, private_key);
-
-        //Write public key to file:
-        FILE *fp = fopen("public_key.bin", "w");
-        if(!fp)
-        {
-            LogError() << "Cannot write public key to file!";
-            return 1;
-        }
-        fwrite(public_key, sizeof(public_key), 1, fp);
-        fclose(fp);
-
-        //Write private key to file:
-        fp = fopen("private_key.bin", "w");
-        if(!fp)
-        {
-            LogError() << "Cannot write private key to file!";
-            return 1;
-        }
-        fwrite(private_key, sizeof(private_key), 1, fp);
-        fclose(fp);
-
-        LogInfo() << "New generated keys successfully written to files. Exiting now.";
+        NetworkSystem::GenKeys(Flags::keyDir.getParam(0),
+                               Flags::pubKeyFilename.getParam(0),
+                               Flags::privKeyFilename.getParam(0));
         return 0;
     }
 
@@ -101,10 +75,15 @@ int main(int argc, char **argv)
         signal(SIGABRT, exitHandler);
 
         GameServer::gameServer = new GameServer(std::stoi(Flags::gameport.getParam(0).c_str()),
-                                    std::stoi(Flags::gameSlots.getParam(0).c_str()),
-                                    Flags::scriptDirectory.getParam(0));
+                                                std::stoi(Flags::gameSlots.getParam(0).c_str()),
+                                                Flags::scriptDirectory.getParam(0),
+                                                Flags::keyDir.getParam(0),
+                                                Flags::pubKeyFilename.getParam(0),
+                                                Flags::privKeyFilename.getParam(0));
         LogInfo() << "Starting the server...";
-        GameServer::gameServer->Startup();
+        if(!GameServer::gameServer->Startup())
+            return 1;
+
         GameServer::gameServer->Process();
         delete GameServer::gameServer;
     }

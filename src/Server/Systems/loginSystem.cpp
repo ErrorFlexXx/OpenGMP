@@ -13,6 +13,7 @@
 
 using namespace RakNet;
 using namespace OpenGMP::Types;
+using namespace OpenGMP::Systems;
 
 const std::string MACBANLIST_FILE = "macbanlist.txt";
 const std::string HDDBANLIST_FILE = "hddbanlist.txt";

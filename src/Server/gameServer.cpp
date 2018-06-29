@@ -8,8 +8,13 @@ using namespace std;
 
 GameServer *GameServer::gameServer = nullptr;
 
-GameServer::GameServer(int gameport, int playerslots, const string &scriptDirectory)
-    : networkSystem(*this, gameport, playerslots)
+GameServer::GameServer(int gameport,
+                       int playerslots,
+                       const std::string &scriptDirectory,
+                       const std::string &keyDir,
+                       const std::string &pubKeyfileName,
+                       const std::string &privKeyfileName)
+    : networkSystem(*this, gameport, playerslots, keyDir, pubKeyfileName, privKeyfileName)
     , loginSystem(*this)
     , scriptDirectory(scriptDirectory)
     , serverRunning(true)
@@ -28,11 +33,15 @@ GameServer::~GameServer()
 bool GameServer::Startup()
 {
     if(!networkSystem.Startup()) //Start network
+    {
+        LogError() << "NetworkSystem startup failed! Aborting.";
         return false;
+    }
 
     //Load scripts from scripts dir
     ScriptController::LoadScriptsFromDir(scriptDirectory);
 
+    LogInfo() << "GameServer Startup complete!";
     return true;
 }
 

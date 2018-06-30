@@ -2,6 +2,8 @@
 #include <windows.h>
 #include "gameClient.hpp"
 
+using namespace OpenGMP;
+
 BOOL APIENTRY DllMain(HINSTANCE hInstance, DWORD reason, LPVOID reserved)
 {
     switch (reason)

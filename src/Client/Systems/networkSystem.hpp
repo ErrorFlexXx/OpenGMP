@@ -14,6 +14,7 @@ namespace OpenGMP
         class NetworkSystem
         {
         public:
+            NetworkSystem(); //dev std constructor
             NetworkSystem(const std::string &hostname, unsigned short port);
 
             /* Starts a network thread, which will connect to a server */
@@ -38,6 +39,7 @@ namespace OpenGMP
             RakNet::RakPeerInterface *peerInterface;    //!< RakNet PeerInterface object.
             RakNet::SocketDescriptor socketDescriptor;  //!< RakNet SocketDescriptor.
             RakNet::SystemAddress serverAddress;        //!< RakNet SystemAddress of the server.
+            RakNet::PublicKey pk;
             std::mutex networkMutex;    //!< Mutex to sync renderer - network threads.
             std::string hostname;
             unsigned short port;

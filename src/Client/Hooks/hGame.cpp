@@ -7,10 +7,12 @@
 #include "../Systems/menuSystem.hpp"
 #include "../Systems/windowSystem.hpp"
 #include "../GUI/menu.hpp"
+#include "../gameClient.hpp"
 
 using namespace OpenGMP;
 using namespace OpenGMP::Hooks;
 using namespace OpenGMP::GUI;
+using namespace OpenGMP::Systems;
 
 HGame *HGame::instance = nullptr;
 bool HGame::outgameStarted = false;
@@ -74,7 +76,8 @@ void HGame::UndoHook()
 
 void HGame::StartOutgame()
 {
-    OpenGMP::Systems::WindowSystem::SetWindowTitle("OpenGMP");
-    OpenGMP::Systems::WindowSystem::UpdateWindowIcon();
-    OpenGMP::Systems::MenuSystem::OpenMainMenu();
+    WindowSystem::SetWindowTitle("OpenGMP");
+    WindowSystem::UpdateWindowIcon();
+    MenuSystem::OpenMainMenu();
+    GameClient::networkSystem.Startup();
 }

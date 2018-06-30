@@ -55,14 +55,14 @@ void LoginSystem::Process(Packet *packet)
             {
                 std::string ip = packet->systemAddress.ToString(false);
                 bool removed = gameServer.clientContainer.Remove(packet->guid);
-                LogInfo() << "Client lost connection. IP:  " << ip << ". " << (removed ? "Successfully removed from clientContainer." : "Wasn't in clientContainer, not removed.");
+                LogInfo() << "Client lost connection. IP: " << ip << ". " << (removed ? "Successfully removed from clientContainer." : "Wasn't in clientContainer, not removed.");
                 break;
             }
             case ID_DISCONNECTION_NOTIFICATION:
             {
                 std::string ip = packet->systemAddress.ToString(false);
                 bool removed = gameServer.clientContainer.Remove(packet->guid);
-                LogInfo() << "Client disconnected. IP:  " << ip << ". " << (removed ? "Successfully removed from clientContainer." : "Wasn't in clientContainer, not removed.");
+                LogInfo() << "Client disconnected. IP: " << ip << ". " << (removed ? "Successfully removed from clientContainer." : "Wasn't in clientContainer, not removed.");
                 break;
             }
             default:
@@ -73,7 +73,7 @@ void LoginSystem::Process(Packet *packet)
     }
     else //OpenGMP Message
     {
-        bsIn.Read(command);
+        bsIn.Read(command); //Read LoginSystem command
 
         switch(command)
         {
@@ -208,6 +208,7 @@ void LoginSystem::RemoveEntryFromList(const std::string &filename, const std::st
 bool LoginSystem::CheckEntryExists(const std::string &filename, const std::string &entry)
 {
     std::string filepath = Utils::getUserDataLocation() + "/" + filename;
+    std::string userdata = Utils::getUserDataLocation();
     std::string fileContents;
 
     if(0 == entry.size())
@@ -218,7 +219,11 @@ bool LoginSystem::CheckEntryExists(const std::string &filename, const std::strin
 
     if(!Utils::fileExists(filepath))
     {
-        LogInfo() << "Cannot lookup entry \"" << entry << "\" in list \"" << filename << "\". File cannot be opened.";
+        if (!Utils::writeFile(filename, userdata, std::string("")))
+            LogError() << "List \"" << filename << "\" does not exists. Cannot lookup entry \"" << entry << "\". Can't create list - directory not writable: \"" << userdata << "\".";
+        else
+            LogInfo() << "List \"" << filename << "\" does not exists. Cannot lookup entry \"" << entry << "\". Blank list created.";
+
         return false;
     }
 

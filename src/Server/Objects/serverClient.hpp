@@ -1,10 +1,16 @@
 #pragma once
 
-#include <Shared/Objects/iClient.hpp>
+#include <Shared/Objects/client.hpp>
 
-class ServerClient : public IClient
+namespace OpenGMP
 {
-public:
-    ServerClient(RakNet::BitStream &stream);
+    namespace Objects
+    {
+        class ServerClient : public Client
+        {
+        public:
+            ServerClient();
 
-};
+        };
+    }
+}

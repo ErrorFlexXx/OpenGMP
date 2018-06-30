@@ -1,10 +1,6 @@
-#include "scale.h"
+#include "scale.hpp"
 
-Scale::Scale(float x, float y, float z)
-    : x(x)
-    , y(y)
-    , z(z)
-{}
+using namespace OpenGMP::Components;
 
 void Scale::WriteStream(RakNet::BitStream &stream)
 {

@@ -1,5 +1,6 @@
 #include "networkSystem.hpp"
 #include "../gameServer.hpp"
+#include "../Systems/netContainerSystem.hpp"
 #include <Shared/Types/Messages/networkSystemMessages.hpp>
 #include <utils/logger.h>
 
@@ -94,6 +95,7 @@ bool NetworkSystem::Startup()
     {
         LogInfo() << "NetworkController started! Listening on port " << gameport << " with " << playerslots << " slots.";
         peerInterface->SetMaximumIncomingConnections(2 * playerslots);
+        peerInterface->SetOccasionalPing(1);
         return true;
     }
     else if(res == SOCKET_PORT_ALREADY_IN_USE)
@@ -113,28 +115,42 @@ void NetworkSystem::Shutdown()
 
 bool NetworkSystem::Update()
 {
-    Packet *packet;
+    Packet *packet = nullptr;
     bool packetReceipt = false;
 
-    while((packet = peerInterface->Receive()))
+    packet = peerInterface->Receive();
+    while(packet)
     {
         packetReceipt = true;
         if(0 < packet->length)
         {
             switch(packet->data[0])
             {
+                case ID_NEW_INCOMING_CONNECTION:
+                case ID_CONNECTION_LOST:
+                {
+                    gameServer.loginSystem.Process(packet);
+                    break;
+                }
+
                 case NetworkSystemMessages::LoginSystem:
                 {
                     gameServer.loginSystem.Process(packet);
                     break;
                 }
+                case NetworkSystemMessages::ClientPing:
+                {
+                    LogInfo() << "Got Ping packet!";
+                    break;
+                }
                 default:
                 {
-                    LogInfo() << "Got unhandled package with id: " << packet->data[0];
+                    LogInfo() << "Got unhandled package with id: " << (int)packet->data[0];
                 }
             }
         }
         peerInterface->DeallocatePacket(packet);
+        packet = peerInterface->Receive();
     }
     return packetReceipt;
 }

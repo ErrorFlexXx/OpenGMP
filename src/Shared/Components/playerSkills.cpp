@@ -1,11 +1,6 @@
-#include "playerSkills.h"
+#include "playerSkills.hpp"
 
-PlayerSkills::PlayerSkills()
-    : skill_1h(0)
-    , skill_2h(0)
-    , skill_bow(0)
-    , skill_cbow(0)
-{}
+using namespace OpenGMP::Components;
 
 void PlayerSkills::WriteStream(RakNet::BitStream &stream)
 {

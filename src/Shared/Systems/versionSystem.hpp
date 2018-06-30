@@ -1,5 +1,5 @@
 #pragma once
-#include "../Components/version.h"
+#include "../Components/version.hpp"
 #include <string>
 
 namespace OpenGMP
@@ -14,7 +14,7 @@ namespace OpenGMP
             static bool CheckVersionsCompatibility(const uint32_t &version1, const uint32_t &version2);
             static std::string GetVersionString(const uint32_t &version);
 
-            static const Version version;
+            static const Components::Version version;
         };
     }
 }

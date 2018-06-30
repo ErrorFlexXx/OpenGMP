@@ -1,64 +1,64 @@
 #pragma once
 
 #include <string>
+#include <map>
+#include <unordered_map>
 #include <vector>
 #include <RakNetTypes.h>
+#include "Objects/serverClient.hpp"
 #include "Systems/networkSystem.hpp"
 #include "Systems/loginSystem.hpp"
+#include "Systems/netContainerSystem.hpp"
 
-//Forward declarations:
-class IClient;
-class IPlayer;
-class IWorld;
-
-/**
- * @brief The GameServer class
- */
-class GameServer
+namespace OpenGMP
 {
-public:
-    GameServer(int gameport,
-               int playerslots,
-               const std::string &scriptDirectory,
-               const std::string &keyDir,
-               const std::string &pubKeyfileName,
-               const std::string &privKeyfileName);
-    virtual ~GameServer();
-
     /**
-     * @brief Startup initializes structures necessary to start the gameserver.
-     * @return
+     * @brief The GameServer class
      */
-    bool Startup();
+    class GameServer
+    {
+    public:
+        GameServer(int gameport,
+                   int playerslots,
+                   const std::string &scriptDirectory,
+                   const std::string &keyDir,
+                   const std::string &pubKeyfileName,
+                   const std::string &privKeyfileName);
+        virtual ~GameServer();
 
-    /**
-     * @brief Shutdown unloads and stops all ressources.
-     */
-    void Shutdown();
+        /**
+         * @brief Startup initializes structures necessary to start the gameserver.
+         * @return
+         */
+        bool Startup();
 
-    /**
-     * @brief Process GameServer Loop
-     */
-    void Process();
+        /**
+         * @brief Shutdown unloads and stops all ressources.
+         */
+        void Shutdown();
 
-    /**
-     * @brief GetGlobalGameServer returns a reference to global
-     * @return
-     */
-    static GameServer &GetGameServerInstance();
+        /**
+         * @brief Process GameServer Loop
+         */
+        void Process();
 
-    /* Global Systems */
-    static GameServer *gameServer;
-    OpenGMP::Systems::NetworkSystem networkSystem;
-    OpenGMP::Systems::LoginSystem loginSystem;
+        /**
+         * @brief GetGlobalGameServer returns a reference to global
+         * @return
+         */
+        static GameServer &GetGameServerInstance();
 
-    /* Global Collections */
-    std::vector<IClient*> clientList;
-    std::vector<IPlayer*> playerList;
-    std::vector<IWorld*>  worldList;
+        /* Global Systems */
+        static GameServer *gameServer;
+        OpenGMP::Systems::NetworkSystem networkSystem;
+        OpenGMP::Systems::LoginSystem loginSystem;
 
-private:
-    bool serverRunning;
-    bool serverStopped;
-    std::string scriptDirectory;  //!< Directory to load server scripts from.
-};
+        /* Global Containers */
+        OpenGMP::Systems::NetContainerSystem<Objects::ServerClient> clientContainer;
+
+    private:
+        bool serverRunning;
+        bool serverStopped;
+        std::string scriptDirectory;  //!< Directory to load server scripts from.
+    };
+}

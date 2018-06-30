@@ -1,6 +1,7 @@
 #include "versionSystem.hpp"
 #include <sstream>
 
+using namespace OpenGMP::Components;
 using namespace OpenGMP::Systems;
 
 const Version VersionSystem::version = BuildVersionInt(0, 0, 0);

@@ -14,6 +14,7 @@
 #include "../Systems/loginSystem.hpp"
 
 using namespace std;
+using namespace OpenGMP;
 
 //Statics attributes
 std::list<Script*> ScriptController::m_registeredScripts;

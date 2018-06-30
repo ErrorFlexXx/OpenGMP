@@ -1,16 +1,8 @@
-#include "playerVisual.h"
-
+#include "playerVisual.hpp"
 #include <RakString.h>
 
 using namespace RakNet;
-
-PlayerVisual::PlayerVisual()
-    : bodyModel("")
-    , bodyTextureId(0)
-    , headModel("")
-    , headTextureId(0)
-    , fatness(0.f)
-{}
+using namespace OpenGMP::Components;
 
 void PlayerVisual::WriteStream(BitStream &stream)
 {

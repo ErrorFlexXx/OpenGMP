@@ -1,9 +1,6 @@
 #include "worldTime.hpp"
 
-WorldTime::WorldTime(int totalSeconds)
-    : totalSeconds(totalSeconds)
-{}
-
+using namespace OpenGMP::Components;
 
 void WorldTime::WriteStream(RakNet::BitStream &stream)
 {

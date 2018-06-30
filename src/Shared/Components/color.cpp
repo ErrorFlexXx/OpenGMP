@@ -1,10 +1,13 @@
-#include "color.h"
+#include "color.hpp"
 
-Color::Color() : Color(255, 255, 255) {}
+using namespace OpenGMP::Components;
 
-Color::Color(unsigned char r, unsigned char g, unsigned char b) : Color(r, g, b, 255) {}
+Color::Color()
+    : Color(255, 255, 255, 255)
+{
+}
 
-Color::Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+Color::Color(const unsigned char &r, const unsigned char &g, const unsigned char &b, const unsigned char &a)
     : r(r)
     , g(g)
     , b(b)

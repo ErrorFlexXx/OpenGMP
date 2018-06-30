@@ -2,9 +2,13 @@
 
 #include <BitStream.h>
 
+/* No pure virtual functions - Performance optimization
+ * Just don't forget to implement Write and ReadStream
+ * for each component.
+ */
+
 class IStreamObject
 {
-protected:
-    virtual void WriteStream(RakNet::BitStream &stream) = 0;
-    virtual void ReadStream(RakNet::BitStream &stream) = 0;
+     void WriteStream(RakNet::BitStream &stream) {}
+     void ReadStream(RakNet::BitStream &stream) {}
 };

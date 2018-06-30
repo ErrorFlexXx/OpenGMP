@@ -1,23 +1,24 @@
 #include "loginSystem.hpp"
 #include "../gameServer.hpp"
 #include "../Objects/serverClient.hpp"
+#include <Shared/Types/Messages/networkSystemMessages.hpp>
 #include <Shared/Types/Messages/loginSystemMessages.hpp>
+#include "../Utils/utils.h"
+#include "../ScriptController/scriptController.hpp"
 #include <utils/logger.h>
 #include <BitStream.h>
-#include "../Utils/utils.h"
-//Script system includes:
-#include "../ScriptController/scriptController.hpp"
-#include <cpgf/metatraits/gmetaconverter_string.h>
-#include <cpgf/gmetadefine.h>
-#include <cpgf/goutmain.h>
+#include <MessageIdentifiers.h>
 
 using namespace RakNet;
+using namespace OpenGMP::Components;
 using namespace OpenGMP::Types;
 using namespace OpenGMP::Systems;
+using namespace OpenGMP::Objects;
 
 const std::string MACBANLIST_FILE = "macbanlist.txt";
 const std::string HDDBANLIST_FILE = "hddbanlist.txt";
 const std::string LOGINNAMEBANLIST_FILE = "loginnamebanlist.txt";
+const std::string IPBANLIST_FILE = "ipbanlist.txt";
 
 LoginSystem::LoginSystem(GameServer &gameServer)
     : gameServer(gameServer)
@@ -25,25 +26,98 @@ LoginSystem::LoginSystem(GameServer &gameServer)
 
 void LoginSystem::Process(Packet *packet)
 {
-    LoginSystemMessages command;
-    BitStream stream(packet->data, packet->length, false);
+    unsigned char command;
+    BitStream bsIn(packet->data, packet->length, false);
+    bsIn.Read(command);
 
-    stream.IgnoreBytes(1);
-    stream.Read(command);
-
-    switch(command)
+    if(command < ID_USER_PACKET_ENUM) //RakNet System message
     {
-        case(LoginSystemMessages::LOGIN):
+        switch(command)
         {
+            case ID_NEW_INCOMING_CONNECTION:
+            {
+                RakNet::RakNetGUID guid = packet->guid;
+                std::string ip = packet->systemAddress.ToString(false);
+                Id id;
+                bool created;
 
-            break;
-        }
-        default:
-        {
-            LogWarn() << "Unknown LoginSystemMessages id " << (int)(command);
-            break;
+                if(IsBanned(ip))
+                {
+                    SendBanned(packet);
+                    CloseConnection(packet);
+                }
+                ServerClient &client = gameServer.clientContainer.CreateEntity(created, id, guid);
+                client.authData.rakNetGuid = packet->guid;
+                LogInfo() << "Client connected. IP: " << ip << ", ID: " << id.id << ", added to clientContainer: " << (created ? "true" : "false") << ".";
+                break;
+            }
+            case ID_CONNECTION_LOST:
+            {
+                std::string ip = packet->systemAddress.ToString(false);
+                bool removed = gameServer.clientContainer.Remove(packet->guid);
+                LogInfo() << "Client lost connection. IP:  " << ip << ". " << (removed ? "Successfully removed from clientContainer." : "Wasn't in clientContainer, not removed.");
+                break;
+            }
+            case ID_DISCONNECTION_NOTIFICATION:
+            {
+                std::string ip = packet->systemAddress.ToString(false);
+                bool removed = gameServer.clientContainer.Remove(packet->guid);
+                LogInfo() << "Client disconnected. IP:  " << ip << ". " << (removed ? "Successfully removed from clientContainer." : "Wasn't in clientContainer, not removed.");
+                break;
+            }
+            default:
+            {
+                LogWarn() << "LoginSystem RakNet Message not handled! ID is: " << (int)command << ".";
+            }
         }
     }
+    else //OpenGMP Message
+    {
+        bsIn.Read(command);
+
+        switch(command)
+        {
+            case LoginSystemMessages::LOGIN:
+            {
+
+                break;
+            }
+            default:
+            {
+                LogWarn() << "Unknown LoginSystemMessages id " << (int)(command);
+                break;
+            }
+        }
+    }
+}
+
+void LoginSystem::SendBanned(Packet *packet)
+{
+    BitStream bsOut;
+    bsOut.Write(LoginSystemMessages::BANNED);
+    gameServer.networkSystem.peerInterface->Send(
+                &bsOut, LOW_PRIORITY, RELIABLE, LoginSystemOrderingChannel, packet->systemAddress, false);
+}
+
+void LoginSystem::CloseConnection(Packet *packet)
+{
+    gameServer.networkSystem.peerInterface->CloseConnection(packet->systemAddress, true, LoginSystemOrderingChannel);
+    gameServer.clientContainer.Remove(packet->guid);
+}
+
+bool LoginSystem::IsBanned(const std::string &ip)
+{
+    bool banned = false;
+
+    //Check ip ban.
+    banned |= CheckEntryExists(IPBANLIST_FILE, ip);
+    if(banned)
+    {
+        LogInfo() << "Client " << ip << " banned by ip.";
+        return banned;
+    }
+
+    return banned; //False if we reached this line.
 }
 
 bool LoginSystem::IsBanned(ServerClient &client)

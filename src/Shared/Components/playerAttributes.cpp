@@ -1,18 +1,6 @@
-#include "playerAttributes.h"
+#include "playerAttributes.hpp"
 
-PlayerAttributes::PlayerAttributes()
-    : level(0)
-    , learn_points(0)
-    , experience(0)
-    , experience_next_level(0)
-    , magic_level(0)
-    , health(0)
-    , max_health(0)
-    , mana(0)
-    , max_mana(0)
-    , strength(0)
-    , dexterity(0)
-{}
+using namespace OpenGMP::Components;
 
 void PlayerAttributes::WriteStream(RakNet::BitStream &stream)
 {

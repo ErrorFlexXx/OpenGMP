@@ -1,21 +1,24 @@
 #pragma once
 
 #include "../Objects/iStreamObject.hpp"
+#include "../Types/weatherTypes.hpp"
 
-class WeatherState : public IStreamObject
+namespace OpenGMP
 {
-public:
-    WeatherState(const Types::WeatherTypes &type, const WorldTime &startTime,
-									const float &startWeight, const WorldTime &endTime, const float &endWeight,
-									const float &currentWeight );
+    namespace Components
+    {
+        class WeatherState : public IStreamObject
+        {
+        public:
+            Types::WeatherTypes type;
+            WorldTime startTime;
+            float startWeight;
+            WorldTime endTime;
+            float endWeight;
+            float currentWeight;
 
-	Types::WeatherTypes type;
-	WorldTime startTime;
-	float startWeight;
-	WorldTime endTime;
-	float endWeight;
-	float currentWeight;
-
-    virtual void WriteStream(RakNet::BitStream &stream) override;
-    virtual void ReadStream(RakNet::BitStream &stream) override;
-};
+            void WriteStream(RakNet::BitStream &stream);
+            void ReadStream(RakNet::BitStream &stream);
+        };
+    }
+}

@@ -1,15 +1,16 @@
-#include "version.h"
+#include "version.hpp"
 
 using namespace RakNet;
+using namespace OpenGMP::Components;
 
-Version::Version(BitStream &stream)
-{
-    ReadStream(stream);
-}
-
-Version::Version(const uint32_t &version)
-    : version(version)
+Version::Version()
+    : version(0)
 {}
+
+Version::Version(uint32_t version)
+    : version(version)
+{
+}
 
 void Version::WriteStream(BitStream &stream)
 {

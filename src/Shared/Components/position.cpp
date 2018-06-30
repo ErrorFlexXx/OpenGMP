@@ -1,11 +1,6 @@
-#include "position.h"
+#include "position.hpp"
 
-Position::Position(float x, float y, float z, float angle)
-    : x(x)
-    , y(y)
-    , z(z)
-    , angle(angle)
-{}
+using namespace OpenGMP::Components;
 
 void Position::WriteStream(RakNet::BitStream &stream)
 {

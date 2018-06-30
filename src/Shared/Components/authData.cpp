@@ -1,7 +1,8 @@
-#include "authData.h"
+#include "authData.hpp"
 #include <RakString.h>
 
 using namespace RakNet;
+using namespace OpenGMP::Components;
 
 void AuthData::WriteStream(BitStream &stream)
 {

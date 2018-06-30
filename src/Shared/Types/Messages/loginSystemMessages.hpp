@@ -3,7 +3,7 @@
 namespace OpenGMP
 {
     namespace Types
-    {
+    {        
         enum LoginSystemMessages : unsigned char
         {
             LOGIN,

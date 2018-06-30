@@ -1,14 +1,8 @@
-#include "iItem.h"
-
+#include "iItem.hpp"
 #include <RakString.h>
 
 using namespace RakNet;
-
-IItem::IItem()
-    : id(0)
-    , instance("")
-    , amount(0)
-{}
+using namespace OpenGMP::Components;
 
 void IItem::WriteStream(BitStream &stream)
 {

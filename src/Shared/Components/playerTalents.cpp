@@ -1,8 +1,6 @@
-#include "playerTalents.h"
+#include "playerTalents.hpp"
 
-PlayerTalents::PlayerTalents()
-    : talents(0)
-{}
+using namespace OpenGMP::Components;
 
 int PlayerTalents::HasTalent(EnumTalents talent)
 {

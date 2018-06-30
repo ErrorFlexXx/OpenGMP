@@ -5,9 +5,6 @@
 #include <NativeFeatureIncludes.h>
 #include <SecureHandshake.h>
 
-//Forward declaration:
-class GameServer;
-
 namespace RakNet
 {
     class RakPeerInterface;
@@ -17,6 +14,8 @@ namespace RakNet
 
 namespace OpenGMP
 {
+    class GameServer;
+
     namespace Systems
     {
         class NetworkSystem
@@ -59,6 +58,8 @@ namespace OpenGMP
                                const std::string &pubKeyfileName,
                                const std::string &privKeyfileName);
 
+            RakNet::RakPeerInterface *peerInterface;      //!< RakNet PeerInterface object.
+
         private:
             GameServer &gameServer;
             int gameport;     //!< UDP RakNet listening port.
@@ -68,7 +69,6 @@ namespace OpenGMP
             std::string privateKeyfileName;
             char public_key[cat::EasyHandshake::PUBLIC_KEY_BYTES] = {};
             char private_key[cat::EasyHandshake::PUBLIC_KEY_BYTES] = {};
-            RakNet::RakPeerInterface *peerInterface;      //!< RakNet PeerInterface object.
             RakNet::SocketDescriptor socketDescriptor;    //!< Socket descriptor holding maxConns.
         };
     }

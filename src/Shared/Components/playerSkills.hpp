@@ -6,10 +6,13 @@ namespace OpenGMP
 {
     namespace Components
     {
-        class WorldTime : public IStreamObject
+        class PlayerSkills : public IStreamObject
         {
         public:
-            int totalSeconds;
+            int skill_1h;
+            int skill_2h;
+            int skill_bow;
+            int skill_cbow;
 
             void WriteStream(RakNet::BitStream &stream);
             void ReadStream(RakNet::BitStream &stream);

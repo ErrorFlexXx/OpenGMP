@@ -1,9 +1,15 @@
 #pragma once
 
-#include <Shared/Objects/iPlayer.hpp>
+#include <Shared/Objects/player.hpp>
 
-class ServerPlayer : public IPlayer
+namespace OpenGMP
 {
-public:
+    namespace Objects
+    {
+        class ServerPlayer : public Player
+        {
+        public:
 
-};
+        };
+    }
+}

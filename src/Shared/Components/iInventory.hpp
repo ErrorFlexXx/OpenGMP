@@ -2,14 +2,17 @@
 
 #include "../Objects/iStreamObject.hpp"
 
+#include <map>
+
 namespace OpenGMP
 {
     namespace Components
     {
-        class WorldTime : public IStreamObject
+        class IItem;
+
+        class IInventory : public IStreamObject
         {
         public:
-            int totalSeconds;
 
             void WriteStream(RakNet::BitStream &stream);
             void ReadStream(RakNet::BitStream &stream);

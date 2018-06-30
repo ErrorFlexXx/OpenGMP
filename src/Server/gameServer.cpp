@@ -5,6 +5,7 @@
 #include <RakSleep.h>
 
 using namespace std;
+using namespace OpenGMP;
 
 GameServer *GameServer::gameServer = nullptr;
 
@@ -14,7 +15,8 @@ GameServer::GameServer(int gameport,
                        const std::string &keyDir,
                        const std::string &pubKeyfileName,
                        const std::string &privKeyfileName)
-    : networkSystem(*this, gameport, playerslots, keyDir, pubKeyfileName, privKeyfileName)
+    : clientContainer(playerslots)
+    , networkSystem(*this, gameport, playerslots, keyDir, pubKeyfileName, privKeyfileName)
     , loginSystem(*this)
     , scriptDirectory(scriptDirectory)
     , serverRunning(true)

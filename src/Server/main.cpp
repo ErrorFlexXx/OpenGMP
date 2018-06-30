@@ -17,6 +17,7 @@ namespace Flags
     Cli::Flag privKeyFilename("privk", "private-key", 1, "Filename of private key.", {"private_key.bin"}, "Serversettings");
 }
 
+using namespace OpenGMP;
 using namespace OpenGMP::Systems;
 
 void exitHandler(int signum)

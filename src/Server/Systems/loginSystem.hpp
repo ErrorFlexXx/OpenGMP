@@ -2,9 +2,6 @@
 
 #include <string>
 
-class GameServer;
-class ServerClient;
-
 namespace RakNet
 {
     class Packet;
@@ -12,6 +9,13 @@ namespace RakNet
 
 namespace OpenGMP
 {
+    class GameServer;
+
+    namespace Objects
+    {
+        class ServerClient;
+    }
+
     namespace Systems
     {
         class LoginSystem
@@ -21,19 +25,25 @@ namespace OpenGMP
 
             void Process(RakNet::Packet *packet);
 
-            bool IsBanned(ServerClient &client);
+            void SendBanned(RakNet::Packet *packet);
 
-            void BanByMac(ServerClient &client);
+            void CloseConnection(RakNet::Packet *packet);
 
-            void UnbanByMac(ServerClient &client);
+            bool IsBanned(const std::string &ip);
 
-            void BanByHDD(ServerClient &client);
+            bool IsBanned(Objects::ServerClient &client);
 
-            void UnbanByHDD(ServerClient &client);
+            void BanByMac(Objects::ServerClient &client);
 
-            void BanByLoginname(ServerClient &client);
+            void UnbanByMac(Objects::ServerClient &client);
 
-            void UnbanByLoginname(ServerClient &client);
+            void BanByHDD(Objects::ServerClient &client);
+
+            void UnbanByHDD(Objects::ServerClient &client);
+
+            void BanByLoginname(Objects::ServerClient &client);
+
+            void UnbanByLoginname(Objects::ServerClient &client);
 
         protected:
             void AddEntryToList(const std::string &filename, const std::string &entry);

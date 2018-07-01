@@ -8,7 +8,8 @@ namespace OpenGMP
         {
             BANNED,
             SERVERFULL,
-            AUTH
+            AUTH,
+            REGISTER
         };
     }
 }

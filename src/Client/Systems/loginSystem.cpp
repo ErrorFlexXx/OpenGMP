@@ -1,4 +1,5 @@
 #include "loginSystem.hpp"
+#include "../gameClient.hpp"
 #include <Shared/Types/Messages/networkSystemMessages.hpp>
 #include <Shared/Types/Messages/loginSystemMessages.hpp>
 #include <iostream>
@@ -14,7 +15,7 @@ LoginSystem::LoginSystem(GameClient &gameClient)
     : gameClient(gameClient)
 {}
 
-void LoginSystem::Process(Packet *packet)
+void LoginSystem::Process(RakNet::Packet *packet)
 {
     unsigned char command;
     BitStream bsIn(packet->data, packet->length, false);
@@ -26,6 +27,7 @@ void LoginSystem::Process(Packet *packet)
         {
         case ID_CONNECTION_LOST:
         {
+            gameClient.menuSystem.menuMain.DisableNetworkElements();
             std::cout << "Connection Lost." << std::endl;
             break;
         }
@@ -55,6 +57,7 @@ void LoginSystem::Process(Packet *packet)
         case LoginSystemMessages::AUTH:
         {
             std::cout << "Got packet Login::Auth" << std::endl;
+            gameClient.menuSystem.menuMain.EnableNetworkElements();
             break;
         }
         default:

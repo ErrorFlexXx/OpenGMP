@@ -1,4 +1,5 @@
 #include "menuButton.hpp"
+#include <iostream>
 
 using namespace OpenGMP::GUI;
 
@@ -55,7 +56,7 @@ void MenuButton::Enabled(bool value)
     if (value)
         visualText->SetColor(*zCOLOR_WHITE());
     else
-        visualText->SetColor(*zCOLOR_GREY());
+        visualText->SetColor(zCOLOR(80, 80, 80, 255)); //Darker Grey
 }
 
 ViewPoint MenuButton::Position()

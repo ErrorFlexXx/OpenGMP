@@ -27,17 +27,17 @@ void MenuRegister::OnCreate()
     btnShowPassword = AddButton(btnShowPasswordTextShow, "Schaltet die Klartext-Passwortanzeige um.", offset + dist * 2, [=]() { this->ToggleShowPassword(); });
     btnCreate = AddButton("Registrieren", "Erstellt einen neuen Benutzer.", offset + dist * 4, [=]() { this->Register(); });
     btnBack = AddButton("Zurück", "Zum Hauptmenü zurückkehren.", offset + dist * 5, [=]() {gameClient.menuSystem.menuMain.Open(); });
-}
 
-void MenuRegister::Open()
-{
-    OpenGMP::GUI::MainMenu::Open();
-    
     txtUsername->Enabled(true);
     txtPassword->Enabled(true);
     btnShowPassword->Enabled(true);
     btnCreate->Enabled(true);
     btnBack->Enabled(true);
+}
+
+void MenuRegister::Open()
+{
+    OpenGMP::GUI::MainMenu::Open();
 }
 
 void MenuRegister::Register()

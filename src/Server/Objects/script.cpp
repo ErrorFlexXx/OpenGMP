@@ -1,9 +1,12 @@
 #include "script.hpp"
+#include "../Systems/scriptSystem.hpp"
+#include "../Objects/serverClient.hpp"
 #include <utils/logger.h>
-#include "scriptController.hpp"
 
 using namespace std;
 using namespace cpgf;
+using namespace OpenGMP::Objects;
+using namespace OpenGMP::Systems;
 
 Script::Script(string &filename)
     : m_filename(filename)
@@ -17,7 +20,7 @@ bool Script::LoadClasses()
 {
     //Register all registered meta classes
     //Currently crashing:
-    for(auto &metaClassPair : ScriptController::GetRegisteredClasses())
+    for(auto &metaClassPair : ScriptSystem::GetRegisteredClasses())
     {
         GScopedInterface<IMetaClass> metaClass(m_service->get()->findClassByName(metaClassPair.first.c_str()));
         scriptSetValue(m_binding->get(), metaClassPair.second.c_str(), GScriptValue::fromClass(metaClass.get()));
@@ -53,4 +56,10 @@ std::string Script::filename() const
 void Script::InvokeScriptFunction(const std::string &functionName)
 {
     invokeScriptFunction(m_binding->get(), functionName.c_str());
+}
+
+void Script::InvokeScriptFunctionParamServerClient(const std::string &functionName,
+                                               ServerClient &serverClient)
+{
+    invokeScriptFunction(m_binding->get(), functionName.c_str(), serverClient);
 }

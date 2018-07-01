@@ -3,7 +3,7 @@
 #include <Shared/Objects/client.hpp>
 
 namespace OpenGMP
-{
+{    
     namespace Objects
     {
         class ServerClient : public Client
@@ -11,6 +11,8 @@ namespace OpenGMP
         public:
             ServerClient();
 
+            Components::AuthData &GetAuthData();
+            void SetAuthData(Components::AuthData authData);
         };
     }
 }

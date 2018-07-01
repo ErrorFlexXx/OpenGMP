@@ -22,8 +22,8 @@ namespace OpenGMP
             NetContainerSystem<T>(const size_t &capacity);
 
             T &CreateEntity(bool &success, Components::Id &id, const RakNet::RakNetGUID &rakGuid);
-            T &Get(const Components::Id &id);
-            T &Get(const RakNet::RakNetGUID &rakId);
+            T &Get(const Components::Id &id, bool &success);
+            T &Get(const RakNet::RakNetGUID &rakId, bool &success);
             int Remove(const Components::Id &id);
             int Remove(const RakNet::RakNetGUID &rakId);
             int Count();

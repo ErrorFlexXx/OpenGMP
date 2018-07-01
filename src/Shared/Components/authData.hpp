@@ -20,6 +20,18 @@ namespace OpenGMP
 
             void WriteStream(RakNet::BitStream &stream) const;
             void ReadStream(RakNet::BitStream &stream);
+
+            //Getter and setter for script interface:
+            std::string GetLoginname() const;
+            void SetLoginname(const std::string &value);
+            std::string GetPassword() const;
+            void SetPassword(const std::string &value);
+            unsigned long GetHddSerial() const;
+            void SetHddSerial(unsigned long value);
+            std::string GetMacAddress() const;
+            void SetMacAddress(const std::string &value);
+            RakNet::RakNetGUID GetRakNetGuid() const;
+            void SetRakNetGuid(const RakNet::RakNetGUID &value);
         };
     }
 }

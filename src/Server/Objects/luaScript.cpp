@@ -5,6 +5,7 @@
 
 using namespace std;
 using namespace cpgf;
+using namespace OpenGMP::Objects;
 
 LuaScript::LuaScript(std::string filename)
     : Script(filename)

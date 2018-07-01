@@ -1,5 +1,6 @@
 def init():
-	print("Script init...")
-	inst = GameServer.GetGameServerInstance()
-	inst.testAttribute = 10
-	inst.Shutdown()
+	print("Hello from testscript.py :)")
+
+def Register(serverClient):
+	print("Register called!")
+	print("Loginname: " + serverClient.authData.loginname)

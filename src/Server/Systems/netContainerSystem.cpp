@@ -1,6 +1,7 @@
 #include "netContainerSystem.hpp"
 #include "../Objects/serverClient.hpp"
 #include "../Objects/serverPlayer.hpp"
+#include <utils/logger.h>
 
 using namespace OpenGMP::Systems;
 using namespace OpenGMP::Objects;
@@ -30,16 +31,28 @@ T &NetContainerSystem<T>::CreateEntity(bool &success, Components::Id &id, const 
 }
 
 template <class T>
-T &NetContainerSystem<T>::Get(const Components::Id &id)
+T &NetContainerSystem<T>::Get(const Components::Id &id, bool &success)
 {
-    return container[id.id];
+    if(0 <= id.id)
+    {
+        success = true;
+        return container[id.id];
+    }
+    success = false;
+    LogError() << "Faulty ID given: " << id.id;
+    return failDummy;
 }
 
 template <class T>
-T &NetContainerSystem<T>::Get(const RakNet::RakNetGUID &rakId)
+T &NetContainerSystem<T>::Get(const RakNet::RakNetGUID &rakId, bool &success)
 {
     RakNet::RakNetGUID rakIdKey = rakId;
-    return Get(rakIdMap[rakIdKey.ToUint32(rakIdKey)]);
+    Id id = rakIdMap[rakIdKey.ToUint32(rakIdKey)];
+    if(0 <= id.id)
+        return Get(id, success);
+    LogError() << "Faulty ID behind RakNet GUID: " << id.id;
+    success = false;
+    return failDummy;
 }
 
 template <class T>

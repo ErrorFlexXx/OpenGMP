@@ -3,6 +3,7 @@
 
 using namespace std;
 using namespace cpgf;
+using namespace OpenGMP::Objects;
 
 PythonScript::PythonScript(std::string filename)
     : Script(filename)

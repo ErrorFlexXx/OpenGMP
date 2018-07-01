@@ -4,7 +4,7 @@
 #include <Shared/Types/Messages/networkSystemMessages.hpp>
 #include <Shared/Types/Messages/loginSystemMessages.hpp>
 #include "../Utils/utils.h"
-#include "../ScriptController/scriptController.hpp"
+#include "scriptSystem.hpp"
 #include <utils/logger.h>
 #include <BitStream.h>
 #include <MessageIdentifiers.h>
@@ -85,9 +85,17 @@ void LoginSystem::Process(Packet *packet)
 
         switch(command)
         {
-            case LoginSystemMessages::AUTH:
+            case LoginSystemMessages::REGISTER:
             {
-
+                LogInfo() << "REGISTER1";
+                bool success;
+                ServerClient &client = gameServer.clientContainer.Get(packet->guid, success);
+                LogInfo() << "clientContainer RakNet Get result: " << success;
+                LogInfo() << "REGISTER2";
+                client.authData.ReadStream(bsIn);
+                LogInfo() << "LoginSystem Register receipt for Client ID: " << client.id.id << ".";
+                ScriptSystem::InvokeScriptFunction("init");
+                ScriptSystem::InvokeScriptFunctionParamServerClient("Register", client);
                 break;
             }
             default:

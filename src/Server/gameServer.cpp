@@ -1,11 +1,12 @@
 #include "gameServer.hpp"
 #include <utils/logger.h>
 #include "WorldObjects/serverWorld.hpp"
-#include "ScriptController/scriptController.hpp"
+#include "Systems/scriptSystem.hpp"
 #include <RakSleep.h>
 
 using namespace std;
 using namespace OpenGMP;
+using namespace OpenGMP::Systems;
 
 GameServer *GameServer::gameServer = nullptr;
 
@@ -41,7 +42,7 @@ bool GameServer::Startup()
     }
 
     //Load scripts from scripts dir
-    ScriptController::LoadScriptsFromDir(scriptDirectory);
+    ScriptSystem::LoadScriptsFromDir(scriptDirectory);
 
     LogInfo() << "GameServer Startup complete!";
     return true;

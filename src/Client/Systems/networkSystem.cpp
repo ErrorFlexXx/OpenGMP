@@ -69,7 +69,9 @@ void NetworkSystem::Shutdown()
 
 void NetworkSystem::Update()
 {
-    for (RakNet::Packet *packet = peerInterface->Receive(); packet = peerInterface->Receive(); peerInterface->DeallocatePacket(packet))
+    for (RakNet::Packet *packet = peerInterface->Receive();
+         packet;
+         peerInterface->DeallocatePacket(packet), packet = peerInterface->Receive())
     {
         if (0 < packet->length)
         {

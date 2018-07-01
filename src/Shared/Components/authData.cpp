@@ -4,7 +4,7 @@
 using namespace RakNet;
 using namespace OpenGMP::Components;
 
-void AuthData::WriteStream(BitStream &stream)
+void AuthData::WriteStream(BitStream &stream) const
 {
     RakString rakLoginname("%s", loginname.c_str());
     RakString rakPassword("%s", password.c_str());

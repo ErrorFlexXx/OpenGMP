@@ -34,7 +34,7 @@ unsigned long long GameTime::GetTicks()
     return GameTime::ticks;
 }
 
-void GameTime::WriteStream(RakNet::BitStream &stream)
+void GameTime::WriteStream(RakNet::BitStream &stream) const
 {
     stream.Write(ticks);
 }

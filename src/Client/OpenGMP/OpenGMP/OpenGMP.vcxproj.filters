@@ -155,6 +155,9 @@
     <ClCompile Include="..\..\..\Shared\Components\id.cpp">
       <Filter>Shared\Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\authData.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Hooks\hGame.hpp">
@@ -305,9 +308,6 @@
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="..\..\..\Shared\Components\version.h">
-      <Filter>Shared\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp">
       <Filter>Shared\Systems</Filter>
     </ClInclude>
@@ -349,6 +349,12 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Shared\Components\id.hpp">
+      <Filter>Shared\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\authData.hpp">
+      <Filter>Shared\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\version.hpp">
       <Filter>Shared\Components</Filter>
     </ClInclude>
   </ItemGroup>

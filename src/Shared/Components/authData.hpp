@@ -14,11 +14,11 @@ namespace OpenGMP
         public:
             std::string loginname;
             std::string password;
-            int hddSerial;
+            unsigned long hddSerial;
             std::string macAddress;
             RakNet::RakNetGUID rakNetGuid;
 
-            void WriteStream(RakNet::BitStream &stream);
+            void WriteStream(RakNet::BitStream &stream) const;
             void ReadStream(RakNet::BitStream &stream);
         };
     }

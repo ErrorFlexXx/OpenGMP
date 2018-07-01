@@ -12,7 +12,7 @@ Version::Version(uint32_t version)
 {
 }
 
-void Version::WriteStream(BitStream &stream)
+void Version::WriteStream(BitStream &stream) const
 {
     stream.Write(version);
 }

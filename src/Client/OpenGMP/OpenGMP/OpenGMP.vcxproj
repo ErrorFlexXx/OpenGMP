@@ -122,6 +122,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Shared\Components\authData.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\gameTime.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\id.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\version.cpp" />
@@ -159,9 +160,10 @@
     <ClCompile Include="..\..\Systems\windowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Shared\Components\authData.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\gameTime.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\id.hpp" />
-    <ClInclude Include="..\..\..\Shared\Components\version.h" />
+    <ClInclude Include="..\..\..\Shared\Components\version.hpp" />
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\loginSystemMessages.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\networkSystemMessages.hpp" />

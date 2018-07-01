@@ -115,11 +115,12 @@ void NetworkSystem::Shutdown()
 
 bool NetworkSystem::Update()
 {
-    Packet *packet = nullptr;
     bool packetReceipt = false;
 
-    packet = peerInterface->Receive();
-    while(packet)
+
+    for (RakNet::Packet *packet = peerInterface->Receive();
+         packet;
+         peerInterface->DeallocatePacket(packet), packet = peerInterface->Receive())
     {
         packetReceipt = true;
         if(0 < packet->length)
@@ -144,8 +145,6 @@ bool NetworkSystem::Update()
                 }
             }
         }
-        peerInterface->DeallocatePacket(packet);
-        packet = peerInterface->Receive();
     }
     return packetReceipt;
 }

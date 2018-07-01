@@ -2,7 +2,7 @@
 
 using namespace OpenGMP::Components;
 
-void WorldTime::WriteStream(RakNet::BitStream &stream)
+void WorldTime::WriteStream(RakNet::BitStream &stream) const
 {
     stream.Write(totalSeconds);
 }

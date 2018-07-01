@@ -2,7 +2,7 @@
 
 using namespace OpenGMP::Components;
 
-void PlayerSkills::WriteStream(RakNet::BitStream &stream)
+void PlayerSkills::WriteStream(RakNet::BitStream &stream) const
 {
     stream.Write(skill_1h);
     stream.Write(skill_2h);

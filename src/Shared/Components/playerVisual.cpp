@@ -4,7 +4,7 @@
 using namespace RakNet;
 using namespace OpenGMP::Components;
 
-void PlayerVisual::WriteStream(BitStream &stream)
+void PlayerVisual::WriteStream(BitStream &stream) const
 {
     RakString rakBodyModel("%S", bodyModel.c_str());
     RakString rakHeadModel("%s", headModel.c_str());

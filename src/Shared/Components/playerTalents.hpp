@@ -23,7 +23,7 @@ namespace OpenGMP
 
             int HasTalent(EnumTalents talent);
             void SetTalent(EnumTalents talent);
-            void WriteStream(RakNet::BitStream &stream);
+            void WriteStream(RakNet::BitStream &stream) const;
             void ReadStream(RakNet::BitStream &stream);
 
             int talents;

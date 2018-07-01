@@ -3,7 +3,7 @@
 
 using namespace OpenGMP::Components;
 
-void IInventory::WriteStream(RakNet::BitStream &stream)
+void IInventory::WriteStream(RakNet::BitStream &stream) const
 {
 
 }

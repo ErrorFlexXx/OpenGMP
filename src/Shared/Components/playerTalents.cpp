@@ -12,7 +12,7 @@ void PlayerTalents::SetTalent(EnumTalents talent)
     talents |= (1 << talent);
 }
 
-void PlayerTalents::WriteStream(RakNet::BitStream &stream)
+void PlayerTalents::WriteStream(RakNet::BitStream &stream) const
 {
     stream.Write(talents);
 }

@@ -2,7 +2,7 @@
 
 using namespace OpenGMP::Components;
 
-void PlayerAttributes::WriteStream(RakNet::BitStream &stream)
+void PlayerAttributes::WriteStream(RakNet::BitStream &stream) const
 {
     stream.Write(level);
     stream.Write(learn_points);

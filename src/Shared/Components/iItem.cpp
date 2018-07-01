@@ -4,7 +4,7 @@
 using namespace RakNet;
 using namespace OpenGMP::Components;
 
-void IItem::WriteStream(BitStream &stream)
+void IItem::WriteStream(BitStream &stream) const
 {
     RakString rakInstance("%s", instance.c_str());
 

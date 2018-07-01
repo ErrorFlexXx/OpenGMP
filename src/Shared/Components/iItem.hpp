@@ -17,7 +17,7 @@ namespace OpenGMP
             std::string instance;
             int amount;
 
-            void WriteStream(RakNet::BitStream &stream);
+            void WriteStream(RakNet::BitStream &stream) const;
             void ReadStream(RakNet::BitStream & stream);
         };
     }

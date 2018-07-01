@@ -14,7 +14,7 @@ namespace OpenGMP
         {
         public:
 
-            void WriteStream(RakNet::BitStream &stream);
+            void WriteStream(RakNet::BitStream &stream) const;
             void ReadStream(RakNet::BitStream &stream);
         };
     }

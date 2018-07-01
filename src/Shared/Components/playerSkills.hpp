@@ -14,7 +14,7 @@ namespace OpenGMP
             int skill_bow;
             int skill_cbow;
 
-            void WriteStream(RakNet::BitStream &stream);
+            void WriteStream(RakNet::BitStream &stream) const;
             void ReadStream(RakNet::BitStream &stream);
         };
     }

@@ -16,7 +16,7 @@ namespace OpenGMP
             int headTextureId;
             float fatness;
 
-            void WriteStream(RakNet::BitStream &stream);
+            void WriteStream(RakNet::BitStream &stream) const;
             void ReadStream(RakNet::BitStream &stream);
         };
     }

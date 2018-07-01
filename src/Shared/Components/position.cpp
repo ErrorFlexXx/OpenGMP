@@ -2,7 +2,7 @@
 
 using namespace OpenGMP::Components;
 
-void Position::WriteStream(RakNet::BitStream &stream)
+void Position::WriteStream(RakNet::BitStream &stream) const
 {
     stream.Write(x);
     stream.Write(y);

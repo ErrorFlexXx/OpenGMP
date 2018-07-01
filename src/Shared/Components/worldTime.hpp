@@ -11,7 +11,7 @@ namespace OpenGMP
         public:
             int totalSeconds;
 
-            void WriteStream(RakNet::BitStream &stream);
+            void WriteStream(RakNet::BitStream &stream) const;
             void ReadStream(RakNet::BitStream &stream);
         };
     }

@@ -14,7 +14,7 @@ Color::Color(const unsigned char &r, const unsigned char &g, const unsigned char
     , a(a)
 {}
 
-void Color::WriteStream(RakNet::BitStream &stream)
+void Color::WriteStream(RakNet::BitStream &stream) const
 {
     stream.Write(r);
     stream.Write(g);

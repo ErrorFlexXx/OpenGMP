@@ -36,6 +36,7 @@ void LoginSystem::Process(RakNet::Packet *packet)
         }
         case ID_CONNECTION_REQUEST_ACCEPTED:
         {
+            gameClient.networkSystem.serverAddress = packet->systemAddress;
             std::cout << "Connection established." << std::endl;
             break;
         }
@@ -122,5 +123,7 @@ void LoginSystem::GetMac(Components::AuthData &authData)
 
 void LoginSystem::GetHDDSerial(Components::AuthData &authData)
 {
-    GetVolumeInformation("C:\\", NULL, 0, &authData.hddSerial, NULL, NULL, NULL, 0);
+    DWORD serial;
+    GetVolumeInformation("C:\\", NULL, 0, &serial, NULL, NULL, NULL, 0);
+    authData.hddSerial = (uint32_t)serial;
 }

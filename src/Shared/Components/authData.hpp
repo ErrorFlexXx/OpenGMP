@@ -14,7 +14,7 @@ namespace OpenGMP
         public:
             std::string loginname;
             std::string password;
-            unsigned long hddSerial;
+            uint32_t hddSerial;
             std::string macAddress;
             RakNet::RakNetGUID rakNetGuid;
 

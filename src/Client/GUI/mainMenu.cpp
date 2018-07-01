@@ -89,14 +89,16 @@ void MainMenu::Open()
     }
 
     cursor = preferredCursorItem;
-    MenuItem *currentItem;
-    currentItem = CurrentItem();
-    if (!currentItem->Enabled())
+    
+    for (size_t i = 0; !CurrentItem()->Enabled() && i < items.size(); i++)
     {
         MoveCursor();
     }
-    currentItem->Select();
-    UpdateHelpText();
+    if (CurrentItem()->Enabled())
+    {
+        CurrentItem()->Select();
+        UpdateHelpText();
+    }
     isOpen = true;
 }
 

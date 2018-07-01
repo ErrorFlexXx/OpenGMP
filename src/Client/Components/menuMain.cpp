@@ -26,21 +26,25 @@ void MenuMain::OnCreate()
     btnLogin = AddButton("Anmelden", "In einen bestehenden Account einloggen.", offset + dist * 0, nullptr);
     btnRegister = AddButton("Registrieren", "Einen neuen Account erstellen.", offset + dist * 1, [=]() { gameClient.menuSystem.menuRegister.Open(); });
     btnQuit = AddButton("Beenden", "Beendet das Spiel. Wechsel zum Desktop.", offset + dist * 3, [=]() { gameManager->ExitGame(); });
+    
+    btnLogin->Enabled(false);
+    btnRegister->Enabled(false);
+    btnQuit->Enabled(true);
 }
 
 void MenuMain::Open()
 {
     OpenGMP::GUI::MainMenu::Open();
-    if (ingame) //loggedin
-    {
-        btnLogin->Enabled(false);
-        btnRegister->Enabled(false);
-        btnQuit->Enabled(true);
-    }
-    else //not logged in
-    {
-        btnLogin->Enabled(true);
-        btnRegister->Enabled(true);
-        btnQuit->Enabled(true);
-    }
+}
+
+void MenuMain::EnableNetworkElements()
+{
+    btnLogin->Enabled(true);
+    btnRegister->Enabled(true);
+}
+
+void MenuMain::DisableNetworkElements()
+{
+    btnLogin->Enabled(false);
+    btnRegister->Enabled(false);
 }

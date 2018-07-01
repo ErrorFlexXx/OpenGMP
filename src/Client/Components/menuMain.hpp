@@ -21,6 +21,8 @@ namespace OpenGMP
             MenuMain(GameClient &gameClient);
             virtual void OnCreate() override;
             virtual void Open() override;
+            void EnableNetworkElements();
+            void DisableNetworkElements();
 
         private:
             GUI::MenuButton *btnLogin;

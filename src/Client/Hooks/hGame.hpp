@@ -2,7 +2,6 @@
 
 #include "hook.hpp"
 #include <Client/Gothic/Types/zCOLOR.hpp>
-#include "../Menus/ogmpMainMenu.hpp"
 
 namespace OpenGMP
 {

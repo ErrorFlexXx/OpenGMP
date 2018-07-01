@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../Types/virtualKeys.hpp"
+#include "../Components/menuMain.hpp"
+#include "../Components/menuRegister.hpp"
 #include <list>
 
 namespace OpenGMP
@@ -18,16 +20,15 @@ namespace OpenGMP
         {
         public:
             MenuSystem(GameClient &gameClient);
-
-            void OpenMainMenu();
-            void OpenRegisterMenu();
+            
             void CloseActiveMenus();
             bool IsMenuActive();
             bool KeyDownUpdateMenus(Types::VirtualKeys key);
             bool KeyUpUpdateMenus(Types::VirtualKeys key);
             void UpdateMenus(unsigned long long now);
 
-            std::list<GUI::Menu*> createdMenus;
+            Components::MenuMain menuMain;
+            Components::MenuRegister menuRegister;
 
         private:
             GameClient &gameClient;

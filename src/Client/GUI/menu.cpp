@@ -45,3 +45,12 @@ void Menu::KeyUp(Types::VirtualKeys key)
 
 void Menu::Update(unsigned long long now)
 {}
+
+void Menu::CloseActiveMenus()
+{
+    while (0 < activeMenus.size())
+    {
+        Menu *menu = activeMenus.back();
+        menu->Close();
+    }
+}

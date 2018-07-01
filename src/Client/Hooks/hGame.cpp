@@ -73,6 +73,6 @@ void HGame::StartOutgame()
 {
     WindowSystem::SetWindowTitle("OpenGMP");
     WindowSystem::UpdateWindowIcon();
-    gameClient.menuSystem.OpenMainMenu();
+    gameClient.menuSystem.menuMain.Open();
     gameClient.networkSystem.Startup();
 }

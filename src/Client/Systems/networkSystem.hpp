@@ -27,13 +27,14 @@ namespace OpenGMP
             
             void StartupFailed();
             
+            RakNet::SystemAddress serverAddress;        //!< RakNet SystemAddress of the server.
+            RakNet::RakPeerInterface *peerInterface;    //!< RakNet PeerInterface object.
+
         private:
             GameClient &gameClient;
             static bool started;
             static char public_key[];
-            RakNet::RakPeerInterface *peerInterface;    //!< RakNet PeerInterface object.
             RakNet::SocketDescriptor socketDescriptor;  //!< RakNet SocketDescriptor.
-            RakNet::SystemAddress serverAddress;        //!< RakNet SystemAddress of the server.
             RakNet::PublicKey pk;
             std::mutex networkMutex;    //!< Mutex to sync renderer - network threads.
             std::string hostname;

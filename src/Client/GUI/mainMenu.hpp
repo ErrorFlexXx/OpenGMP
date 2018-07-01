@@ -24,7 +24,7 @@ namespace OpenGMP
             MenuItem *CurrentItem();
             bool IsOpen();
 
-            virtual void OnCreate() = 0;
+            virtual void OnCreate();
             virtual void Open() override;
             virtual void Close() override;
             virtual void KeyDown(Types::VirtualKeys key) override;

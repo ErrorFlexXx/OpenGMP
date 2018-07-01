@@ -123,8 +123,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Shared\Components\gameTime.cpp" />
+    <ClCompile Include="..\..\..\Shared\Components\id.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\version.cpp" />
     <ClCompile Include="..\..\..\Shared\Systems\versionSystem.cpp" />
+    <ClCompile Include="..\..\Components\menuMain.cpp" />
+    <ClCompile Include="..\..\Components\menuRegister.cpp" />
     <ClCompile Include="..\..\gameClient.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zCOLOR.cpp" />
     <ClCompile Include="..\..\Gothic\Types\zMAT3.cpp" />
@@ -146,8 +149,7 @@
     <ClCompile Include="..\..\Hooks\hView.cpp" />
     <ClCompile Include="..\..\Hooks\otherHooks.cpp" />
     <ClCompile Include="..\..\main.cpp" />
-    <ClCompile Include="..\..\Menus\ogmpMainMenu.cpp" />
-    <ClCompile Include="..\..\Menus\ogmpRegisterMenu.cpp" />
+    <ClCompile Include="..\..\Objects\clientClient.cpp" />
     <ClCompile Include="..\..\Systems\inputKeyCombSystem.cpp" />
     <ClCompile Include="..\..\Systems\inputKeyDownRepeatSystem.cpp" />
     <ClCompile Include="..\..\Systems\inputSystem.cpp" />
@@ -158,10 +160,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Shared\Components\gameTime.hpp" />
+    <ClInclude Include="..\..\..\Shared\Components\id.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\version.h" />
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\loginSystemMessages.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\networkSystemMessages.hpp" />
+    <ClInclude Include="..\..\Components\menuMain.hpp" />
+    <ClInclude Include="..\..\Components\menuRegister.hpp" />
     <ClInclude Include="..\..\gameClient.hpp" />
     <ClInclude Include="..\..\Gothic\cGameManager.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCCamera.hpp" />
@@ -210,8 +215,7 @@
     <ClInclude Include="..\..\Hooks\hook.hpp" />
     <ClInclude Include="..\..\Hooks\hView.hpp" />
     <ClInclude Include="..\..\Hooks\otherHooks.hpp" />
-    <ClInclude Include="..\..\Menus\ogmpMainMenu.hpp" />
-    <ClInclude Include="..\..\Menus\ogmpRegisterMenu.hpp" />
+    <ClInclude Include="..\..\Objects\clientClient.hpp" />
     <ClInclude Include="..\..\Systems\inputKeyCombSystem.hpp" />
     <ClInclude Include="..\..\Systems\inputKeyDownRepeatSystem.hpp" />
     <ClInclude Include="..\..\Systems\inputSystem.hpp" />

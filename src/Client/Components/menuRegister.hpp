@@ -12,12 +12,12 @@ namespace OpenGMP
         class MenuTextBox;
     }
 
-    namespace Menus
+    namespace Components
     {
-        class OGMPRegisterMenu : public GUI::MainMenu
+        class MenuRegister : public GUI::MainMenu
         {
         public:
-            OGMPRegisterMenu(GameClient &gameClient);
+            MenuRegister(GameClient &gameClient);
             virtual void OnCreate() override;
             virtual void Open() override;
             void Register();

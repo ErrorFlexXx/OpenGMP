@@ -20,6 +20,7 @@ namespace OpenGMP
             virtual void KeyDown(Types::VirtualKeys key);
             virtual void KeyUp(Types::VirtualKeys key);
             virtual void Update(unsigned long long now);
+            void CloseActiveMenus();
 
             static std::list<Menu*> activeMenus;
 

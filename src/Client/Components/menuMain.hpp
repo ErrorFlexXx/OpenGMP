@@ -13,12 +13,12 @@ namespace OpenGMP
         class MenuButton;
     }
 
-    namespace Menus
+    namespace Components
     {
-        class OGMPMainMenu : public GUI::MainMenu
+        class MenuMain : public GUI::MainMenu
         {
         public:
-            OGMPMainMenu(GameClient &gameClient);
+            MenuMain(GameClient &gameClient);
             virtual void OnCreate() override;
             virtual void Open() override;
 

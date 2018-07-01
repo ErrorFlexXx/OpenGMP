@@ -22,9 +22,6 @@
     <Filter Include="GUI">
       <UniqueIdentifier>{435b7f02-e668-4809-afbb-73bfb790c34b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Menus">
-      <UniqueIdentifier>{52c664d0-82cf-4d80-a152-26789e00bf5c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Systems">
       <UniqueIdentifier>{56c6c9a8-d2ba-4e68-935c-de3257f30fda}</UniqueIdentifier>
     </Filter>
@@ -51,6 +48,9 @@
     </Filter>
     <Filter Include="Types">
       <UniqueIdentifier>{c7ea0e8e-83ba-416b-b172-1caa526a591a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{40bf75ac-1d27-4c14-b8b5-c5ba4f7a0baf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -109,12 +109,6 @@
     <ClCompile Include="..\..\GUI\visualText.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Menus\ogmpMainMenu.cpp">
-      <Filter>Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Menus\ogmpRegisterMenu.cpp">
-      <Filter>Menus</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Systems\menuSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
@@ -148,6 +142,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Systems\inputKeyCombSystem.cpp">
       <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Objects\clientClient.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Components\menuMain.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Components\menuRegister.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\id.cpp">
+      <Filter>Shared\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,12 +295,6 @@
     <ClInclude Include="..\..\GUI\visualText.hpp">
       <Filter>GUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Menus\ogmpMainMenu.hpp">
-      <Filter>Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Menus\ogmpRegisterMenu.hpp">
-      <Filter>Menus</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Systems\menuSystem.hpp">
       <Filter>Systems</Filter>
     </ClInclude>
@@ -338,6 +338,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Systems\inputKeyCombSystem.hpp">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Objects\clientClient.hpp">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Components\menuMain.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Components\menuRegister.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\id.hpp">
+      <Filter>Shared\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

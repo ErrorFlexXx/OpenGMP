@@ -18,6 +18,24 @@ MainMenu::MainMenu(GameClient &gameClient)
     : Menu(gameClient)
     , scrollHelper(gameClient)
 {
+}
+
+MenuItem *MainMenu::CurrentItem()
+{
+    if (0 <= cursor && cursor < items.size()) //Valid cursor range ?
+    {
+        return items[cursor];
+    }
+    return nullptr;
+}
+
+bool MainMenu::IsOpen()
+{
+    return isOpen;
+}
+
+void MainMenu::OnCreate()
+{
     cursor = 0;
     preferredCursorItem = 0;
     ViewPoint screenSize = View::GetPixelScreenSize();
@@ -38,7 +56,7 @@ MainMenu::MainMenu(GameClient &gameClient)
     versionString.append(VersionSystem::GetVersionString(VersionSystem::version.version));
     versionVis = VisualText::Create(versionString, 10, screenSize.y - 30);
     versionVis->Texts().back()->SetColor(*zCOLOR_GREY());
-    
+
     //Setup key strokes for actions:
     std::list<VirtualKeys> combUp;
     combUp.push_back(VirtualKeys::Up);
@@ -53,20 +71,6 @@ MainMenu::MainMenu(GameClient &gameClient)
     scrollHelper.Add(combTab, actionScrollDown);
 }
 
-MenuItem *MainMenu::CurrentItem()
-{
-    if (0 <= cursor && cursor < items.size()) //Valid cursor range ?
-    {
-        return items[cursor];
-    }
-    return nullptr;
-}
-
-bool MainMenu::IsOpen()
-{
-    return isOpen;
-}
-
 void MainMenu::Open()
 {
     if (!init)
@@ -74,6 +78,7 @@ void MainMenu::Open()
         OnCreate();
         init = true;
     }
+    CloseActiveMenus();
     Menu::Open();
     back->Show();
     helpVis->Show();

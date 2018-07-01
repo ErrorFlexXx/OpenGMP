@@ -1,26 +1,31 @@
 #include "textBox.hpp"
 #include "visualText.hpp"
+#include "../gameClient.hpp"
+#include "../Systems/inputSystem.hpp"
+#include "../Types/virtualKeys.hpp"
 #include <Shared/Components/gameTime.hpp>
-#include "../Controls/inputHandler.hpp"
-#include "../Controls/virtualKeys.hpp"
 #include <functional>
 
 using namespace OpenGMP;
 using namespace OpenGMP::GUI;
+using namespace OpenGMP::Components;
+using namespace OpenGMP::Systems;
+using namespace OpenGMP::Types;
 
 const size_t TextBox::cursorSize = 16;
 const int TextBox::cursorOffsetX = 1 - TextBox::cursorSize / 2;
 const size_t TextBox::cursorOffsetY = 1;
 const size_t TextBox::arrowSize = 10;
 
-TextBox::TextBox(int x, int y, int w, bool fixedBorders, bool passwordText)
-    : width(w)
+TextBox::TextBox(GameClient &gameClient, int x, int y, int w, bool fixedBorders, bool passwordText)
+    : gameClient(gameClient)
+    , width(w)
     , height(fontSizeDefault)
     , inputVis(x, y, w, height)
     , cursorVis(x + cursorOffsetX, y + cursorOffsetY, cursorSize, cursorSize)
     , leftArrow(x, y + (fontSizeDefault - arrowSize) / 2, arrowSize, arrowSize)
     , rightArrow(x + w - arrowSize, y + (fontSizeDefault - arrowSize) / 2, arrowSize, arrowSize)
-    , keyRepeater([=](VirtualKeys key) { this->KeyPressedNoRepeatUpdate(key); })
+    , keyRepeater(gameClient, [=](VirtualKeys key) { this->KeyPressedNoRepeatUpdate(key); })
 {
     characterLimit = 512;
     allowSpaces = true;
@@ -286,9 +291,10 @@ char TextBox::GetCharFromKey(VirtualKeys key)
     wchar_t buffer[10] = {};
     BYTE keyState[256] = {};
     
-    if (InputHandler::IsPressed(VirtualKeys::Shift))
+    if (gameClient.inputSystem.IsPressed(VirtualKeys::Shift))
         keyState[VirtualKeys::Shift] = 0xff;
-    if (InputHandler::IsPressed(VirtualKeys::Control) && InputHandler::IsPressed(VirtualKeys::Menu))
+    if (gameClient.inputSystem.IsPressed(VirtualKeys::Control) && 
+        gameClient.inputSystem.IsPressed(VirtualKeys::Menu))
     {
         keyState[VirtualKeys::Control] = 0xff;
         keyState[VirtualKeys::Menu] = 0xff;

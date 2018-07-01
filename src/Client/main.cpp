@@ -4,18 +4,20 @@
 
 using namespace OpenGMP;
 
+GameClient gameClient;
+
 BOOL APIENTRY DllMain(HINSTANCE hInstance, DWORD reason, LPVOID reserved)
 {
     switch (reason)
     {
     case DLL_PROCESS_ATTACH:
     {
-        GameClient::Startup(hInstance);
+        gameClient.Startup(hInstance);
         break;
     }
     case DLL_PROCESS_DETACH:
     {
-        GameClient::Stop();
+        gameClient.Stop();
         break;
     }
     }

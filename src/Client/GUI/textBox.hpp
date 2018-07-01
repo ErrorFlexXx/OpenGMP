@@ -2,11 +2,13 @@
 
 #include "view.hpp"
 #include "visual.hpp"
-#include "../Controls/keyDownRepeatHelper.hpp"
+#include "../Systems/inputKeyDownRepeatSystem.hpp"
 #include <string>
 
 namespace OpenGMP
 {
+    class GameClient;
+
     namespace GUI
     {
         class VisualText;
@@ -14,15 +16,15 @@ namespace OpenGMP
         class TextBox : public View
         {
         public:
-            TextBox(int x, int y, int w, bool fixedBorders, bool passwordText = false);
+            TextBox(GameClient &gameClient, int x, int y, int w, bool fixedBorders, bool passwordText = false);
 
             virtual void Show() override;
             virtual void Hide() override;
 
             VisualText *InputText();
             void Update(unsigned long long now);
-            void KeyPressed(VirtualKeys key);
-            void KeyPressedNoRepeatUpdate(VirutalKeys key);
+            void KeyPressed(Types::VirtualKeys key);
+            void KeyPressedNoRepeatUpdate(Types::VirutalKeys key);
             bool Enabled();
             void Enabled(bool value);
             std::string Input();
@@ -40,9 +42,12 @@ namespace OpenGMP
             bool rightArrowShown;
             bool enabled;
 
+        protected:
+            GameClient &gameClient;
+
         private:
             void UpdateInputVisual();
-            char GetCharFromKey(VirtualKeys key);
+            char GetCharFromKey(Types::VirtualKeys key);
 
             struct Pos
             {
@@ -65,7 +70,7 @@ namespace OpenGMP
             Visual rightArrow;
             unsigned long long cursorTime;
             std::string input;
-            Controls::KeyDownRepeatHelper keyRepeater;
+            Systems::InputKeyDownRepeatSystem keyRepeater;
         };
     }
 }

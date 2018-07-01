@@ -2,12 +2,14 @@
 
 #include "menu.hpp"
 #include "visual.hpp"
-#include "../Controls/keyHoldHelper.hpp"
+#include "../Systems/inputKeyCombSystem.hpp"
 #include <vector>
 #include <functional>
 
 namespace OpenGMP
 {
+    class GameClient;
+
     namespace GUI
     {
         class VisualText;
@@ -18,14 +20,14 @@ namespace OpenGMP
         class MainMenu : public Menu
         {
         public:
-            MainMenu();
+            MainMenu(GameClient &gameClient);
             MenuItem *CurrentItem();
             bool IsOpen();
 
             virtual void OnCreate() = 0;
             virtual void Open() override;
             virtual void Close() override;
-            virtual void KeyDown(VirtualKeys key) override;
+            virtual void KeyDown(Types::VirtualKeys key) override;
             virtual void Update(unsigned long long now) override;
 
         protected:
@@ -58,7 +60,7 @@ namespace OpenGMP
             unsigned long long helpTextNextUpdateTime;
 
         private:
-            OpenGMP::Controls::KeyHoldHelper scrollHelper;
+            OpenGMP::Systems::InputKeyCombSystem scrollHelper;
             bool init;
         };
     }

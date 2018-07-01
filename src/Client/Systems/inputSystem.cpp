@@ -1,34 +1,37 @@
-#include "inputHandler.hpp"
+#include "inputSystem.hpp"
 #include <Shared/Components/GameTime.hpp>
 #include "../Systems/windowSystem.hpp"
 
-#define KEYCOUNT 255
-
 using namespace OpenGMP;
+using namespace OpenGMP::Components;
 using namespace OpenGMP::Systems;
+using namespace OpenGMP::Types;
 
-std::function<void(VirtualKeys key)> InputHandler::keyDownReceipient;
-std::function<void(VirtualKeys key)> InputHandler::keyUpReceipient;
-bool InputHandler::MouseShown = false;
-int InputHandler::movedX = 0;
-int InputHandler::movedY = 0;
-POINT InputHandler::oriPos;
-const int InputHandler::DefaultMousePosX = 320;
-const int InputHandler::DefaultMousePosY = 240;
-bool InputHandler::m_keys[KEYCOUNT];
-bool InputHandler::m_shown = false;
+InputSystem::InputSystem(GameClient &gameClient)
+    : gameClient(gameClient)
+    , defaultMousePosX(320)
+    , defaultMousePosY(240)
+    , mouseShown(false)
+    , movedX(false)
+    , movedY(false)
+    , m_keys()
+    , m_shown(false)
+{
+    oriPos.x = 320;
+    oriPos.y = 240;
+}
 
-int InputHandler::MouseDistX()
+int InputSystem::MouseDistX()
 {
 	return movedX;
 }
 
-int InputHandler::MouseDistY()
+int InputSystem::MouseDistY()
 {
 	return movedY;
 }
 
-void InputHandler::Update()
+void InputSystem::Update()
 {
     unsigned long long ticks = GameTime::GetTicks();
 	if(WindowSystem::IsForeground())
@@ -38,7 +41,7 @@ void InputHandler::Update()
 			m_shown = true;
 			while(0 <= ShowCursor(false));
 			GetCursorPos(&oriPos);
-			SetCursorPos(DefaultMousePosX, DefaultMousePosY);
+			SetCursorPos(defaultMousePosX, defaultMousePosY);
 			movedX = 0;
 			movedY = 0;
 		}
@@ -47,9 +50,9 @@ void InputHandler::Update()
 			POINT pos;
 			if(GetCursorPos(&pos))
 			{
-				movedX = pos.x - DefaultMousePosX;
-				movedY = pos.y - DefaultMousePosY;
-				SetCursorPos(DefaultMousePosX, DefaultMousePosY);
+				movedX = pos.x - defaultMousePosX;
+				movedY = pos.y - defaultMousePosY;
+				SetCursorPos(defaultMousePosX, defaultMousePosY);
 			}
 		}
 		for(int i = 1; i < KEYCOUNT; i++)
@@ -93,7 +96,7 @@ void InputHandler::Update()
 	}
 }
 
-bool InputHandler::IsPressed(VirtualKeys key)
+bool InputSystem::IsPressed(VirtualKeys key)
 {
     return m_keys[(int)key];
 }

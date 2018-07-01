@@ -6,6 +6,8 @@ class CGameManager;
 
 namespace OpenGMP
 {
+    class GameClient;
+
     namespace GUI
     {
         class MenuButton;
@@ -16,7 +18,7 @@ namespace OpenGMP
         class OGMPMainMenu : public GUI::MainMenu
         {
         public:
-            OGMPMainMenu();
+            OGMPMainMenu(GameClient &gameClient);
             virtual void OnCreate() override;
             virtual void Open() override;
 

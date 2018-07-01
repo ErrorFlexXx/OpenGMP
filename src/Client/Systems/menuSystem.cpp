@@ -1,14 +1,15 @@
 #include "menuSystem.hpp"
+#include "../gameClient.hpp"
 #include "../GUI/menu.hpp"
 #include "../Menus/ogmpMainMenu.hpp"
 #include "../Menus/ogmpRegisterMenu.hpp"
 
 using namespace OpenGMP;
 using namespace OpenGMP::Systems;
+using namespace OpenGMP::Types;
 
-std::list<GUI::Menu*> MenuSystem::createdMenus;
-
-MenuSystem::MenuSystem()
+MenuSystem::MenuSystem(GameClient &gameClient)
+    : gameClient(gameClient)
 {}
 
 void MenuSystem::OpenMainMenu()
@@ -26,7 +27,7 @@ void MenuSystem::OpenMainMenu()
         }
     }
     //No main menu found -- Create one
-    Menus::OGMPMainMenu *mainMenu = new Menus::OGMPMainMenu();
+    Menus::OGMPMainMenu *mainMenu = new Menus::OGMPMainMenu(gameClient);
     createdMenus.push_back(mainMenu);
     mainMenu->Open();
 }
@@ -46,7 +47,7 @@ void MenuSystem::OpenRegisterMenu()
         }
     }
     //No main menu found -- Create one
-    Menus::OGMPRegisterMenu *registerMenu = new Menus::OGMPRegisterMenu();
+    Menus::OGMPRegisterMenu *registerMenu = new Menus::OGMPRegisterMenu(gameClient);
     createdMenus.push_back(registerMenu);
     registerMenu->Open();
 }
@@ -65,7 +66,7 @@ bool MenuSystem::IsMenuActive()
     return 0 < GUI::Menu::activeMenus.size();
 }
 
-bool MenuSystem::KeyDownUpdateMenus(OpenGMP::VirtualKeys key)
+bool MenuSystem::KeyDownUpdateMenus(VirtualKeys key)
 {
     if (0 < GUI::Menu::activeMenus.size())
     {
@@ -75,7 +76,7 @@ bool MenuSystem::KeyDownUpdateMenus(OpenGMP::VirtualKeys key)
     return false;
 }
 
-bool MenuSystem::KeyUpUpdateMenus(OpenGMP::VirtualKeys key)
+bool MenuSystem::KeyUpUpdateMenus(VirtualKeys key)
 {
     if (0 < GUI::Menu::activeMenus.size())
     {

@@ -3,14 +3,20 @@
 #include "menuItem.hpp"
 #include "menuButton.hpp"
 #include "menuTextBox.hpp"
+#include "../gameClient.hpp"
 #include <Shared/Components/gameTime.hpp>
 #include <Shared/Systems/versionSystem.hpp>
 #include "../Gothic/Classes/zCViewText.hpp"
 
+using namespace OpenGMP;
 using namespace OpenGMP::GUI;
 using namespace OpenGMP::Systems;
+using namespace OpenGMP::Types;
+using namespace OpenGMP::Components;
 
-MainMenu::MainMenu()
+MainMenu::MainMenu(GameClient &gameClient)
+    : Menu(gameClient)
+    , scrollHelper(gameClient)
 {
     cursor = 0;
     preferredCursorItem = 0;
@@ -118,21 +124,21 @@ MenuButton * MainMenu::AddButton(const std::string &text, const std::string &hel
 MenuTextBox * MainMenu::AddTextBox(const std::string &title, const std::string &help, int y, int width, std::function<void()> onActivate, bool passwordText)
 {
     int borderOffset = 50;
-    MenuTextBox *newTextBox = new MenuTextBox(title, help, pos.x + 640 - width - borderOffset, pos.y + y, width, pos.x + borderOffset, onActivate, passwordText);
+    MenuTextBox *newTextBox = new MenuTextBox(gameClient, title, help, pos.x + 640 - width - borderOffset, pos.y + y, width, pos.x + borderOffset, onActivate, passwordText);
     items.push_back(newTextBox);
     return newTextBox;
 }
 
 MenuTextBox * MainMenu::AddTextBox(const std::string &title, const std::string &help, int x, int y, int width, int titleX, std::function<void()> onActivate, bool passwordText)
 {
-    MenuTextBox *newTextBox = new MenuTextBox(title, help, pos.x + x, pos.y + y, width, pos.x + titleX, onActivate, passwordText);
+    MenuTextBox *newTextBox = new MenuTextBox(gameClient, title, help, pos.x + x, pos.y + y, width, pos.x + titleX, onActivate, passwordText);
     items.push_back(newTextBox);
     return newTextBox;
 }
 
 MenuTextBox * MainMenu::AddTextBox(const std::string &title, const std::string &help, int x, int y, int width, int titleX, int titleY, std::function<void()> onActivate, bool passwordText)
 {
-    MenuTextBox *newTextBox = new MenuTextBox(title, help, pos.x + x, pos.y + y, width, pos.x + titleX, pos.y + titleY, onActivate, passwordText);
+    MenuTextBox *newTextBox = new MenuTextBox(gameClient, title, help, pos.x + x, pos.y + y, width, pos.x + titleX, pos.y + titleY, onActivate, passwordText);
     items.push_back(newTextBox);
     return newTextBox;
 }
@@ -214,7 +220,7 @@ void MainMenu::MoveCursor(bool up)
     }
 }
 
-void MainMenu::KeyDown(OpenGMP::VirtualKeys key)
+void MainMenu::KeyDown(VirtualKeys key)
 {
     unsigned long long now = GameTime::GetTicks();
 

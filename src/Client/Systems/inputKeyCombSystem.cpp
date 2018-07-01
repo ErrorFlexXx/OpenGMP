@@ -1,17 +1,20 @@
-#include "keyHoldHelper.hpp"
-#include "../Controls/inputHandler.hpp"
+#include "inputKeyCombSystem.hpp"
+#include "inputSystem.hpp"
+#include "../gameClient.hpp"
 #include <Shared/Components/gameTime.hpp>
 
 using namespace OpenGMP;
-using namespace OpenGMP::Controls;
+using namespace OpenGMP::Types;
+using namespace OpenGMP::Systems;
 
-KeyHoldHelper::KeyHoldHelper(int holdTime, int rate)
-    : holdTime(holdTime)
+InputKeyCombSystem::InputKeyCombSystem(GameClient &gameClient, int holdTime, int rate)
+    : gameClient(gameClient)
+    , holdTime(holdTime)
     , rate(rate)
     , current(nullptr)
 {}
 
-void KeyHoldHelper::Add(const std::list<VirtualKeys> &keyCombination, const std::function<void()> &action)
+void InputKeyCombSystem::Add(const std::list<VirtualKeys> &keyCombination, const std::function<void()> &action)
 {
     if (0 < keyCombination.size())
     {
@@ -19,7 +22,7 @@ void KeyHoldHelper::Add(const std::list<VirtualKeys> &keyCombination, const std:
     }
 }
 
-void KeyHoldHelper::Update(unsigned long long now)
+void InputKeyCombSystem::Update(unsigned long long now)
 {
     for (auto it : actionKeyCombinationBindings)
     {
@@ -27,7 +30,7 @@ void KeyHoldHelper::Update(unsigned long long now)
         bool allCombinationKeysPressed = true;
         for (const VirtualKeys &key : pair->keyCombination)
         {
-            if (!InputHandler::IsPressed(key))
+            if (!gameClient.inputSystem.IsPressed(key))
             {
                 allCombinationKeysPressed = false;
                 break;

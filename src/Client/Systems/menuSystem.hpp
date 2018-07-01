@@ -1,10 +1,12 @@
 #pragma once
 
-#include "../Controls/virtualKeys.hpp"
+#include "../Types/virtualKeys.hpp"
 #include <list>
 
 namespace OpenGMP
 {
+    class GameClient;
+
     namespace GUI
     {
         class Menu;
@@ -15,17 +17,20 @@ namespace OpenGMP
         class MenuSystem
         {
         public:
-            MenuSystem();
+            MenuSystem(GameClient &gameClient);
 
-            static void OpenMainMenu();
-            static void OpenRegisterMenu();
-            static void CloseActiveMenus();
-            static bool IsMenuActive();
-            static bool KeyDownUpdateMenus(VirtualKeys key);
-            static bool KeyUpUpdateMenus(OpenGMP::VirtualKeys key);
-            static void UpdateMenus(unsigned long long now);
+            void OpenMainMenu();
+            void OpenRegisterMenu();
+            void CloseActiveMenus();
+            bool IsMenuActive();
+            bool KeyDownUpdateMenus(Types::VirtualKeys key);
+            bool KeyUpUpdateMenus(Types::VirtualKeys key);
+            void UpdateMenus(unsigned long long now);
 
-            static std::list<GUI::Menu*> createdMenus;
+            std::list<GUI::Menu*> createdMenus;
+
+        private:
+            GameClient &gameClient;
         };
     }
 }

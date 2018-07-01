@@ -19,9 +19,6 @@
     <Filter Include="Gothic\Types">
       <UniqueIdentifier>{78ea0db8-b79f-4948-b053-5a963975a9cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controls">
-      <UniqueIdentifier>{f45df1b6-3ede-4595-b6f1-7540ca7df5bb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GUI">
       <UniqueIdentifier>{435b7f02-e668-4809-afbb-73bfb790c34b}</UniqueIdentifier>
     </Filter>
@@ -52,6 +49,9 @@
     <Filter Include="Shared\Types\Messages">
       <UniqueIdentifier>{f2b0be59-f255-414f-bb53-4693856693c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Types">
+      <UniqueIdentifier>{c7ea0e8e-83ba-416b-b172-1caa526a591a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main.cpp" />
@@ -78,9 +78,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Gothic\Types\zVEC3.cpp">
       <Filter>Gothic\Types</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Controls\keyHoldHelper.cpp">
-      <Filter>Controls</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GUI\view.cpp">
       <Filter>GUI</Filter>
@@ -121,14 +118,8 @@
     <ClCompile Include="..\..\Systems\menuSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Controls\inputHandler.cpp">
-      <Filter>Controls</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Shared\Components\gameTime.cpp">
       <Filter>Shared\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Controls\keyDownRepeatHelper.cpp">
-      <Filter>Controls</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Systems\windowSystem.cpp">
       <Filter>Systems</Filter>
@@ -144,6 +135,18 @@
     </ClCompile>
     <ClCompile Include="..\..\gameClient.cpp" />
     <ClCompile Include="..\..\Systems\networkSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Systems\loginSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Systems\inputSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Systems\inputKeyDownRepeatSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Systems\inputKeyCombSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -256,9 +259,6 @@
     <ClInclude Include="..\..\Gothic\Objects\oCWorldTimer.hpp">
       <Filter>Gothic\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Controls\keyHoldHelper.hpp">
-      <Filter>Controls</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GUI\view.hpp">
       <Filter>GUI</Filter>
     </ClInclude>
@@ -298,17 +298,8 @@
     <ClInclude Include="..\..\Systems\menuSystem.hpp">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Controls\inputHandler.hpp">
-      <Filter>Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Controls\virtualKeys.hpp">
-      <Filter>Controls</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Shared\Components\gameTime.hpp">
       <Filter>Shared\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Controls\keyDownRepeatHelper.hpp">
-      <Filter>Controls</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Systems\windowSystem.hpp">
       <Filter>Systems</Filter>
@@ -332,6 +323,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Shared\Types\Messages\networkSystemMessages.hpp">
       <Filter>Shared\Types\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Systems\loginSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Systems\inputSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Types\virtualKeys.hpp">
+      <Filter>Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Systems\inputKeyDownRepeatSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Systems\inputKeyCombSystem.hpp">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

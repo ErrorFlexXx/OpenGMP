@@ -1,13 +1,16 @@
 #include "ogmpMainMenu.hpp"
+#include "../gameClient.hpp"
 #include "../GUI/menuButton.hpp"
 #include "../Gothic/cGameManager.hpp"
 #include "../Systems/menuSystem.hpp"
 
+using namespace OpenGMP;
 using namespace OpenGMP::Menus;
 using namespace OpenGMP::Systems;
 
-OGMPMainMenu::OGMPMainMenu()
-    : ingame(false)
+OGMPMainMenu::OGMPMainMenu(GameClient &gameClient)
+    : MainMenu(gameClient)
+    , ingame(false)
 {
     gameManager = CGameManager::GetInstance();
 }
@@ -20,7 +23,7 @@ void OGMPMainMenu::OnCreate()
     const int dist = 38;
 
     btnLogin = AddButton("Anmelden", "In einen bestehenden Account einloggen.", offset + dist * 0, nullptr);
-    btnRegister = AddButton("Registrieren", "Einen neuen Account erstellen.", offset + dist * 1, []() { MenuSystem::OpenRegisterMenu(); });
+    btnRegister = AddButton("Registrieren", "Einen neuen Account erstellen.", offset + dist * 1, [=]() { gameClient.menuSystem.OpenRegisterMenu(); });
     btnQuit = AddButton("Beenden", "Beendet das Spiel. Wechsel zum Desktop.", offset + dist * 3, [=]() { gameManager->ExitGame(); });
 }
 

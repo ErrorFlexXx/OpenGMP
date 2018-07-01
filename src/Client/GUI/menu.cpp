@@ -1,12 +1,16 @@
 #include "menu.hpp"
-#include <Client/Controls/inputHandler.hpp>
+#include "../gameClient.hpp"
+#include "../Systems/inputSystem.hpp"
 
+using namespace OpenGMP;
 using namespace OpenGMP::GUI;
+using namespace OpenGMP::Systems;
 
 std::list<Menu*> Menu::activeMenus;
 
-Menu::Menu()
-    : opened(false)
+Menu::Menu(GameClient &gameClient)
+    : gameClient(gameClient)
+    , opened(false)
 {}
 
 bool Menu::Opened()
@@ -19,7 +23,7 @@ void Menu::Open()
     if (opened)
         activeMenus.remove(this);
     activeMenus.push_front(this);
-    InputHandler::keyDownReceipient = [=](VirtualKeys key) { this->KeyDown(key); };
+    gameClient.inputSystem.keyDownReceipient = [=](Types::VirtualKeys key) { this->KeyDown(key); };
     opened = true;
 }
 
@@ -28,15 +32,15 @@ void Menu::Close()
     if (opened)
     {
         activeMenus.remove(this);
-        InputHandler::keyDownReceipient = nullptr;
+        gameClient.inputSystem.keyDownReceipient = nullptr;
         opened = false;
     }
 }
 
-void Menu::KeyDown(OpenGMP::VirtualKeys key)
+void Menu::KeyDown(Types::VirtualKeys key)
 {}
 
-void Menu::KeyUp(OpenGMP::VirtualKeys key)
+void Menu::KeyUp(Types::VirtualKeys key)
 {}
 
 void Menu::Update(unsigned long long now)

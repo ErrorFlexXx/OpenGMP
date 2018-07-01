@@ -3,7 +3,7 @@
 #include <map>
 #include <vector>
 #include <string>
-#include "../Controls/virtualKeys.hpp"
+#include "../Types/virtualKeys.hpp"
 
 namespace OpenGMP
 {
@@ -18,7 +18,7 @@ namespace OpenGMP
         class InputReceiver
         {
         public:
-            virtual void KeyPressed(VirutalKeys key) = 0;
+            virtual void KeyPressed(Types::VirutalKeys key) = 0;
         };
 
         class View

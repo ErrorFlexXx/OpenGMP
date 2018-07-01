@@ -9,31 +9,26 @@
 
 namespace OpenGMP
 {
+    class GameClient;
+
     namespace Systems
     {
         class NetworkSystem
         {
         public:
-            NetworkSystem(); //dev std constructor
-            NetworkSystem(const std::string &hostname, unsigned short port);
+            NetworkSystem(GameClient &gameClient); //dev std constructor
+            NetworkSystem(GameClient &gameClient, const std::string &hostname, unsigned short port);
 
-            /* Starts a network thread, which will connect to a server */
             bool Startup();
 
-            /* Signals the network thread to quit */
             void Shutdown();
 
-            /* Called from GameLoop */
-            bool Update();
-
-            /* Started in a separate thread */
-            void NetworkLoop();
-
-            /* Called from network thread */
+            void Update();
+            
             void StartupFailed();
             
         private:
-            static bool runNetwork;
+            GameClient &gameClient;
             static bool started;
             static char public_key[];
             RakNet::RakPeerInterface *peerInterface;    //!< RakNet PeerInterface object.

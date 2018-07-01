@@ -1,36 +1,39 @@
 #pragma once
 
-#include "virtualKeys.hpp"
+#include "../Types/virtualKeys.hpp"
 #include <list>
 #include <functional>
 
 namespace OpenGMP
 {
-    namespace Controls
+    class GameClient;
+
+    namespace Systems
     {
         struct ActionKeyCombinationBinding
         {
             ActionKeyCombinationBinding(
-                const std::list<VirtualKeys> &keyCombination,
+                const std::list<Types::VirtualKeys> &keyCombination,
                 const std::function<void()> &action)
                 : keyCombination(keyCombination)
                 , action(action) {}
 
-            std::list<VirtualKeys> keyCombination;
+            std::list<Types::VirtualKeys> keyCombination;
             std::function<void()> action;
         };
 
-        class KeyHoldHelper
+        class InputKeyCombSystem
         {
         public:
-            KeyHoldHelper(int holdTime = 600, int rate = 150);
+            InputKeyCombSystem(GameClient &gameClient, int holdTime = 600, int rate = 150);
 
             int holdTime;
             int rate;
-            void Add(const std::list<VirtualKeys> &keyCombination, const std::function<void()> &action);
+            void Add(const std::list<Types::VirtualKeys> &keyCombination, const std::function<void()> &action);
             void Update(unsigned long long now);
 
         private:
+            GameClient &gameClient;
             std::list <ActionKeyCombinationBinding*> actionKeyCombinationBindings;
             unsigned long long nextTime;
             ActionKeyCombinationBinding *current;

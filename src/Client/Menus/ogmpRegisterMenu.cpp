@@ -1,13 +1,19 @@
 #include "ogmpRegisterMenu.hpp"
+#include "../gameClient.hpp"
 #include "../GUI/menuButton.hpp"
 #include "../GUI/menuTextBox.hpp"
 #include "../Systems/menuSystem.hpp"
 
+using namespace OpenGMP;
 using namespace OpenGMP::Menus;
 using namespace OpenGMP::GUI;
 
 const std::string btnShowPasswordTextShow = "Zeige Passwort";
 const std::string btnShowPasswordTextHide = "Verberge Passwort";
+
+OGMPRegisterMenu::OGMPRegisterMenu(GameClient &gameClient)
+    : MainMenu(gameClient)
+{}
 
 void OGMPRegisterMenu::OnCreate()
 {
@@ -19,7 +25,7 @@ void OGMPRegisterMenu::OnCreate()
     txtPassword = AddTextBox("Passwort", "Passwort des neuen Benutzers.", offset + dist * 1, 280, nullptr, true);
     btnShowPassword = AddButton(btnShowPasswordTextShow, "Schaltet die Klartext-Passwortanzeige um.", offset + dist * 2, [=]() { this->ToggleShowPassword(); });
     btnCreate = AddButton("Registrieren", "Erstellt einen neuen Benutzer.", offset + dist * 4, [=]() { this->Register(); });
-    btnBack = AddButton("Zurück", "Zum Hauptmenü zurückkehren.", offset + dist * 5, []() {Systems::MenuSystem::OpenMainMenu(); });
+    btnBack = AddButton("Zurück", "Zum Hauptmenü zurückkehren.", offset + dist * 5, [=]() {gameClient.menuSystem.OpenMainMenu(); });
 }
 
 void OGMPRegisterMenu::Open()

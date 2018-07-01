@@ -7,16 +7,23 @@ using namespace OpenGMP;
 using namespace OpenGMP::Hooks;
 using namespace OpenGMP::Systems;
 
-bool GameClient::inited = false;
 HINSTANCE GameClient::dllInstance = nullptr;
-NetworkSystem GameClient::networkSystem;
+
+GameClient::GameClient()
+    : inited(false)
+    , networkSystem(*this)
+    , loginSystem(*this)
+    , inputSystem(*this)
+    , menuSystem(*this)
+    , hookGame(*this)
+{}
 
 void GameClient::Startup(HINSTANCE inst)
 {
     if (!inited) //If no instance created yet
     {
         OtherHooks::Hook(); //Controls, SpawnRange, Camera, etc...
-        HGame::GetInstance()->DoHook(); //Game Loops
+        hookGame.Startup(); //Hook Game Loops (Menu & Ingame)
         inited = true;
         dllInstance = inst;
     }

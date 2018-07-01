@@ -6,27 +6,25 @@
 
 namespace OpenGMP
 {
+    class GameClient;
+
     namespace Hooks
     {
         class HGame
         {
         public:
-            static HGame *GetInstance();
-            void DoHook();
-            void UndoHook();
+            HGame(GameClient &gameClient);
+            void Startup();
+            void Shutdown();
 
+            static HGame *instance; //!< Instance to get the object from (hooked) non member function.
         private:
             /**
-             * @brief private contructor for singleton instance creation.
-             */
-            HGame();
-
-            /**
-            * @brief private copy contructor -- copy forbidden for singleton.
+            * @brief private copy contructor -- copy forbidden.
             */
             HGame(HGame &cpy);
 
-            static HGame *instance; //!< Singleton instance of HGame.
+            GameClient &gameClient;
             Hook m_hookOutgame;     //!< Outgame hook (menus).
             Hook m_hookIngame;      //!< Outgame hook (game rendering).
             static bool outgameStarted; //!< Flag to create initial outgame
@@ -47,7 +45,7 @@ namespace OpenGMP
             /**
              * @brief StartOutgame - Does setup tasks to create outgame resources.
              */
-            static void StartOutgame();
+            void StartOutgame();
         };
     }
 }

@@ -3,6 +3,7 @@
 #define _WINSOCKAPI_ //Stop windows.h from including winsock.h (colliding with RakNet)
 #include <windows.h>
 #include "Hooks/hGame.hpp"
+#include "Objects/clientClient.hpp"
 #include "Systems/networkSystem.hpp"
 #include "Systems/loginSystem.hpp"
 #include "Systems/inputSystem.hpp"
@@ -18,6 +19,7 @@ namespace OpenGMP
         void Stop();     //!< Stops the OpenGMP instance (do cleanup..)
 
         static HINSTANCE dllInstance;
+        Objects::ClientClient client;
         Systems::NetworkSystem networkSystem;
         Systems::LoginSystem loginSystem;
         Systems::InputSystem inputSystem;

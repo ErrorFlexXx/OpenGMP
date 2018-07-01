@@ -80,3 +80,8 @@ void MenuTextBox::SetPasswordText(bool value)
 {
     tb.SetPasswordText(value);
 }
+
+std::string MenuTextBox::GetText()
+{
+    return tb.Input();
+}

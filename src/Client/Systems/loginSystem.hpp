@@ -11,6 +11,11 @@ namespace OpenGMP
 {
     class GameClient;
 
+    namespace Components
+    {
+        class AuthData;
+    }
+
     namespace Systems
     {
         class LoginSystem
@@ -20,7 +25,14 @@ namespace OpenGMP
             
             void Process(RakNet::Packet *packet);
 
+            void SendRegister(const Components::AuthData &authData);
+
+            void GetMac(Components::AuthData &authData);
+
+            void LoginSystem::GetHDDSerial(Components::AuthData &authData);
+
         private:
+
             GameClient &gameClient;
         };
     }

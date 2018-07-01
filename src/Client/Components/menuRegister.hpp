@@ -21,6 +21,8 @@ namespace OpenGMP
             virtual void OnCreate() override;
             virtual void Open() override;
             void Register();
+            void DisableRegisterButton();
+            void EnableRegisterButton();
             void ToggleShowPassword();
 
         private:

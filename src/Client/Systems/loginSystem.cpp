@@ -1,13 +1,16 @@
 #include "loginSystem.hpp"
 #include "../gameClient.hpp"
+#include <Shared/Components/authData.hpp>
 #include <Shared/Types/Messages/networkSystemMessages.hpp>
 #include <Shared/Types/Messages/loginSystemMessages.hpp>
 #include <iostream>
 #include <BitStream.h>
 #include <MessageIdentifiers.h>
+#include <iphlpapi.h>
 
 using namespace RakNet;
 using namespace OpenGMP;
+using namespace OpenGMP::Components;
 using namespace OpenGMP::Systems;
 using namespace OpenGMP::Types;
 
@@ -56,7 +59,8 @@ void LoginSystem::Process(RakNet::Packet *packet)
         {
         case LoginSystemMessages::AUTH:
         {
-            std::cout << "Got packet Login::Auth" << std::endl;
+            GetMac(gameClient.client.authData);
+            GetHDDSerial(gameClient.client.authData);
             gameClient.menuSystem.menuMain.EnableNetworkElements();
             break;
         }
@@ -67,4 +71,56 @@ void LoginSystem::Process(RakNet::Packet *packet)
         }
         }
     }
+}
+
+void LoginSystem::SendRegister(const Components::AuthData &authData)
+{
+    BitStream bsOut;
+    bsOut.Write(NetworkSystemMessages::LoginSystem);
+    bsOut.Write(LoginSystemMessages::REGISTER);
+    authData.WriteStream(bsOut);
+    gameClient.networkSystem.peerInterface->Send(
+        &bsOut, LOW_PRIORITY, RELIABLE, LoginSystemOrderingChannel, gameClient.networkSystem.serverAddress, false);
+    gameClient.menuSystem.menuRegister.DisableRegisterButton();
+}
+
+void LoginSystem::GetMac(Components::AuthData &authData)
+{
+    IP_ADAPTER_INFO AdapterInfo[16];
+    DWORD bufLen = sizeof(AdapterInfo);
+    DWORD dwStatus = GetAdaptersInfo(AdapterInfo, &bufLen);
+    
+    if (dwStatus == ERROR_SUCCESS)
+    {
+        PIP_ADAPTER_INFO pAdapterInfo = AdapterInfo; //Take first adapter
+        while (
+            pAdapterInfo && //As long as there is an adapter
+            pAdapterInfo->Address[0] == 0 && //and the current adapter
+            pAdapterInfo->Address[0] == 0 && //has a
+            pAdapterInfo->Address[0] == 0 && //totally zero
+            pAdapterInfo->Address[0] == 0 && //mac
+            pAdapterInfo->Address[0] == 0)   //address
+        {
+            pAdapterInfo = pAdapterInfo->Next; //Take next adapter
+        }
+
+        if (pAdapterInfo) //If we found an adapter
+        {
+            const int BufSize = 18;
+            char mac[BufSize] = {};
+            sprintf_s(mac, BufSize, "%02X-%02X-%02X-%02X-%02X-%02X", //format the mac address
+                pAdapterInfo->Address[0],
+                pAdapterInfo->Address[1],
+                pAdapterInfo->Address[2],
+                pAdapterInfo->Address[3],
+                pAdapterInfo->Address[4],
+                pAdapterInfo->Address[5]);
+            authData.macAddress = mac; //and attach it to authData component.
+        }
+    }
+}
+
+void LoginSystem::GetHDDSerial(Components::AuthData &authData)
+{
+    GetVolumeInformation("C:\\", NULL, 0, &authData.hddSerial, NULL, NULL, NULL, 0);
 }

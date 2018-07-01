@@ -28,6 +28,7 @@ namespace OpenGMP
             std::function<void(unsigned long long)> Update;
             bool GetPasswordText();
             void SetPasswordText(bool value);
+            std::string GetText();
         
         private:
             virtual void KeyPressed(Types::VirtualKeys key) override;

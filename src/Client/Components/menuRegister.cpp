@@ -42,7 +42,9 @@ void MenuRegister::Open()
 
 void MenuRegister::Register()
 {
-    ;
+    gameClient.client.authData.loginname = txtUsername->GetText();
+    gameClient.client.authData.password = txtPassword->GetText();
+    gameClient.loginSystem.SendRegister(gameClient.client.authData);
 }
 
 void MenuRegister::ToggleShowPassword()
@@ -53,4 +55,14 @@ void MenuRegister::ToggleShowPassword()
         btnShowPassword->Text(btnShowPasswordTextShow);
     else
         btnShowPassword->Text(btnShowPasswordTextHide);
+}
+
+void MenuRegister::DisableRegisterButton()
+{
+    btnCreate->Enabled(false);
+}
+
+void MenuRegister::EnableRegisterButton()
+{
+    btnCreate->Enabled(true);
 }

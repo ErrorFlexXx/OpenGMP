@@ -40,6 +40,13 @@ void LoginSystem::Process(Packet *packet)
                 std::string ip = packet->systemAddress.ToString(false);
                 Id id;
                 bool created;
+                int connectedClients = gameServer.clientContainer.Count();
+
+                if(connectedClients >= gameServer.clientContainer.capacity)
+                {
+                    SendServerFull(packet);
+                    CloseConnection(packet);
+                }
 
                 if(IsBanned(ip))
                 {
@@ -49,6 +56,7 @@ void LoginSystem::Process(Packet *packet)
                 ServerClient &client = gameServer.clientContainer.CreateEntity(created, id, guid);
                 client.authData.rakNetGuid = packet->guid;
                 LogInfo() << "Client connected. IP: " << ip << ", ID: " << id.id << ", added to clientContainer: " << (created ? "true" : "false") << ".";
+                SendAuth(packet);
                 break;
             }
             case ID_CONNECTION_LOST:
@@ -77,7 +85,7 @@ void LoginSystem::Process(Packet *packet)
 
         switch(command)
         {
-            case LoginSystemMessages::LOGIN:
+            case LoginSystemMessages::AUTH:
             {
 
                 break;
@@ -94,7 +102,26 @@ void LoginSystem::Process(Packet *packet)
 void LoginSystem::SendBanned(Packet *packet)
 {
     BitStream bsOut;
+    bsOut.Write(NetworkSystemMessages::LoginSystem);
     bsOut.Write(LoginSystemMessages::BANNED);
+    gameServer.networkSystem.peerInterface->Send(
+                &bsOut, LOW_PRIORITY, RELIABLE, LoginSystemOrderingChannel, packet->systemAddress, false);
+}
+
+void LoginSystem::SendServerFull(Packet *packet)
+{
+    BitStream bsOut;
+    bsOut.Write(NetworkSystemMessages::LoginSystem);
+    bsOut.Write(LoginSystemMessages::SERVERFULL);
+    gameServer.networkSystem.peerInterface->Send(
+                &bsOut, LOW_PRIORITY, RELIABLE, LoginSystemOrderingChannel, packet->systemAddress, false);
+}
+
+void LoginSystem::SendAuth(Packet *packet)
+{
+    BitStream bsOut;
+    bsOut.Write(NetworkSystemMessages::LoginSystem);
+    bsOut.Write(LoginSystemMessages::AUTH);
     gameServer.networkSystem.peerInterface->Send(
                 &bsOut, LOW_PRIORITY, RELIABLE, LoginSystemOrderingChannel, packet->systemAddress, false);
 }

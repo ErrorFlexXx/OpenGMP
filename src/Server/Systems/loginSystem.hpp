@@ -27,6 +27,10 @@ namespace OpenGMP
 
             void SendBanned(RakNet::Packet *packet);
 
+            void SendServerFull(RakNet::Packet *packet);
+
+            void SendAuth(RakNet::Packet *packet);
+
             void CloseConnection(RakNet::Packet *packet);
 
             bool IsBanned(const std::string &ip);

@@ -126,14 +126,9 @@ bool NetworkSystem::Update()
         {
             switch(packet->data[0])
             {
-                case ID_NEW_INCOMING_CONNECTION:
-                case ID_CONNECTION_LOST:
-                {
-                    gameServer.loginSystem.Process(packet);
-                    break;
-                }
-
                 case NetworkSystemMessages::LoginSystem:
+                case ID_NEW_INCOMING_CONNECTION:
+                case ID_CONNECTION_LOST:                
                 {
                     gameServer.loginSystem.Process(packet);
                     break;

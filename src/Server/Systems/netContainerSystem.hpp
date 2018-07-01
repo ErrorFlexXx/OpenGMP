@@ -26,6 +26,9 @@ namespace OpenGMP
             T &Get(const RakNet::RakNetGUID &rakId);
             int Remove(const Components::Id &id);
             int Remove(const RakNet::RakNetGUID &rakId);
+            int Count();
+
+            size_t capacity;
 
         private:
             /**

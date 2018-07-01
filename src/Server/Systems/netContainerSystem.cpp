@@ -9,6 +9,7 @@ using namespace RakNet;
 
 template <class T>
 NetContainerSystem<T>::NetContainerSystem(const size_t &capacity)
+    : capacity(capacity)
 {
     currentIndex.id = 0;
     container.reserve(capacity); //Reserve memory block
@@ -60,6 +61,12 @@ int NetContainerSystem<T>::Remove(const RakNet::RakNetGUID &rakId)
 {
     Id id = rakIdMap[rakId.ToUint32(rakId)]; //Lookup id
     return Remove(id);
+}
+
+template <class T>
+int NetContainerSystem<T>::Count()
+{
+    return currentIndex.id - freeGapIds.size();
 }
 
 template <class T>

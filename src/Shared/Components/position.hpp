@@ -15,7 +15,7 @@ namespace OpenGMP
             float angle;
 
             void WriteStream(RakNet::BitStream &stream) const;
-            void ReadStream(RakNet::BitStream &stream);
+            bool ReadStream(RakNet::BitStream &stream);
         };
     }
 }

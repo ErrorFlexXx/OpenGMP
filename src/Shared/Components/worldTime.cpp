@@ -7,7 +7,11 @@ void WorldTime::WriteStream(RakNet::BitStream &stream) const
     stream.Write(totalSeconds);
 }
 
-void WorldTime::ReadStream(RakNet::BitStream &stream)
+bool WorldTime::ReadStream(RakNet::BitStream &stream)
 {
-    stream.Read(totalSeconds);
+    bool success;
+
+    success = stream.Read(totalSeconds);
+
+    return success;
 }

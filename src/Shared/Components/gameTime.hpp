@@ -25,7 +25,7 @@ namespace OpenGMP
             static unsigned long long GetTicks();
 
             void WriteStream(RakNet::BitStream &stream) const;
-            void ReadStream(RakNet::BitStream &stream);
+            bool ReadStream(RakNet::BitStream &stream);
 
             static unsigned long long ticks;    //!< Current ticks.
 

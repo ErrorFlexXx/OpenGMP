@@ -10,10 +10,14 @@ void PlayerSkills::WriteStream(RakNet::BitStream &stream) const
     stream.Write(skill_cbow);
 }
 
-void PlayerSkills::ReadStream(RakNet::BitStream &stream)
+bool PlayerSkills::ReadStream(RakNet::BitStream &stream)
 {
-    stream.Read(skill_1h);
-    stream.Read(skill_2h);
-    stream.Read(skill_bow);
-    stream.Read(skill_cbow);
+    bool success;
+
+                success = stream.Read(skill_1h);
+    if(success) success = stream.Read(skill_2h);
+    if(success) success = stream.Read(skill_bow);
+    if(success) success = stream.Read(skill_cbow);
+
+    return success;
 }

@@ -19,7 +19,7 @@ namespace OpenGMP
             RakNet::RakNetGUID rakNetGuid;
 
             void WriteStream(RakNet::BitStream &stream) const;
-            void ReadStream(RakNet::BitStream &stream);
+            bool ReadStream(RakNet::BitStream &stream);
 
             //Getter and setter for script interface:
             std::string GetLoginname() const;

@@ -13,13 +13,16 @@ void IItem::WriteStream(BitStream &stream) const
     stream.Write(amount);
 }
 
-void IItem::ReadStream(BitStream &stream)
+bool IItem::ReadStream(BitStream &stream)
 {
     RakString rakInstance;
+    bool success;
 
-    id.ReadStream(stream);
-    stream.Read(rakInstance);
-    stream.Read(amount);
+                success = id.ReadStream(stream);
+    if(success) success = stream.Read(rakInstance);
+    if(success) success = stream.Read(amount);
 
-    instance = rakInstance;
+    if(success)
+        instance = rakInstance;
+    return success;
 }

@@ -17,7 +17,11 @@ void Version::WriteStream(BitStream &stream) const
     stream.Write(version);
 }
 
-void Version::ReadStream(BitStream &stream)
+bool Version::ReadStream(BitStream &stream)
 {
-    stream.Read(version);
+    bool success;
+
+    success = stream.Read(version);
+
+    return success;
 }

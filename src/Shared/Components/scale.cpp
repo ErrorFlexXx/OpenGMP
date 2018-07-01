@@ -9,9 +9,13 @@ void Scale::WriteStream(RakNet::BitStream &stream) const
     stream.Write(z);
 }
 
-void Scale::ReadStream(RakNet::BitStream &stream)
+bool Scale::ReadStream(RakNet::BitStream &stream)
 {
-    stream.Read(x);
-    stream.Read(y);
-    stream.Read(z);
+    bool success;
+
+                success = stream.Read(x);
+    if(success) success = stream.Read(y);
+    if(success) success = stream.Read(z);
+
+    return success;
 }

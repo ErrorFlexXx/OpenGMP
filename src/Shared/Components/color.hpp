@@ -17,7 +17,7 @@ namespace OpenGMP
             Color(const unsigned char &r, const unsigned char &g, const unsigned char &b, const unsigned char &a);
 
             void WriteStream(RakNet::BitStream &stream) const;
-            void ReadStream(RakNet::BitStream &stream);
+            bool ReadStream(RakNet::BitStream &stream);
 
             unsigned char r;
             unsigned char g;

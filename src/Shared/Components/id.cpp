@@ -11,7 +11,8 @@ void Id::WriteStream(RakNet::BitStream &stream) const
     stream.Write(id);
 }
 
-void Id::ReadStream(RakNet::BitStream &stream)
+bool Id::ReadStream(RakNet::BitStream &stream)
 {
-    stream.Read(id);
+    bool success = stream.Read(id);
+    return success;
 }

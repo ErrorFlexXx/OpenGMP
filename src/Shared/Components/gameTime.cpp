@@ -39,7 +39,11 @@ void GameTime::WriteStream(RakNet::BitStream &stream) const
     stream.Write(ticks);
 }
 
-void GameTime::ReadStream(RakNet::BitStream &stream)
+bool GameTime::ReadStream(RakNet::BitStream &stream)
 {
-    stream.Read(ticks);
+    bool success;
+
+    success = stream.Read(ticks);
+
+    return success;
 }

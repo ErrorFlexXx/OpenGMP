@@ -17,20 +17,25 @@ void AuthData::WriteStream(BitStream &stream) const
     stream.Write(rakMacAddress);
 }
 
-void AuthData::ReadStream(BitStream &stream)
+bool AuthData::ReadStream(BitStream &stream)
 {
     RakString rakLoginname;
     RakString rakPassword;
     RakString rakMacAddress;
+    bool success;
 
-    stream.Read(rakLoginname);
-    stream.Read(rakPassword);
-    stream.Read(hddSerial);
-    stream.Read(rakMacAddress);
+                success = stream.Read(rakLoginname);
+    if(success) success = stream.Read(rakPassword);
+    if(success) success = stream.Read(hddSerial);
+    if(success) success = stream.Read(rakMacAddress);
 
-    loginname = rakLoginname;
-    macAddress = rakMacAddress;
-    password = rakPassword;
+    if(success)
+    {
+        loginname = rakLoginname;
+        macAddress = rakMacAddress;
+        password = rakPassword;
+    }
+    return success;
 }
 
 std::string AuthData::GetLoginname() const

@@ -22,10 +22,14 @@ void Color::WriteStream(RakNet::BitStream &stream) const
     stream.Write(a);
 }
 
-void Color::ReadStream(RakNet::BitStream &stream)
+bool Color::ReadStream(RakNet::BitStream &stream)
 {
-    stream.Read(r);
-    stream.Read(g);
-    stream.Read(b);
-    stream.Read(a);
+    bool success;
+
+                success = stream.Read(r);
+    if(success) success = stream.Read(g);
+    if(success) success = stream.Read(b);
+    if(success) success = stream.Read(a);
+
+    return success;
 }

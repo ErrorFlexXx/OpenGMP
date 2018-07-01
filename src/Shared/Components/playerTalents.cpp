@@ -17,7 +17,11 @@ void PlayerTalents::WriteStream(RakNet::BitStream &stream) const
     stream.Write(talents);
 }
 
-void PlayerTalents::ReadStream(RakNet::BitStream &stream)
+bool PlayerTalents::ReadStream(RakNet::BitStream &stream)
 {
-    stream.Read(talents);
+    bool success;
+
+    success = stream.Read(talents);
+
+    return success;
 }

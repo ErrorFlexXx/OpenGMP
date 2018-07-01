@@ -10,10 +10,14 @@ void Position::WriteStream(RakNet::BitStream &stream) const
     stream.Write(angle);
 }
 
-void Position::ReadStream(RakNet::BitStream &stream)
+bool Position::ReadStream(RakNet::BitStream &stream)
 {
-    stream.Read(x);
-    stream.Read(y);
-    stream.Read(z);
-    stream.Read(angle);
+    bool success;
+
+                success = stream.Read(x);
+    if(success) success = stream.Read(y);
+    if(success) success = stream.Read(z);
+    if(success) success = stream.Read(angle);
+
+    return success;
 }

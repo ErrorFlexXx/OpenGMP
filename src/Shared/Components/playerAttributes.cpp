@@ -17,17 +17,21 @@ void PlayerAttributes::WriteStream(RakNet::BitStream &stream) const
     stream.Write(dexterity);
 }
 
-void PlayerAttributes::ReadStream(RakNet::BitStream &stream)
+bool PlayerAttributes::ReadStream(RakNet::BitStream &stream)
 {
-    stream.Read(level);
-    stream.Read(learn_points);
-    stream.Read(experience);
-    stream.Read(experience_next_level);
-    stream.Read(magic_level);
-    stream.Read(health);
-    stream.Read(max_health);
-    stream.Read(mana);
-    stream.Read(max_mana);
-    stream.Read(strength);
-    stream.Read(dexterity);
+    bool success;
+
+                success = stream.Read(level);
+    if(success) success = stream.Read(learn_points);
+    if(success) success = stream.Read(experience);
+    if(success) success = stream.Read(experience_next_level);
+    if(success) success = stream.Read(magic_level);
+    if(success) success = stream.Read(health);
+    if(success) success = stream.Read(max_health);
+    if(success) success = stream.Read(mana);
+    if(success) success = stream.Read(max_mana);
+    if(success) success = stream.Read(strength);
+    if(success) success = stream.Read(dexterity);
+
+    return success;
 }

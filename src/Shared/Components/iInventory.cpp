@@ -8,7 +8,8 @@ void IInventory::WriteStream(RakNet::BitStream &stream) const
 
 }
 
-void IInventory::ReadStream(RakNet::BitStream &stream)
+bool IInventory::ReadStream(RakNet::BitStream &stream)
 {
-
+    bool success = true;
+    return success;
 }

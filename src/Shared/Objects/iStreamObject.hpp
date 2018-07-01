@@ -9,6 +9,6 @@
 
 class IStreamObject
 {
-     void WriteStream(RakNet::BitStream &stream) {}
-     void ReadStream(RakNet::BitStream &stream) {}
+//     void WriteStream(RakNet::BitStream &stream) {}
+//     bool ReadStream(RakNet::BitStream &stream) {}
 };

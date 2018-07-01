@@ -14,7 +14,7 @@ namespace OpenGMP
             int id;
 
             void WriteStream(RakNet::BitStream &stream) const;
-            void ReadStream(RakNet::BitStream &stream);
+            bool ReadStream(RakNet::BitStream &stream);
         };
     }
 }

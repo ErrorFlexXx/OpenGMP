@@ -16,17 +16,22 @@ void PlayerVisual::WriteStream(BitStream &stream) const
     stream.Write(fatness);
 }
 
-void PlayerVisual::ReadStream(BitStream &stream)
+bool PlayerVisual::ReadStream(BitStream &stream)
 {
     RakString rakBodyModel;
     RakString rakHeadModel;
+    bool success;
 
-    stream.Read(rakBodyModel);
-    stream.Read(bodyTextureId);
-    stream.Read(rakHeadModel);
-    stream.Read(headTextureId);
-    stream.Read(fatness);
+                success = stream.Read(rakBodyModel);
+    if(success) success = stream.Read(bodyTextureId);
+    if(success) success = stream.Read(rakHeadModel);
+    if(success) success = stream.Read(headTextureId);
+    if(success) success = stream.Read(fatness);
 
-    bodyModel = rakBodyModel;
-    headModel = rakHeadModel;
+    if(success)
+    {
+        bodyModel = rakBodyModel;
+        headModel = rakHeadModel;
+    }
+    return success;
 }

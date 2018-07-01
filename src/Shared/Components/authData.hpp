@@ -26,8 +26,8 @@ namespace OpenGMP
             void SetLoginname(const std::string &value);
             std::string GetPassword() const;
             void SetPassword(const std::string &value);
-            unsigned long GetHddSerial() const;
-            void SetHddSerial(unsigned long value);
+            uint32_t GetHddSerial() const;
+            void SetHddSerial(uint32_t value);
             std::string GetMacAddress() const;
             void SetMacAddress(const std::string &value);
             RakNet::RakNetGUID GetRakNetGuid() const;

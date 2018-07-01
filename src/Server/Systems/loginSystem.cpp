@@ -8,6 +8,7 @@
 #include <utils/logger.h>
 #include <BitStream.h>
 #include <MessageIdentifiers.h>
+#include <RakSleep.h>
 
 using namespace RakNet;
 using namespace OpenGMP::Components;
@@ -87,14 +88,9 @@ void LoginSystem::Process(Packet *packet)
         {
             case LoginSystemMessages::REGISTER:
             {
-                LogInfo() << "REGISTER1";
                 bool success;
                 ServerClient &client = gameServer.clientContainer.Get(packet->guid, success);
-                LogInfo() << "clientContainer RakNet Get result: " << success;
-                LogInfo() << "REGISTER2";
                 client.authData.ReadStream(bsIn);
-                LogInfo() << "LoginSystem Register receipt for Client ID: " << client.id.id << ".";
-                ScriptSystem::InvokeScriptFunction("init");
                 ScriptSystem::InvokeScriptFunctionParamServerClient("Register", client);
                 break;
             }

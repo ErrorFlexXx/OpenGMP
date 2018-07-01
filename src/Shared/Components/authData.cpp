@@ -19,26 +19,18 @@ void AuthData::WriteStream(BitStream &stream) const
 
 void AuthData::ReadStream(BitStream &stream)
 {
-    LogInfo() << stream.GetData();
     RakString rakLoginname;
     RakString rakPassword;
     RakString rakMacAddress;
-    LogInfo() << "Hey1";
+
     stream.Read(rakLoginname);
-    LogInfo() << "Hey2";
     stream.Read(rakPassword);
-    LogInfo() << "Hey3";
     stream.Read(hddSerial);
-    LogInfo() << "Hey4";
     stream.Read(rakMacAddress);
-    LogInfo() << "Hey5";
 
     loginname = rakLoginname;
-    LogInfo() << "Hey6";
     macAddress = rakMacAddress;
-    LogInfo() << "Hey7";
     password = rakPassword;
-    LogInfo() << "Hey8";
 }
 
 std::string AuthData::GetLoginname() const
@@ -61,12 +53,12 @@ void AuthData::SetPassword(const std::string &value)
     password = value;
 }
 
-unsigned long AuthData::GetHddSerial() const
+uint32_t AuthData::GetHddSerial() const
 {
     return hddSerial;
 }
 
-void AuthData::SetHddSerial(unsigned long value)
+void AuthData::SetHddSerial(uint32_t value)
 {
     hddSerial = value;
 }

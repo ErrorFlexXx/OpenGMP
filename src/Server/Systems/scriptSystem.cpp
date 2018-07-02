@@ -15,7 +15,7 @@
 #include <Shared/Components/id.hpp>
 #include "../gameServer.hpp"
 #include "../Systems/loginSystem.hpp"
-#include "../Systems/mySqlSystem.hpp"
+#include "../Systems/mysqlSystem.hpp"
 
 using namespace std;
 using namespace OpenGMP;

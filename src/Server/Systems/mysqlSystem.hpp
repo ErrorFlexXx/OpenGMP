@@ -9,10 +9,10 @@ namespace OpenGMP
 {
     namespace Systems
     {
-        class MySqlSystem
+        class MysqlSystem
         {
         public:
-            MySqlSystem();
+            MysqlSystem();
             void TestFunctionVariadic(cpgf::GMetaVariadicParam *params);
         };
     }

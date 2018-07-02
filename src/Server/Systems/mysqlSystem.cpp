@@ -1,4 +1,4 @@
-#include "mySqlSystem.hpp"
+#include "mysqlSystem.hpp"
 #include "utils/logger.h"
 #include <cpgf/metatraits/gmetaconverter_string.h>
 #include <cpgf/gmetadefine.h>
@@ -10,10 +10,10 @@
 
 using namespace OpenGMP::Systems;
 
-MySqlSystem::MySqlSystem()
+MysqlSystem::MysqlSystem()
 {}
 
-void MySqlSystem::TestFunctionVariadic(cpgf::GMetaVariadicParam *params)
+void MysqlSystem::TestFunctionVariadic(cpgf::GMetaVariadicParam *params)
 {
     LogInfo() << "TestFunctionVariadic!";
     for(size_t i = 0; i < params->paramCount; ++i)

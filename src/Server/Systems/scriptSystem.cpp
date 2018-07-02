@@ -15,6 +15,7 @@
 #include <Shared/Components/id.hpp>
 #include "../gameServer.hpp"
 #include "../Systems/loginSystem.hpp"
+#include "../Systems/mySqlSystem.hpp"
 
 using namespace std;
 using namespace OpenGMP;
@@ -175,4 +176,9 @@ G_AUTO_RUN_BEFORE_MAIN()
             ;
     ScriptSystem::RegisterClass(std::string("ServerClient"));
 
+    GDefineMetaClass<MySqlSystem>
+            ::define("method::MySqlSystem")
+            ._method("TestFunctionVariadic", &MySqlSystem::TestFunctionVariadic)
+            ;
+    ScriptSystem::RegisterClass(std::string("MySqlSystem"));
 }

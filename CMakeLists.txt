@@ -32,6 +32,19 @@ if(MSVC)
     set(USE_MSVC_RUNTIME_LIBRARY_DLL ON)
 endif()
 
+# ---------------- Doxygen documentation ------------
+
+find_package(Doxygen)
+
+if(DOXYGEN_FOUND)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+    add_custom_target(doc ALL
+        ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Doxyfile
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Generating API documentation with Doxygen" VERBATIM
+        )
+endif(DOXYGEN_FOUND)
+
 #Set library output dir
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
@@ -69,6 +82,7 @@ file(GLOB serverSources
 	"src/Server/ScriptController/*.hpp"
 	"src/Server/Utils/*.cpp"
 	"src/Server/Utils/*.hpp"
+        "src/Server/Utils/*.h"
     "src/Server/Objects/*.cpp"
     "src/Server/Objects/*.hpp"
     "src/Server/Systems/*.cpp"

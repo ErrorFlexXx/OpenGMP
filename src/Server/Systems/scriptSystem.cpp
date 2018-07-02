@@ -11,6 +11,8 @@
 //Script interface classes:
 #include "../Objects/serverClient.hpp"
 #include <Shared/Components/authData.hpp>
+#include <Shared/Components/netId.hpp>
+#include <Shared/Components/id.hpp>
 #include "../gameServer.hpp"
 #include "../Systems/loginSystem.hpp"
 
@@ -150,9 +152,20 @@ G_AUTO_RUN_BEFORE_MAIN()
             ._property("password", &AuthData::GetPassword, &AuthData::SetPassword)
             ._property("hddSerial", &AuthData::GetHddSerial, &AuthData::SetHddSerial)
             ._property("macAddress", &AuthData::GetMacAddress, &AuthData::SetMacAddress)
-            ._property("rakNetGuid", &AuthData::GetRakNetGuid, &AuthData::SetRakNetGuid)
             ;
-    ScriptSystem::RegisterClass(std::string("ServerClient"));
+    ScriptSystem::RegisterClass(std::string("AuthData"));
+
+    GDefineMetaClass<NetId>
+            ::define("method::NetId")
+            ._property("rakNetId", &NetId::GetRakNetId, &NetId::SetRakNetId)
+            ;
+    ScriptSystem::RegisterClass(std::string("NetId"));
+
+    GDefineMetaClass<Id>
+            ::define("method::Id")
+            ._property("id", &Id::GetId, &Id::SetId)
+            ;
+    ScriptSystem::RegisterClass(std::string("Id"));
 
     GDefineMetaClass<ServerClient>
             ::define("method::ServerClient")

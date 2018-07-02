@@ -1,6 +1,6 @@
 #pragma once
-
-#include "../Objects/iStreamObject.hpp"
+#include <BitStream.h>
+#include <RakNetTypes.h>
 
 namespace OpenGMP
 {
@@ -12,22 +12,20 @@ namespace OpenGMP
          */
 
         /**
-         * @brief The Id component
+         * @brief The NetId component
          * @ingroup scriptObject
          */
-        class Id : public IStreamObject
+        class NetId
         {
         public:
-            Id();
-
-            int id; //!< (available script attribute) an ID
+            RakNet::RakNetGUID rakNetId;  //!< (available script attribute) the RakNet guid
 
             void WriteStream(RakNet::BitStream &stream) const;
             bool ReadStream(RakNet::BitStream &stream);
 
             //Getter and setter for script interface:
-            int GetId() const;
-            void SetId(int value);
+            RakNet::RakNetGUID GetRakNetId() const;
+            void SetRakNetId(const RakNet::RakNetGUID &value);
         };
     }
 }

@@ -9,14 +9,22 @@ namespace OpenGMP
 {
     namespace Components
     {
+        /**
+         * @defgroup scriptObject
+         * @brief ScriptObjects Elements exposed to scripts
+         */
+
+        /**
+         * @brief The AuthData component
+         * @ingroup scriptObject
+         */
         class AuthData : public IStreamObject
         {
         public:
-            std::string loginname;
-            std::string password;
-            uint32_t hddSerial;
-            std::string macAddress;
-            RakNet::RakNetGUID rakNetGuid;
+            std::string loginname;          //!< (available script attribute) the loginname
+            std::string password;           //!< (available script attribute) the cleartext password
+            uint32_t hddSerial;             //!< (available script attribute) the hdd serial
+            std::string macAddress;         //!< (available script attribute) the mac address
 
             void WriteStream(RakNet::BitStream &stream) const;
             bool ReadStream(RakNet::BitStream &stream);
@@ -30,8 +38,6 @@ namespace OpenGMP
             void SetHddSerial(uint32_t value);
             std::string GetMacAddress() const;
             void SetMacAddress(const std::string &value);
-            RakNet::RakNetGUID GetRakNetGuid() const;
-            void SetRakNetGuid(const RakNet::RakNetGUID &value);
         };
     }
 }

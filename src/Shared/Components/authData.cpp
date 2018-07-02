@@ -77,13 +77,3 @@ void AuthData::SetMacAddress(const std::string &value)
 {
     macAddress = value;
 }
-
-RakNet::RakNetGUID AuthData::GetRakNetGuid() const
-{
-    return rakNetGuid;
-}
-
-void AuthData::SetRakNetGuid(const RakNet::RakNetGUID &value)
-{
-    rakNetGuid = value;
-}

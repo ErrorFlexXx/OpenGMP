@@ -12,14 +12,19 @@ namespace OpenGMP
     namespace Objects
     {
         /**
-         * @describe The Client class
-         *   This class covers a network client.
+         * @defgroup scriptObject
+         * @brief ScriptObjects Elements exposed to scripts
+         */
+
+        /**
+         * @brief The Client object
+         * @ingroup scriptObject
          */
         class Client : public NetIdObject
         {
         public:
-            Components::Version version;   //!< Client version
-            Components::AuthData authData; //!< Auth data of the client.
+            Components::Version version;   //!< (available script attribute) version of a client
+            Components::AuthData authData; //!< (available script attribute) auth data of a client
         };
     }
 }

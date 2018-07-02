@@ -6,6 +6,15 @@ namespace OpenGMP
 {    
     namespace Objects
     {
+        /**
+         * @defgroup scriptObject
+         * @brief ScriptObjects Elements exposed to scripts
+         */
+
+        /**
+         * @brief The ServerClient object
+         * @ingroup scriptObject
+         */
         class ServerClient : public Client
         {
         public:

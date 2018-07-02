@@ -22,9 +22,9 @@ T &NetContainerSystem<T>::CreateEntity(bool &success, Components::Id &id, const 
     Id freeId = GetFreeId();
     T &obj = container[freeId.id];
 
-    obj.guid = rakGuid;
+    obj.netId.rakNetId = rakGuid;
     obj.id = freeId;
-    rakIdMap[obj.guid.ToUint32(obj.guid)] = freeId;
+    rakIdMap[obj.netId.rakNetId.ToUint32(obj.netId.rakNetId)] = freeId;
     id = freeId;
     success = true;
     return obj;
@@ -62,7 +62,7 @@ int NetContainerSystem<T>::Remove(const Components::Id &id)
     {
         NetIdObject &obj = dynamic_cast<NetIdObject&>(container[id.id]);
         obj.id.id = -1; //Flag id as unset.
-        rakIdMap.erase(obj.guid.ToUint32(obj.guid));
+        rakIdMap.erase(obj.netId.rakNetId.ToUint32(obj.netId.rakNetId));
         freeGapIds.push_back(id);
         return true;
     }

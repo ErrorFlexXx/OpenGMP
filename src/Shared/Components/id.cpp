@@ -16,3 +16,13 @@ bool Id::ReadStream(RakNet::BitStream &stream)
     bool success = stream.Read(id);
     return success;
 }
+
+int Id::GetId() const
+{
+    return id;
+}
+
+void Id::SetId(int value)
+{
+    id = value;
+}

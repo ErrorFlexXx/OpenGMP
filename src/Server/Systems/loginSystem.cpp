@@ -55,7 +55,7 @@ void LoginSystem::Process(Packet *packet)
                     CloseConnection(packet);
                 }
                 ServerClient &client = gameServer.clientContainer.CreateEntity(created, id, guid);
-                client.authData.rakNetGuid = packet->guid;
+                client.netId.rakNetId = packet->guid;
                 LogInfo() << "Client connected. IP: " << ip << ", ID: " << id.id << ", added to clientContainer: " << (created ? "true" : "false") << ".";
                 SendAuth(packet);
                 break;

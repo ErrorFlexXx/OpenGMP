@@ -27,6 +27,7 @@ GameServer::GameServer(int gameport,
 
 GameServer::~GameServer()
 {
+    GameServer::gameServer = nullptr;
 }
 
 /**

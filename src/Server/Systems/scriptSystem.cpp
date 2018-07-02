@@ -176,9 +176,9 @@ G_AUTO_RUN_BEFORE_MAIN()
             ;
     ScriptSystem::RegisterClass(std::string("ServerClient"));
 
-    GDefineMetaClass<MySqlSystem>
-            ::define("method::MySqlSystem")
-            ._method("TestFunctionVariadic", &MySqlSystem::TestFunctionVariadic)
+    GDefineMetaClass<MysqlSystem>
+            ::define("method::MysqlSystem")
+            ._method("TestFunctionVariadic", &MysqlSystem::TestFunctionVariadic)
             ;
-    ScriptSystem::RegisterClass(std::string("MySqlSystem"));
+    ScriptSystem::RegisterClass(std::string("MysqlSystem"));
 }

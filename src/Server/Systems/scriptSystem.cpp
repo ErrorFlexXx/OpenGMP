@@ -66,7 +66,7 @@ void ScriptSystem::LoadScriptsFromDir(std::string &dir)
     }
     tinydir_close(&directory);
 
-    InvokeScriptFunction("init");
+    InvokeScriptFunction("Init");
 }
 
 bool ScriptSystem::UnloadScript(std::string &filename)

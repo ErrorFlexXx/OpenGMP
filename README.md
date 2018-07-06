@@ -35,7 +35,7 @@ Therefore it has to be compiled with a msvc microsoft compiler.
 
 To create the project, you'll first have to compile the RakNet library. Open the project `lib/Raknet/Lib/LibStatic/LibStatic.sln` and compile a release and debug build of the project.
 
-Since OpenGMP has build in encryption by default, you need to generate a keypair with the compiled server, before compiling the client.
+Since OpenGMP has built in encryption by default, you need to generate a keypair with the compiled server, before compiling the client.
 For that purpose start the server either with `-gk` or `--generate-keys` parameter to create a new public and private key.
 The public key needs to be pasted to the public_key char array in file `src/Client/Systems/networkSystem.cpp` around line 21.
 On linux operating systems there is a support script named `binFileToAsciHexInitList.sh` copied to the build directory to get a `C/C++` compatible formatted output of the key that can be  pasted in the client source.

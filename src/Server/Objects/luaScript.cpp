@@ -32,6 +32,7 @@ bool LuaScript::Load()
     m_scope = new GScopedInterface<IScriptObject>(m_binding->get()->createScriptObject("OpenGMP").toScriptObject());
 
     LoadClasses();
+    LoadGlobals();
 
     return true;
 }

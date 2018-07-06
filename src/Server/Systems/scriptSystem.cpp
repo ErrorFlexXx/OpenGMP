@@ -15,9 +15,10 @@
 #include <Shared/Components/id.hpp>
 #include "../gameServer.hpp"
 #include "../Systems/loginSystem.hpp"
-#include "../Systems/mysqlSystem.hpp"
+#include <mysql/mysql.h>
 
 using namespace std;
+using namespace cpgf;
 using namespace OpenGMP;
 using namespace OpenGMP::Components;
 using namespace OpenGMP::Objects;
@@ -26,6 +27,7 @@ using namespace OpenGMP::Systems;
 //Statics attributes
 std::list<Script*> ScriptSystem::m_registeredScripts;
 std::list<std::pair<const string, const string>> ScriptSystem::m_registeredClasses;
+std::list<std::string> ScriptSystem::m_registeredGlobals;
 
 void ScriptSystem::LoadLuaScript(const char *filename)
 {
@@ -100,9 +102,20 @@ void ScriptSystem::RegisterClass(const string &classname)
                                classname));
 }
 
+void ScriptSystem::RegisterGlobal(const string &name)
+{
+    m_registeredGlobals.push_back(
+                name);
+}
+
 const std::list<std::pair<const std::string, const std::string>> &ScriptSystem::GetRegisteredClasses()
 {
     return m_registeredClasses;
+}
+
+const std::list<std::string> &ScriptSystem::GetRegisteredGlobals()
+{
+    return m_registeredGlobals;
 }
 
 void ScriptSystem::InvokeScriptFunction(const std::string &functionName)
@@ -113,8 +126,10 @@ void ScriptSystem::InvokeScriptFunction(const std::string &functionName)
         {
             script->InvokeScriptFunction(functionName);
         }
-        catch(...)
-        {}
+        catch(std::exception & ex)
+        {
+            LogWarn() << ex.what();
+        }
     }
 }
 
@@ -127,15 +142,35 @@ void ScriptSystem::InvokeScriptFunctionParamServerClient(const std::string &func
         {
             script->InvokeScriptFunctionParamServerClient(functionName, serverClient);
         }
-        catch(...)
-        {}
+        catch(std::exception & ex)
+        {
+            LogWarn() << ex.what();
+        }
     }
+}
+
+void globalFunction(int value)
+{
+    LogInfo() << "Hello from globalFunction!" << value;
 }
 
 //Script interface registration:
 G_AUTO_RUN_BEFORE_MAIN()
 {
     using namespace cpgf;
+
+    GDefineMetaGlobal()
+        ._method("mysql_init", &mysql_init)
+        ._method("mysql_real_connect", &mysql_real_connect)
+        ._method("mysql_query", &mysql_query)
+        ._method("mysql_error", &mysql_error)
+        ._method("mysql_close", &mysql_close)
+    ;
+    ScriptSystem::RegisterGlobal(std::string("mysql_init"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_real_connect"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_query"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_error"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_close"));
 
     GDefineMetaClass<GameServer>
             ::define("method::GameServer")
@@ -176,9 +211,13 @@ G_AUTO_RUN_BEFORE_MAIN()
             ;
     ScriptSystem::RegisterClass(std::string("ServerClient"));
 
-    GDefineMetaClass<MysqlSystem>
-            ::define("method::MysqlSystem")
-            ._method("TestFunctionVariadic", &MysqlSystem::TestFunctionVariadic)
-            ;
-    ScriptSystem::RegisterClass(std::string("MysqlSystem"));
+//    GDefineMetaClass<MysqlSystem>
+//            ::define("method::MysqlSystem")
+//            ._method("TestFunctionVariadic", &MysqlSystem::TestFunctionVariadic)
+//            ._method("RealConnect", &MysqlSystem::RealConnect)
+//            ._method("Query", &MysqlSystem::Query)
+//            ._method("ErrorText", &MysqlSystem::ErrorText)
+//            ._method("Close", &MysqlSystem::Close)
+//            ;
+//    ScriptSystem::RegisterClass(std::string("MysqlSystem"));
 }

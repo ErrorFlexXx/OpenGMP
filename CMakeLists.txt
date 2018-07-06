@@ -106,7 +106,7 @@ file(GLOB serverSources
 # Build commands server
 message("Will build server.")
 add_executable(OpenGMP-Server ${serverSources})
-target_link_libraries(OpenGMP-Server RakNetLibStatic liblua libpython-shared libCpgf utils )
+target_link_libraries(OpenGMP-Server RakNetLibStatic liblua libpython-shared libCpgf utils mysqlclient)
 
 # Dirty hack for libpython shared lib not moved automatically by python cmake project.
 if(UNIX)

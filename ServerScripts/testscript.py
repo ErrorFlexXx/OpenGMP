@@ -1,9 +1,11 @@
-def init():
-	print("Hello from testscript.py :)")
-	mysqlSystem = MySqlSystem()
-	print("After construction!")
-	mysqlSystem.TestFunctionVariadic(1, 2, 3, 4, 5, 6, 7)
-	print(mysqlSystem)
+def Init():
+	print("Hello from testscript.py")
+	'''
+	handle = mysql_init(0)
+	handle = mysql_real_connect(handle, "127.0.0.1", "root", "password", "Anthera",  3306, 0, 0)
+	mysql_query(handle, "Update worlds set worldname='PYTHONWorld' where w_id = 1;")
+	mysql_close(handle)
+	'''
 	print("Done")
 
 def Register(serverClient):

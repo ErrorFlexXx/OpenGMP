@@ -55,21 +55,44 @@ namespace OpenGMP
             static void RegisterClass(const std::string &classname);
 
             /**
+             * @brief RegisterGlobal registers a global function or var. to be avail. in scripts.
+             * @param name name that shall the global be called in scripts.
+             */
+            static void RegisterGlobal(const std::string &name);
+
+            /**
              * @brief GetRegisteredClasses returns a list of pairs with metaClassNames, classnames definitions.
-             *  Most probably used as support function in Script class.
+             *  Mostly used as support function in Script class.
              * @return std::list<std::pair<std::string, std::string>>
              */
             static const std::list<std::pair<const std::string, const std::string>> &GetRegisteredClasses();
 
+            /**
+             * @brief GetRegisteredGlobals returns a list of names for registered globals.
+             *   Mostly used as support function in Script class.
+             * @return std::list<std::string> a list of names.
+             */
+            static const std::list<std::string> &GetRegisteredGlobals();
+
+            /**
+             * @brief InvokeScriptFunction calls a script function in all registered scripts.
+             * @param functionName of the function, that should be called.
+             */
             static void InvokeScriptFunction(const std::string &functionName);
 
+            /**
+             * @brief InvokeScriptFunctionParamServerClient calls a script function in all registered scripts with matching name.
+             * @param functionName name of the function, that should be called.
+             * @param serverClient reference to ServerClient object this callback shall work with.
+             */
             static void InvokeScriptFunctionParamServerClient(const std::string &functionName,
                                                           Objects::ServerClient &serverClient);
 
         private:
             ScriptSystem(); //Abstract class - The one and only script controller
             static std::list<Objects::Script*> m_registeredScripts; //!< Container to hold loaded script objects in.
-            static std::list<std::pair<const std::string, const std::string>> m_registeredClasses; //!< Container of registered meta classes.
+            static std::list<std::pair<const std::string, const std::string>> m_registeredClasses; //!< Container with names of registered meta classes.
+            static std::list<std::string> m_registeredGlobals; //!< Container with names of registered globals
         };
     }
 }

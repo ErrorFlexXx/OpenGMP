@@ -19,11 +19,28 @@ Script::~Script()
 bool Script::LoadClasses()
 {
     //Register all registered meta classes
-    //Currently crashing:
     for(auto &metaClassPair : ScriptSystem::GetRegisteredClasses())
     {
         GScopedInterface<IMetaClass> metaClass(m_service->get()->findClassByName(metaClassPair.first.c_str()));
         scriptSetValue(m_binding->get(), metaClassPair.second.c_str(), GScriptValue::fromClass(metaClass.get()));
+    }
+
+    return true;
+}
+
+bool Script::LoadGlobals()
+{
+    GScopedInterface<IMetaModule> module(m_service->get()->getModuleAt(0));
+    GScopedInterface<IMetaClass> global(module->getGlobalMetaClass());
+    GScopedInterface<IMetaMethod> method;
+
+    for(const std::string &name : ScriptSystem::GetRegisteredGlobals())
+    {
+        GScopedInterface<IMetaList> metaList(createMetaList());
+
+        method.reset(global.get()->getMethod(name.c_str()));
+        metaList.get()->add(method.get(), nullptr);
+        scriptSetValue(m_binding->get(), name.c_str(), GScriptValue::fromOverloadedMethods(metaList.get()));
     }
 
     return true;

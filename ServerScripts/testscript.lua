@@ -1,7 +1,11 @@
-function init ()
+function Init ()
 	print("Hello from testscript.lua")
-	mysqlSystem = MySqlSystem()
-	mysqlSystem.TestFunctionVariadic(8, 9, 10, 11, 12, 13, 14)
+	--[[
+	handle = mysql_init(nil)
+	handle = mysql_real_connect(handle, "127.0.0.1", "root", "password", "Anthera", 3306, nil, 0)
+	mysql_query(handle, "UPDATE worlds SET worldname='LUAWorld' WHERE w_id = 1;")
+	mysql_close(handle)
+	]]
     print("Done")
 end
 

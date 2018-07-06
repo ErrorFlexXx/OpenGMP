@@ -16,7 +16,6 @@ namespace OpenGMP
 
     namespace Objects
     {
-
         /**
          * @brief The IScript class is an interface for a script implementation.
          *  Each Script Object has to implement the following structure
@@ -47,6 +46,11 @@ namespace OpenGMP
              */
             void InvokeScriptFunction(const std::string &functionName);
 
+            /**
+             * @brief InvokeScriptFunctionParamServerClient calls a script function in all registered scripts with matching name.
+             * @param functionName functionName  to be called
+             * @param serverClient reference to ServerClient object this callback shall work with.
+             */
             void InvokeScriptFunctionParamServerClient(const std::string &functionName,
                                                        Objects::ServerClient &serverClient);
 
@@ -76,9 +80,14 @@ namespace OpenGMP
              */
             bool LoadClasses();
 
+            /**
+             * @brief LoadGlobals registers all meta globals for a cpgf script instance to publish definitions.
+             * @return atm. always true.
+             */
+            bool LoadGlobals();
+
             std::string m_filename; //!< Filename of the loaded script.
             cpgf::GScopedInterface<cpgf::IMetaService> *m_service; //!< service object for this script instance.
-            //cpgf::GScopedInterface<IMetaClass> m_globalClass; //!< Unused atm.
             cpgf::GScopedPointer<cpgf::GScriptObject> *m_binding; //!< binding for this script.
             cpgf::GScopedInterface<cpgf::IScriptObject> *m_scope; //!< scope object for this script instance.
         };

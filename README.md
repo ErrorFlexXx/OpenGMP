@@ -38,7 +38,8 @@ To create the project, you'll first have to compile the RakNet library. Open the
 Since OpenGMP has build in encryption by default, you need to generate a keypair with the compiled server, before compiling the client.
 For that purpose start the server either with `-gk` or `--generate-keys` parameter to create a new public and private key.
 The public key needs to be pasted to the public_key char array in file `src/Client/Systems/networkSystem.cpp` around line 21.
-On linux operating systems there is a support script named `binFileToAsciHexInitList.sh` copied to the build directory to get a `C/C++` compatible formatted output of the key to paste it in the client source.
+On linux operating systems there is a support script named `binFileToAsciHexInitList.sh` copied to the build directory to get a `C/C++` compatible formatted output of the key that can be  pasted in the client source.
+Note: The private key has to be kept secret, to support a basic security of the encrypted communication.
 
 After this one can open the .sln project located at src/Client/OpenGMP-Client and compile it.
 

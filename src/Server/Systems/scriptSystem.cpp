@@ -205,14 +205,4 @@ G_AUTO_RUN_BEFORE_MAIN()
             ._property("authData", &ServerClient::GetAuthData, &ServerClient::SetAuthData)
             ;
     ScriptSystem::RegisterClass(std::string("ServerClient"));
-
-//    GDefineMetaClass<MysqlSystem>
-//            ::define("method::MysqlSystem")
-//            ._method("TestFunctionVariadic", &MysqlSystem::TestFunctionVariadic)
-//            ._method("RealConnect", &MysqlSystem::RealConnect)
-//            ._method("Query", &MysqlSystem::Query)
-//            ._method("ErrorText", &MysqlSystem::ErrorText)
-//            ._method("Close", &MysqlSystem::Close)
-//            ;
-//    ScriptSystem::RegisterClass(std::string("MysqlSystem"));
 }

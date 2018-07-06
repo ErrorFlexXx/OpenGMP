@@ -149,11 +149,6 @@ void ScriptSystem::InvokeScriptFunctionParamServerClient(const std::string &func
     }
 }
 
-void globalFunction(int value)
-{
-    LogInfo() << "Hello from globalFunction!" << value;
-}
-
 //Script interface registration:
 G_AUTO_RUN_BEFORE_MAIN()
 {

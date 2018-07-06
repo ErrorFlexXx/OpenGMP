@@ -21,7 +21,7 @@ On a windows system it's needed to have a program for CMake, Git and some build 
 Instead of calling ```make``` you want to open the generated .sln file on windows.
 
 ```
-git clone https://github.com/ErrorFlexXx/OpenGMP.git
+git clone --recursive https://github.com/ErrorFlexXx/OpenGMP.git
 cd OpenGMP
 mkdir build
 cd build
@@ -34,6 +34,11 @@ Currently there is only one client implementation and it's designed for the orig
 Therefore it has to be compiled with a msvc microsoft compiler. 
 
 To create the project, you'll first have to compile the RakNet library. Open the project `lib/Raknet/Lib/LibStatic/LibStatic.sln` and compile a release and debug build of the project.
+
+Since OpenGMP has build in encryption by default, you need to generate a keypair with the compiled server, before compiling the client.
+For that purpose start the server either with `-gk` or `--generate-keys` parameter to create a new public and private key.
+The public key needs to be pasted to the public_key char array in file `src/Client/Systems/networkSystem.cpp` around line 21.
+On linux operating systems there is a support script copied to the build directory to get a c compatible formatted key output out of the newly generated key.
 
 After this one can open the .sln project located at src/Client/OpenGMP-Client and compile it.
 

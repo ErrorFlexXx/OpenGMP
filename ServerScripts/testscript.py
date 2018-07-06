@@ -1,12 +1,18 @@
+handle = 0 # Handle to database connection
+
 def Init():
-	print("Hello from testscript.py")
-	'''
-	handle = mysql_init(0)
-	handle = mysql_real_connect(handle, "127.0.0.1", "root", "password", "Anthera",  3306, 0, 0)
-	mysql_query(handle, "Update worlds set worldname='PYTHONWorld' where w_id = 1;")
-	mysql_close(handle)
-	'''
-	print("Done")
+	global handle # Want to modify global handle here.
+	print("Hello from Init of testscript.py")
+	handle = connect()
+	if ping(handle): # Connection open ?
+		doIt()
+
+def doIt():
+	if	ping(handle):
+		print("Updating worlds name.")
+		mysql_query(handle, "Update worlds set worldname='TestWorld' where w_id = 1;")
+	else:
+		print("Db down :(")
 
 def Register(serverClient):
 	print("Register called(Python)!")

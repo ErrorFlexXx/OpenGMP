@@ -51,19 +51,27 @@ void ScriptSystem::LoadScriptsFromDir(std::string &dir)
     tinydir_open(&directory, TINYDIR_STRING(dir.c_str()));
     while(directory.has_next)
     {
-        tinydir_file file;
-        tinydir_readfile(&directory, &file);
-        string extension(file.extension);
-        if(extension.compare("lua") == 0)
+        try
         {
-            LogInfo() << "Loading lua script: " << file.name;
-            LoadLuaScript(file.path);
+            tinydir_file file;
+            tinydir_readfile(&directory, &file);
+            string extension(file.extension);
+            if(extension.compare("lua") == 0)
+            {
+                LogInfo() << "Loading lua script: " << file.name;
+                LoadLuaScript(file.path);
+            }
+            else if(extension.compare("py") == 0)
+            {
+                LogInfo() << "Loading python script: " << file.name;
+                LoadPythonScript(file.path);
+            }
         }
-        else if(extension.compare("py") == 0)
+        catch(std::exception &ex)
         {
-            LogInfo() << "Loading python script: " << file.name;
-            LoadPythonScript(file.path);
+            LogWarn() << ex.what();
         }
+
         tinydir_next(&directory);
     }
     tinydir_close(&directory);

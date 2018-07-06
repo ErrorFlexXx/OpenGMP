@@ -155,17 +155,145 @@ G_AUTO_RUN_BEFORE_MAIN()
     using namespace cpgf;
 
     GDefineMetaGlobal()
-        ._method("mysql_init", &mysql_init)
-        ._method("mysql_real_connect", &mysql_real_connect)
-        ._method("mysql_query", &mysql_query)
-        ._method("mysql_error", &mysql_error)
-        ._method("mysql_close", &mysql_close)
+
+            //Mysql Handler:
+            ._method("mysql_init", &mysql_init)
+            ._method("mysql_real_connect", &mysql_real_connect)
+            ._method("mysql_set_character_set", &mysql_set_character_set)
+            ._method("mysql_error", &mysql_error)
+            ._method("mysql_errno", &mysql_errno)
+            ._method("mysql_close", &mysql_close)
+            ._method("mysql_info", &mysql_info)
+            ._method("mysql_hex_string", &mysql_hex_string)
+            ._method("mysql_ping", &mysql_ping)
+            ._method("mysql_select_db", &mysql_select_db)
+            ._method("mysql_warning_count", &mysql_warning_count)
+            ._method("mysql_ping", &mysql_ping)
+            ._method("mysql_change_user", &mysql_change_user)
+            ._method("mysql_get_character_set_info", &mysql_get_character_set_info)
+            ._method("mysql_get_client_info", &mysql_get_client_info)
+            ._method("mysql_get_client_version", &mysql_get_client_version)
+            ._method("mysql_get_host_info", &mysql_get_host_info)
+            ._method("mysql_get_proto_info", &mysql_get_proto_info)
+            ._method("mysql_get_server_info", &mysql_get_server_info)
+            ._method("mysql_get_server_version", &mysql_get_server_version)
+            ._method("mysql_stat", &mysql_stat)
+            ._method("mysql_insert_id", &mysql_insert_id)
+            //Mysql Result:
+            ._method("mysql_query", &mysql_query)
+            ._method("mysql_real_escape_string", &mysql_real_escape_string)
+            ._method("mysql_data_seek", &mysql_data_seek)
+            ._method("mysql_fetch_field", &mysql_fetch_field)
+            ._method("mysql_fetch_field_direct", &mysql_fetch_field_direct)
+            ._method("mysql_fetch_fields", &mysql_fetch_fields)
+            ._method("mysql_fetch_lengths", &mysql_fetch_lengths)
+            ._method("mysql_fetch_row", &mysql_fetch_row)
+            ._method("mysql_field_count", &mysql_field_count)
+            ._method("mysql_field_seek", &mysql_field_seek)
+            ._method("mysql_field_tell", &mysql_field_tell)
+            ._method("mysql_free_result", &mysql_free_result)
+            ._method("mysql_num_rows", &mysql_num_rows)
+            ._method("mysql_more_results", &mysql_more_results)
+            ._method("mysql_next_result", &mysql_next_result)
+            ._method("mysql_num_fields", &mysql_num_fields)
+            ._method("mysql_affected_rows", &mysql_affected_rows)
+            ._method("mysql_rollback", &mysql_rollback)
+            ._method("mysql_row_seek", &mysql_row_seek)
+            ._method("mysql_row_tell", &mysql_row_tell)
+            //Mysql Statements:
+            ._method("mysql_stmt_init", &mysql_stmt_init)
+            ._method("mysql_stmt_prepare", &mysql_stmt_prepare)
+            ._method("mysql_stmt_bind_param", &mysql_stmt_bind_param)
+            ._method("mysql_stmt_bind_result", &mysql_stmt_bind_result)
+            ._method("mysql_stmt_execute", &mysql_stmt_execute)
+            ._method("mysql_stmt_attr_get", &mysql_stmt_attr_get)
+            ._method("mysql_stmt_attr_set", &mysql_stmt_attr_set)
+            ._method("mysql_stmt_affected_rows", &mysql_stmt_affected_rows)
+            ._method("mysql_stmt_data_seek", &mysql_stmt_data_seek)
+            ._method("mysql_stmt_error", &mysql_stmt_error)
+            ._method("mysql_stmt_errno", &mysql_stmt_errno)
+            ._method("mysql_stmt_fetch", &mysql_stmt_fetch)
+            ._method("mysql_stmt_fetch_column", &mysql_stmt_fetch_column)
+            ._method("mysql_stmt_field_count", &mysql_stmt_field_count)
+            ._method("mysql_stmt_free_result", &mysql_stmt_free_result)
+            ._method("mysql_stmt_next_result", &mysql_stmt_next_result)
+            ._method("mysql_stmt_num_rows", &mysql_stmt_num_rows)
+            ._method("mysql_stmt_param_count", &mysql_stmt_param_count)
+            ._method("mysql_stmt_reset", &mysql_stmt_reset)
+            ._method("mysql_stmt_row_seek", &mysql_stmt_row_seek)
+            ._method("mysql_stmt_row_tell", &mysql_stmt_row_tell)
+            ._method("mysql_stmt_store_result", &mysql_stmt_store_result)
+            ._method("mysql_stmt_insert_id", &mysql_stmt_insert_id)
+            ._method("mysql_stmt_close", &mysql_stmt_close)
     ;
     ScriptSystem::RegisterGlobal(std::string("mysql_init"));
     ScriptSystem::RegisterGlobal(std::string("mysql_real_connect"));
-    ScriptSystem::RegisterGlobal(std::string("mysql_query"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_set_character_set"));
     ScriptSystem::RegisterGlobal(std::string("mysql_error"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_errno"));
     ScriptSystem::RegisterGlobal(std::string("mysql_close"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_info"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_hex_string"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_ping"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_select_db"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_warning_count"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_ping"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_change_user"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_get_character_set_info"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_get_client_info"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_get_client_version"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_get_host_info"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_get_proto_info"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_get_server_info"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_get_server_version"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stat"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_insert_id"));
+    //Mysql Result:
+    ScriptSystem::RegisterGlobal(std::string("mysql_query"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_real_escape_string"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_data_seek"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_fetch_field"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_fetch_field_direct"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_fetch_fields"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_fetch_lengths"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_fetch_row"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_field_count"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_field_seek"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_field_tell"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_free_result"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_num_rows"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_more_results"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_next_result"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_num_fields"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_affected_rows"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_rollback"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_row_seek"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_row_tell"));
+    //Mysql Statements:
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_init"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_prepare"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_bind_param"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_bind_result"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_execute"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_attr_get"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_attr_set"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_affected_rows"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_data_seek"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_error"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_errno"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_fetch"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_fetch_column"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_field_count"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_free_result"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_next_result"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_num_rows"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_param_count"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_reset"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_row_seek"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_row_tell"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_store_result"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_insert_id"));
+    ScriptSystem::RegisterGlobal(std::string("mysql_stmt_close"));
 
     GDefineMetaClass<GameServer>
             ::define("method::GameServer")

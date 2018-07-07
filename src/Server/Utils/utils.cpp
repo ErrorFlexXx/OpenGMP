@@ -171,6 +171,15 @@ std::string Utils::getCaseSensitivePath(const std::string& caseInsensitivePath, 
 #endif
 }
 
+std::string Utils::stripExtension(const std::string& fileName)
+{
+    size_t dp = fileName.find_last_of('.');
+    if (dp == std::string::npos)
+        return fileName;
+
+    return fileName.substr(0, dp);
+}
+
 void Utils::StopWatch::start()
 {
     m_begin = m_delayTimeStamp = Utils::currentTimestamp();

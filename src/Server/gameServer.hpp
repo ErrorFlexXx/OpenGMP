@@ -9,6 +9,7 @@
 #include "Systems/networkSystem.hpp"
 #include "Systems/loginSystem.hpp"
 #include "Systems/netContainerSystem.hpp"
+#include "Systems/scriptSystem.hpp"
 
 namespace OpenGMP
 {
@@ -52,13 +53,15 @@ namespace OpenGMP
         static GameServer *gameServer;
         OpenGMP::Systems::NetworkSystem networkSystem;
         OpenGMP::Systems::LoginSystem loginSystem;
+        OpenGMP::Systems::ScriptSystem scriptSystem;
 
         /* Global Containers */
         OpenGMP::Systems::NetContainerSystem<Objects::ServerClient> clientContainer;
 
+        std::string scriptDirectory;  //!< Directory to load server scripts from.
+
     private:
         bool serverRunning;
         bool serverStopped;
-        std::string scriptDirectory;  //!< Directory to load server scripts from.
     };
 }

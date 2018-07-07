@@ -9,6 +9,8 @@
 
 namespace OpenGMP
 {
+    class GameServer;
+
     namespace Objects
     {
         class ServerClient;
@@ -22,7 +24,9 @@ namespace OpenGMP
          */
         class Script
         {
-        public:
+        public:            
+            Script(GameServer &gameServer, std::string &filename);
+
             /**
              * @brief ~Script virtual destructor: Call destructor of childs on deletion.
              */
@@ -39,6 +43,8 @@ namespace OpenGMP
              * @return true on success, false otherwise.
              */
             virtual bool Unload() = 0;
+
+            void InvokeInit();
 
             /**
              * @brief InvokeScriptFunction calls a script function in all registered scripts with matching name
@@ -57,14 +63,14 @@ namespace OpenGMP
             /**
              * @brief filename getter of filename attribute.
              */
-            std::string filename() const;
+            std::string fullFilePath() const;
 
         protected:
             /**
              * @brief IScript constructor for the base object.
              * @param filename filename that represents the script.
              */
-            Script(std::string &filename);
+            Script(std::string &fullFilePath);
 
             /**
              * @brief ReadStringFromFile reads a whole file into a string varible.
@@ -86,10 +92,12 @@ namespace OpenGMP
              */
             bool LoadGlobals();
 
-            std::string m_filename; //!< Filename of the loaded script.
+            std::string m_fullFilePath; //!< Filename of the loaded script.
+            std::string m_filename;     //!< Filename without path & extension
             cpgf::GScopedInterface<cpgf::IMetaService> *m_service; //!< service object for this script instance.
             cpgf::GScopedPointer<cpgf::GScriptObject> *m_binding; //!< binding for this script.
             cpgf::GScopedInterface<cpgf::IScriptObject> *m_scope; //!< scope object for this script instance.
+            GameServer &m_gameServer;
         };
 
     }

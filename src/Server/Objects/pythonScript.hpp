@@ -8,6 +8,8 @@
 
 namespace OpenGMP
 {
+    class GameServer;
+
     namespace Objects
     {
         class PythonScript : public Script
@@ -17,7 +19,7 @@ namespace OpenGMP
              * @brief PythonScript constructs a PythonScript object and loads the code.
              * @param filename of the python script file
              */
-            PythonScript(std::string filename);
+            PythonScript(GameServer &gameServer, std::string fullFilePath);
 
             /**
              * @brief ~PythonScript virtual destructor -- Ćalled on Script::~Script.

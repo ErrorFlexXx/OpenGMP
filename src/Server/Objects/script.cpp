@@ -1,15 +1,20 @@
 #include "script.hpp"
+#include "../gameServer.hpp"
 #include "../Systems/scriptSystem.hpp"
 #include "../Objects/serverClient.hpp"
 #include <utils/logger.h>
+#include "../Utils/utils.h"
 
 using namespace std;
 using namespace cpgf;
+using namespace OpenGMP;
 using namespace OpenGMP::Objects;
 using namespace OpenGMP::Systems;
 
-Script::Script(string &filename)
-    : m_filename(filename)
+Script::Script(GameServer &gameServer, string &filename)
+    : m_fullFilePath(filename)
+    , m_filename(Utils::stripExtension(Utils::stripFilePath(filename)))
+    , m_gameServer(gameServer)
 {}
 
 Script::~Script()
@@ -19,7 +24,7 @@ Script::~Script()
 bool Script::LoadClasses()
 {
     //Register all registered meta classes
-    for(auto &metaClassPair : ScriptSystem::GetRegisteredClasses())
+    for(auto &metaClassPair : m_gameServer.scriptSystem.GetRegisteredClasses())
     {
         GScopedInterface<IMetaClass> metaClass(m_service->get()->findClassByName(metaClassPair.first.c_str()));
         scriptSetValue(m_binding->get(), metaClassPair.second.c_str(), GScriptValue::fromClass(metaClass.get()));
@@ -34,7 +39,7 @@ bool Script::LoadGlobals()
     GScopedInterface<IMetaClass> global(module->getGlobalMetaClass());
     GScopedInterface<IMetaMethod> method;
 
-    for(const std::string &name : ScriptSystem::GetRegisteredGlobals())
+    for(const std::string &name : m_gameServer.scriptSystem.GetRegisteredGlobals())
     {
         GScopedInterface<IMetaList> metaList(createMetaList());
 
@@ -65,9 +70,14 @@ bool Script::ReadStringFromFile(const std::string & fileName, std::string * outC
     return result == length; //Read all requested bytes ?
 }
 
-std::string Script::filename() const
+std::string Script::fullFilePath() const
 {
-    return m_filename;
+    return m_fullFilePath;
+}
+
+void Script::InvokeInit()
+{
+    invokeScriptFunction(m_binding->get(), this->m_filename.c_str());
 }
 
 void Script::InvokeScriptFunction(const std::string &functionName)

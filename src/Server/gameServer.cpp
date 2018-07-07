@@ -20,6 +20,7 @@ GameServer::GameServer(int gameport,
     , networkSystem(*this, gameport, playerslots, keyDir, pubKeyfileName, privKeyfileName)
     , loginSystem(*this)
     , scriptDirectory(scriptDirectory)
+    , scriptSystem(*this)
     , serverRunning(true)
     , serverStopped(false)
 {
@@ -43,7 +44,7 @@ bool GameServer::Startup()
     }
 
     //Load scripts from scripts dir
-    ScriptSystem::LoadScriptsFromDir(scriptDirectory);
+    scriptSystem.LoadScriptsFromDir(scriptDirectory);
 
     LogInfo() << "GameServer Startup complete!";
     return true;

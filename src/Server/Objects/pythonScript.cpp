@@ -1,12 +1,14 @@
 #include "pythonScript.hpp"
+#include "../gameServer.hpp"
 #include <utils/logger.h>
 
 using namespace std;
 using namespace cpgf;
+using namespace OpenGMP;
 using namespace OpenGMP::Objects;
 
-PythonScript::PythonScript(std::string filename)
-    : Script(filename)
+PythonScript::PythonScript(GameServer &gameServer, std::string filename)
+    : Script(gameServer, filename)
 {
 }
 
@@ -18,9 +20,9 @@ bool PythonScript::Load()
 {
     Py_Initialize();
     string pythonCode;
-    if(!ReadStringFromFile(m_filename, &pythonCode))
+    if(!ReadStringFromFile(m_fullFilePath, &pythonCode))
     {
-        LogError() << "Read failed for python script file: " << m_filename.c_str();
+        LogError() << "Read failed for python script file: " << m_fullFilePath.c_str();
         return false;
     }
     PyRun_SimpleString(pythonCode.c_str());

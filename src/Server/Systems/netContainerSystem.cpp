@@ -17,7 +17,7 @@ NetContainerSystem<T>::NetContainerSystem(const size_t &capacity)
 }
 
 template <class T>
-T &NetContainerSystem<T>::CreateEntity(bool &success, Components::Id &id, const RakNet::RakNetGUID &rakGuid)
+T &NetContainerSystem<T>::CreateEntity(bool &success, Id &id, const RakNet::RakNetGUID &rakGuid)
 {
     Id freeId = GetFreeId();
     T &obj = container[freeId.id];
@@ -31,7 +31,7 @@ T &NetContainerSystem<T>::CreateEntity(bool &success, Components::Id &id, const 
 }
 
 template <class T>
-T &NetContainerSystem<T>::Get(const Components::Id &id, bool &success)
+T &NetContainerSystem<T>::Get(const Id &id, bool &success)
 {
     if(0 <= id.id)
     {
@@ -56,7 +56,7 @@ T &NetContainerSystem<T>::Get(const RakNet::RakNetGUID &rakId, bool &success)
 }
 
 template <class T>
-int NetContainerSystem<T>::Remove(const Components::Id &id)
+int NetContainerSystem<T>::Remove(const Id &id)
 {
     if(0 <= id.id )
     {
@@ -83,11 +83,10 @@ int NetContainerSystem<T>::Count()
 }
 
 template <class T>
-bool NetContainerSystem<T>::IsFreeId(const Components::Id &id)
+bool NetContainerSystem<T>::IsFreeId(const Id &id)
 {
-    NetIdObject &obj = container[id.id];
+    NetIdObject &obj = dynamic_cast<NetIdObject&>(container[id.id]);
     return obj.id.id == -1;
-    return false;
 }
 
 template <class T>

@@ -1,6 +1,7 @@
 #include "containerSystem.hpp"
 #include <utils/logger.h>
 
+using namespace OpenGMP::Objects;
 using namespace OpenGMP::Systems;
 using namespace OpenGMP::Components;
 
@@ -13,7 +14,7 @@ ContainerSystem<T>::ContainerSystem(const size_t &capacity)
 }
 
 template <class T>
-T &ContainerSystem<T>::CreateEntity(bool &success, Components::Id &id)
+T &ContainerSystem<T>::CreateEntity(bool &success, Id &id)
 {
     Id freeId = GetFreeId();
     T &obj = container[freeId.id];
@@ -25,7 +26,7 @@ T &ContainerSystem<T>::CreateEntity(bool &success, Components::Id &id)
 }
 
 template <class T>
-T &ContainerSystem<T>::Get(const Components::Id &id, bool &success)
+T &ContainerSystem<T>::Get(const Id &id, bool &success)
 {
     if(0 <= id.id)
     {
@@ -38,13 +39,11 @@ T &ContainerSystem<T>::Get(const Components::Id &id, bool &success)
 }
 
 template <class T>
-int ContainerSystem<T>::Remove(const Components::Id &id)
+int ContainerSystem<T>::Remove(const Id &id)
 {
     if(0 <= id.id )
     {
-        NetIdObject &obj = dynamic_cast<NetIdObject&>(container[id.id]);
-        obj.id.id = -1; //Flag id as unset.
-        rakIdMap.erase(obj.netId.rakNetId.ToUint32(obj.netId.rakNetId));
+        container[id.id].id.id = -1; //Flag id as unset.
         freeGapIds.push_back(id);
         return true;
     }
@@ -52,15 +51,15 @@ int ContainerSystem<T>::Remove(const Components::Id &id)
 }
 
 template <class T>
-int NetContainerSystem<T>::Count()
+int ContainerSystem<T>::Count()
 {
     return currentIndex.id - freeGapIds.size();
 }
 
 template <class T>
-bool ContainerSystem<T>::IsFreeId(const Components::Id &id)
+bool ContainerSystem<T>::IsFreeId(const Id &id)
 {
-    NetIdObject &obj = container[id.id];
+    IdObject &obj = dynamic_cast<NetIdObject&>(container[id.id]);
     return obj.id.id == -1;
     return false;
 }

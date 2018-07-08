@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Shared/Components/id.hpp>
+#include <Shared/Objects/netIdObject.hpp>
 #include <vector>
 #include <list>
 

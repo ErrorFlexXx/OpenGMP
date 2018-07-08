@@ -38,10 +38,29 @@ namespace OpenGMP
              */
             bool Unload() override;
 
+            /**
+             * @brief LoadIncludeScripts appends include script code to python code
+             * @param pythonCode python code to search for includes and append code.
+             */
+            void LoadIncludeScripts(std::string &pythonCode);
+
+            /**
+             * @brief InvokePre switchs the thread state of the python interpreter for this script.
+             */
+            virtual void InvokePre() override;
+
+            /**
+             * @brief InvokePost switchs the thread state of the python interpreter back to main.
+             */
+            virtual void InvokePost() override;
+
         private:
             PyObject *m_pyObject;   //!< Python object to work with.
             PyObject *m_pyDict;     //!< Python dict.
             FILE *m_file;           //!< File pointer to read the script code from.
+            PyThreadState* _main;   //!< Main thread state
+            PyThreadState* ts;      //!< Isolated thread state
+            static bool singleSetup;//!< Setup python library once only.
         };
     }
 }

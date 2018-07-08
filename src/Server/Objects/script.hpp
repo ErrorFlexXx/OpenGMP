@@ -44,20 +44,33 @@ namespace OpenGMP
              */
             virtual bool Unload() = 0;
 
-            void InvokeInit();
+            /**
+             * @brief InvokePre preparation task to invoke a function on a script.
+             */
+            virtual void InvokePre() {}
+
+            /**
+             * @brief InvokePost finalization task to after invoking of a function on a script.
+             */
+            virtual void InvokePost() {}
+
+            /**
+             * @brief InvokeInit invokes an init function for the script.
+             */
+            virtual void InvokeInit();
 
             /**
              * @brief InvokeScriptFunction calls a script function in all registered scripts with matching name
              * @param functionName to be called
              */
-            void InvokeScriptFunction(const std::string &functionName);
+            virtual void InvokeScriptFunction(const std::string &functionName);
 
             /**
              * @brief InvokeScriptFunctionParamServerClient calls a script function in all registered scripts with matching name.
              * @param functionName functionName  to be called
              * @param serverClient reference to ServerClient object this callback shall work with.
              */
-            void InvokeScriptFunctionParamServerClient(const std::string &functionName,
+            virtual void InvokeScriptFunctionParamServerClient(const std::string &functionName,
                                                        Objects::ServerClient &serverClient);
 
             /**

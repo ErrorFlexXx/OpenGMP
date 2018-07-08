@@ -147,7 +147,7 @@ void ScriptSystem::InvokeInit()
         }
         catch(std::exception & ex)
         {
-            LogWarn() << ex.what(); //Do not warn on non existent invoke functions.
+            LogWarn() << ex.what();
         }
     }
 }
@@ -162,7 +162,7 @@ void ScriptSystem::InvokeScriptFunction(const std::string &functionName)
         }
         catch(std::exception & ex)
         {
-            //LogWarn() << ex.what(); //Do not warn on non existent invoke functions.
+            LogWarn() << ex.what();
         }
     }
 }

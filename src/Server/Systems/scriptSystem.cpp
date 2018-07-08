@@ -15,6 +15,7 @@
 #include <Shared/Components/id.hpp>
 #include "../gameServer.hpp"
 #include "../Systems/loginSystem.hpp"
+#include "../Systems/scriptMysqlBindHelper.hpp"
 #include <mysql/mysql.h>
 
 using namespace std;
@@ -147,7 +148,7 @@ void ScriptSystem::InvokeInit()
         }
         catch(std::exception & ex)
         {
-            LogWarn() << ex.what();
+            //LogWarn() << ex.what();
         }
     }
 }
@@ -162,7 +163,7 @@ void ScriptSystem::InvokeScriptFunction(const std::string &functionName)
         }
         catch(std::exception & ex)
         {
-            LogWarn() << ex.what();
+            //LogWarn() << ex.what();
         }
     }
 }
@@ -178,7 +179,7 @@ void ScriptSystem::InvokeScriptFunctionParamServerClient(const std::string &func
         }
         catch(std::exception & ex)
         {
-            LogWarn() << ex.what();
+            //LogWarn() << ex.what();
         }
     }
 }
@@ -264,6 +265,7 @@ void ScriptSystem::SetupMetaData()
     RegisterClass(std::string("NetId"));
     RegisterClass(std::string("Id"));
     RegisterClass(std::string("ServerClient"));
+    RegisterClass(std::string("ScriptMysqlBindHelper"));
 
     if(!ScriptSystem::metaInited)
     {
@@ -339,6 +341,15 @@ void ScriptSystem::SetupMetaData()
                 ._method("mysql_stmt_store_result", &mysql_stmt_store_result)
                 ._method("mysql_stmt_insert_id", &mysql_stmt_insert_id)
                 ._method("mysql_stmt_close", &mysql_stmt_close)
+        ;
+
+        GDefineMetaClass<ScriptMysqlBindHelper>
+                ::define("method::ScriptMysqlBindHelper")
+                ._method("AddString", &ScriptMysqlBindHelper::AddString)
+                ._method("AddInt", &ScriptMysqlBindHelper::AddInt)
+                ._method("AddDouble", &ScriptMysqlBindHelper::AddDouble)
+                ._method("ResetBinds", &ScriptMysqlBindHelper::ResetBinds)
+                ._method("Bind", &ScriptMysqlBindHelper::Bind)
         ;
 
         GDefineMetaClass<GameServer>

@@ -1,6 +1,5 @@
 #include "authData.hpp"
 #include <RakString.h>
-#include <utils/logger.h>
 
 using namespace RakNet;
 using namespace OpenGMP::Components;

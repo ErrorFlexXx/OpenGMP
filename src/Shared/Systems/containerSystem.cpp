@@ -1,5 +1,4 @@
 #include "containerSystem.hpp"
-#include <utils/logger.h>
 
 using namespace OpenGMP::Objects;
 using namespace OpenGMP::Systems;
@@ -34,7 +33,6 @@ T &ContainerSystem<T>::Get(const Id &id, bool &success)
         return container[id.id];
     }
     success = false;
-    LogError() << "Faulty ID given: " << id.id;
     return failDummy;
 }
 

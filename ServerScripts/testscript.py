@@ -15,15 +15,3 @@ def doIt():
 		mysql_query(handle, "Update worlds set worldname='TestWorld' where w_id = 1;")
 	else:
 		print("Db down :(")
-
-def HelloWorld():
-	print("Hello World!")
-
-def Register(serverClient):
-	print("Register called(Python)!")
-	print("Loginname: " + serverClient.authData.loginname)
-
-#def HelloWorld():
-#	print("HelloWorldTestScript.py")
-
-

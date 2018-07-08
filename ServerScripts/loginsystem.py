@@ -8,10 +8,6 @@ def Init():
 	handle = connect()
 	if(ping(handle)):
 		InitLoginSystemStatements()
-		test = ServerClient()
-		test.authData.loginname = "Test4"
-		test.authData.password = "Test3"
-		Register(test)
 
 def InitLoginSystemStatements():
 	
@@ -38,7 +34,6 @@ def Register(serverClient):
 	bindHelper.Bind(stmtRegister);	
 	if(mysql_stmt_execute(stmtRegister) != 0):
 		print("LoginSystem Error stmtRegister: " + mysql_stmt_error(stmtRegister))
-		return False
-	print("Registered: " + serverClient.authData.loginname)
-	return True
-	
+	else:
+		print("Registered: " + serverClient.authData.loginname)
+	bindHelper.ResetBinds()

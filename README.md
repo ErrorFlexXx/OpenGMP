@@ -44,6 +44,9 @@ Note: The private key has to be kept secret, to support a basic security of the 
 
 After this one can open the .sln project located at src/Client/OpenGMP-Client and compile it.
 
+## Scripting
+Read more about scripting in the [ServerScripts](https://www.github.com/ErrorFlexXx/OpenGMP/tree/master/ServerScripts) directory.
+
 ## Known issues
 
 ### Server (Linux build):

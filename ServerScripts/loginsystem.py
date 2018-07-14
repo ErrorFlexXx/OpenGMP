@@ -2,7 +2,6 @@
 
 handle = 0
 stmtRegister = 0
-bindHelper = 0
 regCounter = 0
 
 def Init():
@@ -38,7 +37,7 @@ def InitLoginSystemStatements():
 
 def Register(serverClient):
 	global stmtRegister
-	global bindHelper
+	bindHelper = ScriptMysqlBindHelper()
 	bindHelper.AddString(serverClient.authData.loginname)
 	bindHelper.AddString(serverClient.authData.password)
 	bindHelper.Bind(stmtRegister)

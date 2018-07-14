@@ -1,0 +1,48 @@
+require("db_con")
+
+stmtRegister = nil
+handle = nil
+bindHelper = nil
+
+function Init()
+	handle = connect()
+	if(ping(handle)) then
+		InitLoginSystemStatements()	
+	end
+	bindHelper = ScriptMysqlBindHelper()
+	client = ServerClient()
+	for i = 0,50000,1
+	do
+		client.authData.loginname = "Boob"..i
+		client.authData.password = "BobsPassword"
+		print("Registering...")
+		Register(client)
+		print("Done.")
+	end
+end
+
+function InitLoginSystemStatements()
+	registerStatement = "INSERT INTO `ServerClients` " ..
+	"(`loginname`, `password`, `register_time`) " ..
+	"VALUES(?, MD5(?), NOW());"
+	stmtRegister = mysql_stmt_init(handle)
+	if(stmtRegister == nil) then
+		print("LoginSystem initLoginSystemStatements - Out of memory")
+		return
+	end
+	if(mysql_stmt_prepare(stmtRegister, registerStatement, string.len(registerStatement)) ~= 0) then
+		print("LoginSystem stmtRegister prepare error: " .. mysql_stmt_error(stmtRegister))
+	end
+end
+
+function Register(serverClient)
+	bindHelper.AddString(serverClient.authData.loginname)
+	bindHelper.AddString(serverClient.authData.password)
+	bindHelper.Bind(stmtRegister)
+	if (mysql_stmt_execute(stmtRegister) ~= 0) then
+		print("LoginSystem Error Stmt Register: " .. mysql_stmt_error(stmtRegister))
+	else
+		print("Registered " .. serverClient.authData.loginname .. " successfully.")
+	end
+	bindHelper.ResetBinds()
+end

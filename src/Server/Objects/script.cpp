@@ -74,26 +74,3 @@ std::string Script::fullFilePath() const
 {
     return m_fullFilePath;
 }
-
-void Script::InvokeInit()
-{
-    InvokePre();
-    //invokeScriptFunction(m_binding->get(), this->m_filename.c_str());
-    invokeScriptFunction(m_binding->get(), "Init");
-    InvokePost();
-}
-
-void Script::InvokeScriptFunction(const std::string &functionName)
-{
-    InvokePre();
-    invokeScriptFunction(m_binding->get(), functionName.c_str());
-    InvokePost();
-}
-
-void Script::InvokeScriptFunctionParamServerClient(const std::string &functionName,
-                                               ServerClient &serverClient)
-{
-    InvokePre();
-    invokeScriptFunction(m_binding->get(), functionName.c_str(), serverClient);
-    InvokePost();
-}

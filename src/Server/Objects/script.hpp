@@ -54,24 +54,13 @@ namespace OpenGMP
              */
             virtual void InvokePost() {}
 
-            /**
-             * @brief InvokeInit invokes an init function for the script.
-             */
-            virtual void InvokeInit();
-
-            /**
-             * @brief InvokeScriptFunction calls a script function in all registered scripts with matching name
-             * @param functionName to be called
-             */
-            virtual void InvokeScriptFunction(const std::string &functionName);
-
-            /**
-             * @brief InvokeScriptFunctionParamServerClient calls a script function in all registered scripts with matching name.
-             * @param functionName functionName  to be called
-             * @param serverClient reference to ServerClient object this callback shall work with.
-             */
-            virtual void InvokeScriptFunctionParamServerClient(const std::string &functionName,
-                                                       Objects::ServerClient &serverClient);
+            template<typename... Parameters>
+            void InvokeScriptFunction(const std::string &functionName, Parameters && ... parameters)
+            {
+                InvokePre();
+                invokeScriptFunction(m_binding->get(), functionName.c_str(), std::forward<Parameters>(parameters)...);
+                InvokePost();
+            }
 
             /**
              * @brief filename getter of filename attribute.

@@ -175,7 +175,7 @@ void ScriptSystem::InvokeScriptFunctionParamServerClient(const std::string &func
     {
         try
         {
-            script->InvokeScriptFunctionParamServerClient(functionName, serverClient);
+            script->InvokeScriptFunction(functionName, serverClient);
         }
         catch(std::exception & ex)
         {
@@ -342,6 +342,10 @@ void ScriptSystem::SetupMetaData()
                 ._method("mysql_stmt_insert_id", &mysql_stmt_insert_id)
                 ._method("mysql_stmt_close", &mysql_stmt_close)
         ;
+
+//        GDefineMetaClass<MYSQL_BIND>
+//                ::define("method::MYSQL_BIND")
+//                ._field("length", length)
 
         GDefineMetaClass<ScriptMysqlBindHelper>
                 ::define("method::ScriptMysqlBindHelper")

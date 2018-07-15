@@ -4,20 +4,8 @@ handle = 0
 stmtRegister = 0
 regCounter = 0
 
-def Init():
-	global handle #Modify global var	
-	global bindHelper
-	handle = connect()
-	if ping(handle):
-		InitLoginSystemStatements()
-	bindHelper = ScriptMysqlBindHelper()
-	#for x in range(0, 50000):
-	#	client = ServerClient()
-	#	client.authData.loginname = "BBob%d" %(x)
-	#	client.authData.password = "APassword"
-	#	print("Registering...%d" %(x))
-	#	Register(client)
-	#	print("Done.")
+cpgf._import(None, "builtin");
+cpgf._import("cpgf", "builtin.collections.bytearray");
 
 def InitLoginSystemStatements():
 	
@@ -41,8 +29,22 @@ def Register(serverClient):
 	bindHelper.AddString(serverClient.authData.loginname)
 	bindHelper.AddString(serverClient.authData.password)
 	bindHelper.Bind(stmtRegister)
+		
 	if mysql_stmt_execute(stmtRegister) != 0:
 		print("LoginSystem Error stmtRegister: " + mysql_stmt_error(stmtRegister))
 	else:
 		print("Registered: " + serverClient.authData.loginname)
 	bindHelper.ResetBinds()
+
+#Initialization:
+handle = connect()
+if ping(handle):
+	InitLoginSystemStatements()
+for x in range(0, 1000):
+	client = ServerClient()
+	client.authData.loginname = "BBBob%d" %(x)
+	client.authData.password = "APassword"
+	#	print("Registering...%d" %(x))
+	Register(client)
+print("Done.")
+

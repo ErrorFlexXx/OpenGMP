@@ -41,11 +41,6 @@ bool PythonScript::Load()
 
     LoadIncludeScripts(pythonCode); //Load included scripts in this python thread state
 
-    string setPath = string("import sys\nsys.path.append('").append(m_gameServer.scriptDirectory).append("')\n");
-    PyRun_SimpleString(
-       setPath.c_str()
-    );
-    PyRun_SimpleString(pythonCode.c_str());
     m_pyObject = PyImport_ImportModule("__main__");
     m_pyDict = PyModule_GetDict(m_pyObject);
     Py_XINCREF(m_pyDict);
@@ -53,8 +48,17 @@ bool PythonScript::Load()
     m_binding = new GScopedPointer<GScriptObject>(createPythonScriptObject(m_service->get(), m_pyObject));
     m_scope = new GScopedInterface<IScriptObject>(m_binding->get()->createScriptObject("OpenGMP").toScriptObject());
 
+    //Load cpgf core lib
+    m_binding->get()->bindCoreService("cpgf", nullptr);
+
     LoadClasses();
     LoadGlobals();
+
+    string setPath = string("import sys\nsys.path.append('").append(m_gameServer.scriptDirectory).append("')\n");
+    PyRun_SimpleString(
+       setPath.c_str()
+    );
+    PyRun_SimpleString(pythonCode.c_str());
 
     PyThreadState_Swap(_main); //Reset main thread state.
 

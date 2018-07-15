@@ -23,6 +23,17 @@ bool LuaScript::Load()
     m_lState = lua_open();
     luaL_openlibs(m_lState);
     SetLuaPath(string(m_gameServer.scriptDirectory).append("?.lua"));
+
+    //lua_call(m_lState, 0, LUA_MULTRET);
+    m_service = new GScopedInterface<IMetaService>(createDefaultMetaService());
+    m_binding = new GScopedPointer<GScriptObject>(createLuaScriptObject(m_service->get(), m_lState));
+    m_scope = new GScopedInterface<IScriptObject>(m_binding->get()->createScriptObject("OpenGMP").toScriptObject());
+
+    m_binding->get()->bindCoreService("cpgf", nullptr);
+
+    LoadClasses();
+    LoadGlobals();
+
     int result = luaL_loadfile(m_lState, m_fullFilePath.c_str());
     if(result != 0)
     {
@@ -37,13 +48,6 @@ bool LuaScript::Load()
         lua_pop(m_lState, 1);
         return false;
     }
-    //lua_call(m_lState, 0, LUA_MULTRET);
-    m_service = new GScopedInterface<IMetaService>(createDefaultMetaService());
-    m_binding = new GScopedPointer<GScriptObject>(createLuaScriptObject(m_service->get(), m_lState));
-    m_scope = new GScopedInterface<IScriptObject>(m_binding->get()->createScriptObject("OpenGMP").toScriptObject());
-
-    LoadClasses();
-    LoadGlobals();
 
     return true;
 }

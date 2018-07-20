@@ -91,7 +91,7 @@ void LoginSystem::Process(Packet *packet)
                 bool success;
                 ServerClient &client = gameServer.clientContainer.Get(packet->guid, success);
                 client.authData.ReadStream(bsIn);
-                gameServer.scriptSystem.InvokeScriptFunctionParamServerClient("Register", client);
+                gameServer.scriptSystem.InvokeScriptFunction("Register", client);
                 break;
             }
             default:

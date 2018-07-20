@@ -71,7 +71,7 @@ namespace OpenGMP
              *  Mostly used as support function in Script class.
              * @return std::list<std::pair<std::string, std::string>>
              */
-            const std::list<std::pair<const std::string, const std::string>> &GetRegisteredClasses();
+            const std::list<const std::string> &GetRegisteredClasses();
 
             /**
              * @brief GetRegisteredGlobals returns a list of names for registered globals.
@@ -80,25 +80,30 @@ namespace OpenGMP
              */
             const std::list<std::string> &GetRegisteredGlobals();
 
-            void InvokeInit();
-
             /**
-             * @brief InvokeScriptFunction calls a script function in all registered scripts.
-             * @param functionName of the function, that should be called.
-             */
-            void InvokeScriptFunction(const std::string &functionName);
-
-            /**
-             * @brief InvokeScriptFunctionParamServerClient calls a script function in all registered scripts with matching name.
+             * @brief InvokeScriptFunction calls a script function in all registered scripts with matching name.
              * @param functionName name of the function, that should be called.
-             * @param serverClient reference to ServerClient object this callback shall work with.
              */
-            void InvokeScriptFunctionParamServerClient(const std::string &functionName,
-                                                          Objects::ServerClient &serverClient);
+            template<typename... Parameters>
+            void InvokeScriptFunction(const std::string &functionName,
+                                      Parameters && ... parameters)
+            {
+                for(Objects::Script *script : m_registeredScripts)
+                {
+                    try
+                    {
+                        script->InvokeScriptFunction(functionName, std::forward<Parameters>(parameters)...);
+                    }
+                    catch(std::exception & ex)
+                    {
+                        //LogWarn() << ex.what();
+                    }
+                }
+            }
 
         private:
             std::list<Objects::Script*> m_registeredScripts; //!< Container to hold loaded script objects in.
-            std::list<std::pair<const std::string, const std::string>> m_registeredClasses; //!< Container with names of registered meta classes.
+            std::list<const std::string> m_registeredClasses; //!< Container with names of registered meta classes.
             std::list<std::string> m_registeredGlobals; //!< Container with names of registered globals
             GameServer &gameServer;
             static bool metaInited;

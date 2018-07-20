@@ -87,8 +87,6 @@ void ScriptSystem::LoadScriptsFromDir(std::string &dir)
         tinydir_next(&directory);
     }
     tinydir_close(&directory);
-
-    InvokeInit();
 }
 
 bool ScriptSystem::UnloadScript(std::string &filename)
@@ -114,12 +112,7 @@ bool ScriptSystem::UnloadScript(std::string &filename)
 
 void ScriptSystem::RegisterClass(const string &classname)
 {
-    string assembledMetaName("method::");
-    assembledMetaName.append(classname);
-
-    m_registeredClasses.push_back(
-                std::make_pair(assembledMetaName,
-                               classname));
+    m_registeredClasses.push_back(classname);
 }
 
 void ScriptSystem::RegisterGlobal(const string &name)
@@ -128,7 +121,7 @@ void ScriptSystem::RegisterGlobal(const string &name)
                 name);
 }
 
-const std::list<std::pair<const std::string, const std::string>> &ScriptSystem::GetRegisteredClasses()
+const std::list<const std::string> &ScriptSystem::GetRegisteredClasses()
 {
     return m_registeredClasses;
 }
@@ -138,50 +131,9 @@ const std::list<std::string> &ScriptSystem::GetRegisteredGlobals()
     return m_registeredGlobals;
 }
 
-void ScriptSystem::InvokeInit()
+size_t GetMysqlBindSize()
 {
-    for(Script *script : m_registeredScripts)
-    {
-        try
-        {
-            script->InvokeInit();
-        }
-        catch(std::exception & ex)
-        {
-            //LogWarn() << ex.what();
-        }
-    }
-}
-
-void ScriptSystem::InvokeScriptFunction(const std::string &functionName)
-{
-    for(Script *script : m_registeredScripts)
-    {
-        try
-        {
-            script->InvokeScriptFunction(functionName);
-        }
-        catch(std::exception & ex)
-        {
-            //LogWarn() << ex.what();
-        }
-    }
-}
-
-void ScriptSystem::InvokeScriptFunctionParamServerClient(const std::string &functionName,
-                                                         ServerClient &serverClient)
-{
-    for(Script *script : m_registeredScripts)
-    {
-        try
-        {
-            script->InvokeScriptFunction(functionName, serverClient);
-        }
-        catch(std::exception & ex)
-        {
-            //LogWarn() << ex.what();
-        }
-    }
+    return sizeof(MYSQL_BIND);
 }
 
 //Script interface registration:
@@ -266,6 +218,7 @@ void ScriptSystem::SetupMetaData()
     RegisterClass(std::string("Id"));
     RegisterClass(std::string("ServerClient"));
     RegisterClass(std::string("ScriptMysqlBindHelper"));
+    //RegisterClass(std::string("MYSQL_BIND"));
 
     if(!ScriptSystem::metaInited)
     {
@@ -344,11 +297,17 @@ void ScriptSystem::SetupMetaData()
         ;
 
 //        GDefineMetaClass<MYSQL_BIND>
-//                ::define("method::MYSQL_BIND")
-//                ._field("length", length)
+//                ::define("MYSQL_BIND")
+//                ._field("length", &MYSQL_BIND::length)
+//                ._field("buffer", &MYSQL_BIND::buffer)
+//                ._field("buffer_type", &MYSQL_BIND::buffer_type)
+//                ._field("buffer_length", &MYSQL_BIND::buffer_length)
+//                ._field("is_null", &MYSQL_BIND::is_null)
+//                ._method("sizeof", &GetMysqlBindSize)
+//        ;
 
         GDefineMetaClass<ScriptMysqlBindHelper>
-                ::define("method::ScriptMysqlBindHelper")
+                ::define("ScriptMysqlBindHelper")
                 ._method("AddString", &ScriptMysqlBindHelper::AddString)
                 ._method("AddInt", &ScriptMysqlBindHelper::AddInt)
                 ._method("AddDouble", &ScriptMysqlBindHelper::AddDouble)
@@ -357,7 +316,7 @@ void ScriptSystem::SetupMetaData()
         ;
 
         GDefineMetaClass<GameServer>
-                ::define("method::GameServer")
+                ::define("GameServer")
                 //._constructor<void *(const string, const string)>()
                 ._method("GetGameServerInstance", &GameServer::GetGameServerInstance)
                 ._method("Shutdown", &GameServer::Shutdown)
@@ -365,7 +324,7 @@ void ScriptSystem::SetupMetaData()
                 ;
 
         GDefineMetaClass<AuthData>
-                ::define("method::AuthData")
+                ::define("AuthData")
                 //._constructor<void *(const string, const string)>()
                 ._property("loginname", &AuthData::GetLoginname, &AuthData::SetLoginname)
                 ._property("password", &AuthData::GetPassword, &AuthData::SetPassword)
@@ -374,20 +333,20 @@ void ScriptSystem::SetupMetaData()
                 ;
 
         GDefineMetaClass<NetId>
-                ::define("method::NetId")
+                ::define("NetId")
                 ._property("rakNetId", &NetId::GetRakNetId, &NetId::SetRakNetId)
                 ;
 
         GDefineMetaClass<Id>
-                ::define("method::Id")
+                ::define("Id")
                 ._property("id", &Id::GetId, &Id::SetId)
                 ;
 
-        GDefineMetaClass<ServerClient>
-                ::define("method::ServerClient")
-                //._constructor<void *(const string, const string)>()
+        GDefineMetaClass<ServerClient,Client,NetIdObject,IdObject>
+                ::define("ServerClient")
+                //._constructor<void *()>()
                 //._method("Shutdown", &GameServer::Shutdown)
-                ._property("authData", &ServerClient::GetAuthData, &ServerClient::SetAuthData)
+                ._field("authData", &ServerClient::authData)
                 ;
     }
 }

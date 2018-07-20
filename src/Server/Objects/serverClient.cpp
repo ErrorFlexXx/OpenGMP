@@ -12,7 +12,6 @@ ServerClient::ServerClient()
 
 ServerClient::~ServerClient()
 {
-    LogInfo() << "Destructor called";
 }
 
 AuthData &ServerClient::GetAuthData()

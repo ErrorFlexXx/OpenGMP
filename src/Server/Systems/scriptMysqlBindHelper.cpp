@@ -6,7 +6,6 @@ using namespace OpenGMP::Systems;
 ScriptMysqlBindHelper::~ScriptMysqlBindHelper()
 {
     ResetBinds();
-    LogInfo() << "Out of Scope.. Byebye!";
 }
 
 void ScriptMysqlBindHelper::AddString(std::string &value)

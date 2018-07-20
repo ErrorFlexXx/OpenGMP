@@ -26,8 +26,8 @@ bool Script::LoadClasses()
     //Register all registered meta classes
     for(auto &metaClassPair : m_gameServer.scriptSystem.GetRegisteredClasses())
     {
-        GScopedInterface<IMetaClass> metaClass(m_service->get()->findClassByName(metaClassPair.first.c_str()));
-        scriptSetValue(m_binding->get(), metaClassPair.second.c_str(), GScriptValue::fromClass(metaClass.get()));
+        GScopedInterface<IMetaClass> metaClass(m_service->get()->findClassByName(metaClassPair.c_str()));
+        scriptSetValue(m_binding->get(), metaClassPair.c_str(), GScriptValue::fromClass(metaClass.get()));
     }
 
     return true;

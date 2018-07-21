@@ -82,7 +82,7 @@ bool PythonScript::Unload()
 
 void PythonScript::LoadIncludeScripts(string &pythonCode)
 {
-    regex exp("(?:\#include)(?:\ )?[\<\"](.*)[\"\>]");
+    regex exp("(?:\\#include)(?:\\ )?[\\<\"](.*)[\"\\>]");
     smatch res;
     list<string> includes;
     string::const_iterator searchStart( pythonCode.cbegin() );

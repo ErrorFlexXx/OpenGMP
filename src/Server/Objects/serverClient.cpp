@@ -14,14 +14,4 @@ ServerClient::~ServerClient()
 {
 }
 
-AuthData &ServerClient::GetAuthData()
-{
-    return authData;
-}
-
-void ServerClient::SetAuthData(AuthData authData)
-{
-    this->authData = authData;
-}
-
 

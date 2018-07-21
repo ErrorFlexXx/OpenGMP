@@ -6,6 +6,7 @@
 #include "../Components/version.hpp"
 #include "../Components/authData.hpp"
 #include "../Components/id.hpp"
+#include "../Components/netId.hpp"
 
 namespace OpenGMP
 {
@@ -23,8 +24,8 @@ namespace OpenGMP
         class Client : public NetIdObject
         {
         public:
-            Components::Version version;   //!< (available script attribute) version of a client
-            Components::AuthData authData; //!< (available script attribute) auth data of a client
+            Components::Version version;    //!< (available script attribute) version of a client
+            Components::AuthData authData;  //!< (available script attribute) auth data of a client
         };
     }
 }

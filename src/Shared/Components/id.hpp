@@ -24,10 +24,6 @@ namespace OpenGMP
 
             void WriteStream(RakNet::BitStream &stream) const;
             bool ReadStream(RakNet::BitStream &stream);
-
-            //Getter and setter for script interface:
-            int GetId() const;
-            void SetId(int value);
         };
     }
 }

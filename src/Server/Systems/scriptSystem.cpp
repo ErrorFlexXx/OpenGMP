@@ -320,32 +320,28 @@ void ScriptSystem::SetupMetaData()
                 //._constructor<void *(const string, const string)>()
                 ._method("GetGameServerInstance", &GameServer::GetGameServerInstance)
                 ._method("Shutdown", &GameServer::Shutdown)
-                //._property("testAttribute", &GameServer::GetTestAttribute, &GameServer::SetTestAttribute)
                 ;
 
         GDefineMetaClass<AuthData>
                 ::define("AuthData")
-                //._constructor<void *(const string, const string)>()
-                ._property("loginname", &AuthData::GetLoginname, &AuthData::SetLoginname)
-                ._property("password", &AuthData::GetPassword, &AuthData::SetPassword)
-                ._property("hddSerial", &AuthData::GetHddSerial, &AuthData::SetHddSerial)
-                ._property("macAddress", &AuthData::GetMacAddress, &AuthData::SetMacAddress)
+                ._field("loginname", &AuthData::loginname)
+                ._field("password", &AuthData::password)
+                ._field("hddSerial", &AuthData::hddSerial)
+                ._field("macAddress", &AuthData::macAddress)
                 ;
 
         GDefineMetaClass<NetId>
                 ::define("NetId")
-                ._property("rakNetId", &NetId::GetRakNetId, &NetId::SetRakNetId)
+                ._field("rakNetId", &NetId::rakNetId)
                 ;
 
         GDefineMetaClass<Id>
                 ::define("Id")
-                ._property("id", &Id::GetId, &Id::SetId)
+                ._field("id", &Id::id)
                 ;
 
         GDefineMetaClass<ServerClient,Client,NetIdObject,IdObject>
                 ::define("ServerClient")
-                //._constructor<void *()>()
-                //._method("Shutdown", &GameServer::Shutdown)
                 ._field("authData", &ServerClient::authData)
                 ;
     }

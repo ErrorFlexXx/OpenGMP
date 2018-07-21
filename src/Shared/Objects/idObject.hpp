@@ -20,9 +20,6 @@ namespace OpenGMP
         public:
             Components::Id id; //!< (available script attribute) the ID
 
-            Components::Id GetId() const;
-            void SetId(const Components::Id &value);
-
         protected:
             IdObject() {} //Abstract
         };

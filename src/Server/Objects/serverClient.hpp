@@ -20,10 +20,6 @@ namespace OpenGMP
         public:
             ServerClient();
             ~ServerClient();
-
-            //Getter and setter for script interface:
-            Components::AuthData &GetAuthData();
-            void SetAuthData(Components::AuthData authData);
         };
     }
 }

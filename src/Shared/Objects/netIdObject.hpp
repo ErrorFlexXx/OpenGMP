@@ -23,9 +23,6 @@ namespace OpenGMP
         public:
             Components::NetId netId; //!< (available script attribute) the RakNet GUID
 
-            Components::NetId GetNetId() const;
-            void SetNetId(const Components::NetId &value);
-
         protected:
             NetIdObject() {} //Abstract
         };

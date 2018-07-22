@@ -2,6 +2,7 @@
 
 #define _WINSOCKAPI_ //Stop windows.h from including winsock.h (colliding with RakNet)
 #include <windows.h>
+#include <string>
 #include "Hooks/hGame.hpp"
 #include "Objects/clientClient.hpp"
 #include "Systems/networkSystem.hpp"
@@ -17,8 +18,11 @@ namespace OpenGMP
         GameClient();
         void Startup(HINSTANCE inst);  //!< Initializes the game client
         void Stop();     //!< Stops the OpenGMP instance (do cleanup..)
+        bool IsGothic2exe();
 
         static HINSTANCE dllInstance;
+        static std::string serverName;
+        static unsigned short serverPort;
         Objects::ClientClient client;
         Systems::NetworkSystem networkSystem;
         Systems::LoginSystem loginSystem;

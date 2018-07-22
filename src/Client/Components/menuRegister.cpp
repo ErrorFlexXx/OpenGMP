@@ -3,13 +3,15 @@
 #include "../GUI/menuButton.hpp"
 #include "../GUI/menuTextBox.hpp"
 #include "../Systems/menuSystem.hpp"
+#include <libintl.h>
+#define _(string) gettext (string)
 
 using namespace OpenGMP;
 using namespace OpenGMP::Components;
 using namespace OpenGMP::GUI;
 
-const std::string btnShowPasswordTextShow = "Zeige Passwort";
-const std::string btnShowPasswordTextHide = "Verberge Passwort";
+std::string btnShowPasswordTextShow;
+std::string btnShowPasswordTextHide;
 
 MenuRegister::MenuRegister(GameClient &gameClient)
     : MainMenu(gameClient)
@@ -17,16 +19,19 @@ MenuRegister::MenuRegister(GameClient &gameClient)
 
 void MenuRegister::OnCreate()
 {
+    btnShowPasswordTextShow = _("Show password");
+    btnShowPasswordTextHide = _("Hide password");
+
     MainMenu::OnCreate();
-    back->CreateTextCenterX("Registrierung", 70);
+    back->CreateTextCenterX(_("Registration"), 70);
     const int offset = 200;
     const int dist = 38;
 
-    txtUsername = AddTextBox("Benutzername", "Benutzername des neuen Benutzers.", offset + dist * 0, 280, nullptr);
-    txtPassword = AddTextBox("Passwort", "Passwort des neuen Benutzers.", offset + dist * 1, 280, nullptr, true);
-    btnShowPassword = AddButton(btnShowPasswordTextShow, "Schaltet die Klartext-Passwortanzeige um.", offset + dist * 2, [=]() { this->ToggleShowPassword(); });
-    btnCreate = AddButton("Registrieren", "Erstellt einen neuen Benutzer.", offset + dist * 4, [=]() { this->Register(); });
-    btnBack = AddButton("Zurück", "Zum Hauptmenü zurückkehren.", offset + dist * 5, [=]() {gameClient.menuSystem.menuMain.Open(); });
+    txtUsername = AddTextBox(_("Username"), _("Username of the created user."), offset + dist * 0, 280, nullptr);
+    txtPassword = AddTextBox(_("Password"), _("Password of the created user."), offset + dist * 1, 280, nullptr, true);
+    btnShowPassword = AddButton(btnShowPasswordTextShow, _("Toggles the password plain text view."), offset + dist * 2, [=]() { this->ToggleShowPassword(); });
+    btnCreate = AddButton(_("Register"), _("Creates a new user."), offset + dist * 4, [=]() { this->Register(); });
+    btnBack = AddButton(_("Back"), _("Goes back to the main menu."), offset + dist * 5, [=]() {gameClient.menuSystem.menuMain.Open(); });
 
     txtUsername->Enabled(true);
     txtPassword->Enabled(true);

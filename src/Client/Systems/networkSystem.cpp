@@ -21,13 +21,9 @@ bool NetworkSystem::started = false;
 char NetworkSystem::public_key[] = { (char)0xE3, (char)0x1C, (char)0x4C, (char)0xC4, (char)0x38, (char)0x52, (char)0x32, (char)0x55, (char)0x22, (char)0x51, (char)0xA9, (char)0x6B, (char)0x82, (char)0x96, (char)0xE3, (char)0xEB, (char)0x82, (char)0x92, (char)0xF4, (char)0xAA, (char)0x37, (char)0x44, (char)0x39, (char)0xF4, (char)0x08, (char)0xA6, (char)0x4D, (char)0xE1, (char)0x16, (char)0xC4, (char)0x64, (char)0xD1, (char)0x04, (char)0x17, (char)0xB5, (char)0xF6, (char)0x11, (char)0xBE, (char)0xAE, (char)0x4E, (char)0x0C, (char)0xAE, (char)0xEC, (char)0x2B, (char)0xE7, (char)0xF5, (char)0x6B, (char)0xA3, (char)0x65, (char)0x42, (char)0xA0, (char)0x5F, (char)0x03, (char)0xC4, (char)0x80, (char)0x68, (char)0x25, (char)0xD9, (char)0xC7, (char)0x93, (char)0x91, (char)0x0F, (char)0x9A, (char)0x1F };
 
 NetworkSystem::NetworkSystem(GameClient &gameClient)
-    : NetworkSystem(gameClient, "127.0.0.1", 1760)
-{}
-
-NetworkSystem::NetworkSystem(GameClient &gameClient, const std::string &hostname, unsigned short port)
     : gameClient(gameClient)
-    , hostname(hostname)
-    , port(port)
+    , hostname("")
+    , port(0)
     , ping(0)
     , peerInterface(RakPeerInterface::GetInstance())
 {
@@ -40,6 +36,8 @@ bool NetworkSystem::Startup()
     if (started == false)
     {
         started = true;
+        hostname = GameClient::serverName; //Use injected hostname and port stored in GameClient from external thread.
+        port = GameClient::serverPort;
 
         StartupResult result = peerInterface->Startup(1, &socketDescriptor, 1);
         if (result != RAKNET_STARTED)

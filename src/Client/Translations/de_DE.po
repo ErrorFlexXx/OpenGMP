@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenGMP\n"
+"POT-Creation-Date: 2018-07-22 15:04+0200\n"
+"PO-Revision-Date: 2018-07-22 15:16+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.9\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: ISO-8859-1\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-SearchPath-0: Objects\n"
+"X-Poedit-SearchPath-1: Components\n"
+
+#: Components/menuMain.cpp:23
+msgid "Mainmenu"
+msgstr "Hauptmenü"
+
+#: Components/menuMain.cpp:28
+msgid "Login"
+msgstr "Anmelden"
+
+#: Components/menuMain.cpp:28
+msgid "Log into an existing account."
+msgstr "In einen bestehenden Account einloggen."
+
+#: Components/menuMain.cpp:29 Components/menuRegister.cpp:30
+msgid "Register"
+msgstr "Registrieren"
+
+#: Components/menuMain.cpp:29
+msgid "Create a new account."
+msgstr "Einen neuen Account erstellen."
+
+#: Components/menuMain.cpp:30
+msgid "Quit"
+msgstr "Beenden"
+
+#: Components/menuMain.cpp:30
+msgid "Quit the game. Switch to the desktop."
+msgstr "Beendet das Spiel. Wechsel zum Desktop."
+
+#: Components/menuRegister.cpp:13
+msgid "Show password"
+msgstr "Zeige Passwort"
+
+#: Components/menuRegister.cpp:14
+msgid "Hide password"
+msgstr "Verstecke Passwort"
+
+#: Components/menuRegister.cpp:23
+msgid "Registration"
+msgstr "Registrieren"
+
+#: Components/menuRegister.cpp:27
+msgid "Username"
+msgstr "Benutzername"
+
+#: Components/menuRegister.cpp:27
+msgid "Username of the created user."
+msgstr "Benutzername des neuen Benutzers."
+
+#: Components/menuRegister.cpp:28
+msgid "Password"
+msgstr "Passwort"
+
+#: Components/menuRegister.cpp:28
+msgid "Password of the created user."
+msgstr "Passwort des neuen Benutzers."
+
+#: Components/menuRegister.cpp:29
+msgid "Toggles the password plain text view."
+msgstr "Schaltet die Passwort-Klartextanzeige um."
+
+#: Components/menuRegister.cpp:30
+msgid "Creates a new user."
+msgstr "Einen neuen Account erstellen."
+
+#: Components/menuRegister.cpp:31
+msgid "Back"
+msgstr "Zurück"
+
+#: Components/menuRegister.cpp:31
+msgid "Goes back to the main menu."
+msgstr "Kehrt zum Hauptmenü zurück."

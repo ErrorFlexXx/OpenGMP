@@ -17,7 +17,6 @@ namespace OpenGMP
         {
         public:
             NetworkSystem(GameClient &gameClient); //dev std constructor
-            NetworkSystem(GameClient &gameClient, const std::string &hostname, unsigned short port);
 
             bool Startup();
 

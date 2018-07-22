@@ -3,6 +3,8 @@
 #include "../GUI/menuButton.hpp"
 #include "../Gothic/cGameManager.hpp"
 #include "../Systems/menuSystem.hpp"
+#include <libintl.h>
+#define _(string) gettext (string)
 
 using namespace OpenGMP;
 using namespace OpenGMP::Components;
@@ -18,14 +20,14 @@ void MenuMain::OnCreate()
 {
     MainMenu::OnCreate();
     gameManager = CGameManager::GetInstance();
-    back->CreateTextCenterX("Hauptmenü", 70);
+    back->CreateTextCenterX(_("Mainmenu"), 70);
 
     const int offset = 200;
     const int dist = 38;
 
-    btnLogin = AddButton("Anmelden", "In einen bestehenden Account einloggen.", offset + dist * 0, nullptr);
-    btnRegister = AddButton("Registrieren", "Einen neuen Account erstellen.", offset + dist * 1, [=]() { gameClient.menuSystem.menuRegister.Open(); });
-    btnQuit = AddButton("Beenden", "Beendet das Spiel. Wechsel zum Desktop.", offset + dist * 3, [=]() { gameManager->ExitGame(); });
+    btnLogin = AddButton(_("Login"), _("Log into an existing account."), offset + dist * 0, nullptr);
+    btnRegister = AddButton(_("Register"), _("Create a new account."), offset + dist * 1, [=]() { gameClient.menuSystem.menuRegister.Open(); });
+    btnQuit = AddButton(_("Quit"), _("Quit the game. Switch to the desktop."), offset + dist * 3, [=]() { gameManager->ExitGame(); });
     
     btnLogin->Enabled(false);
     btnRegister->Enabled(false);

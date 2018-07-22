@@ -51,7 +51,7 @@ resources.res : resources.rc
 	$(CC) $(CFLAGS) -c $<
 
 $(EXE_FILE): $(OBJECT_FILES) resources.res
-	$(CC) $(LFLAGS) $(OBJECT_FILES) resources.res -o $(EXE_FILE)
+	$(CC) $(LFLAGS) $(OBJECT_FILES) resources.res -o $(EXE_FILE) -lpsapi
 
 clean:
 ifeq ($(OS),Windows_NT)

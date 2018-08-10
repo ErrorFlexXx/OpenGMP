@@ -21,15 +21,10 @@ endif()
 if(MINGW)
     set(COMPILER_PREFIX "i686-mingw32")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s")
-endif()
-
-if(MSVC)
+elseif(MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /MP /bigobj")
-    add_definitions(-DNOMINMAX)
-endif()
-
-if(MSVC)
     set(USE_MSVC_RUNTIME_LIBRARY_DLL ON)
+    add_definitions(-DNOMINMAX)
 endif()
 
 # ---------------- Doxygen documentation ------------
@@ -45,22 +40,27 @@ if(DOXYGEN_FOUND)
         )
 endif(DOXYGEN_FOUND)
 
+# -------------------------------------------------------------------
+
 #Set library output dir
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
-# Add used libraries to project
-add_subdirectory(lib/RakNet)
+# Add library includes directories:
 include_directories(lib/RakNet/Source)
 include_directories(lib/RakNet/DependentExtensions)
-add_subdirectory(lib/ZenLib)
 include_directories(lib/ZenLib)
-	# Temporarily disabled - cpgf breaks with v8.
-	# add_subdirectory(lib/v8)
-	# include_directories(lib/v8/include)
-add_subdirectory(lib/lua)
 include_directories(lib/lua/src)
 include_directories(lib/lua/etc)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/lua) #luaconf.h generated from lua cmake file.
+include_directories(lib/cpgf/include)
+include_directories(lib/json)
+include_directories(lib/tinydir)
+include_directories(src)
+
+add_subdirectory(lib/RakNet)
+add_subdirectory(lib/ZenLib)
+add_subdirectory(lib/lua)
+
 if(UNIX)
 	add_subdirectory(lib/python-cmake-buildsystem)
 	include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/python-cmake-buildsystem/bin) # generated from python cmake file.
@@ -69,10 +69,6 @@ else()
 	find_package(PythonLibs 2.7 EXACT REQUIRED)
 endif()
 add_subdirectory(lib/cpgf)
-include_directories(lib/cpgf/include)
-include_directories(lib/json)
-include_directories(lib/tinydir)
-include_directories(src)
 
 #Server
 file(GLOB serverSources
@@ -108,15 +104,17 @@ message("Will build server.")
 add_executable(OpenGMP-Server ${serverSources})
 target_link_libraries(OpenGMP-Server RakNetLibStatic liblua libpython-shared libCpgf utils mysqlclient)
 
-# Dirty hack for libpython shared lib not moved automatically by python cmake project.
+# Copy generated python library before linkage.
 if(UNIX)
 	set(PYTHON_OUT_SHARED_LIB ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/lib/python-cmake-buildsystem/lib/libpython2.7.so)
 else()
 	set(PYTHON_OUT_SHARED_LIB ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/lib/python-cmake-buildsystem/lib/python2.7.dll)
-endif(UNIX)
+endif()
 add_custom_command(TARGET OpenGMP-Server
 		   PRE_LINK
 		   COMMAND ${CMAKE_COMMAND} -E copy ${PYTHON_OUT_SHARED_LIB} ${CMAKE_CURRENT_BINARY_DIR})
+
+# Copy support scripts:
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/lib/BashSupportScripts/binFileToAsciHexInitList.sh
      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 

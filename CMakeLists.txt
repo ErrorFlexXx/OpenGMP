@@ -40,7 +40,7 @@ if(DOXYGEN_FOUND)
         )
 endif(DOXYGEN_FOUND)
 
-# -------------------------------------------------------------------
+# ---------------------------------------------------
 
 #Set library output dir
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
@@ -124,3 +124,5 @@ if(MSVC)
 else()
   message("Client on Gothic2 base cannot be built on Linux systems. Sorry. msvc compiler required.")
 endif()
+
+add_subdirectory(src/Launcher)

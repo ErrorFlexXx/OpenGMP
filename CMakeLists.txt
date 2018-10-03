@@ -124,5 +124,3 @@ if(MSVC)
 else()
   message("Client on Gothic2 base cannot be built on Linux systems. Sorry. msvc compiler required.")
 endif()
-
-add_subdirectory(src/Launcher)

@@ -357,6 +357,9 @@
     <ClInclude Include="..\..\..\Shared\Components\version.hpp">
       <Filter>Shared\Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\constants.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\Shared\Resources\appIcon.ico">

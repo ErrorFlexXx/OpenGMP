@@ -1,6 +1,7 @@
 #include "gameClient.hpp"
 #include "Hooks/otherHooks.hpp"
 #include "Hooks/hGame.hpp"
+#include <Shared/Types/constants.hpp>
 #include <libintl.h>
 #include <locale>
 #include <iostream>
@@ -11,15 +12,8 @@ using namespace OpenGMP::Hooks;
 using namespace OpenGMP::Systems;
 
 HINSTANCE GameClient::dllInstance = nullptr;
-string GameClient::serverName = "";
+string GameClient::serverName = "localhost";
 unsigned short GameClient::serverPort = 1760;
-
-/* Called from external created thread */
-extern "C"
-void __declspec(dllexport) SetConnectData(char *serverName)
-{
-    GameClient::serverName = serverName;
-}
 
 GameClient::GameClient()
     : inited(false)
@@ -63,4 +57,27 @@ bool GameClient::IsGothic2exe()
         filenameStr[i] = std::tolower(filenameStr[i], loc);
     }
     return (filenameStr.find(gothicFilename) != string::npos);
+}
+
+void GameClient::ReadEnvironmentConnectData()
+{
+    //Read connect data from environment variables
+    char* buf = nullptr;
+    size_t sz = 0;
+    
+    if (_dupenv_s(&buf, &sz, hostnameEnvVarName) == 0 && buf != nullptr)
+    {
+        GameClient::serverName = buf;
+        free(buf);
+        buf = nullptr;
+        sz = 0;
+    }
+
+    if (_dupenv_s(&buf, &sz, portEnvVarName) == 0 && buf != nullptr)
+    {
+        GameClient::serverPort = atoi(buf);
+        free(buf);
+        buf = nullptr;
+        sz = 0;
+    }
 }

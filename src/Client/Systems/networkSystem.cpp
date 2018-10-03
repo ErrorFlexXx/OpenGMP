@@ -33,11 +33,12 @@ NetworkSystem::NetworkSystem(GameClient &gameClient)
 
 bool NetworkSystem::Startup()
 {
-    if (started == false)
+    if (started == false) //Don't start twice
     {
-        started = true;
-        hostname = GameClient::serverName; //Use injected hostname and port stored in GameClient from external thread.
-        port = GameClient::serverPort;
+        started = true; //Network system running now.
+        gameClient.ReadEnvironmentConnectData(); //Update connect data
+        hostname = GameClient::serverName;  //Use hostname from GameClient
+        port = GameClient::serverPort;      //Use port from GameClient
 
         StartupResult result = peerInterface->Startup(1, &socketDescriptor, 1);
         if (result != RAKNET_STARTED)
@@ -61,7 +62,7 @@ bool NetworkSystem::Startup()
 
 void NetworkSystem::Shutdown()
 {
-    started = false; //New thread possible.
+    started = false; //Network system no longer running.
     peerInterface->Shutdown(1000);
 }
 
@@ -113,5 +114,5 @@ void NetworkSystem::Update()
 
 void NetworkSystem::StartupFailed()
 {
-    started = false;
+    started = false; //NetworkSystem no longer running.
 }

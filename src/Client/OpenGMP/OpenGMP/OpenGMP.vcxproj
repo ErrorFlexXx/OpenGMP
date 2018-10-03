@@ -167,6 +167,7 @@
     <ClInclude Include="..\..\..\Shared\Components\id.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\version.hpp" />
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\constants.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\loginSystemMessages.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\networkSystemMessages.hpp" />
     <ClInclude Include="..\..\Components\menuMain.hpp" />

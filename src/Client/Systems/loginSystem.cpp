@@ -42,7 +42,7 @@ void LoginSystem::Process(RakNet::Packet *packet)
         }
         case ID_CONNECTION_ATTEMPT_FAILED:
         {
-            std::cout << "Connection attempt failed." << std::endl;
+            std::cout << "Connection attempt failed (Host: \"" << gameClient.serverName << "\" Port: " << gameClient.serverPort << ")!" << std::endl;
             break;
         }
         default:

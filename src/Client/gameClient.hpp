@@ -16,9 +16,10 @@ namespace OpenGMP
     {
     public:
         GameClient();
-        void Startup(HINSTANCE inst);  //!< Initializes the game client
-        void Stop();     //!< Stops the OpenGMP instance (do cleanup..)
+        void Startup(HINSTANCE inst);   // Initializes the game client
+        void Stop();                    // Stops the OpenGMP instance (do cleanup..)
         bool IsGothic2exe();
+        void ReadEnvironmentConnectData();
 
         static HINSTANCE dllInstance;
         static std::string serverName;

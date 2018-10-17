@@ -1,0 +1,7 @@
+- File download
+- Json parsing
+- zip pack / unpack
+- md5 checksum for binary data
+- Get Admin Priviliges - Exe staging
+- Get user settings path
+- 

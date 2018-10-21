@@ -2,7 +2,7 @@
 
 #include "menu.hpp"
 #include "visual.hpp"
-#include "../Systems/inputKeyCombSystem.hpp"
+#include <Client/Systems/inputSystem.hpp>
 #include <vector>
 #include <functional>
 
@@ -60,7 +60,7 @@ namespace OpenGMP
             unsigned long long helpTextNextUpdateTime;
 
         private:
-            OpenGMP::Systems::InputKeyCombSystem scrollHelper;
+            OpenGMP::Systems::InputSystemKeyCombination scrollHelper;
             bool init;
         };
     }

@@ -8,6 +8,11 @@ class oCGame;
 class CGameManager
 {
 public:
+    static const struct Addresses
+    {
+        static const unsigned int Menu = 0x004292D0;
+    } Addresses;
+
     static CGameManager *GetInstance()
     {
         return *(CGameManager**)(0x008C2958);
@@ -67,6 +72,9 @@ public:
     {
         XCALL(0x00425780);
     }
+    
+    //Detour declarations:
+    void GMP_Menu(int savegame);
 
 private:
     CGameManager(); //Abstract class (size unknown) -> Do not create one

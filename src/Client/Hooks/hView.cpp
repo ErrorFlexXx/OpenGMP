@@ -20,11 +20,11 @@ zCVob *HView::camVob = nullptr;
 zCCamera *HView::camera = nullptr;
 
 //Address casting:
-typedef void (zCView::*DrawItemsDetourPtr)();
-DrawItemsDetourPtr drawItemsAddress = &zCView::DrawItemsDetour; //Get address of detour method.
+typedef void (zCView::*tDrawItems)();
+tDrawItems pzCViewGMPDrawItems = &zCView::GMP_DrawItems;
 
 HView::HView()
-    : hookDrawItems(false, (DWORD)zCView::Addresses::DrawItems, (DWORD)(void*&)drawItemsAddress)
+    : drawItemsDetour(zCView::Addresses::DrawItems, 5, DETOUR_CAST pzCViewGMPDrawItems)
 {
 }
 
@@ -39,16 +39,15 @@ HView *HView::GetInstance()
 
 void HView::DoHook()
 {
-    hookDrawItems.DoHook();
+    drawItemsDetour.Activate();
 }
 
 void HView::UndoHook()
 {
-    hookDrawItems.UndoHook();
 }
 
 /* This one replaces zCView DrawItems */
-void zCView::DrawItemsDetour()
+void zCView::GMP_DrawItems()
 {
     auto viewIt = HView::vobRenderList.find(this);
     if (viewIt != HView::vobRenderList.end())

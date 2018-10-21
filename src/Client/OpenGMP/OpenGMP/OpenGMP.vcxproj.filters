@@ -124,9 +124,6 @@
     <ClCompile Include="..\..\..\Shared\Systems\versionSystem.cpp">
       <Filter>Shared\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Hooks\hook.cpp">
-      <Filter>Hooks</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\gameClient.cpp" />
     <ClCompile Include="..\..\Systems\networkSystem.cpp">
       <Filter>Systems</Filter>
@@ -135,12 +132,6 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Systems\inputSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Systems\inputKeyDownRepeatSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Systems\inputKeyCombSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Objects\clientClient.cpp">
@@ -157,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Shared\Components\authData.cpp">
       <Filter>Shared\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Objects\CDetour.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -311,9 +305,6 @@
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp">
       <Filter>Shared\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Hooks\hook.hpp">
-      <Filter>Hooks</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\gameClient.hpp" />
     <ClInclude Include="..\..\Systems\networkSystem.hpp">
       <Filter>Systems</Filter>
@@ -332,12 +323,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Types\virtualKeys.hpp">
       <Filter>Types</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Systems\inputKeyDownRepeatSystem.hpp">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Systems\inputKeyCombSystem.hpp">
-      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Objects\clientClient.hpp">
       <Filter>Objects</Filter>
@@ -359,6 +344,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Shared\Types\constants.hpp">
       <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Objects\CDetour.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

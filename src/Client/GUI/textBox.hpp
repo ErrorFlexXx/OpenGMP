@@ -2,7 +2,7 @@
 
 #include "view.hpp"
 #include "visual.hpp"
-#include "../Systems/inputKeyDownRepeatSystem.hpp"
+#include <Client/Systems/inputSystem.hpp>
 #include <string>
 
 namespace OpenGMP
@@ -70,7 +70,7 @@ namespace OpenGMP
             Visual rightArrow;
             unsigned long long cursorTime;
             std::string input;
-            Systems::InputKeyDownRepeatSystem keyRepeater;
+            Systems::InputSystemKeyDownRepeat keyRepeater;
         };
     }
 }

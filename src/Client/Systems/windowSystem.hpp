@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Hooks/hook.hpp"
+#include <Client/Objects/CDetour.h>
 #include <string>
 #define _WINSOCKAPI_ //Stop windows.h from including winsock.h (colliding with RakNet)
 #include <windows.h>
@@ -20,7 +20,7 @@ namespace OpenGMP
 
         private:
             static DWORD procId;
-            static Hook splashHook;
+            static CDetour splashDetour;
         };
     }
 }

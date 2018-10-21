@@ -1,6 +1,6 @@
 #pragma once
 
-#include "hook.hpp"
+#include <Client/Objects/CDetour.h>
 #include <map>
 
 class zCView;
@@ -22,7 +22,7 @@ namespace OpenGMP
                        
             static bool inited;
             static HView *instance; //Singleton instance
-            Hook hookDrawItems;
+            CDetour drawItemsDetour; //Detour of zCView::DrawItems
             static std::map<zCView*, zCVob*> vobRenderList;
             static zCWorld *rndrWorld;
             static zCVob *camVob;

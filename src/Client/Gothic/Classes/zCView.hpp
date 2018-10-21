@@ -44,8 +44,6 @@ public:
         static const unsigned int DrawItems = 0x007A6750;
     } Addresses;
 
-    void DrawItemsDetour(); //Defined in HView class.
-
     static zCView *GetScreen()
     {
         return *(zCView**)(0x00AB6468);
@@ -506,6 +504,9 @@ public:
     {
         *(bool*)((unsigned int)this + VarOffsets::m_bFillZ) = value;
     }
+
+    //Detour declarations:
+    void GMP_DrawItems();
 
 protected:
     void ApplyOpenClose(class zVEC2 &,class zVEC2 &)

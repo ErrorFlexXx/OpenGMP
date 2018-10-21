@@ -1,5 +1,7 @@
 #include "hGame.hpp"
 #include <Shared/Components/GameTime.hpp>
+#include <Client/Objects/CDetour.h>
+#include "../Gothic/cGameManager.hpp"
 #include "../Gothic/Objects/oCGame.hpp"
 #include "../Gothic/Classes/zCRenderer.hpp"
 #include "../Gothic/Classes/zCView.hpp"
@@ -15,58 +17,62 @@ using namespace OpenGMP::GUI;
 using namespace OpenGMP::Systems;
 using namespace OpenGMP::Components;
 
-HGame *HGame::instance = nullptr; //Instance to get the object from (hooked) non member function.
-bool HGame::outgameStarted = false;
-zCOLOR HGame::blankColor = zCOLOR(0, 0, 0, 0);
+extern GameClient gameClient;
 
 typedef void (*SysEventPtr)();
 SysEventPtr sysEvent = (SysEventPtr)(0x5053E0); //Get address of detour method.
 
+typedef void (CGameManager::*tMenu)(int savegame);
+tMenu pCGameManagerGMPMenu = &CGameManager::GMP_Menu;
+
+typedef void (oCGame::*tRender)();
+tRender poCGameGMPRender = &oCGame::GMP_Render;
+
 HGame::HGame(GameClient &gameClient)
     : gameClient(gameClient)
-    , m_hookOutgame(false, (DWORD)oCGame::Addresses::Menu, (DWORD)&RunOutgame)
-    , m_hookIngame(false, (DWORD)oCGame::Addresses::Render, (DWORD)&RunIngame)
+    , outgameStarted(false)
+    , blankColor(0, 0, 0, 0)
+    , menuDetour(CGameManager::Addresses::Menu, 7, DETOUR_CAST pCGameManagerGMPMenu)
+    , renderDetour(oCGame::Addresses::Render, 7, DETOUR_CAST poCGameGMPRender)
 {
-    instance = this;
 }
 
-void HGame::RunOutgame()
+void CGameManager::GMP_Menu(int savegame)
 {
-        GameTime::Update();
-        unsigned long long now = GameTime::GetTicks();
-        instance->gameClient.inputSystem.Update();
-        if (!HGame::outgameStarted)
-        {
-            instance->StartOutgame();
-            HGame::outgameStarted = true;
-        }
-        instance->gameClient.menuSystem.UpdateMenus(now);
-        instance->gameClient.networkSystem.Update();
-        //Rendering:
-        sysEvent();
-        zCRenderer *renderer = zCRenderer::GetRenderer();
-        renderer->Vid_Clear(blankColor, 3);
-        renderer->BeginFrame();
-        zCView::GetScreen()->Render();
-        renderer->EndFrame();
-        renderer->Vid_Blit(1, 0, 0);
+    GameTime::Update();
+    unsigned long long now = GameTime::GetTicks();
+    gameClient.inputSystem.Update();
+    if (!gameClient.hookGame.outgameStarted)
+    {
+        gameClient.hookGame.StartOutgame();
+        gameClient.hookGame.outgameStarted = true;
+    }
+    gameClient.menuSystem.UpdateMenus(now);
+    gameClient.networkSystem.Update();
+
+    //Rendering:
+    sysEvent();
+    zCRenderer *renderer = zCRenderer::GetRenderer();
+    renderer->Vid_Clear(gameClient.hookGame.blankColor, 3);
+    renderer->BeginFrame();
+    zCView::GetScreen()->Render();
+    renderer->EndFrame();
+    renderer->Vid_Blit(1, 0, 0);
 }
 
-void HGame::RunIngame()
+void oCGame::GMP_Render()
 {
 
 }
 
 void HGame::Startup()
 {
-    m_hookIngame.DoHook();
-    m_hookOutgame.DoHook();
+    renderDetour.Activate();
+    menuDetour.Activate();
 }
 
 void HGame::Shutdown()
 {
-    m_hookIngame.UndoHook();
-    m_hookOutgame.UndoHook();
 }
 
 void HGame::StartOutgame()

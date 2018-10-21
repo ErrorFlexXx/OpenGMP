@@ -1,11 +1,94 @@
 #include "inputSystem.hpp"
 #include <Shared/Components/GameTime.hpp>
-#include "../Systems/windowSystem.hpp"
+#include <Client/gameClient.hpp>
+#include <Client/Systems/windowSystem.hpp>
 
 using namespace OpenGMP;
 using namespace OpenGMP::Components;
 using namespace OpenGMP::Systems;
 using namespace OpenGMP::Types;
+
+/* InputSystem Key Down Repeater*/
+
+InputSystemKeyDownRepeat::InputSystemKeyDownRepeat(GameClient &gameClient, std::function<void(VirtualKeys)> action, int holdTime, int rate)
+    : gameClient(gameClient)
+{
+    this->action = action;
+    this->holdTime = holdTime;
+    this->rate = rate;
+    this->nextTime = ULLONG_MAX; //Do not repeat a never pressed key.
+}
+
+void InputSystemKeyDownRepeat::Update(unsigned long long now)
+{
+    //Repeat time reached and not after long focus lost ?
+    if (now > nextTime && now < nextTime + 3 * rate)
+    {
+        nextTime = now + rate * TICKS_PER_MILLISECOND;
+        if (gameClient.inputSystem.IsPressed(currentKey) && action)
+            action(currentKey);
+    }
+}
+
+void InputSystemKeyDownRepeat::KeyDown(const VirtualKeys &key, unsigned long long now)
+{
+    currentKey = key;
+    nextTime = now + holdTime * TICKS_PER_MILLISECOND;
+}
+
+/* InputSystem - Key Combinations */
+
+InputSystemKeyCombination::InputSystemKeyCombination(GameClient &gameClient, int holdTime, int rate)
+    : gameClient(gameClient)
+    , holdTime(holdTime)
+    , rate(rate)
+    , current(nullptr)
+{}
+
+void InputSystemKeyCombination::Add(const std::list<VirtualKeys> &keyCombination, const std::function<void()> &action)
+{
+    if (0 < keyCombination.size())
+    {
+        actionKeyCombinationBindings.push_back(new ActionKeyCombinationBinding(keyCombination, action));
+    }
+}
+
+void InputSystemKeyCombination::Update(unsigned long long now)
+{
+    for (auto it : actionKeyCombinationBindings)
+    {
+        ActionKeyCombinationBinding *pair = it;
+        bool allCombinationKeysPressed = true;
+        for (const VirtualKeys &key : pair->keyCombination)
+        {
+            if (!gameClient.inputSystem.IsPressed(key))
+            {
+                allCombinationKeysPressed = false;
+                break;
+            }
+        }
+        if (allCombinationKeysPressed)
+        {
+            if (pair != current)
+            {
+                current = pair;
+                nextTime = now + holdTime * TICKS_PER_MILLISECOND;
+                if (pair->action)
+                    pair->action();
+            }
+            else if (now > nextTime)
+            {
+                nextTime = now + rate * TICKS_PER_MILLISECOND;
+                if (pair->action)
+                    pair->action();
+            }
+            return;
+        }
+    }
+    current = nullptr;
+}
+
+/* InputSystem */
 
 InputSystem::InputSystem(GameClient &gameClient)
     : gameClient(gameClient)

@@ -12,7 +12,6 @@ public:
      */
     static const struct Addresses
     {
-        static const unsigned int Menu = 0x004292D0;
         static const unsigned int Render = 0x006C86A0;
     } Addresses;
 
@@ -90,4 +89,7 @@ public:
     {
         XCALL(0x006CB640);
     }
+
+    //Detour declarations:
+    void GMP_Render();
 };

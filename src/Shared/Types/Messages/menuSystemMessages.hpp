@@ -5,13 +5,12 @@
 namespace OpenGMP
 {
     namespace Types
-    {        
-        enum LoginSystemMessages : unsigned char
+    {
+        enum MenuSystemMessages : unsigned char
         {
-            BANNED,
-            SERVERFULL,
-            AUTH,
-            REGISTER
+            SHOW_NOTIFICATION,
+            SHOW_TIMED_NOTIFICATION,
+            HIDE_NOTIFICATION
         };
     }
 }

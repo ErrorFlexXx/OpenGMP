@@ -152,6 +152,15 @@
     <ClCompile Include="..\..\Objects\CDetour.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\color.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Components\notificationBox.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\notificationText.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Hooks\hGame.hpp">
@@ -347,6 +356,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Objects\CDetour.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\color.hpp">
+      <Filter>Shared\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\Messages\menuSystemMessages.hpp">
+      <Filter>Shared\Types\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Components\notificationBox.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\notificationText.hpp">
+      <Filter>Shared\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

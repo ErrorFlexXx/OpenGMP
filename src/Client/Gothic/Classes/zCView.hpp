@@ -309,12 +309,12 @@ public:
         XCALL(0x007A7D20);
     }
 
-    void PrintTimedCX(int,class zSTRING const &,float,zCOLOR *)
+    void PrintTimedCX(int posY, class zSTRING const &text, float time, zCOLOR *col)
     {
         XCALL(0x007A7DB0);
     }
 
-    void PrintTimedCY(int,class zSTRING const &,float,zCOLOR *)
+    void PrintTimedCY(int posX, class zSTRING const &text, float time, zCOLOR *col)
     {
         XCALL(0x007A7F00);
     }

@@ -4,9 +4,12 @@
 #include <Shared/Types/Messages/networkSystemMessages.hpp>
 #include <Shared/Types/Messages/loginSystemMessages.hpp>
 #include <iostream>
+#include <string>
 #include <BitStream.h>
 #include <MessageIdentifiers.h>
 #include <iphlpapi.h>
+#include <libintl.h>
+#define _(string) gettext (string)
 
 using namespace RakNet;
 using namespace OpenGMP;
@@ -31,23 +34,38 @@ void LoginSystem::Process(RakNet::Packet *packet)
         case ID_CONNECTION_LOST:
         {
             gameClient.menuSystem.menuMain.DisableNetworkElements();
-            std::cout << "Connection Lost." << std::endl;
+            gameClient.menuSystem.ShowNotification(
+                20,
+                std::string(_("Connection to server lost!")),
+                Color(255, 0, 0, 255)
+            );
             break;
         }
         case ID_CONNECTION_REQUEST_ACCEPTED:
         {
             gameClient.networkSystem.serverAddress = packet->systemAddress;
-            std::cout << "Connection established." << std::endl;
+            gameClient.menuSystem.HideNotification();
             break;
         }
         case ID_CONNECTION_ATTEMPT_FAILED:
         {
-            std::cout << "Connection attempt failed (Host: \"" << gameClient.serverName << "\" Port: " << gameClient.serverPort << ")!" << std::endl;
+            gameClient.menuSystem.ShowNotification(
+                20,
+                std::string(_("Connection attempt failed (Host: ")).append(gameClient.serverName).append(_(" Port: ")).append(std::to_string(gameClient.serverPort)).append(")!"),
+                Color(255, 0, 0, 255)
+            );
             break;
         }
         default:
         {
-            std::cout << "LoginSystem RakNet Message not handled! ID is: " << (int)command << ".";
+#ifdef DBG_NETWORK
+            gameClient.menuSystem.ShowNotification(
+                20,
+                std::string(_("Loginsystem RakNet Message not handled! ID is: ")).append(std::to_string((int)command)).append("!"),
+                Color(255, 0, 0, 255),
+                10
+            );
+#endif
             break;
         }
         }

@@ -48,6 +48,7 @@ void CGameManager::GMP_Menu(int savegame)
         gameClient.hookGame.outgameStarted = true;
     }
     gameClient.menuSystem.UpdateMenus(now);
+    gameClient.menuSystem.UpdateNotification(now);
     gameClient.networkSystem.Update();
 
     //Rendering:

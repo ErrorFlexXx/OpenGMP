@@ -2,6 +2,8 @@
 
 #include <MessageIdentifiers.h>
 
+#define DBG_NETWORK
+
 namespace OpenGMP
 {
     namespace Types
@@ -14,7 +16,8 @@ namespace OpenGMP
         enum NetworkSystemMessages : unsigned char
         {
             ClientPing = ID_USER_PACKET_ENUM,
-            LoginSystem
+            LoginSystem,
+            MenuSystem
         };
     }
 }

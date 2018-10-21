@@ -2,6 +2,7 @@
 
 #include "../xcall.h"
 #include "zSTRING.hpp"
+#include <Shared/Components/color.hpp>
 
 class zCOLOR
 {
@@ -40,6 +41,14 @@ public:
         this->m_g = color.g();
         this->m_b = color.b();
         this->m_a = color.a();
+    }
+
+    zCOLOR(const OpenGMP::Components::Color &color)
+    {
+        this->m_r = color.r;
+        this->m_g = color.g;
+        this->m_b = color.b;
+        this->m_a = color.a;
     }
 
     /**

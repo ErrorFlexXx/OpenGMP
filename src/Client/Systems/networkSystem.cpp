@@ -3,10 +3,14 @@
 #include <BitStream.h>
 #include <GetTime.h>
 #include <MessageIdentifiers.h>
+#include <Shared/Components/color.hpp>
 #include <Shared/Types/Messages/networkSystemMessages.hpp>
+#include <Shared/Types/Messages/menuSystemMessages.hpp>
 #include <NativeFeatureIncludes.h>
 #include <SecureHandshake.h>
 #include <iostream>
+#include <libintl.h>
+#define _(string) gettext (string)
 
 #if LIBCAT_SECURITY!=1
 #error "Define LIBCAT_SECURITY 1 in lib/RakNet/Source/NativeFeatureIncludesOverrides.h to enable Encryption"
@@ -15,10 +19,11 @@
 using namespace OpenGMP;
 using namespace OpenGMP::Types;
 using namespace OpenGMP::Systems;
+using namespace OpenGMP::Components;
 using namespace RakNet;
 
 bool NetworkSystem::started = false;
-char NetworkSystem::public_key[] = { (char)0xE3, (char)0x1C, (char)0x4C, (char)0xC4, (char)0x38, (char)0x52, (char)0x32, (char)0x55, (char)0x22, (char)0x51, (char)0xA9, (char)0x6B, (char)0x82, (char)0x96, (char)0xE3, (char)0xEB, (char)0x82, (char)0x92, (char)0xF4, (char)0xAA, (char)0x37, (char)0x44, (char)0x39, (char)0xF4, (char)0x08, (char)0xA6, (char)0x4D, (char)0xE1, (char)0x16, (char)0xC4, (char)0x64, (char)0xD1, (char)0x04, (char)0x17, (char)0xB5, (char)0xF6, (char)0x11, (char)0xBE, (char)0xAE, (char)0x4E, (char)0x0C, (char)0xAE, (char)0xEC, (char)0x2B, (char)0xE7, (char)0xF5, (char)0x6B, (char)0xA3, (char)0x65, (char)0x42, (char)0xA0, (char)0x5F, (char)0x03, (char)0xC4, (char)0x80, (char)0x68, (char)0x25, (char)0xD9, (char)0xC7, (char)0x93, (char)0x91, (char)0x0F, (char)0x9A, (char)0x1F };
+char NetworkSystem::public_key[] = { (char)0x04, (char)0xBB, (char)0x07, (char)0xEC, (char)0x1B, (char)0x19, (char)0x21, (char)0x7A, (char)0xDE, (char)0x0F, (char)0xF8, (char)0xC5, (char)0x89, (char)0x61, (char)0x71, (char)0x94, (char)0xA5, (char)0x22, (char)0x2C, (char)0x4A, (char)0xB1, (char)0x1C, (char)0x1E, (char)0xD2, (char)0x1D, (char)0x03, (char)0x17, (char)0x89, (char)0x5B, (char)0xEF, (char)0x6B, (char)0x06, (char)0x1A, (char)0x3B, (char)0xF7, (char)0xD4, (char)0x78, (char)0xC8, (char)0xE9, (char)0x4E, (char)0x8B, (char)0x3B, (char)0x0E, (char)0xB8, (char)0xE0, (char)0x0D, (char)0x70, (char)0x6B, (char)0xB7, (char)0x71, (char)0x46, (char)0xD5, (char)0x42, (char)0xB6, (char)0xCB, (char)0xAB, (char)0x74, (char)0x3A, (char)0x06, (char)0x3F, (char)0x55, (char)0xA6, (char)0xAD, (char)0x13 };
 
 NetworkSystem::NetworkSystem(GameClient &gameClient)
     : gameClient(gameClient)
@@ -55,6 +60,11 @@ bool NetworkSystem::Startup()
             StartupFailed();
             return false;
         }
+        gameClient.menuSystem.ShowNotification(
+            20,
+            std::string(_("Connecting to server (Host: ")).append(gameClient.serverName).append(_(" Port: ")).append(std::to_string(gameClient.serverPort)).append(")."),
+            Color(255, 255, 255, 255)
+        );
         return true;
     }
     return false;
@@ -100,6 +110,11 @@ void NetworkSystem::Update()
                 peerInterface->Send(&bsOut, PacketPriority::LOW_PRIORITY, PacketReliability::UNRELIABLE, 0, serverAddress, false);
                 peerInterface->DeallocatePacket(packet);
                 std::cout << "Send ping with value " << ping << std::endl;
+                break;
+            }
+            case NetworkSystemMessages::MenuSystem:
+            {
+                gameClient.menuSystem.Process(packet);
                 break;
             }
             default:

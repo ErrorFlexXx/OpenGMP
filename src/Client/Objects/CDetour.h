@@ -5,6 +5,7 @@
 #include <map>
 
 #define DETOUR_CAST (void*)(void*&)
+#define FASTHOOK    1
 
 /**
  * @brief CDetour class

@@ -44,6 +44,17 @@ Note: The private key has to be kept secret, to support a basic security of the 
 
 After this one can open the .sln project located at src/Client/OpenGMP-Client and compile it.
 
+#### Updating or creating new translations
+All texts in the project are covered in GNU GetText Strings. At runtime environment variables are read to determine, which translation file should be loaded.
+The program will search for translations in the root directory (currently Gothic II)/locale/xx\_XX/LC\_MESSAGES/OpenGMP.mo, where xx stands for the letter code (e.g. de for german).
+If the required translation can't be found, gettext will display the default english texts.
+
+To update translation files or create a translation for a new language, one can install poedit. Afterwards open the *.po file and click update from source or
+to create a new translation click File->New->Select Language->Extract from source.
+
+### Building the Launcher
+On windows, there is a need to add the path to `jom.exe` from the Qt installation to the path variable.
+
 ## Scripting
 Read more about scripting in the [ServerScripts](https://www.github.com/ErrorFlexXx/OpenGMP/tree/master/ServerScripts) directory.
 

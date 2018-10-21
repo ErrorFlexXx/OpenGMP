@@ -51,7 +51,7 @@ void LoginSystem::Process(RakNet::Packet *packet)
         {
             gameClient.menuSystem.ShowNotification(
                 20,
-                std::string(_("Connection attempt failed (Host: ")).append(gameClient.serverName).append(_(" Port: ")).append(std::to_string(gameClient.serverPort)).append(")!"),
+                std::string(_("Connection attempt failed")).append(" (Host: ").append(gameClient.serverName).append(" Port: ").append(std::to_string(gameClient.serverPort)).append(")!"),
                 Color(255, 0, 0, 255)
             );
             break;
@@ -61,7 +61,7 @@ void LoginSystem::Process(RakNet::Packet *packet)
 #ifdef DBG_NETWORK
             gameClient.menuSystem.ShowNotification(
                 20,
-                std::string(_("LoginSystem RakNet Message not handled! ID is: ")).append(std::to_string((int)command)).append("!"),
+                std::string(_("LoginSystem RakNet Message not handled! ID is")).append(": ").append(std::to_string((int)command)).append("!"),
                 Color(255, 0, 0, 255),
                 10
             );
@@ -85,7 +85,14 @@ void LoginSystem::Process(RakNet::Packet *packet)
         }
         default:
         {
-            std::cout << "Unknown LoginSystemMessages id " << (int)(command);
+#ifdef DBG_NETWORK
+            gameClient.menuSystem.ShowNotification(
+                20,
+                std::string(_("LoginSystem RakNet Message not handled! ID is")).append(": ").append(std::to_string((int)command)).append("!"),
+                Color(255, 0, 0, 255),
+                10
+            );
+#endif
             break;
         }
         }

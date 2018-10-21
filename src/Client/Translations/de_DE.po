@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenGMP\n"
-"POT-Creation-Date: 2018-10-21 18:17+0200\n"
-"PO-Revision-Date: 2018-10-21 18:18+0200\n"
+"POT-Creation-Date: 2018-10-21 18:30+0200\n"
+"PO-Revision-Date: 2018-10-21 18:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -95,25 +95,32 @@ msgid "Connection to server lost!"
 msgstr "Verbindung zum Server verloren!"
 
 #: Systems/loginSystem.cpp:54
-msgid "Connection attempt failed (Host: "
-msgstr "Verbindungsversuch fehlgeschlagen (Host:"
+msgid "Connection attempt failed"
+msgstr "Verbindungsversuch fehlgeschlagen"
 
-#: Systems/loginSystem.cpp:54 Systems/networkSystem.cpp:65
-msgid " Port: "
-msgstr "Port:"
-
-#: Systems/loginSystem.cpp:64
-msgid "LoginSystem RakNet Message not handled! ID is: "
-msgstr "LoginSystem RakNet Nachricht nicht behandelt! ID ist:"
+#: Systems/loginSystem.cpp:64 Systems/loginSystem.cpp:91
+msgid "LoginSystem RakNet Message not handled! ID is"
+msgstr "LoginSystem RakNet Nachricht nicht behandelt! ID ist"
 
 #: Systems/menuSystem.cpp:126
-msgid "MenuSystem RakNet Message not handled! ID is: "
-msgstr "MenuSystem RakNet Nachricht nicht behandelt! ID ist:"
+msgid "MenuSystem RakNet Message not handled! ID is"
+msgstr "MenuSystem RakNet Nachricht nicht behandelt! ID ist"
+
+#: Systems/networkSystem.cpp:53
+msgid "Network cannot be started!"
+msgstr ""
 
 #: Systems/networkSystem.cpp:65
-msgid "Connecting to server (Host: "
-msgstr "Verbinde mit Server(Host:"
+msgid "Connection failed!"
+msgstr "Verbindung fehlgeschlagen!"
 
-#: Systems/networkSystem.cpp:127
-msgid "NetworkSystem RakNet Message not handled! ID is: "
-msgstr "LoginSystem RakNet Nachricht nicht behandelt! ID ist:"
+#: Systems/networkSystem.cpp:73
+msgid "Connecting to server"
+msgstr "Verbinde mit Server"
+
+#: Systems/networkSystem.cpp:135
+msgid "NetworkSystem RakNet Message not handled! ID is"
+msgstr "NetworkSystem RakNet Nachricht nicht behandelt! ID ist"
+
+#~ msgid " Port: "
+#~ msgstr "Port:"

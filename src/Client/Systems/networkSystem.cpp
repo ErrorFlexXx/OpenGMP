@@ -47,8 +47,12 @@ bool NetworkSystem::Startup()
 
         StartupResult result = peerInterface->Startup(1, &socketDescriptor, 1);
         if (result != RAKNET_STARTED)
-        {
-            std::cout << "peerInterface Startup failed with result: " << result << std::endl;
+        {            
+            gameClient.menuSystem.ShowNotification(
+                20,
+                std::string(_("Network cannot be started!")).append(" (RakNet StartupResult: ").append(std::to_string(result)).append(")."),
+                Color(255, 0, 0, 255)
+            );
             StartupFailed();
             return false;
         }
@@ -56,13 +60,17 @@ bool NetworkSystem::Startup()
         ConnectionAttemptResult conResult = peerInterface->Connect(hostname.c_str(), port, 0, 0, &pk);
         if (conResult != CONNECTION_ATTEMPT_STARTED)
         {
-            std::cout << "peerInterface connect failed with result: " << conResult << std::endl;
+            gameClient.menuSystem.ShowNotification(
+                20,
+                std::string(_("Connection failed!")).append(" (RakNet ConnectionAttemptResult: ").append(std::to_string(conResult)).append(")."),
+                Color(255, 0, 0, 255)
+            );
             StartupFailed();
             return false;
         }
         gameClient.menuSystem.ShowNotification(
             20,
-            std::string(_("Connecting to server (Host: ")).append(gameClient.serverName).append(_(" Port: ")).append(std::to_string(gameClient.serverPort)).append(")."),
+            std::string(_("Connecting to server")).append(" (Host: ").append(gameClient.serverName).append(" Port: ").append(std::to_string(gameClient.serverPort)).append(")."),
             Color(255, 255, 255, 255)
         );
         return true;
@@ -124,7 +132,7 @@ void NetworkSystem::Update()
 #ifdef DBG_NETWORK
                 gameClient.menuSystem.ShowNotification(
                     20,
-                    std::string(_("NetworkSystem RakNet Message not handled! ID is: ")).append(std::to_string((int)command)).append("!"),
+                    std::string(_("NetworkSystem RakNet Message not handled! ID is")).append(": ").append(std::to_string((int)command)).append("!"),
                     Color(255, 0, 0, 255),
                     10
                 );

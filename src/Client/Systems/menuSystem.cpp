@@ -123,7 +123,7 @@ void MenuSystem::Process(RakNet::Packet *packet)
 #ifdef DBG_NETWORK
             gameClient.menuSystem.ShowNotification(
                 20,
-                std::string(_("MenuSystem RakNet Message not handled! ID is: ")).append(std::to_string((int)command)).append("!"),
+                std::string(_("MenuSystem RakNet Message not handled! ID is")).append(": ").append(std::to_string((int)command)).append("!"),
                 Color(255, 0, 0, 255),
                 10
             );

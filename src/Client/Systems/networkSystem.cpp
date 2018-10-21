@@ -84,7 +84,9 @@ void NetworkSystem::Update()
     {
         if (0 < packet->length)
         {
-            switch (packet->data[0])
+            unsigned char command = packet->data[0];
+
+            switch (command)
             {
             case NetworkSystemMessages::LoginSystem:
             case ID_CONNECTION_LOST:
@@ -119,7 +121,14 @@ void NetworkSystem::Update()
             }
             default:
             {
-                std::cout << "Got unhandled package with id: " << (int)packet->data[0] << std::endl;
+#ifdef DBG_NETWORK
+                gameClient.menuSystem.ShowNotification(
+                    20,
+                    std::string(_("NetworkSystem RakNet Message not handled! ID is: ")).append(std::to_string((int)command)).append("!"),
+                    Color(255, 0, 0, 255),
+                    10
+                );
+#endif
                 break;
             }
             }

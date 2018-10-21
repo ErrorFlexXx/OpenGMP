@@ -61,7 +61,7 @@ void LoginSystem::Process(RakNet::Packet *packet)
 #ifdef DBG_NETWORK
             gameClient.menuSystem.ShowNotification(
                 20,
-                std::string(_("Loginsystem RakNet Message not handled! ID is: ")).append(std::to_string((int)command)).append("!"),
+                std::string(_("LoginSystem RakNet Message not handled! ID is: ")).append(std::to_string((int)command)).append("!"),
                 Color(255, 0, 0, 255),
                 10
             );

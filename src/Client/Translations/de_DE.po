@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenGMP\n"
-"POT-Creation-Date: 2018-10-21 18:09+0200\n"
-"PO-Revision-Date: 2018-10-21 18:13+0200\n"
+"POT-Creation-Date: 2018-10-21 18:17+0200\n"
+"PO-Revision-Date: 2018-10-21 18:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -102,10 +102,18 @@ msgstr "Verbindungsversuch fehlgeschlagen (Host:"
 msgid " Port: "
 msgstr "Port:"
 
-#: Systems/loginSystem.cpp:64 Systems/menuSystem.cpp:126
-msgid "Loginsystem RakNet Message not handled! ID is: "
-msgstr "Loginsystem RakNet Nachricht nicht behandelt! ID ist:"
+#: Systems/loginSystem.cpp:64
+msgid "LoginSystem RakNet Message not handled! ID is: "
+msgstr "LoginSystem RakNet Nachricht nicht behandelt! ID ist:"
+
+#: Systems/menuSystem.cpp:126
+msgid "MenuSystem RakNet Message not handled! ID is: "
+msgstr "MenuSystem RakNet Nachricht nicht behandelt! ID ist:"
 
 #: Systems/networkSystem.cpp:65
 msgid "Connecting to server (Host: "
 msgstr "Verbinde mit Server(Host:"
+
+#: Systems/networkSystem.cpp:127
+msgid "NetworkSystem RakNet Message not handled! ID is: "
+msgstr "LoginSystem RakNet Nachricht nicht behandelt! ID ist:"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Shared/Objects/IStreamObject.hpp>
+#include <Shared/Objects/iStreamObject.hpp>
 #include "color.hpp"
 #include <string>
 #include <stdint.h>

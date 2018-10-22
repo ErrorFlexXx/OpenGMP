@@ -9,7 +9,7 @@ namespace RakNet
 {
     class RakPeerInterface;
     class SocketDescriptor;
-    class Packet;
+    struct Packet;
 }
 
 namespace OpenGMP
@@ -61,7 +61,7 @@ namespace OpenGMP
             RakNet::RakPeerInterface *peerInterface;      //!< RakNet PeerInterface object.
 
         private:
-            GameServer &gameServer;
+            GameServer &gameServer; //!< The GameServer instance this System acts for.
             int gameport;     //!< UDP RakNet listening port.
             int playerslots;  //!< Currently accepted simulateously active connected players.
             std::string keyDirectory;

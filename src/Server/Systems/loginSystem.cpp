@@ -1,10 +1,10 @@
 #include "loginSystem.hpp"
-#include "../gameServer.hpp"
-#include "../Objects/serverClient.hpp"
+#include "scriptSystem.hpp"
+#include <Server/gameServer.hpp>
+#include <Server/Objects/serverClient.hpp>
+#include <Server/Utils/utils.h>
 #include <Shared/Types/Messages/networkSystemMessages.hpp>
 #include <Shared/Types/Messages/loginSystemMessages.hpp>
-#include "../Utils/utils.h"
-#include "scriptSystem.hpp"
 #include <utils/logger.h>
 #include <BitStream.h>
 #include <MessageIdentifiers.h>

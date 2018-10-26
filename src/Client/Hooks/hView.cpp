@@ -24,8 +24,10 @@ typedef void (zCView::*tDrawItems)();
 tDrawItems pzCViewGMPDrawItems = &zCView::GMP_DrawItems;
 
 HView::HView()
-    : drawItemsDetour(zCView::Addresses::DrawItems, 5, DETOUR_CAST pzCViewGMPDrawItems)
 {
+    DWORD funcAddress;
+    GetMemberFuncPtr(funcAddress, zCView::GMP_DrawItems);
+    drawItemsDetour = new CDetour(zCView::Addresses::DrawItems, 5, funcAddress);
 }
 
 HView *HView::GetInstance()
@@ -39,7 +41,7 @@ HView *HView::GetInstance()
 
 void HView::DoHook()
 {
-    drawItemsDetour.Activate();
+    drawItemsDetour->Activate();
 }
 
 void HView::UndoHook()

@@ -20,21 +20,22 @@ using namespace OpenGMP::Components;
 extern GameClient gameClient;
 
 typedef void (*SysEventPtr)();
-SysEventPtr sysEvent = (SysEventPtr)(0x5053E0); //Get address of detour method.
-
-typedef void (CGameManager::*tMenu)(int savegame);
-tMenu pCGameManagerGMPMenu = &CGameManager::GMP_Menu;
-
-typedef void (oCGame::*tRender)();
-tRender poCGameGMPRender = &oCGame::GMP_Render;
+SysEventPtr sysEvent = (SysEventPtr)(0x5053E0);
 
 HGame::HGame(GameClient &gameClient)
     : gameClient(gameClient)
     , outgameStarted(false)
     , blankColor(0, 0, 0, 0)
-    , menuDetour(CGameManager::Addresses::Menu, 7, DETOUR_CAST pCGameManagerGMPMenu)
-    , renderDetour(oCGame::Addresses::Render, 7, DETOUR_CAST poCGameGMPRender)
 {
+    DWORD funcAddress;
+    
+    //FIXME: Can't find a way of getting the member func ptr as DWORD in an expression
+    //       to obtain it in an initializer list. Would be nice to create hooks in an
+    //       initializer list.
+    GetMemberFuncPtr(funcAddress, CGameManager::GMP_Menu);
+    menuDetour = new CDetour(CGameManager::Addresses::Menu, 7, funcAddress);
+    GetMemberFuncPtr(funcAddress, oCGame::GMP_Render);
+    renderDetour = new CDetour(oCGame::Addresses::Render, 7, funcAddress);
 }
 
 void CGameManager::GMP_Menu(int savegame)
@@ -68,8 +69,8 @@ void oCGame::GMP_Render()
 
 void HGame::Startup()
 {
-    renderDetour.Activate();
-    menuDetour.Activate();
+    renderDetour->Activate();
+    menuDetour->Activate();
 }
 
 void HGame::Shutdown()

@@ -6,7 +6,7 @@ using namespace OpenGMP;
 using namespace OpenGMP::Systems;
 
 DWORD WindowSystem::procId = GetCurrentProcessId();
-CDetour WindowSystem::splashDetour((DWORD)GetProcAddress(LoadLibrary("user32.dll"), "LoadBitmapA"), 5, (void*)&DetourLoadBitmap, FASTHOOK);
+CDetour WindowSystem::splashDetour((DWORD)GetProcAddress(LoadLibrary("user32.dll"), "LoadBitmapA"), 5, (DWORD)&DetourLoadBitmap, FASTHOOK);
 
 HBITMAP WINAPI OpenGMP::Systems::DetourLoadBitmap(HINSTANCE inst, LPCSTR lpBitmapName)
 {

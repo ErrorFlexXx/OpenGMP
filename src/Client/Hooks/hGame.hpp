@@ -12,6 +12,7 @@ namespace OpenGMP
         class HGame
         {
         public:
+            HGame();
             HGame(GameClient &gameClient);
 
             void Startup();
@@ -32,8 +33,9 @@ namespace OpenGMP
             HGame(HGame &cpy);
 
             GameClient &gameClient;
-            CDetour menuDetour;     //!< Detour of CGameManager::Menu
-            CDetour renderDetour;   //!< Detour of oCGame::Render
+            
+            CDetour *menuDetour;     //!< Detour of CGameManager::Menu
+            CDetour *renderDetour;   //!< Detour of oCGame::Render
         };
     }
 }

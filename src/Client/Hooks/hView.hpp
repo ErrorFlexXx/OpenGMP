@@ -22,7 +22,7 @@ namespace OpenGMP
                        
             static bool inited;
             static HView *instance; //Singleton instance
-            CDetour drawItemsDetour; //Detour of zCView::DrawItems
+            CDetour *drawItemsDetour; //Detour of zCView::DrawItems
             static std::map<zCView*, zCVob*> vobRenderList;
             static zCWorld *rndrWorld;
             static zCVob *camVob;

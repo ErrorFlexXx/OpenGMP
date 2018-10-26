@@ -4,8 +4,9 @@
 #include <windows.h>
 #include <map>
 
-#define DETOUR_CAST (void*)(void*&)
 #define FASTHOOK    1
+#define GetMemberFuncPtr(dst, src)  __asm { lea eax, src} \
+                                    __asm { mov dst, eax }
 
 /**
  * @brief CDetour class
@@ -16,7 +17,7 @@ namespace OpenGMP
     class CDetour
     {
     public:
-        CDetour(DWORD originAddr, size_t hookLength, void *detourAddr, int fastHook = 0); //Setup a new detour
+        CDetour(DWORD originAddr, size_t hookLength, DWORD detourAddr, int fastHook = 0); //Setup a new detour
         int Activate();
         static DWORD OriginalCallAddress(DWORD detourAddress); //Get the address to call the original function.
 

@@ -6,10 +6,10 @@ using namespace OpenGMP;
 
 map<DWORD, CDetour*> CDetour::detourPool; //Pool of registered detours
 
-CDetour::CDetour(DWORD originAddr, size_t hookLength, void *detourAddr, int fastHook)
+CDetour::CDetour(DWORD originAddr, size_t hookLength, DWORD detourAddr, int fastHook)
     : originAddr(originAddr)
     , hookLength(hookLength)
-    , detourAddr((DWORD)detourAddr)
+    , detourAddr(detourAddr)
     , isSet(0)
 {
     if (fastHook)
@@ -68,6 +68,15 @@ int CDetour::SetupTrampoline()
         fprintf(stderr, "SetupTrampoline: Virtual Protect failed!");
         return 1; //Error - Can't set execute protection for trampoline
     }
+
+    //If the hooked function was already hooked
+    if (*((unsigned char*)trampolineAddr) == 0xE9) //and therefore it has a relative jump in it's head
+    {
+        DWORD oldJmpDst = *((DWORD*)(trampolineAddr + 1)); //get the relative jump offset,
+        DWORD newJmpDst = oldJmpDst + originAddr - trampolineAddr; //correct it
+        *((DWORD*)(trampolineAddr + 1)) = newJmpDst; //and write it back.
+    }
+
     return 0; //Success
 }
 

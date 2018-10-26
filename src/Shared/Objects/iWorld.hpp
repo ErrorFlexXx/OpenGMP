@@ -1,9 +1,19 @@
 #pragma once
 
 #include <string>
+#include "../Systems/containerSystem.hpp"
 
-class IWorld
+namespace OpenGMP
 {
-public:
-    std::string worldName;
-};
+    namespace Objects
+    {
+        class Player;
+
+        class IWorld
+        {
+        public:
+            std::string worldName;
+            Systems::ContainerSystem<Player> player;
+        };
+    }
+}

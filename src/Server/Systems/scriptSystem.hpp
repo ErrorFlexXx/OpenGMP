@@ -105,7 +105,7 @@ namespace OpenGMP
             std::list<Objects::Script*> m_registeredScripts; //!< Container to hold loaded script objects in.
             std::list<const std::string> m_registeredClasses; //!< Container with names of registered meta classes.
             std::list<std::string> m_registeredGlobals; //!< Container with names of registered globals
-            GameServer &gameServer;
+            GameServer &gameServer; //!< The GameServer instance this System acts for.
             static bool metaInited;
         };
     }

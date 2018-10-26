@@ -4,7 +4,7 @@
 
 namespace RakNet
 {
-    class Packet;
+    struct Packet;
 }
 
 namespace OpenGMP
@@ -132,7 +132,7 @@ namespace OpenGMP
             bool CheckEntryExists(const std::string &filename, const std::string &entry);
 
         private:
-            GameServer &gameServer; //!< The GameServer instance this loginSystem acts for.
+            GameServer &gameServer; //!< The GameServer instance this System acts for.
         };
     }
 }

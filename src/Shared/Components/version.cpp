@@ -1,7 +1,7 @@
 #include "version.hpp"
 
 using namespace RakNet;
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 Version::Version()
     : version(0)

@@ -4,26 +4,23 @@
 
 namespace OpenGMP
 {
-    namespace Components
+    /**
+     * @defgroup scriptObject
+     * @brief ScriptObjects Elements exposed to scripts
+     */
+
+    /**
+     * @brief The Id component
+     * @ingroup scriptObject
+     */
+    class Id : public IStreamObject
     {
-        /**
-         * @defgroup scriptObject
-         * @brief ScriptObjects Elements exposed to scripts
-         */
+    public:
+        Id();
 
-        /**
-         * @brief The Id component
-         * @ingroup scriptObject
-         */
-        class Id : public IStreamObject
-        {
-        public:
-            Id();
+        int id; //!< (available script attribute) an ID
 
-            int id; //!< (available script attribute) an ID
-
-            void WriteStream(RakNet::BitStream &stream) const;
-            bool ReadStream(RakNet::BitStream &stream);
-        };
-    }
+        void WriteStream(RakNet::BitStream &stream) const;
+        bool ReadStream(RakNet::BitStream &stream);
+    };
 }

@@ -1,11 +1,10 @@
 #include "netContainerSystem.hpp"
 #include "../Objects/serverClient.hpp"
 #include "../Objects/serverPlayer.hpp"
+#include "../Objects/serverWorld.hpp"
 #include <utils/logger.h>
 
-using namespace OpenGMP::Systems;
-using namespace OpenGMP::Objects;
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 using namespace RakNet;
 
 template <class T>
@@ -109,3 +108,4 @@ Id NetContainerSystem<T>::GetFreeId()
 //Compile for specific classes, please:
 template class NetContainerSystem<ServerClient>;
 template class NetContainerSystem<ServerPlayer>;
+template class NetContainerSystem<ServerWorld>;

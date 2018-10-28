@@ -4,23 +4,6 @@ stmtRegister = nil
 handle = nil
 bindHelper = nil
 
-function Init()
-	handle = connect()
-	if(ping(handle)) then
-		InitLoginSystemStatements()	
-	end
-	bindHelper = ScriptMysqlBindHelper()
-	client = ServerClient()
-	for i = 0,50000,1
-	do
-		client.authData.loginname = "Boob"..i
-		client.authData.password = "BobsPassword"
-		print("Registering...")
-		Register(client)
-		print("Done.")
-	end
-end
-
 function InitLoginSystemStatements()
 	registerStatement = "INSERT INTO `ServerClients` " ..
 	"(`loginname`, `password`, `register_time`) " ..
@@ -46,3 +29,10 @@ function Register(serverClient)
 	end
 	bindHelper.ResetBinds()
 end
+
+handle = connect()
+if(ping(handle)) then
+	InitLoginSystemStatements()	
+end
+bindHelper = ScriptMysqlBindHelper()
+print("Loginsystem Init complete.")

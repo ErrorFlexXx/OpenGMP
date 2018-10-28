@@ -1,7 +1,7 @@
 #include "vec3f.hpp"
 #include <math.h>
 
-using namespace OpenGMP::Types;
+using namespace OpenGMP;
 
 Vec3f::Vec3f()
     : Vec3f(0.f, 0.f, 0.f)

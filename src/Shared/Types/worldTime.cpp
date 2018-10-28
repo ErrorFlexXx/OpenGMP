@@ -2,7 +2,7 @@
 #include <limits.h>
 #include <stdexcept>
 
-using namespace OpenGMP::Types;
+using namespace OpenGMP;
 
 WorldTime::WorldTime()
     : WorldTime(0)

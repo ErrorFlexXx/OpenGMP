@@ -6,16 +6,13 @@
 
 namespace OpenGMP
 {
-    namespace Components
+    class IItem;
+
+    class IInventory : public IStreamObject
     {
-        class IItem;
+    public:
 
-        class IInventory : public IStreamObject
-        {
-        public:
-
-            void WriteStream(RakNet::BitStream &stream) const;
-            bool ReadStream(RakNet::BitStream &stream);
-        };
-    }
+        void WriteStream(RakNet::BitStream &stream) const;
+        bool ReadStream(RakNet::BitStream &stream);
+    };
 }

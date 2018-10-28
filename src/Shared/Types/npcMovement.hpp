@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Types
+namespace OpenGMP
 {
     enum NPCMovement : unsigned char
     {

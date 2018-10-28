@@ -16,3 +16,6 @@
 [submodule "lib/ZenLib"]
 	path = lib/ZenLib
 	url = https://github.com/degenerated1123/ZenLib.git
+[submodule "lib/physfs"]
+	path = lib/physfs
+	url = https://github.com/REGoth-project/physfs.git

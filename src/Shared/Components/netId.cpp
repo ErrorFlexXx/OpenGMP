@@ -1,6 +1,6 @@
 #include "netId.hpp"
 
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 void NetId::WriteStream(RakNet::BitStream &stream) const
 {   //Never transmitted

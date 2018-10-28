@@ -1,16 +1,13 @@
 #pragma once
 
-#include "networkSystemMessages.hpp" //For the Debug Network definition
+#include "networkSystemMessages.hpp"
 
 namespace OpenGMP
 {
-    namespace Types
+    enum MenuSystemMessages : unsigned char
     {
-        enum MenuSystemMessages : unsigned char
-        {
-            SHOW_NOTIFICATION,
-            SHOW_TIMED_NOTIFICATION,
-            HIDE_NOTIFICATION
-        };
-    }
+        SHOW_NOTIFICATION,
+        SHOW_TIMED_NOTIFICATION,
+        HIDE_NOTIFICATION
+    };
 }

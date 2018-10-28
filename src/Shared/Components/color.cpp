@@ -1,6 +1,6 @@
 #include "color.hpp"
 
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 Color::Color()
     : Color(255, 255, 255, 255)

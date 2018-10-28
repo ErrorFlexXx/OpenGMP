@@ -1,8 +1,6 @@
 #include "containerSystem.hpp"
 
-using namespace OpenGMP::Objects;
-using namespace OpenGMP::Systems;
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 template <class T>
 ContainerSystem<T>::ContainerSystem(const size_t &capacity)

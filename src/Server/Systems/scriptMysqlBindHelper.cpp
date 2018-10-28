@@ -1,7 +1,7 @@
 #include "scriptMysqlBindHelper.hpp"
 #include <cstring>
 
-using namespace OpenGMP::Systems;
+using namespace OpenGMP;
 
 ScriptMysqlBindHelper::~ScriptMysqlBindHelper()
 {

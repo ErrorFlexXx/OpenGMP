@@ -4,15 +4,12 @@
 
 namespace OpenGMP
 {
-    namespace Components
+    class WorldTime : public IStreamObject
     {
-        class WorldTime : public IStreamObject
-        {
-        public:
-            int totalSeconds;
+    public:
+        int totalSeconds;
 
-            void WriteStream(RakNet::BitStream &stream) const;
-            bool ReadStream(RakNet::BitStream &stream);
-        };
-    }
+        void WriteStream(RakNet::BitStream &stream) const;
+        bool ReadStream(RakNet::BitStream &stream);
+    };
 }

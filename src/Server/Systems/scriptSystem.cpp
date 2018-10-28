@@ -13,6 +13,8 @@
 #include <Shared/Components/authData.hpp>
 #include <Shared/Components/netId.hpp>
 #include <Shared/Components/id.hpp>
+#include <Shared/Components/color.hpp>
+#include <Shared/Components/notificationText.hpp>
 #include "../gameServer.hpp"
 #include "../Systems/loginSystem.hpp"
 #include "../Systems/scriptMysqlBindHelper.hpp"
@@ -21,9 +23,6 @@
 using namespace std;
 using namespace cpgf;
 using namespace OpenGMP;
-using namespace OpenGMP::Components;
-using namespace OpenGMP::Objects;
-using namespace OpenGMP::Systems;
 
 bool ScriptSystem::metaInited = false;
 
@@ -343,6 +342,22 @@ void ScriptSystem::SetupMetaData()
         GDefineMetaClass<ServerClient,Client,NetIdObject,IdObject>
                 ::define("ServerClient")
                 ._field("authData", &ServerClient::authData)
+                ;
+
+        GDefineMetaClass<Color>
+                ::define("Color")
+                ._field("r", &Color::r)
+                ._field("g", &Color::g)
+                ._field("b", &Color::b)
+                ._field("a", &Color::a)
+                ;
+
+        GDefineMetaClass<NotificationText>
+                ::define("NotificationText")
+                ._field("text", &NotificationText::text)
+                ._field("posY", &NotificationText::posY)
+                ._field("color", &NotificationText::color)
+                ._field("duration", &NotificationText::duration)
                 ;
     }
 }

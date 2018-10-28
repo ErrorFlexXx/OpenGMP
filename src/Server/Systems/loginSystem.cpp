@@ -3,7 +3,6 @@
 #include <Server/gameServer.hpp>
 #include <Server/Objects/serverClient.hpp>
 #include <Server/Utils/utils.h>
-#include <Shared/Types/Messages/networkSystemMessages.hpp>
 #include <Shared/Types/Messages/loginSystemMessages.hpp>
 #include <utils/logger.h>
 #include <BitStream.h>
@@ -11,10 +10,7 @@
 #include <RakSleep.h>
 
 using namespace RakNet;
-using namespace OpenGMP::Components;
-using namespace OpenGMP::Types;
-using namespace OpenGMP::Systems;
-using namespace OpenGMP::Objects;
+using namespace OpenGMP;
 
 const std::string MACBANLIST_FILE = "macbanlist.txt";
 const std::string HDDBANLIST_FILE = "hddbanlist.txt";

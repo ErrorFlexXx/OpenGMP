@@ -2,7 +2,7 @@
 #include "vec3f.hpp"
 #include <math.h>
 
-using namespace OpenGMP::Types;
+using namespace OpenGMP;
 
 const float Angles::Pi = 3.1415926535897931f;
 const float Angles::TwoPi = 6.2831853071795865f;

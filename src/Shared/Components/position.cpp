@@ -1,6 +1,6 @@
 #include "position.hpp"
 
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 void Position::WriteStream(RakNet::BitStream &stream) const
 {

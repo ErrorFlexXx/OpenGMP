@@ -9,30 +9,31 @@ namespace RakNet
 namespace OpenGMP
 {
     class GameServer;
+    class ServerClient;
+    class NotificationText;
 
-    namespace Systems
+    class MenuSystem
     {
-        class MenuSystem
-        {
-        public:
-            /**
-             * @brief handles requests regarding to displayed elements on a client.
-             * @param gameServer the GameServer object, this menuSystem acts for.
-             */
-            MenuSystem(GameServer &gameServer);
+    public:
+        /**
+         * @brief handles requests regarding to displayed elements on a client.
+         * @param gameServer the GameServer object, this menuSystem acts for.
+         */
+        MenuSystem(GameServer &gameServer);
 
-            /**
-             * @brief Process processes RakNet messages reagarding MenuSystem messages.
-             * @param packet the inbound RakNet::Packet to process.
-             */
-            void Process(RakNet::Packet *packet);
+        /**
+         * @brief Process processes RakNet messages reagarding MenuSystem messages.
+         * @param packet the inbound RakNet::Packet to process.
+         */
+        void Process(RakNet::Packet *packet);
 
-            void ShowNotification();
+        void ShowNotification(ServerClient &client, NotificationText &text);
 
-            void HideNotification();
+        void ShowTimedNotificaton(ServerClient &client, NotificationText &text);
 
-        private:
-            GameServer &gameServer; //!< The GameServer instance this System acts for.
-        };
-    }
+        void HideNotification(ServerClient &client);
+
+    private:
+        GameServer &gameServer; //!< The GameServer instance this System acts for.
+    };
 }

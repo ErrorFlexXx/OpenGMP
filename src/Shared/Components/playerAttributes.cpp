@@ -1,6 +1,6 @@
 #include "playerAttributes.hpp"
 
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 void PlayerAttributes::WriteStream(RakNet::BitStream &stream) const
 {

@@ -9,8 +9,7 @@
 #endif
 
 using namespace RakNet;
-using namespace OpenGMP::Types;
-using namespace OpenGMP::Systems;
+using namespace OpenGMP;
 
 NetworkSystem::NetworkSystem(GameServer &gameServer, const int &gameport, const int &playerslots,
                              const std::string &keyDirectory, const std::string &publicKeyfileName, const std::string &privateKeyfileName)

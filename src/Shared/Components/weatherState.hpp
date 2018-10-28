@@ -5,20 +5,17 @@
 
 namespace OpenGMP
 {
-    namespace Components
+    class WeatherState : public IStreamObject
     {
-        class WeatherState : public IStreamObject
-        {
-        public:
-            Types::WeatherTypes type;
-            WorldTime startTime;
-            float startWeight;
-            WorldTime endTime;
-            float endWeight;
-            float currentWeight;
+    public:
+        Types::WeatherTypes type;
+        WorldTime startTime;
+        float startWeight;
+        WorldTime endTime;
+        float endWeight;
+        float currentWeight;
 
-            void WriteStream(RakNet::BitStream &stream) const;
-            bool ReadStream(RakNet::BitStream &stream);
-        };
-    }
+        void WriteStream(RakNet::BitStream &stream) const;
+        bool ReadStream(RakNet::BitStream &stream);
+    };
 }

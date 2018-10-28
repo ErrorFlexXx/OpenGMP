@@ -4,12 +4,9 @@
 
 namespace OpenGMP
 {
-    namespace Objects
+    class ServerPlayer : public Player
     {
-        class ServerPlayer : public Player
-        {
-        public:
+    public:
 
-        };
-    }
+    };
 }

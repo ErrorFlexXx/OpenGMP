@@ -2,10 +2,11 @@
 
 handle = 0
 stmtRegister = 0
-regCounter = 0
+bindHelper = ScriptMysqlBindHelper()
 
-cpgf._import(None, "builtin");
-cpgf._import("cpgf", "builtin.collections.bytearray");
+#cpgf._import(None, "builtin");
+#cpgf._import("cpgf", "builtin.collections.bytearray");
+
 
 def InitLoginSystemStatements():
 	
@@ -18,18 +19,19 @@ def InitLoginSystemStatements():
 	stmtRegister = mysql_stmt_init(handle)
 	if stmtRegister == None:
 		print("LoginSystem initLoginSystemStatements - Out of memory")
-		return
+		return False
 	if mysql_stmt_prepare(stmtRegister, registerStatement, len(registerStatement)) != 0:
 		print("LoginSystem stmtRegister prepare error: " + mysql_stmt_error(stmtRegister))
-	print("InitLoginSystemStatements finished.")
+		return False
+	return True
 
 def Register(serverClient):
 	global stmtRegister
-	bindHelper = ScriptMysqlBindHelper()
+	global bindHelper
 	bindHelper.AddString(serverClient.authData.loginname)
 	bindHelper.AddString(serverClient.authData.password)
 	bindHelper.Bind(stmtRegister)
-		
+	
 	if mysql_stmt_execute(stmtRegister) != 0:
 		print("LoginSystem Error stmtRegister: " + mysql_stmt_error(stmtRegister))
 	else:
@@ -38,13 +40,9 @@ def Register(serverClient):
 
 #Initialization:
 handle = connect()
-if ping(handle):
-	InitLoginSystemStatements()
-for x in range(0, 1000):
-	client = ServerClient()
-	client.authData.loginname = "BBBob%d" %(x)
-	client.authData.password = "APassword"
-	#	print("Registering...%d" %(x))
-	Register(client)
-print("Done.")
-
+if ping(handle) == False:
+	print("LoginSystem startup failed - Database not available!")
+elif InitLoginSystemStatements() == False:
+	print("LoginSystem startup failed - InitLoginSystemStatements failed!")
+else:
+	print("LoginSystem startup complete!")

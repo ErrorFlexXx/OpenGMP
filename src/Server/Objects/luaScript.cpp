@@ -7,7 +7,6 @@
 using namespace std;
 using namespace cpgf;
 using namespace OpenGMP;
-using namespace OpenGMP::Objects;
 
 LuaScript::LuaScript(GameServer &gameServer, std::string filename)
     : Script(gameServer, filename)

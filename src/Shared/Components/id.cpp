@@ -1,6 +1,6 @@
 #include "id.hpp"
 
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 Id::Id()
     : id(-1) //used for unassigned checking in container systems. Do not change.

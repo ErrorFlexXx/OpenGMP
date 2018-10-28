@@ -2,13 +2,10 @@
 
 namespace OpenGMP
 {
-    namespace Types
+    enum WeatherTypes : unsigned char
     {
-        enum WeatherTypes : unsigned char
-        {
-            Snow,
-            Rain,
-            Snowrain
-        };
-    }
+        Snow,
+        Rain,
+        Snowrain
+    };
 }

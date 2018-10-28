@@ -1,6 +1,6 @@
 #include "worldTime.hpp"
 
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 void WorldTime::WriteStream(RakNet::BitStream &stream) const
 {

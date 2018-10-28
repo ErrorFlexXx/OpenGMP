@@ -3,8 +3,7 @@
 #include <utils/logger.h>
 
 using namespace RakNet;
-using namespace OpenGMP::Objects;
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 ServerClient::ServerClient()
 {
@@ -13,5 +12,3 @@ ServerClient::ServerClient()
 ServerClient::~ServerClient()
 {
 }
-
-

@@ -4,12 +4,9 @@
 
 namespace OpenGMP
 {
-    namespace Objects
+    class ServerWorld : public World
     {
-        class ServerWorld : public World
-        {
-        public:
+    public:
 
-        };
-    }
+    };
 }

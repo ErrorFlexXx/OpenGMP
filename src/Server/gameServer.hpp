@@ -6,6 +6,8 @@
 #include <vector>
 #include <RakNetTypes.h>
 #include "Objects/serverClient.hpp"
+#include "Objects/serverPlayer.hpp"
+#include "Objects/serverWorld.hpp"
 #include "Systems/networkSystem.hpp"
 #include "Systems/loginSystem.hpp"
 #include "Systems/netContainerSystem.hpp"
@@ -51,12 +53,14 @@ namespace OpenGMP
 
         /* Global Systems */
         static GameServer *gameServer;
-        OpenGMP::Systems::NetworkSystem networkSystem;
-        OpenGMP::Systems::LoginSystem loginSystem;
-        OpenGMP::Systems::ScriptSystem scriptSystem;
+        NetworkSystem networkSystem;
+        LoginSystem loginSystem;
+        ScriptSystem scriptSystem;
 
         /* Global Containers */
-        OpenGMP::Systems::NetContainerSystem<Objects::ServerClient> clientContainer;
+        NetContainerSystem<ServerClient> clientContainer;
+        NetContainerSystem<ServerPlayer> playerContainer;
+        NetContainerSystem<ServerWorld> worldContainer;
 
         std::string scriptDirectory;  //!< Directory to load server scripts from.
 

@@ -7,24 +7,21 @@
 
 namespace OpenGMP
 {
-    namespace Objects
+    /**
+     * @defgroup scriptObject
+     * @brief ScriptObjects Elements exposed to scripts
+     */
+
+    /**
+     * @brief The NetIdObject object
+     * @ingroup scriptObject
+     */
+    class NetIdObject : public IdObject
     {
-        /**
-         * @defgroup scriptObject
-         * @brief ScriptObjects Elements exposed to scripts
-         */
+    public:
+        NetId netId; //!< (available script attribute) the RakNet GUID
 
-        /**
-         * @brief The NetIdObject object
-         * @ingroup scriptObject
-         */
-        class NetIdObject : public IdObject
-        {
-        public:
-            Components::NetId netId; //!< (available script attribute) the RakNet GUID
-
-        protected:
-            NetIdObject() {} //Abstract
-        };
-    }
+    protected:
+        NetIdObject() {} //Abstract
+    };
 }

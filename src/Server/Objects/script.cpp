@@ -8,8 +8,6 @@
 using namespace std;
 using namespace cpgf;
 using namespace OpenGMP;
-using namespace OpenGMP::Objects;
-using namespace OpenGMP::Systems;
 
 Script::Script(GameServer &gameServer, string &filename)
     : m_fullFilePath(filename)

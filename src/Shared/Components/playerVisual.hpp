@@ -1,23 +1,21 @@
 #pragma once
 
 #include "../Objects/iStreamObject.hpp"
+#include <stdint.h>
 #include <string>
 
 namespace OpenGMP
 {
-    namespace Components
+    class PlayerVisual //: public IStreamObject
     {
-        class PlayerVisual //: public IStreamObject
-        {
-        public:
-            std::string bodyModel;
-            int bodyTextureId;
-            std::string headModel;
-            int headTextureId;
-            float fatness;
+    public:
+        std::string bodyModel;
+        int32_t bodyTextureId;
+        std::string headModel;
+        int32_t headTextureId;
+        float fatness;
 
-            void WriteStream(RakNet::BitStream &stream) const;
-            bool ReadStream(RakNet::BitStream &stream);
-        };
-    }
+        void WriteStream(RakNet::BitStream &stream) const;
+        bool ReadStream(RakNet::BitStream &stream);
+    };
 }

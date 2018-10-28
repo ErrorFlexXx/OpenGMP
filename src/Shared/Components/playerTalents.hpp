@@ -4,29 +4,26 @@
 
 namespace OpenGMP
 {
-    namespace Components
+    class PlayerTalents : public IStreamObject
     {
-        class PlayerTalents : public IStreamObject
+    public:
+        typedef enum EnumTalents
         {
-        public:
-            typedef enum EnumTalents
-            {
-                Sneaking,
-                Thief,
-                OpeningLocks,
-                SloshBlades,
-                CreatingRunes,
-                Alchemy,
-                CollectingTrophies,
-                Acrobatics
-            } EnumTalents;
+            Sneaking,
+            Thief,
+            OpeningLocks,
+            SloshBlades,
+            CreatingRunes,
+            Alchemy,
+            CollectingTrophies,
+            Acrobatics
+        } EnumTalents;
 
-            int HasTalent(EnumTalents talent);
-            void SetTalent(EnumTalents talent);
-            void WriteStream(RakNet::BitStream &stream) const;
-            bool ReadStream(RakNet::BitStream &stream);
+        int HasTalent(EnumTalents talent);
+        void SetTalent(EnumTalents talent);
+        void WriteStream(RakNet::BitStream &stream) const;
+        bool ReadStream(RakNet::BitStream &stream);
 
-            int talents;
-        };
-    }
+        int talents;
+    };
 }

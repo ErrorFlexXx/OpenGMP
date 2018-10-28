@@ -1,7 +1,7 @@
 #include "iInventory.hpp"
 #include "iItem.hpp"
 
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 void IInventory::WriteStream(RakNet::BitStream &stream) const
 {

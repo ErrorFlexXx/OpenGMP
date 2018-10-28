@@ -4,24 +4,21 @@
 
 namespace OpenGMP
 {
-    namespace Objects
+    /**
+     * @defgroup scriptObject
+     * @brief ScriptObjects Elements exposed to scripts
+     */
+
+    /**
+     * @brief The IdObject object
+     * @ingroup scriptObject
+     */
+    class IdObject
     {
-        /**
-         * @defgroup scriptObject
-         * @brief ScriptObjects Elements exposed to scripts
-         */
+    public:
+        Id id; //!< (available script attribute) the ID
 
-        /**
-         * @brief The IdObject object
-         * @ingroup scriptObject
-         */
-        class IdObject
-        {
-        public:
-            Components::Id id; //!< (available script attribute) the ID
-
-        protected:
-            IdObject() {} //Abstract
-        };
-    }
+    protected:
+        IdObject() {} //Abstract
+    };
 }

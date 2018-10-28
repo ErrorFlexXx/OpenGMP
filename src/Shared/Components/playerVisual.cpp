@@ -2,7 +2,7 @@
 #include <RakString.h>
 
 using namespace RakNet;
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 void PlayerVisual::WriteStream(BitStream &stream) const
 {

@@ -18,7 +18,6 @@ namespace Flags
 }
 
 using namespace OpenGMP;
-using namespace OpenGMP::Systems;
 
 void exitHandler(int signum)
 {

@@ -1,16 +1,14 @@
 #pragma once
 
 #include <string>
+#include "../Objects/netIdObject.hpp"
 #include "../Systems/containerSystem.hpp"
 
 namespace OpenGMP
 {
-    namespace Objects
+    class World : public NetIdObject
     {
-        class World
-        {
-        public:
-            std::string worldName;
-        };
-    }
+    public:
+        std::string worldName;
+    };
 }

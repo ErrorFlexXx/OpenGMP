@@ -1,6 +1,6 @@
 #include "scale.hpp"
 
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 void Scale::WriteStream(RakNet::BitStream &stream) const
 {

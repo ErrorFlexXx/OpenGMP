@@ -12,21 +12,18 @@
 
 namespace OpenGMP
 {
-    namespace Objects
+    /**
+     * @describe The Player class
+     *   A player covers a NPC that can be controlled
+     */
+    class Player : public NetIdObject
     {
-        /**
-         * @describe The Player class
-         *   A player covers a NPC that can be controlled
-         */
-        class Player : public NetIdObject
-        {
-        public:
-            Components::Position position;
-            Components::Scale scale;
-            Components::PlayerTalents talents;
-            Components::PlayerAttributes attributes;
-            Components::PlayerSkills skills;
-            Components::PlayerVisual visual;
-        };
-    }
+    public:
+        Position position;
+        Scale scale;
+        PlayerTalents talents;
+        PlayerAttributes attributes;
+        PlayerSkills skills;
+        PlayerVisual visual;
+    };
 }

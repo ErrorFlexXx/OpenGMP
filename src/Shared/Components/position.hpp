@@ -4,18 +4,15 @@
 
 namespace OpenGMP
 {
-    namespace Components
+    class Position : public IStreamObject
     {
-        class Position : public IStreamObject
-        {
-        public:
-            float x;
-            float y;
-            float z;
-            float angle;
+    public:
+        float x;
+        float y;
+        float z;
+        float angle;
 
-            void WriteStream(RakNet::BitStream &stream) const;
-            bool ReadStream(RakNet::BitStream &stream);
-        };
-    }
+        void WriteStream(RakNet::BitStream &stream) const;
+        bool ReadStream(RakNet::BitStream &stream);
+    };
 }

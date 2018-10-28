@@ -13,9 +13,10 @@ To build the server on a linux system, the following tools have to be installed:
 * git
 * cmake
 * build-essential
+* libssl1.0-dev
 On debian based systems the software can be installed with the following command:
 ```
-sudo apt install git cmake build-essential
+sudo apt install git cmake build-essential libssl1.0-dev
 ```
 On a windows system it's needed to have a program for CMake, Git and some build environment like VisualStudio.
 Instead of calling ```make``` you want to open the generated .sln file on windows.

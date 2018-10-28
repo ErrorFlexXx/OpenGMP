@@ -2,7 +2,7 @@
 #include <limits.h>
 
 using namespace RakNet;
-using namespace OpenGMP::Components;
+using namespace OpenGMP;
 
 unsigned long long GameTime::ticks = GetTimeMS();
 TimeMS GameTime::oldTicks = GetTimeMS();

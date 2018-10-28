@@ -6,7 +6,6 @@
 using namespace std;
 using namespace cpgf;
 using namespace OpenGMP;
-using namespace OpenGMP::Objects;
 
 bool PythonScript::singleSetup = false;
 

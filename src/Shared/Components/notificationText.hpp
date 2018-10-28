@@ -7,20 +7,17 @@
 
 namespace OpenGMP
 {
-    namespace Components
+    class NotificationText
     {
-        class NotificationText
-        {
-        public:
-            NotificationText();
+    public:
+        NotificationText();
 
-            void WriteStream(RakNet::BitStream &stream) const;
-            bool ReadStream(RakNet::BitStream &stream);
+        void WriteStream(RakNet::BitStream &stream) const;
+        bool ReadStream(RakNet::BitStream &stream);
 
-            std::string text;
-            uint32_t posY;
-            Color color;
-            uint32_t duration;
-        };
-    }
+        std::string text;
+        uint32_t posY;
+        Color color;
+        uint32_t duration;
+    };
 }

@@ -17,6 +17,7 @@
 #include <Shared/Components/notificationText.hpp>
 #include "../gameServer.hpp"
 #include "../Systems/loginSystem.hpp"
+#include "../Systems/menuSystem.hpp"
 #include "../Systems/scriptMysqlBindHelper.hpp"
 #include <mysql/mysql.h>
 
@@ -210,15 +211,6 @@ void ScriptSystem::SetupMetaData()
     RegisterGlobal(std::string("mysql_stmt_insert_id"));
     RegisterGlobal(std::string("mysql_stmt_close"));
 
-    //Object oriented meta definitions:
-    RegisterClass(std::string("GameServer"));
-    RegisterClass(std::string("AuthData"));
-    RegisterClass(std::string("NetId"));
-    RegisterClass(std::string("Id"));
-    RegisterClass(std::string("ServerClient"));
-    RegisterClass(std::string("ScriptMysqlBindHelper"));
-    //RegisterClass(std::string("MYSQL_BIND"));
-
     if(!ScriptSystem::metaInited)
     {
         ScriptSystem::metaInited = true; //Only do once
@@ -293,7 +285,7 @@ void ScriptSystem::SetupMetaData()
                 ._method("mysql_stmt_store_result", &mysql_stmt_store_result)
                 ._method("mysql_stmt_insert_id", &mysql_stmt_insert_id)
                 ._method("mysql_stmt_close", &mysql_stmt_close)
-        ;
+                ;
 
 //        GDefineMetaClass<MYSQL_BIND>
 //                ::define("MYSQL_BIND")
@@ -305,6 +297,7 @@ void ScriptSystem::SetupMetaData()
 //                ._method("sizeof", &GetMysqlBindSize)
 //        ;
 
+        RegisterClass(std::string("ScriptMysqlBindHelper"));
         GDefineMetaClass<ScriptMysqlBindHelper>
                 ::define("ScriptMysqlBindHelper")
                 ._method("AddString", &ScriptMysqlBindHelper::AddString)
@@ -312,15 +305,21 @@ void ScriptSystem::SetupMetaData()
                 ._method("AddDouble", &ScriptMysqlBindHelper::AddDouble)
                 ._method("ResetBinds", &ScriptMysqlBindHelper::ResetBinds)
                 ._method("Bind", &ScriptMysqlBindHelper::Bind)
-        ;
+                ;
 
+        RegisterClass(std::string("GameServer"));
         GDefineMetaClass<GameServer>
                 ::define("GameServer")
                 //._constructor<void *(const string, const string)>()
                 ._method("GetGameServerInstance", &GameServer::GetGameServerInstance)
+                ._method("GetNetworkSystem", &GameServer::GetNetworkSystem)
+                ._method("GetLoginSystem", &GameServer::GetLoginSystem)
+                ._method("GetScriptSystem", &GameServer::GetScriptSystem)
+                ._method("GetMenuSystem", &GameServer::GetMenuSystem)
                 ._method("Shutdown", &GameServer::Shutdown)
                 ;
 
+        RegisterClass(std::string("AuthData"));
         GDefineMetaClass<AuthData>
                 ::define("AuthData")
                 ._field("loginname", &AuthData::loginname)
@@ -329,21 +328,25 @@ void ScriptSystem::SetupMetaData()
                 ._field("macAddress", &AuthData::macAddress)
                 ;
 
+        RegisterClass(std::string("NetId"));
         GDefineMetaClass<NetId>
                 ::define("NetId")
                 ._field("rakNetId", &NetId::rakNetId)
                 ;
 
+        RegisterClass(std::string("Id"));
         GDefineMetaClass<Id>
                 ::define("Id")
                 ._field("id", &Id::id)
                 ;
 
+        RegisterClass(std::string("ServerClient"));
         GDefineMetaClass<ServerClient,Client,NetIdObject,IdObject>
                 ::define("ServerClient")
                 ._field("authData", &ServerClient::authData)
                 ;
 
+        RegisterClass(std::string("Color"));
         GDefineMetaClass<Color>
                 ::define("Color")
                 ._field("r", &Color::r)
@@ -352,6 +355,7 @@ void ScriptSystem::SetupMetaData()
                 ._field("a", &Color::a)
                 ;
 
+        RegisterClass(std::string("NotificationText"));
         GDefineMetaClass<NotificationText>
                 ::define("NotificationText")
                 ._field("text", &NotificationText::text)
@@ -359,5 +363,32 @@ void ScriptSystem::SetupMetaData()
                 ._field("color", &NotificationText::color)
                 ._field("duration", &NotificationText::duration)
                 ;
+
+        RegisterClass(std::string("MenuSystem"));
+        GDefineMetaClass<MenuSystem>
+                ::define("MenuSystem")
+                ._method("ShowNotification", &MenuSystem::ShowNotification)
+                ._method("ShowTimedNotification", &MenuSystem::ShowTimedNotificaton)
+                ._method("ClearNotification", &MenuSystem::HideNotification)
+                ;
+
+        RegisterClass(std::string("LoginSystem"));
+        GDefineMetaClass<LoginSystem>
+                ::define("LoginSystem")
+                ._method("BanByHDD", &LoginSystem::BanByHDD)
+                ._method("BanByLoginname", &LoginSystem::BanByLoginname)
+                ._method("BanByMac", &LoginSystem::BanByMac)
+                ._method("UnbanByHDD", &LoginSystem::UnbanByHDD)
+                ._method("UnbanByLoginname", &LoginSystem::UnbanByLoginname)
+                ._method("UnbanByMac", &LoginSystem::UnbanByMac)
+                ._method("Unban", &LoginSystem::Unban)
+                ;
+
+        RegisterClass(std::string("NetworkSystem"));
+        GDefineMetaClass<NetworkSystem>
+                ::define("NetworkSystem")
+                ._field("gameslots", &NetworkSystem::playerslots)
+                ;
+
     }
 }

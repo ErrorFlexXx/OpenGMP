@@ -22,15 +22,26 @@ void MenuSystem::ShowNotification(ServerClient &client, NotificationText &text)
     BitStream bs;
     bs.Write(NetworkSystemMessages::MenuSystem);
     bs.Write(MenuSystemMessages::SHOW_NOTIFICATION);
-    //gameServer.networkSystem.peerInterface->Send(&bs, )
+    text.WriteStream(bs);
+    gameServer.networkSystem.peerInterface->Send(&bs, LOW_PRIORITY, RELIABLE, MenuSystemOrderingChannel,
+                                                 client.netId.rakNetId, false);
 }
 
 void MenuSystem::ShowTimedNotificaton(ServerClient &client, NotificationText &text)
 {
-
+    BitStream bs;
+    bs.Write(NetworkSystemMessages::MenuSystem);
+    bs.Write(MenuSystemMessages::SHOW_TIMED_NOTIFICATION);
+    text.WriteStream(bs);
+    gameServer.networkSystem.peerInterface->Send(&bs, LOW_PRIORITY, RELIABLE, MenuSystemOrderingChannel,
+                                                 client.netId.rakNetId, false);
 }
 
 void MenuSystem::HideNotification(ServerClient &client)
 {
-
+    BitStream bs;
+    bs.Write(NetworkSystemMessages::MenuSystem);
+    bs.Write(MenuSystemMessages::HIDE_NOTIFICATION);
+    gameServer.networkSystem.peerInterface->Send(&bs, LOW_PRIORITY, RELIABLE, MenuSystemOrderingChannel,
+                                                 client.netId.rakNetId, false);
 }

@@ -8,7 +8,8 @@ namespace OpenGMP
 {
     enum NetworkSystemOrderingChannels : char
     {
-        LoginSystemOrderingChannel = 1
+        LoginSystemOrderingChannel = 1,
+        MenuSystemOrderingChannel
     };
 
     enum NetworkSystemMessages : unsigned char

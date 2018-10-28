@@ -57,11 +57,11 @@ namespace OpenGMP
                            const std::string &privKeyfileName);
 
         RakNet::RakPeerInterface *peerInterface;    //!< RakNet PeerInterface object.
+        int playerslots;        //!< Currently accepted simulateously active connected players.
 
     private:
         GameServer &gameServer; //!< The GameServer instance this System acts for.
         int gameport;           //!< UDP RakNet listening port.
-        int playerslots;        //!< Currently accepted simulateously active connected players.
         std::string keyDirectory;
         std::string publicKeyfileName;
         std::string privateKeyfileName;

@@ -293,3 +293,9 @@ void LoginSystem::UnbanByLoginname(ServerClient &client)
     RemoveEntryFromList(LOGINNAMEBANLIST_FILE, client.authData.loginname);
 }
 
+void LoginSystem::Unban(ServerClient &client)
+{
+    UnbanByHDD(client);
+    UnbanByLoginname(client);
+    UnbanByMac(client);
+}

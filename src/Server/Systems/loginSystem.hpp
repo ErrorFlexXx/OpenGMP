@@ -10,7 +10,6 @@ namespace RakNet
 namespace OpenGMP
 {
     class GameServer;
-
     class ServerClient;
 
     class LoginSystem
@@ -101,6 +100,8 @@ namespace OpenGMP
          * @param client to take the loginname from.
          */
         void UnbanByLoginname(ServerClient &client);
+
+        void Unban(ServerClient &client);
 
     protected:
 

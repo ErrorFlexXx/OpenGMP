@@ -12,6 +12,7 @@
 #include "Systems/loginSystem.hpp"
 #include "Systems/netContainerSystem.hpp"
 #include "Systems/scriptSystem.hpp"
+#include "Systems/menuSystem.hpp"
 
 namespace OpenGMP
 {
@@ -55,7 +56,13 @@ namespace OpenGMP
         static GameServer *gameServer;
         NetworkSystem networkSystem;
         LoginSystem loginSystem;
+        MenuSystem menuSystem;
         ScriptSystem scriptSystem;
+
+        NetworkSystem &GetNetworkSystem();
+        LoginSystem &GetLoginSystem();
+        ScriptSystem &GetScriptSystem();
+        MenuSystem &GetMenuSystem();
 
         /* Global Containers */
         NetContainerSystem<ServerClient> clientContainer;

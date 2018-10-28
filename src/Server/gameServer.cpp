@@ -22,6 +22,7 @@ GameServer::GameServer(int gameport,
     , loginSystem(*this)
     , scriptDirectory(scriptDirectory)
     , scriptSystem(*this)
+    , menuSystem(*this)
     , serverRunning(true)
     , serverStopped(false)
 {
@@ -83,4 +84,24 @@ void GameServer::Process()
 GameServer &GameServer::GetGameServerInstance()
 {
     return *gameServer;
+}
+
+NetworkSystem &GameServer::GetNetworkSystem()
+{
+    return networkSystem;
+}
+
+LoginSystem &GameServer::GetLoginSystem()
+{
+    return loginSystem;
+}
+
+ScriptSystem &GameServer::GetScriptSystem()
+{
+    return scriptSystem;
+}
+
+MenuSystem &GameServer::GetMenuSystem()
+{
+    return menuSystem;
 }

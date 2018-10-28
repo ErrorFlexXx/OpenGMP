@@ -23,7 +23,6 @@ namespace OpenGMP
         public:
             Components::Position position;
             Components::Scale scale;
-            Components::Color chatColor;
             Components::PlayerTalents talents;
             Components::PlayerAttributes attributes;
             Components::PlayerSkills skills;

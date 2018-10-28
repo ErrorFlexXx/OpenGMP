@@ -7,13 +7,10 @@ namespace OpenGMP
 {
     namespace Objects
     {
-        class Player;
-
-        class IWorld
+        class World
         {
         public:
             std::string worldName;
-            Systems::ContainerSystem<Player> player;
         };
     }
 }

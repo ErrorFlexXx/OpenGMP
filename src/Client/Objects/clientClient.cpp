@@ -1,6 +1,6 @@
 #include "clientClient.hpp"
 
-using namespace OpenGMP::Objects;
+using namespace OpenGMP;
 
 ClientClient::ClientClient()
 {}

@@ -17,8 +17,8 @@ namespace OpenGMP
             bool Opened();
             virtual void Open();
             virtual void Close();
-            virtual void KeyDown(Types::VirtualKeys key);
-            virtual void KeyUp(Types::VirtualKeys key);
+            virtual void KeyDown(VirtualKeys key);
+            virtual void KeyUp(VirtualKeys key);
             virtual void Update(unsigned long long now);
             void CloseActiveMenus();
 

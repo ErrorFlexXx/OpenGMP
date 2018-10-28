@@ -7,8 +7,6 @@
 #define _(string) gettext (string)
 
 using namespace OpenGMP;
-using namespace OpenGMP::Components;
-using namespace OpenGMP::Systems;
 
 MenuMain::MenuMain(GameClient &gameClient)
     : MainMenu(gameClient)

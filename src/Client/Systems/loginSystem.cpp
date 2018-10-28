@@ -13,9 +13,6 @@
 
 using namespace RakNet;
 using namespace OpenGMP;
-using namespace OpenGMP::Components;
-using namespace OpenGMP::Systems;
-using namespace OpenGMP::Types;
 
 LoginSystem::LoginSystem(GameClient &gameClient)
     : gameClient(gameClient)
@@ -99,7 +96,7 @@ void LoginSystem::Process(RakNet::Packet *packet)
     }
 }
 
-void LoginSystem::SendRegister(const Components::AuthData &authData)
+void LoginSystem::SendRegister(const AuthData &authData)
 {
     BitStream bsOut;
     bsOut.Write(NetworkSystemMessages::LoginSystem);
@@ -110,7 +107,7 @@ void LoginSystem::SendRegister(const Components::AuthData &authData)
     gameClient.menuSystem.menuRegister.DisableRegisterButton();
 }
 
-void LoginSystem::GetMac(Components::AuthData &authData)
+void LoginSystem::GetMac(AuthData &authData)
 {
     IP_ADAPTER_INFO AdapterInfo[16];
     DWORD bufLen = sizeof(AdapterInfo);
@@ -146,7 +143,7 @@ void LoginSystem::GetMac(Components::AuthData &authData)
     }
 }
 
-void LoginSystem::GetHDDSerial(Components::AuthData &authData)
+void LoginSystem::GetHDDSerial(AuthData &authData)
 {
     DWORD serial;
     GetVolumeInformation("C:\\", NULL, 0, &serial, NULL, NULL, NULL, 0);

@@ -4,7 +4,6 @@
 #include "../Gothic/Classes/zCVob.hpp"
 
 using namespace OpenGMP::GUI;
-using namespace OpenGMP::Hooks;
 
 Visual3D::Visual3D(int x, int y, int w, int h)
     : Visual3D(x, y, w, h, false)

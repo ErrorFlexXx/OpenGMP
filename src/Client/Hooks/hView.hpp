@@ -10,31 +10,28 @@ class zCCamera;
 
 namespace OpenGMP
 {
-    namespace Hooks
+    class HView
     {
-        class HView
-        {
-        public:
-            HView();
-            static HView *GetInstance();
-            void DoHook();
-            void UndoHook();
-                       
-            static bool inited;
-            static HView *instance; //Singleton instance
-            CDetour *drawItemsDetour; //Detour of zCView::DrawItems
-            static std::map<zCView*, zCVob*> vobRenderList;
-            static zCWorld *rndrWorld;
-            static zCVob *camVob;
-            static zCCamera *camera;
+    public:
+        HView();
+        static HView *GetInstance();
+        void DoHook();
+        void UndoHook();
 
-            void DrawItems();
+        static bool inited;
+        static HView *instance; //Singleton instance
+        CDetour *drawItemsDetour; //Detour of zCView::DrawItems
+        static std::map<zCView*, zCVob*> vobRenderList;
+        static zCWorld *rndrWorld;
+        static zCVob *camVob;
+        static zCCamera *camera;
 
-        private:
-            /**
-            * @brief private copy contructor -- copy forbidden for singleton.
-            */
-            HView(HView &cpy);
-        };
-    }
+        void DrawItems();
+
+    private:
+        /**
+        * @brief private copy contructor -- copy forbidden for singleton.
+        */
+        HView(HView &cpy);
+    };
 }

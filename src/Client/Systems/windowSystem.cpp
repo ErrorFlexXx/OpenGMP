@@ -3,12 +3,11 @@
 #include "../OpenGMP/OpenGMP/resource.h"
 
 using namespace OpenGMP;
-using namespace OpenGMP::Systems;
 
 DWORD WindowSystem::procId = GetCurrentProcessId();
 CDetour WindowSystem::splashDetour((DWORD)GetProcAddress(LoadLibrary("user32.dll"), "LoadBitmapA"), 5, (DWORD)&DetourLoadBitmap, FASTHOOK);
 
-HBITMAP WINAPI OpenGMP::Systems::DetourLoadBitmap(HINSTANCE inst, LPCSTR lpBitmapName)
+HBITMAP WINAPI OpenGMP::DetourLoadBitmap(HINSTANCE inst, LPCSTR lpBitmapName)
 {
     return (HBITMAP)LoadImageA(GameClient::dllInstance, MAKEINTRESOURCE(Splash), IMAGE_BITMAP, 0, 0, LR_SHARED);
 }

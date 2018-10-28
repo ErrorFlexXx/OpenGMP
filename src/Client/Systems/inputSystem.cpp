@@ -4,9 +4,6 @@
 #include <Client/Systems/windowSystem.hpp>
 
 using namespace OpenGMP;
-using namespace OpenGMP::Components;
-using namespace OpenGMP::Systems;
-using namespace OpenGMP::Types;
 
 /* InputSystem Key Down Repeater*/
 

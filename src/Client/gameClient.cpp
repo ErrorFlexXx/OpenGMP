@@ -8,8 +8,6 @@
 
 using namespace std;
 using namespace OpenGMP;
-using namespace OpenGMP::Hooks;
-using namespace OpenGMP::Systems;
 
 HINSTANCE GameClient::dllInstance = nullptr;
 string GameClient::serverName = "localhost";

@@ -4,9 +4,8 @@
 
 using namespace OpenGMP;
 using namespace OpenGMP::GUI;
-using namespace OpenGMP::Systems;
 
-std::list<Menu*> Menu::activeMenus;
+std::list<GUI::Menu*> Menu::activeMenus;
 
 Menu::Menu(GameClient &gameClient)
     : gameClient(gameClient)
@@ -23,7 +22,7 @@ void Menu::Open()
     if (opened)
         activeMenus.remove(this);
     activeMenus.push_front(this);
-    gameClient.inputSystem.keyDownReceipient = [=](Types::VirtualKeys key) { this->KeyDown(key); };
+    gameClient.inputSystem.keyDownReceipient = [=](VirtualKeys key) { this->KeyDown(key); };
     opened = true;
 }
 
@@ -37,10 +36,10 @@ void Menu::Close()
     }
 }
 
-void Menu::KeyDown(Types::VirtualKeys key)
+void Menu::KeyDown(VirtualKeys key)
 {}
 
-void Menu::KeyUp(Types::VirtualKeys key)
+void Menu::KeyUp(VirtualKeys key)
 {}
 
 void Menu::Update(unsigned long long now)

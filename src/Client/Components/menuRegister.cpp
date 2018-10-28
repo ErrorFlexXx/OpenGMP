@@ -7,7 +7,6 @@
 #define _(string) gettext (string)
 
 using namespace OpenGMP;
-using namespace OpenGMP::Components;
 using namespace OpenGMP::GUI;
 
 std::string btnShowPasswordTextShow;

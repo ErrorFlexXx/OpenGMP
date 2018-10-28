@@ -13,23 +13,20 @@ namespace OpenGMP
         class MenuButton;
     }
 
-    namespace Components
+    class MenuMain : public GUI::MainMenu
     {
-        class MenuMain : public GUI::MainMenu
-        {
-        public:
-            MenuMain(GameClient &gameClient);
-            virtual void OnCreate() override;
-            virtual void Open() override;
-            void EnableNetworkElements();
-            void DisableNetworkElements();
+    public:
+        MenuMain(GameClient &gameClient);
+        virtual void OnCreate() override;
+        virtual void Open() override;
+        void EnableNetworkElements();
+        void DisableNetworkElements();
 
-        private:
-            GUI::MenuButton *btnLogin;
-            GUI::MenuButton *btnRegister;
-            GUI::MenuButton *btnQuit;
-            CGameManager *gameManager;
-            bool ingame;
-        };
-    }
+    private:
+        GUI::MenuButton *btnLogin;
+        GUI::MenuButton *btnRegister;
+        GUI::MenuButton *btnQuit;
+        CGameManager *gameManager;
+        bool ingame;
+    };
 }

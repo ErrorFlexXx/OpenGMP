@@ -27,7 +27,7 @@ namespace OpenGMP
             virtual void OnCreate();
             virtual void Open() override;
             virtual void Close() override;
-            virtual void KeyDown(Types::VirtualKeys key) override;
+            virtual void KeyDown(VirtualKeys key) override;
             virtual void Update(unsigned long long now) override;
 
         protected:
@@ -60,7 +60,7 @@ namespace OpenGMP
             unsigned long long helpTextNextUpdateTime;
 
         private:
-            OpenGMP::Systems::InputSystemKeyCombination scrollHelper;
+            OpenGMP::InputSystemKeyCombination scrollHelper;
             bool init;
         };
     }

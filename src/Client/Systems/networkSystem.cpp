@@ -17,9 +17,6 @@
 #endif
 
 using namespace OpenGMP;
-using namespace OpenGMP::Types;
-using namespace OpenGMP::Systems;
-using namespace OpenGMP::Components;
 using namespace RakNet;
 
 bool NetworkSystem::started = false;

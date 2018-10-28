@@ -4,12 +4,9 @@
 
 namespace OpenGMP
 {
-    namespace Objects
+    class ClientClient : public Client
     {
-        class ClientClient : public Client
-        {
-        public:
-            ClientClient();
-        };
-    }
+    public:
+        ClientClient();
+    };
 }

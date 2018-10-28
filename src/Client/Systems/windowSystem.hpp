@@ -7,20 +7,17 @@
 
 namespace OpenGMP
 {
-    namespace Systems
+    HBITMAP WINAPI DetourLoadBitmap(HINSTANCE inst, LPCSTR lpBitmapName);
+
+    class WindowSystem
     {
-        HBITMAP WINAPI DetourLoadBitmap(HINSTANCE inst, LPCSTR lpBitmapName);
+    public:
+        static void SetWindowTitle(const std::string &title);
+        static void UpdateWindowIcon();
+        static bool IsForeground();
 
-        class WindowSystem
-        {
-        public:
-            static void SetWindowTitle(const std::string &title);
-            static void UpdateWindowIcon();
-            static bool IsForeground();
-
-        private:
-            static DWORD procId;
-            static CDetour splashDetour;
-        };
-    }
+    private:
+        static DWORD procId;
+        static CDetour splashDetour;
+    };
 }

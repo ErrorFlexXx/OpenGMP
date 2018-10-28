@@ -4,7 +4,6 @@
 
 using namespace OpenGMP;
 using namespace OpenGMP::GUI;
-using namespace OpenGMP::Components;
 
 NotificationBox::NotificationBox()
     : NotificationText()

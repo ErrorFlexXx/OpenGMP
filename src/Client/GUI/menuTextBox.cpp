@@ -5,7 +5,6 @@
 
 using namespace OpenGMP;
 using namespace OpenGMP::GUI;
-using namespace OpenGMP::Types;
 
 const int MenuTextBox::defaultHeight = 35;
 const std::string MenuTextBox::defaultBackTexture = "Menu_Choice_Back.tga";

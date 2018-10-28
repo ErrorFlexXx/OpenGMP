@@ -2,6 +2,8 @@
 #define _WINSOCKAPI_ //Stop windows.h from including winsock.h (colliding with RakNet)
 #include <windows.h>
 
+using namespace OpenGMP;
+
 const unsigned char OtherHooks::SkipIntroVideos[] = { 0xE9, 0xA3, 0x00, 0x00, 0x00 };
 const unsigned char OtherHooks::SkipSavegamemManagerInit[] = { 0xEB, 0x35 };
 const unsigned char OtherHooks::SkipOutputUnitsInit[] = { 0xC3 };

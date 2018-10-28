@@ -10,9 +10,6 @@
 
 using namespace OpenGMP;
 using namespace OpenGMP::GUI;
-using namespace OpenGMP::Systems;
-using namespace OpenGMP::Types;
-using namespace OpenGMP::Components;
 
 MainMenu::MainMenu(GameClient &gameClient)
     : Menu(gameClient)

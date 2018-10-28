@@ -12,10 +12,6 @@
 #include "../gameClient.hpp"
 
 using namespace OpenGMP;
-using namespace OpenGMP::Hooks;
-using namespace OpenGMP::GUI;
-using namespace OpenGMP::Systems;
-using namespace OpenGMP::Components;
 
 extern GameClient gameClient;
 

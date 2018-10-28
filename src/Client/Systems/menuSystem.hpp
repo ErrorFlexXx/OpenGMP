@@ -22,29 +22,26 @@ namespace OpenGMP
         class Menu;
     }
 
-    namespace Systems
+    class MenuSystem
     {
-        class MenuSystem
-        {
-        public:
-            MenuSystem(GameClient &gameClient);
-            
-            void CloseActiveMenus();
-            bool IsMenuActive();
-            bool KeyDownUpdateMenus(Types::VirtualKeys key);
-            bool KeyUpUpdateMenus(Types::VirtualKeys key);
-            void UpdateMenus(unsigned long long now);
-            void UpdateNotification(unsigned long long now);
-            void ShowNotification(int posY, std::string &text, Components::Color &color, uint32_t durationMS = 0);
-            void HideNotification();
-            void Process(RakNet::Packet *packet);
+    public:
+        MenuSystem(GameClient &gameClient);
 
-            Components::MenuMain menuMain;
-            Components::MenuRegister menuRegister;
-            Components::NotificationBox notification;
+        void CloseActiveMenus();
+        bool IsMenuActive();
+        bool KeyDownUpdateMenus(VirtualKeys key);
+        bool KeyUpUpdateMenus(VirtualKeys key);
+        void UpdateMenus(unsigned long long now);
+        void UpdateNotification(unsigned long long now);
+        void ShowNotification(int posY, std::string &text, Color &color, uint32_t durationMS = 0);
+        void HideNotification();
+        void Process(RakNet::Packet *packet);
 
-        private:
-            GameClient &gameClient;
-        };
-    }
+        MenuMain menuMain;
+        MenuRegister menuRegister;
+        NotificationBox notification;
+
+    private:
+        GameClient &gameClient;
+    };
 }

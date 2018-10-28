@@ -9,9 +9,6 @@
 #define _(string) gettext (string)
 
 using namespace OpenGMP;
-using namespace OpenGMP::Components;
-using namespace OpenGMP::Systems;
-using namespace OpenGMP::Types;
 using namespace RakNet;
 
 MenuSystem::MenuSystem(GameClient &gameClient)
@@ -68,7 +65,7 @@ void MenuSystem::UpdateNotification(unsigned long long now)
     notification.Update(now);
 }
 
-void MenuSystem::ShowNotification(int posY, std::string &text, Components::Color &color, uint32_t duration)
+void MenuSystem::ShowNotification(int posY, std::string &text, Color &color, uint32_t duration)
 {
     notification.text = text;
     notification.posY = posY;

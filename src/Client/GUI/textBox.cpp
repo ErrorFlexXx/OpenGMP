@@ -8,9 +8,6 @@
 
 using namespace OpenGMP;
 using namespace OpenGMP::GUI;
-using namespace OpenGMP::Components;
-using namespace OpenGMP::Systems;
-using namespace OpenGMP::Types;
 
 const size_t TextBox::cursorSize = 16;
 const int TextBox::cursorOffsetX = 1 - TextBox::cursorSize / 2;

@@ -23,8 +23,8 @@ namespace OpenGMP
 
             VisualText *InputText();
             void Update(unsigned long long now);
-            void KeyPressed(Types::VirtualKeys key);
-            void KeyPressedNoRepeatUpdate(Types::VirutalKeys key);
+            void KeyPressed(VirtualKeys key);
+            void KeyPressedNoRepeatUpdate(VirutalKeys key);
             bool Enabled();
             void Enabled(bool value);
             std::string Input();
@@ -47,7 +47,7 @@ namespace OpenGMP
 
         private:
             void UpdateInputVisual();
-            char GetCharFromKey(Types::VirtualKeys key);
+            char GetCharFromKey(VirtualKeys key);
 
             struct Pos
             {
@@ -70,7 +70,7 @@ namespace OpenGMP
             Visual rightArrow;
             unsigned long long cursorTime;
             std::string input;
-            Systems::InputSystemKeyDownRepeat keyRepeater;
+            InputSystemKeyDownRepeat keyRepeater;
         };
     }
 }

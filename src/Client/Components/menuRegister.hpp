@@ -12,25 +12,22 @@ namespace OpenGMP
         class MenuTextBox;
     }
 
-    namespace Components
+    class MenuRegister : public GUI::MainMenu
     {
-        class MenuRegister : public GUI::MainMenu
-        {
-        public:
-            MenuRegister(GameClient &gameClient);
-            virtual void OnCreate() override;
-            virtual void Open() override;
-            void Register();
-            void DisableRegisterButton();
-            void EnableRegisterButton();
-            void ToggleShowPassword();
+    public:
+        MenuRegister(GameClient &gameClient);
+        virtual void OnCreate() override;
+        virtual void Open() override;
+        void Register();
+        void DisableRegisterButton();
+        void EnableRegisterButton();
+        void ToggleShowPassword();
 
-        private:
-            GUI::MenuTextBox *txtUsername;
-            GUI::MenuTextBox *txtPassword;
-            GUI::MenuButton *btnShowPassword;
-            GUI::MenuButton *btnCreate;
-            GUI::MenuButton *btnBack;
-        };
-    }
+    private:
+        GUI::MenuTextBox *txtUsername;
+        GUI::MenuTextBox *txtPassword;
+        GUI::MenuButton *btnShowPassword;
+        GUI::MenuButton *btnCreate;
+        GUI::MenuButton *btnBack;
+    };
 }

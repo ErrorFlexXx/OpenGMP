@@ -13,75 +13,72 @@ namespace OpenGMP
 {
     class GameClient;
 
-    namespace Systems
+    class InputSystemKeyDownRepeat
     {
-        class InputSystemKeyDownRepeat
-        {
-        public:
-            InputSystemKeyDownRepeat(GameClient &gameClient, std::function<void(Types::VirtualKeys)> action, int holdTime = 600, int rate = 75);
+    public:
+        InputSystemKeyDownRepeat(GameClient &gameClient, std::function<void(VirtualKeys)> action, int holdTime = 600, int rate = 75);
 
-            int holdTime;
-            int rate;
-            void Update(unsigned long long now);
-            void KeyDown(const Types::VirtualKeys &key, unsigned long long now);
+        int holdTime;
+        int rate;
+        void Update(unsigned long long now);
+        void KeyDown(const VirtualKeys &key, unsigned long long now);
 
-        private:
-            GameClient &gameClient;
-            unsigned long long nextTime;
-            Types::VirtualKeys currentKey;
-            std::function<void(Types::VirtualKeys)> action;
-        };
+    private:
+        GameClient &gameClient;
+        unsigned long long nextTime;
+        VirtualKeys currentKey;
+        std::function<void(VirtualKeys)> action;
+    };
 
-        struct ActionKeyCombinationBinding
-        {
-            ActionKeyCombinationBinding(
-                const std::list<Types::VirtualKeys> &keyCombination,
-                const std::function<void()> &action)
-                : keyCombination(keyCombination)
-                , action(action) {}
+    struct ActionKeyCombinationBinding
+    {
+        ActionKeyCombinationBinding(
+            const std::list<VirtualKeys> &keyCombination,
+            const std::function<void()> &action)
+            : keyCombination(keyCombination)
+            , action(action) {}
 
-            std::list<Types::VirtualKeys> keyCombination;
-            std::function<void()> action;
-        };
+        std::list<VirtualKeys> keyCombination;
+        std::function<void()> action;
+    };
 
-        class InputSystemKeyCombination
-        {
-        public:
-            InputSystemKeyCombination(GameClient &gameClient, int holdTime = 600, int rate = 150);
+    class InputSystemKeyCombination
+    {
+    public:
+        InputSystemKeyCombination(GameClient &gameClient, int holdTime = 600, int rate = 150);
 
-            int holdTime;
-            int rate;
-            void Add(const std::list<Types::VirtualKeys> &keyCombination, const std::function<void()> &action);
-            void Update(unsigned long long now);
+        int holdTime;
+        int rate;
+        void Add(const std::list<VirtualKeys> &keyCombination, const std::function<void()> &action);
+        void Update(unsigned long long now);
 
-        private:
-            GameClient &gameClient;
-            std::list <ActionKeyCombinationBinding*> actionKeyCombinationBindings;
-            unsigned long long nextTime;
-            ActionKeyCombinationBinding *current;
-        };
+    private:
+        GameClient &gameClient;
+        std::list <ActionKeyCombinationBinding*> actionKeyCombinationBindings;
+        unsigned long long nextTime;
+        ActionKeyCombinationBinding *current;
+    };
 
-        class InputSystem
-        {
-        public:
-            InputSystem(GameClient &gameClient);
-            void Update();
-            std::function<void(Types::VirtualKeys key)> keyDownReceipient;
-            std::function<void(Types::VirtualKeys key)> keyUpReceipient;
-            bool mouseShown;
-            int movedX;
-            int movedY;
-            int MouseDistX();
-            int MouseDistY();
-            POINT oriPos;
-            const int defaultMousePosX;
-            const int defaultMousePosY;
-            bool m_shown;
-            bool IsPressed(Types::VirtualKeys key);
+    class InputSystem
+    {
+    public:
+        InputSystem(GameClient &gameClient);
+        void Update();
+        std::function<void(VirtualKeys key)> keyDownReceipient;
+        std::function<void(VirtualKeys key)> keyUpReceipient;
+        bool mouseShown;
+        int movedX;
+        int movedY;
+        int MouseDistX();
+        int MouseDistY();
+        POINT oriPos;
+        const int defaultMousePosX;
+        const int defaultMousePosY;
+        bool m_shown;
+        bool IsPressed(VirtualKeys key);
 
-        private:
-            GameClient &gameClient;
-            bool m_keys[KEYCOUNT];
-        };
-    }
+    private:
+        GameClient &gameClient;
+        bool m_keys[KEYCOUNT];
+    };
 }

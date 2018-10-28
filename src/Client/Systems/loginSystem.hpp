@@ -10,30 +10,23 @@ namespace RakNet
 namespace OpenGMP
 {
     class GameClient;
+    class AuthData;
 
-    namespace Components
+    class LoginSystem
     {
-        class AuthData;
-    }
+    public:
+        LoginSystem(GameClient &gameClient);
 
-    namespace Systems
-    {
-        class LoginSystem
-        {
-        public:
-            LoginSystem(GameClient &gameClient);
-            
-            void Process(RakNet::Packet *packet);
+        void Process(RakNet::Packet *packet);
 
-            void SendRegister(const Components::AuthData &authData);
+        void SendRegister(const AuthData &authData);
 
-            void GetMac(Components::AuthData &authData);
+        void GetMac(AuthData &authData);
 
-            void LoginSystem::GetHDDSerial(Components::AuthData &authData);
+        void LoginSystem::GetHDDSerial(AuthData &authData);
 
-        private:
+    private:
 
-            GameClient &gameClient;
-        };
-    }
+        GameClient &gameClient;
+    };
 }

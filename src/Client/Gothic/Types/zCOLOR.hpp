@@ -43,7 +43,7 @@ public:
         this->m_a = color.a();
     }
 
-    zCOLOR(const OpenGMP::Components::Color &color)
+    zCOLOR(const OpenGMP::Color &color)
     {
         this->m_r = color.r;
         this->m_g = color.g;

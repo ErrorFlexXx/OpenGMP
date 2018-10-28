@@ -9,7 +9,7 @@
 #include "../Gothic/Types/zVEC3.hpp"
 #include <limits.h>
 
-using namespace OpenGMP::Hooks;
+using namespace OpenGMP;
 
 //Static vars:
 bool HView::inited = false;

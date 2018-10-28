@@ -31,7 +31,7 @@ namespace OpenGMP
             std::string GetText();
         
         private:
-            virtual void KeyPressed(Types::VirtualKeys key) override;
+            virtual void KeyPressed(VirtualKeys key) override;
 
             GameClient &gameClient;
             static const int defaultHeight;

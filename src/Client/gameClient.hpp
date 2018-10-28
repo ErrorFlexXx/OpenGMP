@@ -24,12 +24,12 @@ namespace OpenGMP
         static HINSTANCE dllInstance;
         static std::string serverName;
         static unsigned short serverPort;
-        Objects::ClientClient client;
-        Systems::NetworkSystem networkSystem;
-        Systems::LoginSystem loginSystem;
-        Systems::InputSystem inputSystem;
-        Systems::MenuSystem menuSystem;
-        Hooks::HGame hookGame; //GameLoop hooks (Menu & Ingame)
+        ClientClient client;
+        NetworkSystem networkSystem;
+        LoginSystem loginSystem;
+        InputSystem inputSystem;
+        MenuSystem menuSystem;
+        HGame hookGame; //GameLoop hooks (Menu & Ingame)
     
     private:
         GameClient(const GameClient&);  //!< No Copy allowed!

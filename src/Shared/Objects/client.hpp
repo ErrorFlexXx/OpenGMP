@@ -5,6 +5,7 @@
 #include "netIdObject.hpp"
 #include "../Components/version.hpp"
 #include "../Components/authData.hpp"
+#include "../Components/loginData.hpp"
 #include "../Components/id.hpp"
 #include "../Components/netId.hpp"
 
@@ -24,5 +25,6 @@ namespace OpenGMP
     public:
         Version version;    //!< (available script attribute) version of a client
         AuthData authData;  //!< (available script attribute) auth data of a client
+        LoginData loginData;//!< (available script attribute) login data of a client
     };
 }

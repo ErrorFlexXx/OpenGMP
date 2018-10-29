@@ -3,6 +3,7 @@
 #include <Server/gameServer.hpp>
 #include <Server/Objects/serverClient.hpp>
 #include <Server/Utils/utils.h>
+#include <Shared/Systems/versionSystem.hpp>
 #include <Shared/Types/Messages/loginSystemMessages.hpp>
 #include <utils/logger.h>
 #include <BitStream.h>
@@ -41,19 +42,28 @@ void LoginSystem::Process(Packet *packet)
 
                 if(connectedClients >= gameServer.clientContainer.capacity)
                 {
-                    SendServerFull(packet);
-                    CloseConnection(packet);
+                    BitStream bsOut;
+                    bsOut.Write(NetworkSystemMessages::LoginSystem);
+                    bsOut.Write(LoginSystemMessages::SERVERFULL);
+                    SendLoginSystemMessage(packet->guid, bsOut);
+                    CloseConnection(packet->guid);
                 }
 
                 if(IsBanned(ip))
                 {
-                    SendBanned(packet);
-                    CloseConnection(packet);
+                    BitStream bsOut;
+                    bsOut.Write(NetworkSystemMessages::LoginSystem);
+                    bsOut.Write(LoginSystemMessages::BANNED);
+                    SendLoginSystemMessage(packet->guid, bsOut);
+                    CloseConnection(packet->guid);
                 }
                 ServerClient &client = gameServer.clientContainer.CreateEntity(created, id, guid);
                 client.netId.rakNetId = packet->guid;
                 LogInfo() << "Client connected. IP: " << ip << ", ID: " << id.id << ", added to clientContainer: " << (created ? "true" : "false") << ".";
-                SendAuth(packet);
+                BitStream bsOut;
+                bsOut.Write(NetworkSystemMessages::LoginSystem);
+                bsOut.Write(LoginSystemMessages::AUTH);
+                SendLoginSystemMessage(packet->guid, bsOut);
                 break;
             }
             case ID_CONNECTION_LOST:
@@ -82,6 +92,44 @@ void LoginSystem::Process(Packet *packet)
 
         switch(command)
         {
+            case LoginSystemMessages::AUTH:
+            {
+                bool success;
+                ServerClient &client = gameServer.clientContainer.Get(packet->guid, success);
+
+                if(success) success = client.authData.ReadStream(bsIn);
+                if(success) success = client.version.ReadStream(bsIn);
+
+                if(success)
+                {
+                    if(IsBanned(client))
+                    {
+                        BitStream bsOut;
+                        bsOut.Write(NetworkSystemMessages::LoginSystem);
+                        bsOut.Write(LoginSystemMessages::BANNED);
+                        SendLoginSystemMessage(packet->guid, bsOut);
+                    }
+                    else if(!VersionSystem::CheckVersionsCompatibility(VersionSystem::version.version, client.version.version))
+                    {
+                        BitStream bsOut;
+                        bsOut.Write(NetworkSystemMessages::LoginSystem);
+                        bsOut.Write(LoginSystemMessages::VERSION_INCOMPATIBLE);
+                        SendLoginSystemMessage(packet->guid, bsOut);
+                    }
+                    else
+                    {
+                        BitStream bsOut;
+                        bsOut.Write(NetworkSystemMessages::LoginSystem);
+                        bsOut.Write(LoginSystemMessages::AUTH_ACCEPTED);
+                        SendLoginSystemMessage(packet->guid, bsOut);
+                    }
+                }
+                else //Broken packet - Missing or wrong data
+                {
+                    ; //Todo: Hack counter ? Kick/Ban if too many broken packages.
+                }
+                break;
+            }
             case LoginSystemMessages::REGISTER:
             {
                 bool success;
@@ -99,37 +147,16 @@ void LoginSystem::Process(Packet *packet)
     }
 }
 
-void LoginSystem::SendBanned(Packet *packet)
+void LoginSystem::SendLoginSystemMessage(const RakNetGUID &dest, const BitStream &bsOut)
 {
-    BitStream bsOut;
-    bsOut.Write(NetworkSystemMessages::LoginSystem);
-    bsOut.Write(LoginSystemMessages::BANNED);
     gameServer.networkSystem.peerInterface->Send(
-                &bsOut, LOW_PRIORITY, RELIABLE, LoginSystemOrderingChannel, packet->systemAddress, false);
+                &bsOut, LOW_PRIORITY, RELIABLE, LoginSystemOrderingChannel, dest, false);
 }
 
-void LoginSystem::SendServerFull(Packet *packet)
+void LoginSystem::CloseConnection(const RakNetGUID &dest)
 {
-    BitStream bsOut;
-    bsOut.Write(NetworkSystemMessages::LoginSystem);
-    bsOut.Write(LoginSystemMessages::SERVERFULL);
-    gameServer.networkSystem.peerInterface->Send(
-                &bsOut, LOW_PRIORITY, RELIABLE, LoginSystemOrderingChannel, packet->systemAddress, false);
-}
-
-void LoginSystem::SendAuth(Packet *packet)
-{
-    BitStream bsOut;
-    bsOut.Write(NetworkSystemMessages::LoginSystem);
-    bsOut.Write(LoginSystemMessages::AUTH);
-    gameServer.networkSystem.peerInterface->Send(
-                &bsOut, LOW_PRIORITY, RELIABLE, LoginSystemOrderingChannel, packet->systemAddress, false);
-}
-
-void LoginSystem::CloseConnection(Packet *packet)
-{
-    gameServer.networkSystem.peerInterface->CloseConnection(packet->systemAddress, true, LoginSystemOrderingChannel);
-    gameServer.clientContainer.Remove(packet->guid);
+    gameServer.networkSystem.peerInterface->CloseConnection(dest, true, LoginSystemOrderingChannel);
+    gameServer.clientContainer.Remove(dest);
 }
 
 bool LoginSystem::IsBanned(const std::string &ip)
@@ -155,7 +182,7 @@ bool LoginSystem::IsBanned(ServerClient &client)
     banned |= CheckEntryExists(MACBANLIST_FILE, client.authData.macAddress);
     if(banned)
     {
-        LogInfo() << "Player " << client.authData.loginname << " banned by mac: " << client.authData.macAddress;
+        LogInfo() << "Player " << client.loginData.loginname << " banned by mac: " << client.authData.macAddress;
         return banned;
     }
     //Check hdd ban.
@@ -163,14 +190,14 @@ bool LoginSystem::IsBanned(ServerClient &client)
     banned |= CheckEntryExists(HDDBANLIST_FILE, hddSerial);
     if(banned)
     {
-        LogInfo() << "Player " << client.authData.loginname << " banned by hdd: " << hddSerial;
+        LogInfo() << "Player " << client.loginData.loginname << " banned by hdd: " << hddSerial;
         return banned;
     }
     //Check login ban.
-    banned |= CheckEntryExists(LOGINNAMEBANLIST_FILE, client.authData.loginname);
+    banned |= CheckEntryExists(LOGINNAMEBANLIST_FILE, client.loginData.loginname);
     if(banned)
     {
-        LogInfo() << "Player " << client.authData.loginname << " banned by loginname: " << client.authData.loginname;
+        LogInfo() << "Player " << client.loginData.loginname << " banned by loginname: " << client.loginData.loginname;
         return banned;
     }
 
@@ -285,12 +312,12 @@ void LoginSystem::UnbanByHDD(ServerClient &client)
 
 void LoginSystem::BanByLoginname(ServerClient &client)
 {
-    AddEntryToList(LOGINNAMEBANLIST_FILE, client.authData.loginname);
+    AddEntryToList(LOGINNAMEBANLIST_FILE, client.loginData.loginname);
 }
 
 void LoginSystem::UnbanByLoginname(ServerClient &client)
 {
-    RemoveEntryFromList(LOGINNAMEBANLIST_FILE, client.authData.loginname);
+    RemoveEntryFromList(LOGINNAMEBANLIST_FILE, client.loginData.loginname);
 }
 
 void LoginSystem::Unban(ServerClient &client)

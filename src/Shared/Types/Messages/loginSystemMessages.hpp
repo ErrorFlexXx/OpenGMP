@@ -9,7 +9,8 @@ namespace OpenGMP
         BANNED,
         SERVERFULL,
         AUTH,
+        AUTH_ACCEPTED,
+        VERSION_INCOMPATIBLE,
         REGISTER
     };
 }
-

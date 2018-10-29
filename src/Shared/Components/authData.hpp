@@ -19,8 +19,6 @@ namespace OpenGMP
     class AuthData : public IStreamObject
     {
     public:
-        std::string loginname;          //!< (available script attribute) the loginname
-        std::string password;           //!< (available script attribute) the cleartext password
         uint32_t hddSerial;             //!< (available script attribute) the hdd serial
         std::string macAddress;         //!< (available script attribute) the mac address
 

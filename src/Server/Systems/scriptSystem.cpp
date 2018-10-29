@@ -11,6 +11,7 @@
 //Script interface classes:
 #include "../Objects/serverClient.hpp"
 #include <Shared/Components/authData.hpp>
+#include <Shared/Components/loginData.hpp>
 #include <Shared/Components/netId.hpp>
 #include <Shared/Components/id.hpp>
 #include <Shared/Components/color.hpp>
@@ -322,10 +323,15 @@ void ScriptSystem::SetupMetaData()
         RegisterClass(std::string("AuthData"));
         GDefineMetaClass<AuthData>
                 ::define("AuthData")
-                ._field("loginname", &AuthData::loginname)
-                ._field("password", &AuthData::password)
                 ._field("hddSerial", &AuthData::hddSerial)
                 ._field("macAddress", &AuthData::macAddress)
+                ;
+
+        RegisterClass(std::string("LoginData"));
+        GDefineMetaClass<LoginData>
+                ::define("LoginData")
+                ._field("loginname", &LoginData::loginname)
+                ._field("password", &LoginData::password)
                 ;
 
         RegisterClass(std::string("NetId"));
@@ -344,6 +350,7 @@ void ScriptSystem::SetupMetaData()
         GDefineMetaClass<ServerClient,Client,NetIdObject,IdObject>
                 ::define("ServerClient")
                 ._field("authData", &ServerClient::authData)
+                ._field("loginData", &ServerClient::loginData)
                 ;
 
         RegisterClass(std::string("Color"));

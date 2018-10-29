@@ -5,6 +5,8 @@
 namespace RakNet
 {
     struct Packet;
+    class BitStream;
+    struct RakNetGUID;
 }
 
 namespace OpenGMP
@@ -27,29 +29,9 @@ namespace OpenGMP
          */
         void Process(RakNet::Packet *packet);
 
-        /**
-         * @brief SendBanned sends a banned packet to the client.
-         * @param packet a packet including the sender address, which is used as destination.
-         */
-        void SendBanned(RakNet::Packet *packet);
+        void SendLoginSystemMessage(const RakNet::RakNetGUID &dest, const RakNet::BitStream &bsOut);
 
-        /**
-         * @brief SendServerFull sends a server full packet to the client.
-         * @param packet a packet including the sender address, which is used as destination.
-         */
-        void SendServerFull(RakNet::Packet *packet);
-
-        /**
-         * @brief SendAuth sends an auth packet to the client, to signal Login/Register is possible now.
-         * @param packet a packet including the sender address, which is used as destination.
-         */
-        void SendAuth(RakNet::Packet *packet);
-
-        /**
-         * @brief CloseConnection closes the network connection with the peer.
-         * @param packet a packet including the sender address, which is used as destination.
-         */
-        void CloseConnection(RakNet::Packet *packet);
+        void CloseConnection(const RakNet::RakNetGUID &dest);
 
         /**
          * @brief IsBanned checks, if an IP is banned on the system.

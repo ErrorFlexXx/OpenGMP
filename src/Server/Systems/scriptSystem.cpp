@@ -186,6 +186,7 @@ void ScriptSystem::SetupMetaData()
     RegisterGlobal(std::string("mysql_rollback"));
     RegisterGlobal(std::string("mysql_row_seek"));
     RegisterGlobal(std::string("mysql_row_tell"));
+    RegisterGlobal(std::string("mysql_store_result"));
     //Mysql Statements:
     RegisterGlobal(std::string("mysql_stmt_init"));
     RegisterGlobal(std::string("mysql_stmt_prepare"));
@@ -261,6 +262,7 @@ void ScriptSystem::SetupMetaData()
                 ._method("mysql_rollback", &mysql_rollback)
                 ._method("mysql_row_seek", &mysql_row_seek)
                 ._method("mysql_row_tell", &mysql_row_tell)
+                ._method("mysql_store_result", &mysql_store_result)
                 //Mysql Statements:
                 ._method("mysql_stmt_init", &mysql_stmt_init)
                 ._method("mysql_stmt_prepare", &mysql_stmt_prepare)
@@ -318,6 +320,7 @@ void ScriptSystem::SetupMetaData()
                 ._method("GetScriptSystem", &GameServer::GetScriptSystem)
                 ._method("GetMenuSystem", &GameServer::GetMenuSystem)
                 ._method("Shutdown", &GameServer::Shutdown)
+
                 ;
 
         RegisterClass(std::string("AuthData"));
@@ -356,6 +359,7 @@ void ScriptSystem::SetupMetaData()
         RegisterClass(std::string("Color"));
         GDefineMetaClass<Color>
                 ::define("Color")
+                ._constructor<void *(uint8_t, uint8_t, uint8_t, uint8_t)>()
                 ._field("r", &Color::r)
                 ._field("g", &Color::g)
                 ._field("b", &Color::b)
@@ -394,7 +398,7 @@ void ScriptSystem::SetupMetaData()
         RegisterClass(std::string("NetworkSystem"));
         GDefineMetaClass<NetworkSystem>
                 ::define("NetworkSystem")
-                ._field("gameslots", &NetworkSystem::playerslots)
+                ._field("playerslots", &NetworkSystem::playerslots)
                 ;
 
     }

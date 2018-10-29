@@ -140,7 +140,7 @@ void LoginSystem::Process(Packet *packet)
             {
                 bool success;
                 ServerClient &client = gameServer.clientContainer.Get(packet->guid, success);
-                client.authData.ReadStream(bsIn);
+                client.loginData.ReadStream(bsIn);
                 gameServer.scriptSystem.InvokeScriptFunction("Register", client);
                 break;
             }

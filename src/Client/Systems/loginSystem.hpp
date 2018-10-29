@@ -5,12 +5,14 @@
 namespace RakNet
 {
     struct Packet;
+    class BitStream;
 }
 
 namespace OpenGMP
 {
     class GameClient;
     class AuthData;
+    class LoginData;
 
     class LoginSystem
     {
@@ -19,7 +21,11 @@ namespace OpenGMP
 
         void Process(RakNet::Packet *packet);
 
-        void SendRegister(const AuthData &authData);
+        void SendLoginSystemPacket(const RakNet::BitStream &bsOut);
+
+        void SendRegister(const LoginData &loginData);
+
+        void SendLogin(const LoginData &loginData);
 
         void GetMac(AuthData &authData);
 

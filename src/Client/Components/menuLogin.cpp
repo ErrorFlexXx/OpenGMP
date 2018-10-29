@@ -1,4 +1,4 @@
-#include "menuRegister.hpp"
+#include "menuLogin.hpp"
 #include "../gameClient.hpp"
 #include "../GUI/menuButton.hpp"
 #include "../GUI/menuTextBox.hpp"
@@ -12,46 +12,46 @@ using namespace OpenGMP::GUI;
 std::string btnShowPasswordTextShow;
 std::string btnShowPasswordTextHide;
 
-MenuRegister::MenuRegister(GameClient &gameClient)
+MenuLogin::MenuLogin(GameClient &gameClient)
     : MainMenu(gameClient)
 {}
 
-void MenuRegister::OnCreate()
+void MenuLogin::OnCreate()
 {
     btnShowPasswordTextShow = _("Show password");
     btnShowPasswordTextHide = _("Hide password");
 
     MainMenu::OnCreate();
-    back->CreateTextCenterX(_("Registration"), 70);
+    back->CreateTextCenterX(_("Login"), 70);
     const int offset = 200;
     const int dist = 38;
 
-    txtUsername = AddTextBox(_("Username"), _("Username of the created user."), offset + dist * 0, 280, nullptr);
-    txtPassword = AddTextBox(_("Password"), _("Password of the created user."), offset + dist * 1, 280, nullptr, true);
+    txtUsername = AddTextBox(_("Username"), _("Username to log into."), offset + dist * 0, 280, nullptr);
+    txtPassword = AddTextBox(_("Password"), _("Password of the user."), offset + dist * 1, 280, nullptr, true);
     btnShowPassword = AddButton(btnShowPasswordTextShow, _("Toggles the password plain text view."), offset + dist * 2, [=]() { this->ToggleShowPassword(); });
-    btnCreate = AddButton(_("Register"), _("Creates a new user."), offset + dist * 4, [=]() { this->Register(); });
+    btnLogin = AddButton(_("Login"), _("Login with given credentials."), offset + dist * 4, [=]() { this->Login(); });
     btnBack = AddButton(_("Back"), _("Goes back to the main menu."), offset + dist * 5, [=]() {gameClient.menuSystem.menuMain.Open(); });
 
     txtUsername->Enabled(true);
     txtPassword->Enabled(true);
     btnShowPassword->Enabled(true);
-    btnCreate->Enabled(true);
+    btnLogin->Enabled(true);
     btnBack->Enabled(true);
 }
 
-void MenuRegister::Open()
+void MenuLogin::Open()
 {
     OpenGMP::GUI::MainMenu::Open();
 }
 
-void MenuRegister::Register()
+void MenuLogin::Login()
 {
     gameClient.client.loginData.loginname = txtUsername->GetText();
     gameClient.client.loginData.password = txtPassword->GetText();
-    gameClient.loginSystem.SendRegister(gameClient.client.loginData);
+    gameClient.loginSystem.SendLogin(gameClient.client.loginData);
 }
 
-void MenuRegister::ToggleShowPassword()
+void MenuLogin::ToggleShowPassword()
 {
     bool isPasswordText = !txtPassword->GetPasswordText();
     txtPassword->SetPasswordText(isPasswordText);
@@ -61,12 +61,12 @@ void MenuRegister::ToggleShowPassword()
         btnShowPassword->Text(btnShowPasswordTextHide);
 }
 
-void MenuRegister::DisableRegisterButton()
+void MenuLogin::DisableLoginButton()
 {
-    btnCreate->Enabled(false);
+    btnLogin->Enabled(false);
 }
 
-void MenuRegister::EnableRegisterButton()
+void MenuLogin::EnableLoginButton()
 {
-    btnCreate->Enabled(true);
+    btnLogin->Enabled(true);
 }

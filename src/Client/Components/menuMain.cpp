@@ -23,7 +23,7 @@ void MenuMain::OnCreate()
     const int offset = 200;
     const int dist = 38;
 
-    btnLogin = AddButton(_("Login"), _("Log into an existing account."), offset + dist * 0, nullptr);
+    btnLogin = AddButton(_("Login"), _("Log into an existing account."), offset + dist * 0, [=]() { gameClient.menuSystem.menuLogin.Open(); });
     btnRegister = AddButton(_("Register"), _("Create a new account."), offset + dist * 1, [=]() { gameClient.menuSystem.menuRegister.Open(); });
     btnQuit = AddButton(_("Quit"), _("Quit the game. Switch to the desktop."), offset + dist * 3, [=]() { gameManager->ExitGame(); });
     

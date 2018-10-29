@@ -128,9 +128,11 @@
     <ClCompile Include="..\..\..\Shared\Components\color.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\gameTime.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\id.cpp" />
+    <ClCompile Include="..\..\..\Shared\Components\loginData.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\notificationText.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\version.cpp" />
     <ClCompile Include="..\..\..\Shared\Systems\versionSystem.cpp" />
+    <ClCompile Include="..\..\Components\menuLogin.cpp" />
     <ClCompile Include="..\..\Components\menuMain.cpp" />
     <ClCompile Include="..\..\Components\menuRegister.cpp" />
     <ClCompile Include="..\..\Components\notificationBox.cpp" />
@@ -167,6 +169,7 @@
     <ClInclude Include="..\..\..\Shared\Components\color.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\gameTime.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\id.hpp" />
+    <ClInclude Include="..\..\..\Shared\Components\loginData.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\notificationText.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\version.hpp" />
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp" />
@@ -174,6 +177,7 @@
     <ClInclude Include="..\..\..\Shared\Types\Messages\loginSystemMessages.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\menuSystemMessages.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\networkSystemMessages.hpp" />
+    <ClInclude Include="..\..\Components\menuLogin.hpp" />
     <ClInclude Include="..\..\Components\menuMain.hpp" />
     <ClInclude Include="..\..\Components\menuRegister.hpp" />
     <ClInclude Include="..\..\Components\notificationBox.hpp" />

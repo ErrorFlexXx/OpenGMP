@@ -15,6 +15,7 @@ MenuSystem::MenuSystem(GameClient &gameClient)
     : gameClient(gameClient)
     , menuMain(gameClient)
     , menuRegister(gameClient)
+    , menuLogin(gameClient)
     , notification()
 {}
 

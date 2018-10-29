@@ -3,6 +3,7 @@
 #include <Client/Types/virtualKeys.hpp>
 #include <Client/Components/menuMain.hpp>
 #include <Client/Components/menuRegister.hpp>
+#include <Client/Components/menuLogin.hpp>
 #include <Client/Components/notificationBox.hpp>
 #include <Shared/Components/color.hpp>
 #include <list>
@@ -39,6 +40,7 @@ namespace OpenGMP
 
         MenuMain menuMain;
         MenuRegister menuRegister;
+        MenuLogin menuLogin;
         NotificationBox notification;
 
     private:

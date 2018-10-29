@@ -1,6 +1,8 @@
 #include "loginSystem.hpp"
 #include "../gameClient.hpp"
+#include <Shared/Systems/versionSystem.hpp>
 #include <Shared/Components/authData.hpp>
+#include <Shared/Components/loginData.hpp>
 #include <Shared/Types/Messages/networkSystemMessages.hpp>
 #include <Shared/Types/Messages/loginSystemMessages.hpp>
 #include <iostream>
@@ -77,8 +79,43 @@ void LoginSystem::Process(RakNet::Packet *packet)
         {
             GetMac(gameClient.client.authData);
             GetHDDSerial(gameClient.client.authData);
+
+            BitStream bsOut;
+            bsOut.Write(NetworkSystemMessages::LoginSystem);
+            bsOut.Write(LoginSystemMessages::AUTH);
+            gameClient.client.authData.WriteStream(bsOut);
+            gameClient.client.version.WriteStream(bsOut);
+            SendLoginSystemPacket(bsOut);
+            break;
+        }
+        case LoginSystemMessages::AUTH_ACCEPTED:
+        {
             gameClient.menuSystem.menuMain.EnableNetworkElements();
             break;
+        }
+        case LoginSystemMessages::BANNED:
+        {
+            gameClient.menuSystem.ShowNotification(
+                20,
+                std::string(_("You're banned on this server!")),
+                Color(255, 0, 0, 255)
+            );
+        }
+        case LoginSystemMessages::SERVERFULL:
+        {
+            gameClient.menuSystem.ShowNotification(
+                20,
+                std::string(_("The server is full! Please try again later.")),
+                Color(255, 0, 0, 255)
+            );
+        }
+        case LoginSystemMessages::VERSION_INCOMPATIBLE:
+        {
+            gameClient.menuSystem.ShowNotification(
+                20,
+                std::string(_("Your client version is incompatible with this server!")),
+                Color(255, 0, 0, 255)
+            );
         }
         default:
         {
@@ -96,15 +133,29 @@ void LoginSystem::Process(RakNet::Packet *packet)
     }
 }
 
-void LoginSystem::SendRegister(const AuthData &authData)
+void LoginSystem::SendLoginSystemPacket(const BitStream &bsOut)
+{
+    gameClient.networkSystem.peerInterface->Send(
+        &bsOut, LOW_PRIORITY, RELIABLE, LoginSystemOrderingChannel, gameClient.networkSystem.serverAddress, false);
+}
+
+void LoginSystem::SendRegister(const LoginData &loginData)
 {
     BitStream bsOut;
     bsOut.Write(NetworkSystemMessages::LoginSystem);
     bsOut.Write(LoginSystemMessages::REGISTER);
-    authData.WriteStream(bsOut);
-    gameClient.networkSystem.peerInterface->Send(
-        &bsOut, LOW_PRIORITY, RELIABLE, LoginSystemOrderingChannel, gameClient.networkSystem.serverAddress, false);
+    loginData.WriteStream(bsOut);
+    SendLoginSystemPacket(bsOut);
     gameClient.menuSystem.menuRegister.DisableRegisterButton();
+}
+
+void LoginSystem::SendLogin(const LoginData &loginData)
+{
+    BitStream bsOut;
+    bsOut.Write(NetworkSystemMessages::LoginSystem);
+    bsOut.Write(LoginSystemMessages::LOGIN);
+    loginData.WriteStream(bsOut);
+    SendLoginSystemPacket(bsOut);
 }
 
 void LoginSystem::GetMac(AuthData &authData)

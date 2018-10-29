@@ -42,14 +42,14 @@ void LoginSystem::Process(Packet *packet)
 
                 if(connectedClients >= gameServer.clientContainer.capacity)
                 {
+                    LogInfo() << "Connecting client rejected. Server full (" << connectedClients << "/" << gameServer.clientContainer.capacity << ").";
                     BitStream bsOut;
                     bsOut.Write(NetworkSystemMessages::LoginSystem);
                     bsOut.Write(LoginSystemMessages::SERVERFULL);
                     SendLoginSystemMessage(packet->guid, bsOut);
                     CloseConnection(packet->guid);
                 }
-
-                if(IsBanned(ip))
+                else if(IsBanned(ip))
                 {
                     BitStream bsOut;
                     bsOut.Write(NetworkSystemMessages::LoginSystem);
@@ -57,13 +57,16 @@ void LoginSystem::Process(Packet *packet)
                     SendLoginSystemMessage(packet->guid, bsOut);
                     CloseConnection(packet->guid);
                 }
-                ServerClient &client = gameServer.clientContainer.CreateEntity(created, id, guid);
-                client.netId.rakNetId = packet->guid;
-                LogInfo() << "Client connected. IP: " << ip << ", ID: " << id.id << ", added to clientContainer: " << (created ? "true" : "false") << ".";
-                BitStream bsOut;
-                bsOut.Write(NetworkSystemMessages::LoginSystem);
-                bsOut.Write(LoginSystemMessages::AUTH);
-                SendLoginSystemMessage(packet->guid, bsOut);
+                else
+                {
+                    ServerClient &client = gameServer.clientContainer.CreateEntity(created, id, guid);
+                    client.netId.rakNetId = packet->guid;
+                    LogInfo() << "Client connected. IP: " << ip << ", ID: " << id.id << ", added to clientContainer: " << (created ? "true" : "false") << ".";
+                    BitStream bsOut;
+                    bsOut.Write(NetworkSystemMessages::LoginSystem);
+                    bsOut.Write(LoginSystemMessages::AUTH);
+                    SendLoginSystemMessage(packet->guid, bsOut);
+                }
                 break;
             }
             case ID_CONNECTION_LOST:
@@ -111,6 +114,9 @@ void LoginSystem::Process(Packet *packet)
                     }
                     else if(!VersionSystem::CheckVersionsCompatibility(VersionSystem::version.version, client.version.version))
                     {
+                        LogInfo() << "Connecting client rejected. Version mismatch (Client: " <<
+                                     VersionSystem::GetVersionString(client.version.version) << ", Server: " <<
+                                     VersionSystem::GetVersionString(VersionSystem::version.version) << ").";
                         BitStream bsOut;
                         bsOut.Write(NetworkSystemMessages::LoginSystem);
                         bsOut.Write(LoginSystemMessages::VERSION_INCOMPATIBLE);
@@ -136,6 +142,14 @@ void LoginSystem::Process(Packet *packet)
                 ServerClient &client = gameServer.clientContainer.Get(packet->guid, success);
                 client.authData.ReadStream(bsIn);
                 gameServer.scriptSystem.InvokeScriptFunction("Register", client);
+                break;
+            }
+            case LoginSystemMessages::LOGIN:
+            {
+                bool success;
+                ServerClient &client = gameServer.clientContainer.Get(packet->guid, success);
+                client.loginData.ReadStream(bsIn);
+                gameServer.scriptSystem.InvokeScriptFunction("Login", client);
                 break;
             }
             default:

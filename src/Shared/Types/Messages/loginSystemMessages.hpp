@@ -11,6 +11,7 @@ namespace OpenGMP
         AUTH,
         AUTH_ACCEPTED,
         VERSION_INCOMPATIBLE,
-        REGISTER
+        REGISTER,
+        LOGIN
     };
 }

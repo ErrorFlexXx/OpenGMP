@@ -116,7 +116,6 @@ bool NetworkSystem::Update()
 {
     bool packetReceipt = false;
 
-
     for (RakNet::Packet *packet = peerInterface->Receive();
          packet;
          peerInterface->DeallocatePacket(packet), packet = peerInterface->Receive())

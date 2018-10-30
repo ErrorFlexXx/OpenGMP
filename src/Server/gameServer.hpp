@@ -13,6 +13,7 @@
 #include "Systems/netContainerSystem.hpp"
 #include "Systems/scriptSystem.hpp"
 #include "Systems/menuSystem.hpp"
+#include "Systems/terminalSystem.hpp"
 
 namespace OpenGMP
 {
@@ -58,6 +59,7 @@ namespace OpenGMP
         LoginSystem loginSystem;
         MenuSystem menuSystem;
         ScriptSystem scriptSystem;
+        TerminalSystem terminalSystem;
 
         NetworkSystem &GetNetworkSystem();
         LoginSystem &GetLoginSystem();

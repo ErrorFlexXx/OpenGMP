@@ -41,6 +41,12 @@ namespace OpenGMP
         void LoadScriptsFromDir(std::string &dir);
 
         /**
+         * @brief UnloadScripts
+         *  unloads all loaded scripts.
+         */
+        void UnloadScripts();
+
+        /**
          * @brief UnloadScript unloads a script with the given filename.
          * @param script filename of the script to unload.
          * @return true on success, false otherwise.

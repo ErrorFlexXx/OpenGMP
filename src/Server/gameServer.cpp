@@ -23,6 +23,7 @@ GameServer::GameServer(int gameport,
     , scriptDirectory(scriptDirectory)
     , scriptSystem(*this)
     , menuSystem(*this)
+    , terminalSystem(*this)
     , serverRunning(true)
     , serverStopped(false)
 {
@@ -48,6 +49,19 @@ bool GameServer::Startup()
     //Load scripts from scripts dir
     scriptSystem.LoadScriptsFromDir(scriptDirectory);
 
+    //Install terminal commands
+    terminalSystem.AddCommand("reload", "Reloads all scripts from script directory.",
+                              [=]() {
+        scriptSystem.UnloadScripts();
+        scriptSystem.LoadScriptsFromDir(scriptDirectory);
+    });
+    terminalSystem.AddCommand("help", "Outputs all registered commands with descriptions.",
+                              [=]() {
+        terminalSystem.GetHelp();
+    });
+
+    terminalSystem.Startup();
+
     LogInfo() << "GameServer Startup complete!";
     return true;
 }
@@ -71,12 +85,13 @@ void GameServer::Process()
 {
     while(serverRunning)
     {
-        bool idle;
+        bool idle = false;
 
-        idle = !networkSystem.Update();
+        idle |= !networkSystem.Update();
+        idle |= !terminalSystem.Update();
 
-        if(idle)
-            RakSleep(1);
+        if(idle) //All systems idle ?
+            RakSleep(1); //Then don't waste the cpu
     }
     serverStopped = true;
 }

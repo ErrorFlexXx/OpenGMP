@@ -90,6 +90,16 @@ void ScriptSystem::LoadScriptsFromDir(std::string &dir)
     tinydir_close(&directory);
 }
 
+void ScriptSystem::UnloadScripts()
+{
+    for(auto i = m_registeredScripts.begin(); i != m_registeredScripts.end(); i++)
+    {
+        (*i)->Unload();
+        delete (*i);
+        m_registeredScripts.erase(i--);
+    }
+}
+
 bool ScriptSystem::UnloadScript(std::string &filename)
 {
     bool result = false;

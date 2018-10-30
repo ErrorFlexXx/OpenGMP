@@ -26,24 +26,24 @@ bool Mysql::Connect()
 {
     if(handle)
         Close();
-
-    handle = mysql_init(0);
-
+    handle = mysql_init(nullptr);
     if(!handle)
     {
         LogError() << "Out of memory! mysql_init failed!";
         return false;
     }
-
-    handle = mysql_real_connect(handle, hostname.c_str(), username.c_str(), password.c_str(), database.c_str(), port, nullptr, 0);
+    if(!mysql_real_connect(handle, hostname.c_str(), username.c_str(), password.c_str(), database.c_str(), port, nullptr, 0))
+    {
+        LogError() << mysql_error(handle);
+        return false;
+    }
 
     if(!handle)
     {
         LogInfo() << "Mysql connect failed Host: " << hostname << " Port: " << port << " Database: " << database;
         return false;
     }
-
-    if(0 != mysql_options(handle, MYSQL_OPT_RECONNECT, (void*)1))
+    if(0 != mysql_options(handle, MYSQL_OPT_RECONNECT, (void*)"1"))
     {
         LogWarn() << "Mysql option MYSQL_OPT_RECONNECT cannot be set!";
     }
@@ -73,4 +73,14 @@ std::string Mysql::RealEscapeString(const string &in)
     char escapedString[in.length() * 2 + 1];
     mysql_real_escape_string(handle, escapedString, in.c_str(), in.length());
     return string(escapedString);
+}
+
+std::string Mysql::FetchRowElement(MYSQL_ROW row, int index)
+{
+    if(row[index])
+    {
+        return std::string(row[index]);
+    }
+    LogError() << "Invalid index - out of range.";
+    return std::string();
 }

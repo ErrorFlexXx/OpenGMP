@@ -22,6 +22,7 @@ namespace OpenGMP
         bool Close();
         bool IsConnected();
         std::string RealEscapeString(const std::string &in);
+        std::string FetchRowElement(MYSQL_ROW result, int index);
 
         MYSQL *handle;
         std::string hostname;

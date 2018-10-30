@@ -19,7 +19,7 @@
 #include "../gameServer.hpp"
 #include "../Systems/loginSystem.hpp"
 #include "../Systems/menuSystem.hpp"
-#include "../Systems/scriptMysqlBindHelper.hpp"
+#include "../Systems/mysql.hpp"
 #include <mysql/mysql.h>
 
 using namespace std;
@@ -290,24 +290,20 @@ void ScriptSystem::SetupMetaData()
                 ._method("mysql_stmt_close", &mysql_stmt_close)
                 ;
 
-//        GDefineMetaClass<MYSQL_BIND>
-//                ::define("MYSQL_BIND")
-//                ._field("length", &MYSQL_BIND::length)
-//                ._field("buffer", &MYSQL_BIND::buffer)
-//                ._field("buffer_type", &MYSQL_BIND::buffer_type)
-//                ._field("buffer_length", &MYSQL_BIND::buffer_length)
-//                ._field("is_null", &MYSQL_BIND::is_null)
-//                ._method("sizeof", &GetMysqlBindSize)
-//        ;
-
-        RegisterClass(std::string("ScriptMysqlBindHelper"));
-        GDefineMetaClass<ScriptMysqlBindHelper>
-                ::define("ScriptMysqlBindHelper")
-                ._method("AddString", &ScriptMysqlBindHelper::AddString)
-                ._method("AddInt", &ScriptMysqlBindHelper::AddInt)
-                ._method("AddDouble", &ScriptMysqlBindHelper::AddDouble)
-                ._method("ResetBinds", &ScriptMysqlBindHelper::ResetBinds)
-                ._method("Bind", &ScriptMysqlBindHelper::Bind)
+        RegisterClass(std::string("Mysql"));
+        GDefineMetaClass<Mysql>
+                ::define("Mysql")
+                ._constructor<void *(const string&, unsigned int, const string&, const string&, const string&)>()
+                ._method("Connect", &Mysql::Connect)
+                ._method("Close", &Mysql::Close)
+                ._method("IsConnected", &Mysql::IsConnected)
+                ._method("RealEscapeString", &Mysql::RealEscapeString)
+                ._field("handle", &Mysql::handle)
+                ._field("hostname", &Mysql::hostname)
+                ._field("port", &Mysql::port)
+                ._field("database", &Mysql::database)
+                ._field("username", &Mysql::username)
+                ._field("password", &Mysql::password)
                 ;
 
         RegisterClass(std::string("GameServer"));

@@ -1,20 +1,15 @@
 #include <db_con.py>
 
-handle = 0
-
-#cpgf._import(None, "builtin");
-cpgf._import("cpgf", "builtin.collections.bytearray");
-
 def Register(serverClient):
 	inst = GameServer.GetGameServerInstance()
-	escapedLoginname = serverClient.loginData.loginname
-	escapedPassword = serverClient.loginData.password
-
+	escapedLoginname = mysql.RealEscapeString(serverClient.loginData.loginname)
+	escapedPassword = mysql.RealEscapeString(serverClient.loginData.password)
+    
 	query = "INSERT INTO `ServerClients` " \
 			"(`loginname`, `password`, `register_time`) " \
 			"VALUES('" + escapedLoginname + "', MD5('" + escapedPassword + "'), NOW());"
-	if(mysql_query(handle, query)):
-		print("Error Register query: " + mysql_error(handle))
+	if(mysql_query(mysql.handle, query)):
+		print("Error Register query: " + mysql_error(mysql.handle))
 		notify = NotificationText()
 		notify.text = "Loginname bereits vergeben!"
 		notify.color = Color(255, 0, 0, 255)
@@ -22,7 +17,7 @@ def Register(serverClient):
 		notify.posY = 20
 		return
 	else:
-		if(mysql_affected_rows(handle) != 0):
+		if(mysql_affected_rows(mysql.handle) != 0):
 			print("Registered: " + serverClient.loginData.loginname)
 			notify = NotificationText()
 			notify.text = escapedLoginname + " erfolgreich registriert!"
@@ -35,16 +30,13 @@ def Register(serverClient):
 
 def Login(serverClient):
 	inst = GameServer.GetGameServerInstance()
-	escapedLoginname = serverClient.loginData.loginname
-	escapedPassword = serverClient.loginData.password
-	#escapedLoginname = cpgf.createByteArray(len(serverClient.loginData.loginname) * 2 + 1)
-	#escapedPassword = cpgf.createByteArray(len(serverClient.loginData.password) * 2 + 1)
-	#i = mysql_real_escape_string(handle, escapedLoginname, serverClient.loginData.loginname, len(serverClient.loginData.loginname))
-	#j = mysql_real_escape_string(handle, escapedPassword, serverClient.loginData.password, len(serverClient.loginData.password))	
+	escapedLoginname = mysql.RealEscapeString(serverClient.loginData.loginname)
+	escapedPassword = mysql.RealEscapeString(serverClient.loginData.password)
+
 	query = "SELECT `id`, `register_time` FROM `ServerClients` " \
 			"WHERE `loginname` = '" + escapedLoginname + "' AND `password` = MD5('" + escapedPassword + "');"
-	if(mysql_query(handle, query)):
-		print("Error Login query: " + mysql_error(handle))
+	if(mysql_query(mysql.handle, query)):
+		print("Error Login query: " + mysql_error(mysql.handle))
 		notify = NotificationText()
 		notify.text = "Abnormaler Fehler aufgetreten!"
 		notify.color = Color(255, 0, 0, 255)
@@ -53,7 +45,7 @@ def Login(serverClient):
 		inst.GetMenuSystem().ShowTimedNotification(serverClient, notify)
 		return
 	else:
-		result = mysql_store_result(handle)
+		result = mysql_store_result(mysql.handle)
 		if(mysql_num_rows(result) == 1):
 			print("Login successfull. User: " + escapedLoginname)
 			notify = NotificationText()
@@ -72,9 +64,28 @@ def Login(serverClient):
 			inst.GetMenuSystem().ShowTimedNotification(serverClient, notify)
 		#mysql_free_result(result)
 
+def TestRegister();
+    name = "Han'nes"
+    password = "Johannes"
+    escapedLoginname = mysql.RealEscapeString(serverClient.loginData.loginname)
+	escapedPassword = mysql.RealEscapeString(serverClient.loginData.password)
+    
+	query = "INSERT INTO `ServerClients` " \
+			"(`loginname`, `password`, `register_time`) " \
+			"VALUES('" + escapedLoginname + "', MD5('" + escapedPassword + "'), NOW());"
+	if(mysql_query(mysql.handle, query)):
+		print("Error Register query: " + mysql_error(mysql.handle))
+		return
+	else:
+		if(mysql_affected_rows(mysql.handle) != 0):
+			print("Registered: " + serverClient.loginData.loginname)
+		else:
+			print("Not registered " + serverClient.loginData.loginname + ". Loginname not free ?")
+
 #Initialization:
-handle = connect()
-if ping(handle) == False:
-	print("LoginSystem startup failed - Database not available!")
-else:
-	print("LoginSystem startup complete!")
+if mysql.Connect()
+    print("Connected to database - " + mysql.database)
+    TestRegister()
+    print("Loginsystem startup complete!")
+else
+    print("Connection to database " + mysql.database + " failed!"

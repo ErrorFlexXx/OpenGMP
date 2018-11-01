@@ -10,7 +10,7 @@
 #include "Systems/loginSystem.hpp"
 #include "Systems/inputSystem.hpp"
 #include "Systems/menuSystem.hpp"
-#include "Systems/staticContainer.hpp"
+#include <Shared/Systems/staticContainer.hpp>
 
 namespace OpenGMP
 {

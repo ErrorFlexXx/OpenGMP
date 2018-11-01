@@ -167,11 +167,11 @@
     <ClCompile Include="..\..\Components\menuLogin.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Systems\staticContainer.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Objects\clientWorld.cpp">
       <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Systems\staticContainer.cpp">
+      <Filter>Shared\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -387,11 +387,11 @@
     <ClInclude Include="..\..\Components\menuLogin.hpp">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Systems\staticContainer.hpp">
-      <Filter>Systems</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Objects\clientWorld.hpp">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Systems\staticContainer.hpp">
+      <Filter>Shared\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

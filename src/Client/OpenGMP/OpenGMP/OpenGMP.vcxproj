@@ -81,6 +81,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)../../../../lib/gettext/win/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>OPENGMPCLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ws2_32.lib;intl.lib;RakNetLibStaticDebug.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -102,6 +103,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)../../../../lib/gettext/win/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>OPENGMPCLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -131,6 +133,7 @@
     <ClCompile Include="..\..\..\Shared\Components\loginData.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\notificationText.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\version.cpp" />
+    <ClCompile Include="..\..\..\Shared\Systems\staticContainer.cpp" />
     <ClCompile Include="..\..\..\Shared\Systems\versionSystem.cpp" />
     <ClCompile Include="..\..\Components\menuLogin.cpp" />
     <ClCompile Include="..\..\Components\menuMain.cpp" />
@@ -163,7 +166,6 @@
     <ClCompile Include="..\..\Systems\loginSystem.cpp" />
     <ClCompile Include="..\..\Systems\menuSystem.cpp" />
     <ClCompile Include="..\..\Systems\networkSystem.cpp" />
-    <ClCompile Include="..\..\Systems\staticContainer.cpp" />
     <ClCompile Include="..\..\Systems\windowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +176,7 @@
     <ClInclude Include="..\..\..\Shared\Components\loginData.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\notificationText.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\version.hpp" />
+    <ClInclude Include="..\..\..\Shared\Systems\staticContainer.hpp" />
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\constants.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\loginSystemMessages.hpp" />
@@ -237,7 +240,6 @@
     <ClInclude Include="..\..\Systems\loginSystem.hpp" />
     <ClInclude Include="..\..\Systems\menuSystem.hpp" />
     <ClInclude Include="..\..\Systems\networkSystem.hpp" />
-    <ClInclude Include="..\..\Systems\staticContainer.hpp" />
     <ClInclude Include="..\..\Systems\windowSystem.hpp" />
     <ClInclude Include="..\..\Types\virtualKeys.hpp" />
     <ClInclude Include="resource.h" />

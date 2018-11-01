@@ -5,7 +5,7 @@ def Register(serverClient):
 	escapedLoginname = mysql.RealEscapeString(serverClient.loginData.loginname)
 	escapedPassword = mysql.RealEscapeString(serverClient.loginData.password)
     
-	query = "INSERT INTO `ServerClients` " \
+	query = "INSERT INTO `Clients` " \
 			"(`loginname`, `password`, `register_time`) " \
 			"VALUES('" + escapedLoginname + "', MD5('" + escapedPassword + "'), NOW());"
 	if(mysql_query(mysql.handle, query)):
@@ -33,7 +33,7 @@ def Login(serverClient):
 	escapedLoginname = mysql.RealEscapeString(serverClient.loginData.loginname)
 	escapedPassword = mysql.RealEscapeString(serverClient.loginData.password)
 
-	query = "SELECT `id`, `register_time` FROM `ServerClients` " \
+	query = "SELECT `id`, `register_time` FROM `Clients` " \
 			"WHERE `loginname` = '" + escapedLoginname + "' AND `password` = MD5('" + escapedPassword + "');"
 	if(mysql_query(mysql.handle, query)):
 		print("Error Login query: " + mysql_error(mysql.handle))
@@ -70,7 +70,7 @@ def TestRegister():
     escapedLoginname = mysql.RealEscapeString(name)
     escapedPassword = mysql.RealEscapeString(password)
     
-    query = "INSERT INTO `ServerClients` " \
+    query = "INSERT INTO `Clients` " \
             "(`loginname`, `password`, `register_time`) " \
             "VALUES('" + escapedLoginname + "', MD5('" + escapedPassword + "'), NOW());"
     if(mysql_query(mysql.handle, query)):
@@ -83,7 +83,7 @@ def TestRegister():
             print("Not registered " + escapedPassword + ". Loginname not free ?")
 
 def TestQuery():
-    query = "SELECT `id`, `register_time` FROM `ServerClients` WHERE loginname='Han\\'nes'";
+    query = "SELECT `id`, `register_time` FROM `Clients` WHERE loginname='Han\\'nes'";
     if(mysql.IsConnected()):
         if(mysql_query(mysql.handle, query)):
             print("Error in query: " + mysql_error(mysql.handle))
@@ -91,8 +91,9 @@ def TestQuery():
             print("Success")
             result = mysql_store_result(mysql.handle)
             print("Results: " + str(mysql_num_rows(result)))
-            row = mysql_fetch_row(result)
-            print(mysql.FetchRowElement(row, 0) + " " + mysql.FetchRowElement(row, 1))
+            if mysql_num_rows(result) > 0:
+	            row = mysql_fetch_row(result)
+	            print(mysql.FetchRowElement(row, 0) + " " + mysql.FetchRowElement(row, 1))
             mysql_free_result(result)
 
 #Initialization:

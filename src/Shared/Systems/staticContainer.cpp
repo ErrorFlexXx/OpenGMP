@@ -1,4 +1,5 @@
 #include "staticContainer.hpp"
+#include <Server/Objects/serverWorld.hpp>
 #include <Client/Objects/clientWorld.hpp>
 
 using namespace OpenGMP;
@@ -28,5 +29,9 @@ bool StaticContainer<T>::Remove(const Id &id)
 }
 
 //Compile for specific classes, please:
+#ifndef OPENGMPCLIENT
+template class StaticContainer<ServerWorld>;
+#else
 template class StaticContainer<ClientWorld>;
+#endif
 

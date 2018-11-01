@@ -10,6 +10,8 @@
 #include <cpgf/goutmain.h>
 //Script interface classes:
 #include "../Objects/serverClient.hpp"
+#include "../Objects/serverPlayer.hpp"
+#include "../Objects/serverWorld.hpp"
 #include <Shared/Components/authData.hpp>
 #include <Shared/Components/loginData.hpp>
 #include <Shared/Components/netId.hpp>
@@ -20,6 +22,7 @@
 #include "../Systems/loginSystem.hpp"
 #include "../Systems/menuSystem.hpp"
 #include "../Systems/mysql.hpp"
+#include "../Systems/worldSystem.hpp"
 #include <mysql/mysql.h>
 
 using namespace std;
@@ -327,6 +330,7 @@ void ScriptSystem::SetupMetaData()
                 ._method("GetLoginSystem", &GameServer::GetLoginSystem)
                 ._method("GetScriptSystem", &GameServer::GetScriptSystem)
                 ._method("GetMenuSystem", &GameServer::GetMenuSystem)
+                ._method("GetWorldSystem", &GameServer::GetWorldSystem)
                 ._method("Shutdown", &GameServer::Shutdown)
 
                 ;
@@ -362,6 +366,13 @@ void ScriptSystem::SetupMetaData()
                 ::define("ServerClient")
                 ._field("authData", &ServerClient::authData)
                 ._field("loginData", &ServerClient::loginData)
+                ;
+
+        RegisterClass(std::string("ServerWorld"));
+        GDefineMetaClass<ServerWorld,IdObject>
+                ::define("ServerWorld")
+                ._field("id", &ServerWorld::id)
+                ._field("worldName", &ServerWorld::worldName)
                 ;
 
         RegisterClass(std::string("Color"));
@@ -409,5 +420,10 @@ void ScriptSystem::SetupMetaData()
                 ._field("playerslots", &NetworkSystem::playerslots)
                 ;
 
+        RegisterClass(std::string("WorldSystem"));
+        GDefineMetaClass<WorldSystem>
+                ::define("WorldSystem")
+                ._method("AddWorld", &WorldSystem::AddWorld)
+                ;
     }
 }

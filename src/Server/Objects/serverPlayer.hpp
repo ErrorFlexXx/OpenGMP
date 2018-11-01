@@ -4,9 +4,15 @@
 
 namespace OpenGMP
 {
+    class ServerWorld;
+
     class ServerPlayer : public Player
     {
     public:
+        ServerPlayer()
+            : world(nullptr)
+        {}
 
+        ServerWorld *world;
     };
 }

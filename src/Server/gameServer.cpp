@@ -17,7 +17,7 @@ GameServer::GameServer(int gameport,
                        const std::string &privKeyfileName)
     : clientContainer(playerslots)
     , playerContainer(playerslots)
-    , worldContainer(playerslots)
+    , worldContainer(10)
     , networkSystem(*this, gameport, playerslots, keyDir, pubKeyfileName, privKeyfileName)
     , loginSystem(*this)
     , scriptDirectory(scriptDirectory)
@@ -120,4 +120,9 @@ ScriptSystem &GameServer::GetScriptSystem()
 MenuSystem &GameServer::GetMenuSystem()
 {
     return menuSystem;
+}
+
+WorldSystem & GameServer::GetWorldSystem()
+{
+    return worldSystem;
 }

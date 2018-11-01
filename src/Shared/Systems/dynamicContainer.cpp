@@ -37,7 +37,7 @@ T &DynamicContainer<T>::Get(const Id &id, bool &success)
 template <class T>
 bool DynamicContainer<T>::Remove(const Id &id)
 {
-    if(0 <= id.id )
+    if(0 <= id.id && id.id < currentIndex.id)
     {
         container[id.id].id.id = -1; //Flag id as unset.
         freeGapIds.push_back(id);
@@ -78,5 +78,8 @@ Id DynamicContainer<T>::GetFreeId()
 }
 
 //Compile for specific classes, please:
-template class DynamicContainer<ServerWorld>;
+#ifndef OPENGMPCLIENT
 
+#else
+
+#endif

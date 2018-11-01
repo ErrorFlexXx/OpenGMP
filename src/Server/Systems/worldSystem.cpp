@@ -3,6 +3,7 @@
 #include "../gameServer.hpp"
 #include <Server/Objects/serverWorld.hpp>
 #include <Server/Objects/serverPlayer.hpp>
+#include <Shared/Components/id.hpp>
 
 using namespace OpenGMP;
 
@@ -11,15 +12,17 @@ WorldSystem::WorldSystem(GameServer &gameServer)
 {
 }
 
-ServerWorld &WorldSystem::AddWorld(std::string &worldName)
+ServerWorld &WorldSystem::AddWorld(int id, std::string &worldName)
 {
-    Id id;
-    ServerWorld &world = gameServer.worldContainer.CreateEntity(id);
-    LogInfo() << "Created world with name " << worldName << " ID: " << id.id;
+    LogInfo() << "Hello World";
+    Id worldId;
+    worldId.id = id;
+    ServerWorld &world = gameServer.worldContainer.Get(worldId);
+    LogInfo() << "Added world " << id << " with name " << worldName;
     return world;
 }
 
-void WorldSystem::Spawn(ServerPlayer &player)
+void WorldSystem::SpawnPlayer(ServerPlayer &player, ServerWorld &world)
 {
-
+    player.world = &world;
 }

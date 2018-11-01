@@ -19,7 +19,6 @@ namespace OpenGMP
     class Player : public NetIdObject
     {
     public:
-        Id worldId; //Id of the world the player is in.
         Position position;
         Scale scale;
         PlayerTalents talents;

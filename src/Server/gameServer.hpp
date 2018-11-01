@@ -6,6 +6,7 @@
 #include <vector>
 #include <RakNetTypes.h>
 #include <Shared/Systems/dynamicContainer.hpp>
+#include <Shared/Systems/staticContainer.hpp>
 #include "Objects/serverClient.hpp"
 #include "Objects/serverPlayer.hpp"
 #include "Objects/serverWorld.hpp"
@@ -68,11 +69,12 @@ namespace OpenGMP
         LoginSystem &GetLoginSystem();
         ScriptSystem &GetScriptSystem();
         MenuSystem &GetMenuSystem();
+        WorldSystem &GetWorldSystem();
 
         /* Global Containers */
         NetDynamicContainer<ServerClient> clientContainer;
         NetDynamicContainer<ServerPlayer> playerContainer;
-        DynamicContainer<ServerWorld> worldContainer;
+        StaticContainer<ServerWorld> worldContainer;
 
         std::string scriptDirectory;  //!< Directory to load server scripts from.
 

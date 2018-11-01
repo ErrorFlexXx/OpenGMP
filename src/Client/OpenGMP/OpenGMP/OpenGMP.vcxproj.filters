@@ -167,6 +167,12 @@
     <ClCompile Include="..\..\Components\menuLogin.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Systems\staticContainer.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Objects\clientWorld.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Hooks\hGame.hpp">
@@ -380,6 +386,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Components\menuLogin.hpp">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Systems\staticContainer.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Objects\clientWorld.hpp">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

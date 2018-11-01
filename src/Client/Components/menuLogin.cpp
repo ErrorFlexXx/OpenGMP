@@ -9,8 +9,8 @@
 using namespace OpenGMP;
 using namespace OpenGMP::GUI;
 
-std::string btnShowPasswordTextShow;
-std::string btnShowPasswordTextHide;
+std::string MenuLogin::btnShowPasswordTextShow;
+std::string MenuLogin::btnShowPasswordTextHide;
 
 MenuLogin::MenuLogin(GameClient &gameClient)
     : MainMenu(gameClient)

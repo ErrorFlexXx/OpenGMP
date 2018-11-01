@@ -29,5 +29,7 @@ namespace OpenGMP
         GUI::MenuButton *btnShowPassword;
         GUI::MenuButton *btnCreate;
         GUI::MenuButton *btnBack;
+        static std::string btnShowPasswordTextShow;
+        static std::string btnShowPasswordTextHide;
     };
 }

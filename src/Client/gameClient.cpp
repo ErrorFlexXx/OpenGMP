@@ -14,7 +14,8 @@ string GameClient::serverName = "localhost";
 unsigned short GameClient::serverPort = 1760;
 
 GameClient::GameClient()
-    : inited(false)
+    : worldContainer(10)
+    , inited(false)
     , networkSystem(*this)
     , loginSystem(*this)
     , inputSystem(*this)

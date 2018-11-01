@@ -5,10 +5,12 @@
 #include <string>
 #include "Hooks/hGame.hpp"
 #include "Objects/clientClient.hpp"
+#include "Objects/clientWorld.hpp"
 #include "Systems/networkSystem.hpp"
 #include "Systems/loginSystem.hpp"
 #include "Systems/inputSystem.hpp"
 #include "Systems/menuSystem.hpp"
+#include "Systems/staticContainer.hpp"
 
 namespace OpenGMP
 {
@@ -30,6 +32,9 @@ namespace OpenGMP
         InputSystem inputSystem;
         MenuSystem menuSystem;
         HGame hookGame; //GameLoop hooks (Menu & Ingame)
+
+        /* Global containers */
+        StaticContainer<ClientWorld> worldContainer;
     
     private:
         GameClient(const GameClient&);  //!< No Copy allowed!

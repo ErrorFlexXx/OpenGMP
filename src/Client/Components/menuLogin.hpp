@@ -22,12 +22,14 @@ namespace OpenGMP
         void DisableLoginButton();
         void EnableLoginButton();
         void ToggleShowPassword();
-
+        
     private:
         GUI::MenuTextBox *txtUsername;
         GUI::MenuTextBox *txtPassword;
         GUI::MenuButton *btnShowPassword;
         GUI::MenuButton *btnLogin;
         GUI::MenuButton *btnBack;
+        static std::string btnShowPasswordTextShow;
+        static std::string btnShowPasswordTextHide;
     };
 }

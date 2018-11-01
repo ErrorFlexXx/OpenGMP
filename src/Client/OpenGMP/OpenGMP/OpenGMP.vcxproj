@@ -158,10 +158,12 @@
     <ClCompile Include="..\..\main.cpp" />
     <ClCompile Include="..\..\Objects\CDetour.cpp" />
     <ClCompile Include="..\..\Objects\clientClient.cpp" />
+    <ClCompile Include="..\..\Objects\clientWorld.cpp" />
     <ClCompile Include="..\..\Systems\inputSystem.cpp" />
     <ClCompile Include="..\..\Systems\loginSystem.cpp" />
     <ClCompile Include="..\..\Systems\menuSystem.cpp" />
     <ClCompile Include="..\..\Systems\networkSystem.cpp" />
+    <ClCompile Include="..\..\Systems\staticContainer.cpp" />
     <ClCompile Include="..\..\Systems\windowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -230,10 +232,12 @@
     <ClInclude Include="..\..\Hooks\otherHooks.hpp" />
     <ClInclude Include="..\..\Objects\CDetour.h" />
     <ClInclude Include="..\..\Objects\clientClient.hpp" />
+    <ClInclude Include="..\..\Objects\clientWorld.hpp" />
     <ClInclude Include="..\..\Systems\inputSystem.hpp" />
     <ClInclude Include="..\..\Systems\loginSystem.hpp" />
     <ClInclude Include="..\..\Systems\menuSystem.hpp" />
     <ClInclude Include="..\..\Systems\networkSystem.hpp" />
+    <ClInclude Include="..\..\Systems\staticContainer.hpp" />
     <ClInclude Include="..\..\Systems\windowSystem.hpp" />
     <ClInclude Include="..\..\Types\virtualKeys.hpp" />
     <ClInclude Include="resource.h" />

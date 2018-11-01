@@ -37,7 +37,6 @@ void LoginSystem::Process(Packet *packet)
                 RakNet::RakNetGUID guid = packet->guid;
                 std::string ip = packet->systemAddress.ToString(false);
                 Id id;
-                bool created;
                 int connectedClients = gameServer.clientContainer.Count();
 
                 if(connectedClients >= gameServer.clientContainer.capacity)
@@ -59,9 +58,9 @@ void LoginSystem::Process(Packet *packet)
                 }
                 else
                 {
-                    ServerClient &client = gameServer.clientContainer.CreateEntity(created, id, guid);
+                    ServerClient &client = gameServer.clientContainer.CreateEntity(id, guid);
                     client.netId.rakNetId = packet->guid;
-                    LogInfo() << "Client connected. IP: " << ip << ", ID: " << id.id << ", added to clientContainer: " << (created ? "true" : "false") << ".";
+                    LogInfo() << "Client connected. IP: " << ip << ", ID: " << id.id;
                     BitStream bsOut;
                     bsOut.Write(NetworkSystemMessages::LoginSystem);
                     bsOut.Write(LoginSystemMessages::AUTH);

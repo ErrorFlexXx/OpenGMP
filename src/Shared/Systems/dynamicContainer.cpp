@@ -1,9 +1,10 @@
-#include "containerSystem.hpp"
+#include "dynamicContainer.hpp"
+#include <Server/Objects/serverWorld.hpp>
 
 using namespace OpenGMP;
 
 template <class T>
-ContainerSystem<T>::ContainerSystem(const size_t &capacity)
+DynamicContainer<T>::DynamicContainer(const size_t &capacity)
     : capacity(capacity)
 {
     currentIndex.id = 0;
@@ -11,19 +12,18 @@ ContainerSystem<T>::ContainerSystem(const size_t &capacity)
 }
 
 template <class T>
-T &ContainerSystem<T>::CreateEntity(bool &success, Id &id)
+T &DynamicContainer<T>::CreateEntity(Id &id)
 {
     Id freeId = GetFreeId();
     T &obj = container[freeId.id];
 
     obj.id = freeId;
     id = freeId;
-    success = true;
     return obj;
 }
 
 template <class T>
-T &ContainerSystem<T>::Get(const Id &id, bool &success)
+T &DynamicContainer<T>::Get(const Id &id, bool &success)
 {
     if(0 <= id.id)
     {
@@ -35,7 +35,7 @@ T &ContainerSystem<T>::Get(const Id &id, bool &success)
 }
 
 template <class T>
-int ContainerSystem<T>::Remove(const Id &id)
+bool DynamicContainer<T>::Remove(const Id &id)
 {
     if(0 <= id.id )
     {
@@ -47,21 +47,21 @@ int ContainerSystem<T>::Remove(const Id &id)
 }
 
 template <class T>
-int ContainerSystem<T>::Count()
+int DynamicContainer<T>::Count()
 {
     return currentIndex.id - freeGapIds.size();
 }
 
 template <class T>
-bool ContainerSystem<T>::IsFreeId(const Id &id)
+bool DynamicContainer<T>::IsFreeId(const Id &id)
 {
-    IdObject &obj = dynamic_cast<NetIdObject&>(container[id.id]);
+    IdObject &obj = dynamic_cast<IdObject&>(container[id.id]);
     return obj.id.id == -1;
     return false;
 }
 
 template <class T>
-Id ContainerSystem<T>::GetFreeId()
+Id DynamicContainer<T>::GetFreeId()
 {
     //Take a gap if available.
     if(!freeGapIds.empty())
@@ -78,5 +78,5 @@ Id ContainerSystem<T>::GetFreeId()
 }
 
 //Compile for specific classes, please:
-//template class NetContainerSystem<ServerClient>;
+template class DynamicContainer<ServerWorld>;
 

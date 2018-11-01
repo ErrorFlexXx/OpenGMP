@@ -6,7 +6,7 @@ using namespace OpenGMP;
 
 void PlayerVisual::WriteStream(BitStream &stream) const
 {
-    RakString rakBodyModel("%S", bodyModel.c_str());
+    RakString rakBodyModel("%s", bodyModel.c_str());
     RakString rakHeadModel("%s", headModel.c_str());
     
     stream.Write(rakBodyModel);

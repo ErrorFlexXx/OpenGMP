@@ -1,4 +1,4 @@
-#include "netContainerSystem.hpp"
+#include "netDynamicContainer.hpp"
 #include "../Objects/serverClient.hpp"
 #include "../Objects/serverPlayer.hpp"
 #include "../Objects/serverWorld.hpp"
@@ -8,7 +8,7 @@ using namespace OpenGMP;
 using namespace RakNet;
 
 template <class T>
-NetContainerSystem<T>::NetContainerSystem(const size_t &capacity)
+NetDynamicContainer<T>::NetDynamicContainer(const size_t &capacity)
     : capacity(capacity)
 {
     currentIndex.id = 0;
@@ -16,7 +16,7 @@ NetContainerSystem<T>::NetContainerSystem(const size_t &capacity)
 }
 
 template <class T>
-T &NetContainerSystem<T>::CreateEntity(bool &success, Id &id, const RakNet::RakNetGUID &rakGuid)
+T &NetDynamicContainer<T>::CreateEntity(Id &id, const RakNet::RakNetGUID &rakGuid)
 {
     Id freeId = GetFreeId();
     T &obj = container[freeId.id];
@@ -25,12 +25,11 @@ T &NetContainerSystem<T>::CreateEntity(bool &success, Id &id, const RakNet::RakN
     obj.id = freeId;
     rakIdMap[obj.netId.rakNetId.ToUint32(obj.netId.rakNetId)] = freeId;
     id = freeId;
-    success = true;
     return obj;
 }
 
 template <class T>
-T &NetContainerSystem<T>::Get(const Id &id, bool &success)
+T &NetDynamicContainer<T>::Get(const Id &id, bool &success)
 {
     if(0 <= id.id)
     {
@@ -43,7 +42,7 @@ T &NetContainerSystem<T>::Get(const Id &id, bool &success)
 }
 
 template <class T>
-T &NetContainerSystem<T>::Get(const RakNet::RakNetGUID &rakId, bool &success)
+T &NetDynamicContainer<T>::Get(const RakNet::RakNetGUID &rakId, bool &success)
 {
     RakNet::RakNetGUID rakIdKey = rakId;
     Id id = rakIdMap[rakIdKey.ToUint32(rakIdKey)];
@@ -55,41 +54,45 @@ T &NetContainerSystem<T>::Get(const RakNet::RakNetGUID &rakId, bool &success)
 }
 
 template <class T>
-int NetContainerSystem<T>::Remove(const Id &id)
+bool NetDynamicContainer<T>::Remove(const Id &id)
 {
-    if(0 <= id.id )
+    if(0 <= id.id && id.id < currentIndex.id)
     {
         NetIdObject &obj = dynamic_cast<NetIdObject&>(container[id.id]);
         obj.id.id = -1; //Flag id as unset.
         rakIdMap.erase(obj.netId.rakNetId.ToUint32(obj.netId.rakNetId));
         freeGapIds.push_back(id);
-        return true;
+        return true; //Successfully freed
+    }
+    return false; //Invalid id!
+}
+
+template <class T>
+bool NetDynamicContainer<T>::Remove(const RakNet::RakNetGUID &rakId)
+{
+    if(rakIdMap.find(rakId.ToUint32(rakId)) != rakIdMap.end()) //Id stored in map ?
+    {
+        Id id = rakIdMap[rakId.ToUint32(rakId)]; //Lookup id
+        return Remove(id);
     }
     return false;
 }
 
 template <class T>
-int NetContainerSystem<T>::Remove(const RakNet::RakNetGUID &rakId)
-{
-    Id id = rakIdMap[rakId.ToUint32(rakId)]; //Lookup id
-    return Remove(id);
-}
-
-template <class T>
-int NetContainerSystem<T>::Count()
+int NetDynamicContainer<T>::Count()
 {
     return currentIndex.id - freeGapIds.size();
 }
 
 template <class T>
-bool NetContainerSystem<T>::IsFreeId(const Id &id)
+bool NetDynamicContainer<T>::IsFreeId(const Id &id)
 {
     NetIdObject &obj = dynamic_cast<NetIdObject&>(container[id.id]);
     return obj.id.id == -1;
 }
 
 template <class T>
-Id NetContainerSystem<T>::GetFreeId()
+Id NetDynamicContainer<T>::GetFreeId()
 {
     //Take a gap if available.
     if(!freeGapIds.empty())
@@ -106,6 +109,5 @@ Id NetContainerSystem<T>::GetFreeId()
 }
 
 //Compile for specific classes, please:
-template class NetContainerSystem<ServerClient>;
-template class NetContainerSystem<ServerPlayer>;
-template class NetContainerSystem<ServerWorld>;
+template class NetDynamicContainer<ServerClient>;
+template class NetDynamicContainer<ServerPlayer>;

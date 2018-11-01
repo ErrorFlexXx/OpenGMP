@@ -24,6 +24,7 @@ GameServer::GameServer(int gameport,
     , scriptSystem(*this)
     , menuSystem(*this)
     , terminalSystem(*this)
+    , worldSystem(*this)
     , serverRunning(true)
     , serverStopped(false)
 {

@@ -2,11 +2,10 @@
 
 #include <string>
 #include "../Objects/netIdObject.hpp"
-#include "../Systems/containerSystem.hpp"
 
 namespace OpenGMP
 {
-    class World : public NetIdObject
+    class World : public IdObject
     {
     public:
         std::string worldName;

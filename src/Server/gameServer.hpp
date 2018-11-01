@@ -5,15 +5,17 @@
 #include <unordered_map>
 #include <vector>
 #include <RakNetTypes.h>
+#include <Shared/Systems/dynamicContainer.hpp>
 #include "Objects/serverClient.hpp"
 #include "Objects/serverPlayer.hpp"
 #include "Objects/serverWorld.hpp"
 #include "Systems/networkSystem.hpp"
 #include "Systems/loginSystem.hpp"
-#include "Systems/netContainerSystem.hpp"
+#include "Systems/netDynamicContainer.hpp"
 #include "Systems/scriptSystem.hpp"
 #include "Systems/menuSystem.hpp"
 #include "Systems/terminalSystem.hpp"
+#include "Systems/worldSystem.hpp"
 
 namespace OpenGMP
 {
@@ -60,6 +62,7 @@ namespace OpenGMP
         MenuSystem menuSystem;
         ScriptSystem scriptSystem;
         TerminalSystem terminalSystem;
+        WorldSystem worldSystem;
 
         NetworkSystem &GetNetworkSystem();
         LoginSystem &GetLoginSystem();
@@ -67,9 +70,9 @@ namespace OpenGMP
         MenuSystem &GetMenuSystem();
 
         /* Global Containers */
-        NetContainerSystem<ServerClient> clientContainer;
-        NetContainerSystem<ServerPlayer> playerContainer;
-        NetContainerSystem<ServerWorld> worldContainer;
+        NetDynamicContainer<ServerClient> clientContainer;
+        NetDynamicContainer<ServerPlayer> playerContainer;
+        DynamicContainer<ServerWorld> worldContainer;
 
         std::string scriptDirectory;  //!< Directory to load server scripts from.
 

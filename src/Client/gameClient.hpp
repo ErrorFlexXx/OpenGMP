@@ -10,6 +10,7 @@
 #include "Systems/loginSystem.hpp"
 #include "Systems/inputSystem.hpp"
 #include "Systems/menuSystem.hpp"
+#include "Systems/worldSystem.hpp"
 #include <Shared/Systems/staticContainer.hpp>
 
 namespace OpenGMP
@@ -31,6 +32,7 @@ namespace OpenGMP
         LoginSystem loginSystem;
         InputSystem inputSystem;
         MenuSystem menuSystem;
+        WorldSystem worldSystem;
         HGame hookGame; //GameLoop hooks (Menu & Ingame)
 
         /* Global containers */

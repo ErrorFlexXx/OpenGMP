@@ -173,6 +173,12 @@
     <ClCompile Include="..\..\..\Shared\Systems\staticContainer.cpp">
       <Filter>Shared\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Systems\worldSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\string.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Hooks\hGame.hpp">
@@ -392,6 +398,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Shared\Systems\staticContainer.hpp">
       <Filter>Shared\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Systems\worldSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\string.hpp">
+      <Filter>Shared\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

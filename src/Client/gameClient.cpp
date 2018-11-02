@@ -20,6 +20,7 @@ GameClient::GameClient()
     , loginSystem(*this)
     , inputSystem(*this)
     , menuSystem(*this)
+    , worldSystem(*this)
     , hookGame(*this)
 {}
 

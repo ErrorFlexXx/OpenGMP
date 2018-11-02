@@ -40,6 +40,15 @@ void LoginSystem::Process(RakNet::Packet *packet)
             );
             break;
         }
+        case ID_DISCONNECTION_NOTIFICATION:
+        {
+            gameClient.menuSystem.ShowNotification(
+                20,
+                std::string(_("Connection has been closed by the server!")),
+                Color(255, 0, 0, 255)
+            );
+            break;
+        }
         case ID_CONNECTION_REQUEST_ACCEPTED:
         {
             gameClient.networkSystem.serverAddress = packet->systemAddress;

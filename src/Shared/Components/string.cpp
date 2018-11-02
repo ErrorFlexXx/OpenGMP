@@ -16,7 +16,7 @@ bool String::ReadStream(BitStream &stream)
     RakString rakString;
     bool success;
 
-                success = stream.Read(rakString);
+    success = stream.Read(rakString);
 
     if(success)
     {

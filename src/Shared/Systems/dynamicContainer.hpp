@@ -55,6 +55,12 @@ namespace OpenGMP
         Id GetFreeId();
 
         /**
+         * @brief CheckSpace enlarges the container if needed
+         * @param index of the requested element
+         */
+        void CheckSpace(int index);
+
+        /**
          * @brief IsFreeId checks if the slot is really free
          * @param id to check
          * @return true if free, false otherwise

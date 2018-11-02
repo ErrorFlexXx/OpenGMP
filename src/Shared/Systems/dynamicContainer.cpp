@@ -15,11 +15,19 @@ template <class T>
 T &DynamicContainer<T>::CreateEntity(Id &id)
 {
     Id freeId = GetFreeId();
+    CheckSpace(freeId.id);
     T &obj = container[freeId.id];
 
     obj.id = freeId;
     id = freeId;
     return obj;
+}
+
+template <class T>
+void DynamicContainer<T>::CheckSpace(int index)
+{
+    if(container.size() <= index)
+        container.insert(container.end(), 1 + index - container.size(), T());
 }
 
 template <class T>

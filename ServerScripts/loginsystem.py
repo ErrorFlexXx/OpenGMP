@@ -3,6 +3,7 @@
 
 gameServer = GameServer.GetGameServerInstance()
 menuSys = gameServer.GetMenuSystem()
+worldSys = gameServer.GetWorldSystem()
 
 def Register(serverClient):
     inst = GameServer.GetGameServerInstance()
@@ -37,6 +38,7 @@ def Login(serverClient):
         if(mysql_num_rows(result) == 1):
             print("Login successfull. User: " + escapedLoginname)
             menuSys.ShowTimedNotification(serverClient, NotificationText("Login erfolgreich!", notifyPosY, green, 4))
+            worldSys.LoadWorld(serverClient, worldSys.GetStoredWorld(1))
         else:
             print("Login incorrect. User: " + serverClient.loginData.loginname)
             menuSys.ShowTimedNotification(serverClient, NotificationText("Login fehlerhaft!", notifyPosY, red, 8))

@@ -375,6 +375,11 @@ void ScriptSystem::SetupMetaData()
                 ._field("worldName", &ServerWorld::worldName)
                 ;
 
+        RegisterClass(std::string("ServerPlayer"));
+        GDefineMetaClass<ServerPlayer,NetIdObject>
+                ::define("ServerPlayer")
+                ;
+
         RegisterClass(std::string("Color"));
         GDefineMetaClass<Color>
                 ::define("Color")
@@ -388,6 +393,7 @@ void ScriptSystem::SetupMetaData()
         RegisterClass(std::string("NotificationText"));
         GDefineMetaClass<NotificationText>
                 ::define("NotificationText")
+                ._constructor<void*(string&, uint32_t, Color&, uint32_t)>()
                 ._field("text", &NotificationText::text)
                 ._field("posY", &NotificationText::posY)
                 ._field("color", &NotificationText::color)

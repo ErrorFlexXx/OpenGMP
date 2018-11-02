@@ -4,7 +4,9 @@
 #include <Server/Objects/serverWorld.hpp>
 #include <Server/Objects/serverPlayer.hpp>
 #include <Shared/Components/id.hpp>
+#include <Shared/Types/Messages/worldSystemMessages.hpp>
 
+using namespace RakNet;
 using namespace OpenGMP;
 
 WorldSystem::WorldSystem(GameServer &gameServer)
@@ -14,7 +16,6 @@ WorldSystem::WorldSystem(GameServer &gameServer)
 
 ServerWorld &WorldSystem::AddWorld(int id, std::string &worldName)
 {
-    LogInfo() << "Hello World";
     Id worldId;
     worldId.id = id;
     ServerWorld &world = gameServer.worldContainer.Get(worldId);
@@ -22,7 +23,18 @@ ServerWorld &WorldSystem::AddWorld(int id, std::string &worldName)
     return world;
 }
 
-void WorldSystem::SpawnPlayer(ServerPlayer &player, ServerWorld &world)
+void WorldSystem::LoadWorld(ServerClient &client, ServerWorld &world)
 {
-    player.world = &world;
+    BitStream bs;
+    bs.Write(NetworkSystemMessages::WorldSystem);
+    bs.Write(worldSystemMessages::LOAD_WORLD);
+    world.id.WriteStream(bs);
+    world.worldName.WriteStream(bs);
+    SendWorldSystemMessage(client.netId.rakNetId, bs);
+}
+
+void WorldSystem::SendWorldSystemMessage(const RakNetGUID &dest, const BitStream &bsOut)
+{
+    gameServer.networkSystem.peerInterface->Send(
+                &bsOut, LOW_PRIORITY, RELIABLE_ORDERED, WorldSystemOrderingChannel, dest, false);
 }

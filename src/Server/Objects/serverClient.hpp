@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Shared/Objects/client.hpp>
+#include <Server/Objects/serverWorld.hpp>
 
 namespace OpenGMP
 {
@@ -18,5 +19,7 @@ namespace OpenGMP
     public:
         ServerClient();
         ~ServerClient();
+
+        ServerWorld *world;
     };
 }

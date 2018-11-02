@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "../Components/string.hpp"
 #include "../Objects/netIdObject.hpp"
 
 namespace OpenGMP
@@ -8,6 +9,6 @@ namespace OpenGMP
     class World : public IdObject
     {
     public:
-        std::string worldName;
+        String worldName;
     };
 }

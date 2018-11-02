@@ -18,7 +18,7 @@ namespace OpenGMP
     public:
         Id();
 
-        int id; //!< (available script attribute) an ID
+        int32_t id; //!< (available script attribute) an ID
 
         void WriteStream(RakNet::BitStream &stream) const;
         bool ReadStream(RakNet::BitStream &stream);

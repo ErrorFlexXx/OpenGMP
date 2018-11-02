@@ -21,10 +21,10 @@ GameServer::GameServer(int gameport,
     , networkSystem(*this, gameport, playerslots, keyDir, pubKeyfileName, privKeyfileName)
     , loginSystem(*this)
     , scriptDirectory(scriptDirectory)
-    , scriptSystem(*this)
     , menuSystem(*this)
     , terminalSystem(*this)
     , worldSystem(*this)
+    , scriptSystem(*this) //Init after all other systems
     , serverRunning(true)
     , serverStopped(false)
 {

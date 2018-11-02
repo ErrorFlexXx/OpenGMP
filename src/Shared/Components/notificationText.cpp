@@ -8,6 +8,14 @@ NotificationText::NotificationText()
 {
 }
 
+NotificationText::NotificationText(const std::string &text, uint32_t posY, const Color &color, uint32_t duration)
+    : text(text)
+    , posY(posY)
+    , color(color)
+    , duration(duration)
+{
+}
+
 void NotificationText::WriteStream(BitStream &stream) const
 {
     RakString rakText("%s", text.c_str());

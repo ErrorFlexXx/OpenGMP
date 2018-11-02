@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Shared/Objects/player.hpp>
+#include <Server/Objects/serverClient.hpp>
 
 namespace OpenGMP
 {
@@ -11,8 +12,10 @@ namespace OpenGMP
     public:
         ServerPlayer()
             : world(nullptr)
+            , client(nullptr)
         {}
 
         ServerWorld *world;
+        ServerClient *client;
     };
 }

@@ -90,6 +90,31 @@ public:
         XCALL(0x006CB640);
     }
 
+    class zCViewProgressBar *GetProgressBar()
+    {
+        return *(zCViewProgressBar**)((DWORD)this + 0x17C);
+    }
+
+    void OpenLoadscreen(bool gamestart, zSTRING worldName)
+    {
+        XCALL(0x006C2690);
+    }
+
+    void CloseLoadscreen()
+    {
+        XCALL(0x006C2BD0);
+    }
+
+    void ClearGameState()
+    {
+        XCALL(0x006C5ED0);
+    }
+
+    void EnterWorld(class oCNpc *npc, int setPosition, class zSTRING const &waypoint)
+    {
+        XCALL(0x006C96F0);
+    }
+
     //Detour declarations:
     void GMP_Render();
 };

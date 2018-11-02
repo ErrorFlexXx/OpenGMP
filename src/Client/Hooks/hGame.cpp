@@ -21,6 +21,7 @@ SysEventPtr sysEvent = (SysEventPtr)(0x5053E0);
 HGame::HGame(GameClient &gameClient)
     : gameClient(gameClient)
     , outgameStarted(false)
+    , gameStarted(false)
     , blankColor(0, 0, 0, 0)
 {
     DWORD funcAddress;

@@ -22,6 +22,7 @@ namespace OpenGMP
         void StartOutgame();
 
         bool outgameStarted; //!< Flag to create initial outgame
+        bool gameStarted; //!< Flag to remember if a game was started
         zCOLOR blankColor;
 
     private:

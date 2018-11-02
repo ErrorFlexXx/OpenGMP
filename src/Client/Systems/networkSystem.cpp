@@ -124,6 +124,11 @@ void NetworkSystem::Update()
                 gameClient.menuSystem.Process(packet);
                 break;
             }
+            case NetworkSystemMessages::WorldSystem:
+            {
+                gameClient.worldSystem.Process(packet);
+                break;
+            }
             default:
             {
 #ifdef DBG_NETWORK

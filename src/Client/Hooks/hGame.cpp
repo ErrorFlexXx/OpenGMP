@@ -10,6 +10,7 @@
 #include "../Systems/windowSystem.hpp"
 #include "../GUI/menu.hpp"
 #include "../gameClient.hpp"
+#include <iostream>
 
 using namespace OpenGMP;
 
@@ -17,6 +18,8 @@ extern GameClient gameClient;
 
 typedef void (*SysEventPtr)();
 SysEventPtr sysEvent = (SysEventPtr)(0x5053E0);
+
+DWORD origRenderAddr;
 
 HGame::HGame(GameClient &gameClient)
     : gameClient(gameClient)
@@ -61,12 +64,14 @@ void CGameManager::GMP_Menu(int savegame)
 
 void oCGame::GMP_Render()
 {
-
+    std::cout << "Hello from Render Ingame routine!" << std::endl;
+    Orig_Render();
 }
 
 void HGame::Startup()
 {
     renderDetour->Activate();
+    origRenderAddr = renderDetour->OriginalCallAddress(oCGame::Addresses::Render);
     menuDetour->Activate();
 }
 

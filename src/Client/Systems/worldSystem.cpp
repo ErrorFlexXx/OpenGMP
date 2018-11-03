@@ -9,6 +9,7 @@
 #include <Shared/Components/id.hpp>
 #include <BitStream.h>
 #include <libintl.h>
+#include <iostream>
 #define _(string) gettext (string)
 
 using namespace OpenGMP;
@@ -34,23 +35,33 @@ void WorldSystem::Process(RakNet::Packet *packet)
             id.ReadStream(bsIn);
             ClientWorld &newWorld = gameClient.worldContainer.Get(id);
             newWorld.worldName.ReadStream(bsIn);
-
+            int i = 0;
+            std::cout << i++ << std::endl;
             gameClient.menuSystem.CloseActiveMenus();
+            std::cout << i++ << std::endl;
             oCGame *game = CGameManager::GetInstance()->GetGame();
+            std::cout << i++ << std::endl;
             game->OpenLoadscreen(!gameClient.hookGame.gameStarted, newWorld.worldName.text);
+            std::cout << i++ << std::endl;
             gameClient.hookGame.gameStarted = true;
+            std::cout << i++ << std::endl;
             zCViewProgressBar *progress = game->GetProgressBar();
+            std::cout << i++ << std::endl;
             if (progress) progress->SetPercent(0, "");
+            std::cout << i++ << std::endl;  
             game->ClearGameState();
+            std::cout << i++ << std::endl;
             if (progress) progress->SetRange(0, 92);
+            std::cout << i++ << std::endl;
             game->LoadWorld(true, newWorld.worldName.text);
+            std::cout << i++ << std::endl;
             if (progress) progress->ResetRange();
+            std::cout << i++ << std::endl;
             if (progress) progress->SetRange(92, 100);
+            std::cout << i++ << std::endl;
             game->EnterWorld(nullptr, true, "");
-            if (progress) progress->ResetRange();
-            if (progress) progress->SetPercent(100, "");
+            std::cout << i++ << std::endl;
             //Clock
-            game->CloseLoadscreen();
             break;
         }
         default:

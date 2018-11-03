@@ -4,6 +4,8 @@
 
 class oCWorldTimer;
 
+extern DWORD origRenderAddr;
+
 class oCGame
 {
 public:
@@ -116,5 +118,9 @@ public:
     }
 
     //Detour declarations:
+    void Orig_Render()
+    {
+        XCALL(origRenderAddr);
+    }
     void GMP_Render();
 };

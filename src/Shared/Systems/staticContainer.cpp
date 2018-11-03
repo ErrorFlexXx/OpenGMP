@@ -14,7 +14,15 @@ StaticContainer<T>::StaticContainer(const size_t &capacity)
 template <class T>
 T &StaticContainer<T>::Get(const Id &id)
 {
+    CheckSpace(id.id);
     return container[id.id];
+}
+
+template <class T>
+void StaticContainer<T>::CheckSpace(int index)
+{
+    if(container.size() <= index)
+        container.insert(container.end(), 1 + index - container.size(), T());
 }
 
 template <class T>

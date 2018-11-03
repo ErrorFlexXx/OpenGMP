@@ -35,6 +35,11 @@ namespace OpenGMP
         size_t capacity;
 
     private:
+        /**
+         * @brief CheckSpace enlarges the contrainer if needed
+         * @param index of requested element
+         */
+        void CheckSpace(int index);
 
         std::vector<T> container;   //<! The actual container.
     };

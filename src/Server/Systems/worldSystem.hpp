@@ -31,6 +31,13 @@ namespace OpenGMP
         ServerWorld &AddWorld(int id, std::string &worldName);
 
         /**
+         * @brief GetStoredWorld returns a loaded world object from container
+         * @param index of the world
+         * @return a ServerWorld reference
+         */
+        ServerWorld &GetStoredWorld(int index);
+
+        /**
          * @brief LoadWorld let a client load a world.
          * @param client that shall load the world now.
          * @param world the world, that should be loaded.

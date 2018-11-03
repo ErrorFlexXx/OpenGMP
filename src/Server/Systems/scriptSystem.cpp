@@ -332,7 +332,6 @@ void ScriptSystem::SetupMetaData()
                 ._method("GetMenuSystem", &GameServer::GetMenuSystem)
                 ._method("GetWorldSystem", &GameServer::GetWorldSystem)
                 ._method("Shutdown", &GameServer::Shutdown)
-
                 ;
 
         RegisterClass(std::string("AuthData"));
@@ -430,6 +429,8 @@ void ScriptSystem::SetupMetaData()
         GDefineMetaClass<WorldSystem>
                 ::define("WorldSystem")
                 ._method("AddWorld", &WorldSystem::AddWorld)
+                ._method("GetStoredWorld", &WorldSystem::GetStoredWorld)
+                ._method("LoadWorld", &WorldSystem::LoadWorld)
                 ;
     }
 }

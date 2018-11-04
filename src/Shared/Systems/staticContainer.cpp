@@ -12,10 +12,10 @@ StaticContainer<T>::StaticContainer(const size_t &capacity)
 }
 
 template <class T>
-T &StaticContainer<T>::Get(const Id &id)
+T &StaticContainer<T>::Get(int id)
 {
-    CheckSpace(id.id);
-    return container[id.id];
+    CheckSpace(id);
+    return container[id];
 }
 
 template <class T>
@@ -27,11 +27,11 @@ void StaticContainer<T>::CheckSpace(int index)
 }
 
 template <class T>
-bool StaticContainer<T>::Remove(const Id &id)
+bool StaticContainer<T>::Remove(int id)
 {
-    if(0 <= id.id && id.id < container.size())
+    if(0 <= id && id < container.size())
     {
-        container[id.id].id.id = -1; //Flag id as unset.
+        container[id].id = -1; //Flag id as unset.
         return true;
     }
     return false;

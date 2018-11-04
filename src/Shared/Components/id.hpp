@@ -17,6 +17,9 @@ namespace OpenGMP
     {
     public:
         Id();
+        Id(int value);
+
+        operator int() const { return id; }
 
         int32_t id; //!< (available script attribute) an ID
 

@@ -14,6 +14,8 @@ namespace OpenGMP
     class String : public IStreamObject
     {
     public:
+        String();
+        String(const char *value);
         std::string text;
 
         void WriteStream(RakNet::BitStream &stream) const;

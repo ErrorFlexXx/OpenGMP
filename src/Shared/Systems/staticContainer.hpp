@@ -23,14 +23,14 @@ namespace OpenGMP
          * @param success true, if the id points to a stored element.
          * @return a reference to the stored object.
          */
-        T &Get(const Id &id);
+        T &Get(int id);
 
         /**
          * @brief Remove marks a slot as free.
          * @param id (in) of the slot to free.
          * @return true, if the slot was used before.
          */
-        bool Remove(const Id &id);
+        bool Remove(int id);
 
         size_t capacity;
 

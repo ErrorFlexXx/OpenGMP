@@ -4,6 +4,14 @@
 using namespace RakNet;
 using namespace OpenGMP;
 
+String::String()
+{}
+
+String::String(const char *value)
+{
+    text = value;
+}
+
 void String::WriteStream(BitStream &stream) const
 {
     RakString rakString("%s", text.c_str());

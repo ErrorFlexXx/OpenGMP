@@ -24,7 +24,7 @@ LoginSystem::LoginSystem(GameServer &gameServer)
 
 void LoginSystem::Process(Packet *packet)
 {
-    unsigned char command;
+    NetMessage command;
     BitStream bsIn(packet->data, packet->length, false);
     bsIn.Read(command);
 
@@ -43,16 +43,16 @@ void LoginSystem::Process(Packet *packet)
                 {
                     LogInfo() << "Connecting client rejected. Server full (" << connectedClients << "/" << gameServer.clientContainer.capacity << ").";
                     BitStream bsOut;
-                    bsOut.Write(NetworkSystemMessages::LoginSystem);
-                    bsOut.Write(LoginSystemMessages::SERVERFULL);
+                    bsOut.Write((NetMessage) NetworkSystemMessages::LoginSystem);
+                    bsOut.Write((NetMessage) LoginSystemMessages::SERVERFULL);
                     SendLoginSystemMessage(packet->guid, bsOut);
                     CloseConnection(packet->guid);
                 }
                 else if(IsBanned(ip))
                 {
                     BitStream bsOut;
-                    bsOut.Write(NetworkSystemMessages::LoginSystem);
-                    bsOut.Write(LoginSystemMessages::BANNED);
+                    bsOut.Write((NetMessage) NetworkSystemMessages::LoginSystem);
+                    bsOut.Write((NetMessage) LoginSystemMessages::BANNED);
                     SendLoginSystemMessage(packet->guid, bsOut);
                     CloseConnection(packet->guid);
                 }
@@ -62,8 +62,8 @@ void LoginSystem::Process(Packet *packet)
                     client.netId.rakNetId = packet->guid;
                     LogInfo() << "Client connected. IP: " << ip << ", ID: " << id.id;
                     BitStream bsOut;
-                    bsOut.Write(NetworkSystemMessages::LoginSystem);
-                    bsOut.Write(LoginSystemMessages::AUTH);
+                    bsOut.Write((NetMessage) NetworkSystemMessages::LoginSystem);
+                    bsOut.Write((NetMessage) LoginSystemMessages::AUTH);
                     SendLoginSystemMessage(packet->guid, bsOut);
                 }
                 break;
@@ -107,8 +107,8 @@ void LoginSystem::Process(Packet *packet)
                     if(IsBanned(client))
                     {
                         BitStream bsOut;
-                        bsOut.Write(NetworkSystemMessages::LoginSystem);
-                        bsOut.Write(LoginSystemMessages::BANNED);
+                        bsOut.Write((NetMessage) NetworkSystemMessages::LoginSystem);
+                        bsOut.Write((NetMessage) LoginSystemMessages::BANNED);
                         SendLoginSystemMessage(packet->guid, bsOut);
                     }
                     else if(!VersionSystem::CheckVersionsCompatibility(VersionSystem::version.version, client.version.version))
@@ -117,15 +117,15 @@ void LoginSystem::Process(Packet *packet)
                                      VersionSystem::GetVersionString(client.version.version) << ", Server: " <<
                                      VersionSystem::GetVersionString(VersionSystem::version.version) << ").";
                         BitStream bsOut;
-                        bsOut.Write(NetworkSystemMessages::LoginSystem);
-                        bsOut.Write(LoginSystemMessages::VERSION_INCOMPATIBLE);
+                        bsOut.Write((NetMessage) NetworkSystemMessages::LoginSystem);
+                        bsOut.Write((NetMessage) LoginSystemMessages::VERSION_INCOMPATIBLE);
                         SendLoginSystemMessage(packet->guid, bsOut);
                     }
                     else
                     {
                         BitStream bsOut;
-                        bsOut.Write(NetworkSystemMessages::LoginSystem);
-                        bsOut.Write(LoginSystemMessages::AUTH_ACCEPTED);
+                        bsOut.Write((NetMessage) NetworkSystemMessages::LoginSystem);
+                        bsOut.Write((NetMessage) LoginSystemMessages::AUTH_ACCEPTED);
                         SendLoginSystemMessage(packet->guid, bsOut);
                     }
                 }

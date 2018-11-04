@@ -16,9 +16,8 @@ WorldSystem::WorldSystem(GameServer &gameServer)
 
 ServerWorld &WorldSystem::AddWorld(int id, std::string &worldName)
 {
-    Id worldId;
-    worldId.id = id;
-    ServerWorld &world = gameServer.worldContainer.Get(worldId);
+    ServerWorld &world = gameServer.worldContainer.Get(id);
+    world.id = id;
     world.worldName.text = worldName;
     LogInfo() << "Added world " << id << " with name " << worldName;
     return world;
@@ -26,26 +25,17 @@ ServerWorld &WorldSystem::AddWorld(int id, std::string &worldName)
 
 ServerWorld &WorldSystem::GetStoredWorld(int index)
 {
-    Id id;
-    id.id = index;
-    return gameServer.worldContainer.Get(id);
+    return gameServer.worldContainer.Get(index);
 }
 
 void WorldSystem::LoadWorld(ServerClient &client, ServerWorld &world)
 {
-    LogInfo() << "Peak";
     BitStream bs;
-    LogInfo() << "Peak";
-    bs.Write(NetworkSystemMessages::WorldSystem);
-    LogInfo() << "Peak";
-    bs.Write(worldSystemMessages::LOAD_WORLD);
-    LogInfo() << "Peak";
+    bs.Write((NetMessage) NetworkSystemMessages::WorldSystem);
+    bs.Write((NetMessage) worldSystemMessages::LOAD_WORLD);
     world.id.WriteStream(bs);
-    LogInfo() << "Peak";
     world.worldName.WriteStream(bs);
-    LogInfo() << "Peak";
     SendWorldSystemMessage(client.netId.rakNetId, bs);
-    LogInfo() << "Peak";
 }
 
 void WorldSystem::SendWorldSystemMessage(const RakNetGUID &dest, const BitStream &bsOut)

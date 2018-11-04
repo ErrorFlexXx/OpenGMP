@@ -11,8 +11,8 @@ def LoadWorlds():
             row = mysql_fetch_row(result)
             id        = mysql.FetchRowElement(row, 0)
             worldName = mysql.FetchRowElement(row, 1)
+            print("Adding world id " + id + " with path " + worldName + " to server!")
             gameserver.GetWorldSystem().AddWorld(int(id), worldName)
-            print("Added world: " + worldName)
         mysql_free_result(result)
 
 #Initialization:

@@ -32,36 +32,24 @@ void WorldSystem::Process(RakNet::Packet *packet)
         case worldSystemMessages::LOAD_WORLD:
         {
             Id id;
-            if (!id.ReadStream(bsIn)) { std::cout << "Error reading id!" << std::endl; break; }
-            ClientWorld newWorld;
-            //ClientWorld &newWorld = gameClient.worldContainer.Get(id);
-            if (!newWorld.worldName.ReadStream(bsIn)) { std::cout << "Error reading worldname!" << std::endl; break; }
-            std::cout << "ID: " << id.id << " World Name: " << newWorld.worldName.text;
+            id.ReadStream(bsIn);
+            ClientWorld &newWorld = gameClient.worldContainer.Get(id);
+            newWorld.worldName.ReadStream(bsIn);
 
             gameClient.menuSystem.CloseActiveMenus();
             
             oCGame *game = CGameManager::GetInstance()->GetGame();
             
-            game->OpenLoadscreen(!gameClient.hookGame.gameStarted, "");
-            
-            gameClient.hookGame.gameStarted = true;
-            
+            game->OpenLoadscreen(!gameClient.hookGame.gameStarted, "");            
+            gameClient.hookGame.gameStarted = true;            
             zCViewProgressBar *progress = game->GetProgressBar();
-            
-            if (progress) progress->SetPercent(0, "");
-            
+            progress->SetPercent(0, "");                            
             game->ClearGameState();
-            
-            if (progress) progress->SetRange(0, 92);
-            
-            game->LoadWorld(true, newWorld.worldName.text);
-            
-            if (progress) progress->ResetRange();
-            
-            if (progress) progress->SetRange(92, 100);
-            
-            game->EnterWorld(nullptr, true, "");
-            
+            progress->SetRange(0, 92);
+            game->LoadWorld(-2, newWorld.worldName.text);
+            progress->ResetRange();
+            progress->SetRange(92, 100);
+            game->EnterWorld(nullptr, true, "XARDAS");
             game->SetTime(1, 12, 00);
             break;
         }

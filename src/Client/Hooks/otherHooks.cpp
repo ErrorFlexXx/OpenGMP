@@ -33,11 +33,12 @@ const unsigned char OtherHooks::SkipNPCIsInRoutineCheck[] = { 0x31, 0xC0, 0xC3 }
 const unsigned char OtherHooks::SkipPerceptionCheck[] = { 0xEB, 0x21 };
 const unsigned char OtherHooks::SkipDoAIState[] = { 0x31, 0xC0, 0xC3 };
 const unsigned char OtherHooks::SkipDialogCams[] = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
+const unsigned char OtherHooks::SkipVisualVdfsInit[] = { 0xE9, 0x8C, 0x00, 0x00, 0x00 };
+const unsigned char OtherHooks::SkipForcedVdfsInit[] = { 0xE9, 0x96, 0x02, 0x00, 0x00 };
 
 void OtherHooks::Hook()
 {
-    HANDLE currentProcess = GetCurrentProcess();
-
+    HANDLE currentProcess = GetCurrentProcess();   
     WriteProcessMemory(currentProcess, (LPVOID)0x0042687F, SkipIntroVideos, 5, NULL);
     WriteProcessMemory(currentProcess, (LPVOID)0x00424EE2, SkipSavegamemManagerInit, 2, NULL);
     WriteProcessMemory(currentProcess, (LPVOID)0x005DEA4B, SkipOutputUnitsInit, 1, NULL);
@@ -65,4 +66,6 @@ void OtherHooks::Hook()
     WriteProcessMemory(currentProcess, (LPVOID)0x0069C247, SkipPerceptionCheck, 2, NULL);
     WriteProcessMemory(currentProcess, (LPVOID)0x0076D1A0, SkipDoAIState, 3, NULL);
     WriteProcessMemory(currentProcess, (LPVOID)0x004A059C, SkipDialogCams, 7, NULL);
+    WriteProcessMemory(currentProcess, (LPVOID)0x44AEDF, SkipVisualVdfsInit, 5, NULL);
+    WriteProcessMemory(currentProcess, (LPVOID)0x00470846, SkipForcedVdfsInit, 5, NULL);
 }

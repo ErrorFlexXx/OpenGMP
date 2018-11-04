@@ -64,9 +64,11 @@ void CGameManager::GMP_Menu(int savegame)
 
 void oCGame::GMP_Render()
 {
-    std::cout << "Hello from Render Ingame routine!" << std::endl;
+    GameTime::Update();
+    unsigned long long now = GameTime::GetTicks();
+    gameClient.networkSystem.Update();
+    gameClient.menuSystem.UpdateNotification(now);
     Orig_Render();
-    std::cout << "Hello returned from Render Ingame routine!" << std::endl;
 }
 
 void HGame::Startup()

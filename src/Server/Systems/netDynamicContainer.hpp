@@ -31,6 +31,13 @@ namespace OpenGMP
         T &CreateEntity(Id &id, const RakNet::RakNetGUID &rakGuid);
 
         /**
+         * @brief CheckSpace creates new elements in the container if necessary.
+         * @param index
+         */
+        void CheckSpace(int index);
+
+
+        /**
          * @brief Get returns the stored object with given id
          * @param id (in) id of the stored item
          * @param success true if the slot contains an valid item.

@@ -1,6 +1,7 @@
 #include "staticContainer.hpp"
 #include <Server/Objects/serverWorld.hpp>
 #include <Client/Objects/clientWorld.hpp>
+#include <iostream>
 
 using namespace OpenGMP;
 
@@ -21,9 +22,8 @@ T &StaticContainer<T>::Get(int id)
 template <class T>
 void StaticContainer<T>::CheckSpace(int index)
 {
-    if (container.size() <= index)
-        for (size_t i = container.size(); i < 1 + index - container.size(); i++)
-            container.push_back(T());
+    while(index >= container.size())
+        container.push_back(T());
 }
 
 template <class T>

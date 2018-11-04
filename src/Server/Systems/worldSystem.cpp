@@ -18,8 +18,8 @@ ServerWorld &WorldSystem::AddWorld(int id, std::string &worldName)
 {
     ServerWorld &world = gameServer.worldContainer.Get(id);
     world.id = id;
-    world.worldName.text = worldName;
-    LogInfo() << "Added world " << id << " with name " << worldName;
+    world.worldName = worldName;
+    LogInfo() << "Added world ID: " << id << " Path: " << worldName;
     return world;
 }
 

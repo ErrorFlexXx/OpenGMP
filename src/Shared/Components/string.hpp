@@ -15,7 +15,8 @@ namespace OpenGMP
     {
     public:
         String();
-        String(const char *value);
+        String(const std::string &value);
+
         std::string text;
 
         void WriteStream(RakNet::BitStream &stream) const;

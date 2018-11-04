@@ -7,7 +7,7 @@ using namespace OpenGMP;
 String::String()
 {}
 
-String::String(const char *value)
+String::String(const std::string &value)
 {
     text = value;
 }

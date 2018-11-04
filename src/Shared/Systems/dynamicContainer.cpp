@@ -26,8 +26,8 @@ T &DynamicContainer<T>::CreateEntity(Id &id)
 template <class T>
 void DynamicContainer<T>::CheckSpace(int index)
 {
-    if(container.size() <= index)
-        container.insert(container.end(), 1 + index - container.size(), T());
+    while(index >= container.size())
+        container.push_back(T());
 }
 
 template <class T>

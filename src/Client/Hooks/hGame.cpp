@@ -66,6 +66,7 @@ void oCGame::GMP_Render()
 {
     std::cout << "Hello from Render Ingame routine!" << std::endl;
     Orig_Render();
+    std::cout << "Hello returned from Render Ingame routine!" << std::endl;
 }
 
 void HGame::Startup()

@@ -82,7 +82,7 @@ void MenuSystem::HideNotification()
 
 void MenuSystem::Process(RakNet::Packet *packet)
 {
-    unsigned char command;
+    NetMessage command;
     BitStream bsIn(packet->data, packet->length, false);
     bsIn.IgnoreBytes(1); //MenuSystem
     bsIn.Read(command); //Read command

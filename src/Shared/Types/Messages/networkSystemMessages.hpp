@@ -4,6 +4,8 @@
 
 #define DBG_NETWORK
 
+typedef unsigned char NetMessage;
+
 namespace OpenGMP
 {
     enum NetworkSystemOrderingChannels : char

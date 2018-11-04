@@ -22,7 +22,7 @@ LoginSystem::LoginSystem(GameClient &gameClient)
 
 void LoginSystem::Process(RakNet::Packet *packet)
 {
-    unsigned char command;
+    NetMessage command;
     BitStream bsIn(packet->data, packet->length, false);
     bsIn.Read(command);
 
@@ -90,8 +90,8 @@ void LoginSystem::Process(RakNet::Packet *packet)
             GetHDDSerial(gameClient.client.authData);
 
             BitStream bsOut;
-            bsOut.Write(NetworkSystemMessages::LoginSystem);
-            bsOut.Write(LoginSystemMessages::AUTH);
+            bsOut.Write((NetMessage)NetworkSystemMessages::LoginSystem);
+            bsOut.Write((NetMessage)LoginSystemMessages::AUTH);
             gameClient.client.authData.WriteStream(bsOut);
             gameClient.client.version.WriteStream(bsOut);
             SendLoginSystemPacket(bsOut);
@@ -151,8 +151,8 @@ void LoginSystem::SendLoginSystemPacket(const BitStream &bsOut)
 void LoginSystem::SendRegister(const LoginData &loginData)
 {
     BitStream bsOut;
-    bsOut.Write(NetworkSystemMessages::LoginSystem);
-    bsOut.Write(LoginSystemMessages::REGISTER);
+    bsOut.Write((NetMessage) NetworkSystemMessages::LoginSystem);
+    bsOut.Write((NetMessage) LoginSystemMessages::REGISTER);
     loginData.WriteStream(bsOut);
     SendLoginSystemPacket(bsOut);
     gameClient.menuSystem.menuRegister.DisableRegisterButton();
@@ -161,8 +161,8 @@ void LoginSystem::SendRegister(const LoginData &loginData)
 void LoginSystem::SendLogin(const LoginData &loginData)
 {
     BitStream bsOut;
-    bsOut.Write(NetworkSystemMessages::LoginSystem);
-    bsOut.Write(LoginSystemMessages::LOGIN);
+    bsOut.Write((NetMessage) NetworkSystemMessages::LoginSystem);
+    bsOut.Write((NetMessage) LoginSystemMessages::LOGIN);
     loginData.WriteStream(bsOut);
     SendLoginSystemPacket(bsOut);
 }

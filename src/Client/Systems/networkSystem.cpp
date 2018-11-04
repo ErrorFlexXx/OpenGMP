@@ -89,7 +89,7 @@ void NetworkSystem::Update()
     {
         if (0 < packet->length)
         {
-            unsigned char command = packet->data[0];
+            NetMessage command = packet->data[0];
 
             switch (command)
             {
@@ -111,7 +111,7 @@ void NetworkSystem::Update()
                 ping = currentTime - time;
 
                 RakNet::BitStream bsOut;
-                bsOut.Write(NetworkSystemMessages::ClientPing);
+                bsOut.Write((NetMessage) NetworkSystemMessages::ClientPing);
                 bsOut.Write(ping); //ping
 
                 peerInterface->Send(&bsOut, PacketPriority::LOW_PRIORITY, PacketReliability::UNRELIABLE, 0, serverAddress, false);

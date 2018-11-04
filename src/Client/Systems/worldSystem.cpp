@@ -22,7 +22,7 @@ WorldSystem::WorldSystem(GameClient &gameClient)
 
 void WorldSystem::Process(RakNet::Packet *packet)
 {
-    unsigned char command;
+    NetMessage command;
     BitStream bsIn(packet->data, packet->length, false);
     bsIn.IgnoreBytes(1); //WorldSystem
     bsIn.Read(command); //Read command
@@ -32,36 +32,37 @@ void WorldSystem::Process(RakNet::Packet *packet)
         case worldSystemMessages::LOAD_WORLD:
         {
             Id id;
-            id.ReadStream(bsIn);
-            ClientWorld &newWorld = gameClient.worldContainer.Get(id);
-            newWorld.worldName.ReadStream(bsIn);
-            int i = 0;
-            std::cout << i++ << std::endl;
+            if (!id.ReadStream(bsIn)) { std::cout << "Error reading id!" << std::endl; break; }
+            ClientWorld newWorld;
+            //ClientWorld &newWorld = gameClient.worldContainer.Get(id);
+            if (!newWorld.worldName.ReadStream(bsIn)) { std::cout << "Error reading worldname!" << std::endl; break; }
+            std::cout << "ID: " << id.id << " World Name: " << newWorld.worldName.text;
+
             gameClient.menuSystem.CloseActiveMenus();
-            std::cout << i++ << std::endl;
+            
             oCGame *game = CGameManager::GetInstance()->GetGame();
-            std::cout << i++ << std::endl;
-            game->OpenLoadscreen(!gameClient.hookGame.gameStarted, newWorld.worldName.text);
-            std::cout << i++ << std::endl;
+            
+            game->OpenLoadscreen(!gameClient.hookGame.gameStarted, "");
+            
             gameClient.hookGame.gameStarted = true;
-            std::cout << i++ << std::endl;
+            
             zCViewProgressBar *progress = game->GetProgressBar();
-            std::cout << i++ << std::endl;
+            
             if (progress) progress->SetPercent(0, "");
-            std::cout << i++ << std::endl;  
+            
             game->ClearGameState();
-            std::cout << i++ << std::endl;
+            
             if (progress) progress->SetRange(0, 92);
-            std::cout << i++ << std::endl;
+            
             game->LoadWorld(true, newWorld.worldName.text);
-            std::cout << i++ << std::endl;
+            
             if (progress) progress->ResetRange();
-            std::cout << i++ << std::endl;
+            
             if (progress) progress->SetRange(92, 100);
-            std::cout << i++ << std::endl;
+            
             game->EnterWorld(nullptr, true, "");
-            std::cout << i++ << std::endl;
-            //Clock
+            
+            game->SetTime(1, 12, 00);
             break;
         }
         default:

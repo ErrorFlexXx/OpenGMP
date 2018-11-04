@@ -129,7 +129,6 @@ bool NetworkSystem::Update()
                 case ID_NEW_INCOMING_CONNECTION:
                 case ID_CONNECTION_LOST:                
                 {
-                    LogInfo() << "Got LoginSystem message";
                     gameServer.loginSystem.Process(packet);
                     break;
                 }

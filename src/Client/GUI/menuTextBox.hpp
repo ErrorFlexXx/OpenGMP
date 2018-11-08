@@ -21,6 +21,8 @@ namespace OpenGMP
             MenuTextBox(GameClient &gameClient, const std::string &title, const std::string &help, int x, int y, int width, int height, int titleX, int titleY, std::function<void()> action, bool passwordText = false);
             MenuTextBox(GameClient &gameClient, const std::string &backTexture, const std::string &title, const std::string &help, int x, int y, int width, int height, int titleX, int titleY, std::function<void()> action, bool passwordText = false);
 
+            operator std::string() const { return tb; }
+
             virtual void Select() override;
             virtual void Deselect() override;
             virtual void Show() override;
@@ -28,7 +30,6 @@ namespace OpenGMP
             std::function<void(unsigned long long)> Update;
             bool GetPasswordText();
             void SetPasswordText(bool value);
-            std::string GetText();
         
         private:
             virtual void KeyPressed(VirtualKeys key) override;

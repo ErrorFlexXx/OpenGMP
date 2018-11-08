@@ -169,11 +169,6 @@ void TextBox::Enabled(bool value)
         cursorVis.Hide();
 }
 
-std::string TextBox::Input()
-{
-    return input;
-}
-
 void TextBox::Input(const std::string &value)
 {
     input.clear();

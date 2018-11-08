@@ -46,8 +46,8 @@ void MenuRegister::Open()
 
 void MenuRegister::Register()
 {
-    gameClient.client.loginData.loginname = txtUsername->GetText();
-    gameClient.client.loginData.password = txtPassword->GetText();
+    gameClient.client.loginData.loginname = *txtUsername;
+    gameClient.client.loginData.password = *txtPassword;
     gameClient.loginSystem.SendRegister(gameClient.client.loginData);
 }
 

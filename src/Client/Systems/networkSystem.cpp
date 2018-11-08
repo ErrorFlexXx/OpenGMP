@@ -111,7 +111,7 @@ void NetworkSystem::Update()
                 ping = currentTime - time;
 
                 RakNet::BitStream bsOut;
-                bsOut.Write((NetMessage) NetworkSystemMessages::ClientPing);
+                bsOut.Write((NetMessage) NetworkSystemMessages::Ping);
                 bsOut.Write(ping); //ping
 
                 peerInterface->Send(&bsOut, PacketPriority::LOW_PRIORITY, PacketReliability::UNRELIABLE, 0, serverAddress, false);

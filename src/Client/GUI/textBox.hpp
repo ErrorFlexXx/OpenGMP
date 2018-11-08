@@ -18,6 +18,8 @@ namespace OpenGMP
         public:
             TextBox(GameClient &gameClient, int x, int y, int w, bool fixedBorders, bool passwordText = false);
 
+            operator std::string() const { return input; }
+
             virtual void Show() override;
             virtual void Hide() override;
 
@@ -27,7 +29,6 @@ namespace OpenGMP
             void KeyPressedNoRepeatUpdate(VirutalKeys key);
             bool Enabled();
             void Enabled(bool value);
-            std::string Input();
             void Input(const std::string &value);
             bool GetPasswordText();
             void SetPasswordText(bool value);

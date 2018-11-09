@@ -26,7 +26,7 @@ void MenuLogin::OnCreate()
     const int offset = 200;
     const int dist = 38;
 
-    txtUsername = AddTextBox(_("Username"), _("Username to log into."), offset + dist * 0, 280, nullptr);
+    txtUsername = AddTextBox(_("Username"), _("Username to log into."), offset + dist * 0, 280, [=]() { this->SetCursor(txtPassword); });
     txtPassword = AddTextBox(_("Password"), _("Password of the user."), offset + dist * 1, 280, [=]() { this->Login(); }, true);
     btnShowPassword = AddButton(btnShowPasswordTextShow, _("Toggles the password plain text view."), offset + dist * 2, [=]() { this->ToggleShowPassword(); });
     btnLogin = AddButton(_("Login"), _("Login with given credentials."), offset + dist * 4, [=]() { this->Login(); });

@@ -27,7 +27,7 @@ void MenuLogin::OnCreate()
     const int dist = 38;
 
     txtUsername = AddTextBox(_("Username"), _("Username to log into."), offset + dist * 0, 280, nullptr);
-    txtPassword = AddTextBox(_("Password"), _("Password of the user."), offset + dist * 1, 280, nullptr, true);
+    txtPassword = AddTextBox(_("Password"), _("Password of the user."), offset + dist * 1, 280, [=]() { this->Login(); }, true);
     btnShowPassword = AddButton(btnShowPasswordTextShow, _("Toggles the password plain text view."), offset + dist * 2, [=]() { this->ToggleShowPassword(); });
     btnLogin = AddButton(_("Login"), _("Login with given credentials."), offset + dist * 4, [=]() { this->Login(); });
     btnBack = AddButton(_("Back"), _("Goes back to the main menu."), offset + dist * 5, [=]() {gameClient.menuSystem.menuMain.Open(); });

@@ -41,6 +41,7 @@ void MenuMain::EnableNetworkElements()
 {
     btnLogin->Enabled(true);
     btnRegister->Enabled(true);
+    SetCursor(btnLogin);
 }
 
 void MenuMain::DisableNetworkElements()

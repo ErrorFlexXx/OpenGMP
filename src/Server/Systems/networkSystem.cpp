@@ -127,14 +127,14 @@ bool NetworkSystem::Update()
             {
                 case NetworkSystemMessages::LoginSystem:
                 case ID_NEW_INCOMING_CONNECTION:
-                case ID_CONNECTION_LOST:                
+                case ID_CONNECTION_LOST:
+                case ID_DISCONNECTION_NOTIFICATION:
                 {
                     gameServer.loginSystem.Process(packet);
                     break;
                 }
-                case NetworkSystemMessages::ClientPing:
+                case NetworkSystemMessages::Ping:
                 {
-                    LogInfo() << "Got Ping packet!";
                     break;
                 }
                 default:

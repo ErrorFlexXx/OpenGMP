@@ -15,12 +15,14 @@ unsigned short GameClient::serverPort = 1760;
 
 GameClient::GameClient()
     : worldContainer(10)
+    , playerContainer(100)
     , inited(false)
     , networkSystem(*this)
     , loginSystem(*this)
     , inputSystem(*this)
     , menuSystem(*this)
     , worldSystem(*this)
+    , playerController(*this)
     , hookGame(*this)
 {}
 

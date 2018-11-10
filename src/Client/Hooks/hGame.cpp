@@ -8,6 +8,7 @@
 #include "../Systems/inputSystem.hpp"
 #include "../Systems/menuSystem.hpp"
 #include "../Systems/windowSystem.hpp"
+#include "../Systems/playerController.hpp"
 #include "../GUI/menu.hpp"
 #include "../gameClient.hpp"
 #include <iostream>
@@ -67,6 +68,8 @@ void oCGame::GMP_Render()
     GameTime::Update();
     unsigned long long now = GameTime::GetTicks();
     gameClient.networkSystem.Update();
+    gameClient.inputSystem.Update();
+    gameClient.playerController.Update();
     gameClient.menuSystem.UpdateNotification(now);
     Orig_Render();
 }

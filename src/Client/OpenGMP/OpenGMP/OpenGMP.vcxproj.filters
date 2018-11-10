@@ -52,6 +52,9 @@
     <Filter Include="Objects">
       <UniqueIdentifier>{40bf75ac-1d27-4c14-b8b5-c5ba4f7a0baf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shared\Objects">
+      <UniqueIdentifier>{01e3c45c-97dd-4967-99e0-b06a6dec79ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main.cpp" />
@@ -177,6 +180,18 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Shared\Components\string.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Systems\playerController.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Objects\idObject.cpp">
+      <Filter>Shared\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Objects\clientPlayer.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\playerMovement.cpp">
       <Filter>Shared\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -403,6 +418,36 @@
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Shared\Components\string.hpp">
+      <Filter>Shared\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Systems\playerController.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Objects\client.hpp">
+      <Filter>Shared\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Objects\idObject.hpp">
+      <Filter>Shared\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Objects\player.hpp">
+      <Filter>Shared\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Objects\world.hpp">
+      <Filter>Shared\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Objects\clientPlayer.hpp">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Objects\oCNpc.hpp">
+      <Filter>Gothic\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCModel.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Objects\oCAniCtrl_Human.hpp">
+      <Filter>Gothic\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\playerMovement.hpp">
       <Filter>Shared\Components</Filter>
     </ClInclude>
   </ItemGroup>

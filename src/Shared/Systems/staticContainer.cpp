@@ -1,6 +1,7 @@
 #include "staticContainer.hpp"
 #include <Server/Objects/serverWorld.hpp>
 #include <Client/Objects/clientWorld.hpp>
+#include <Client/Objects/clientPlayer.hpp>
 #include <iostream>
 
 using namespace OpenGMP;
@@ -13,21 +14,21 @@ StaticContainer<T>::StaticContainer(const size_t &capacity)
 }
 
 template <class T>
-T &StaticContainer<T>::Get(int id)
+T &StaticContainer<T>::Get(size_t id)
 {
     CheckSpace(id);
     return container[id];
 }
 
 template <class T>
-void StaticContainer<T>::CheckSpace(int index)
+void StaticContainer<T>::CheckSpace(size_t index)
 {
     while(index >= container.size())
         container.push_back(T());
 }
 
 template <class T>
-bool StaticContainer<T>::Remove(int id)
+bool StaticContainer<T>::Remove(size_t id)
 {
     if(0 <= id && id < container.size())
     {
@@ -42,5 +43,6 @@ bool StaticContainer<T>::Remove(int id)
 template class StaticContainer<ServerWorld>;
 #else
 template class StaticContainer<ClientWorld>;
+template class StaticContainer<ClientPlayer>;
 #endif
 

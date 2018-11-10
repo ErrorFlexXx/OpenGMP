@@ -9,6 +9,7 @@
 #include "../Components/playerAttributes.hpp"
 #include "../Components/playerSkills.hpp"
 #include "../Components/playerVisual.hpp"
+#include "../Components/playerMovement.hpp"
 
 namespace OpenGMP
 {
@@ -19,11 +20,13 @@ namespace OpenGMP
     class Player : public NetIdObject
     {
     public:
+        Player() {}
         Position position;
         Scale scale;
         PlayerTalents talents;
         PlayerAttributes attributes;
         PlayerSkills skills;
         PlayerVisual visual;
+        PlayerMovement movement;
     };
 }

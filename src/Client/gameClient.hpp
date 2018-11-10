@@ -6,11 +6,13 @@
 #include "Hooks/hGame.hpp"
 #include "Objects/clientClient.hpp"
 #include "Objects/clientWorld.hpp"
+#include "Objects/clientPlayer.hpp"
 #include "Systems/networkSystem.hpp"
 #include "Systems/loginSystem.hpp"
 #include "Systems/inputSystem.hpp"
 #include "Systems/menuSystem.hpp"
 #include "Systems/worldSystem.hpp"
+#include "Systems/playerController.hpp"
 #include <Shared/Systems/staticContainer.hpp>
 
 namespace OpenGMP
@@ -33,10 +35,12 @@ namespace OpenGMP
         InputSystem inputSystem;
         MenuSystem menuSystem;
         WorldSystem worldSystem;
+        PlayerController playerController;
         HGame hookGame; //GameLoop hooks (Menu & Ingame)
 
         /* Global containers */
         StaticContainer<ClientWorld> worldContainer;
+        StaticContainer<ClientPlayer> playerContainer;
     
     private:
         GameClient(const GameClient&);  //!< No Copy allowed!

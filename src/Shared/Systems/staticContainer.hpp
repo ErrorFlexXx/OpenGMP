@@ -23,14 +23,14 @@ namespace OpenGMP
          * @param success true, if the id points to a stored element.
          * @return a reference to the stored object.
          */
-        T &Get(int id);
+        T &Get(size_t id);
 
         /**
          * @brief Remove marks a slot as free.
          * @param id (in) of the slot to free.
          * @return true, if the slot was used before.
          */
-        bool Remove(int id);
+        bool Remove(size_t id);
 
         size_t capacity;
 
@@ -39,7 +39,7 @@ namespace OpenGMP
          * @brief CheckSpace enlarges the contrainer if needed
          * @param index of requested element
          */
-        void CheckSpace(int index);
+        void CheckSpace(size_t index);
 
         std::vector<T> container;   //<! The actual container.
     };

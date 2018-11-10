@@ -2,6 +2,7 @@
 #include <Client/gameClient.hpp>
 #include <Client/Objects/clientWorld.hpp>
 #include <Client/Systems/menuSystem.hpp>
+#include <Client/Systems/playerController.hpp>
 #include <Client/Gothic/cGameManager.hpp>
 #include <Client/Gothic/Classes/zCViewProgressBar.hpp>
 #include <Client/Gothic/Objects/oCGame.hpp>
@@ -51,6 +52,7 @@ void WorldSystem::Process(RakNet::Packet *packet)
             progress->SetRange(92, 100);
             game->EnterWorld(nullptr, true, "XARDAS");
             game->SetTime(1, 12, 00);
+            gameClient.playerController.ControlCurrentPlayer(); //Test
             break;
         }
         default:

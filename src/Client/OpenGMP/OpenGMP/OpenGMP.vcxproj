@@ -132,8 +132,10 @@
     <ClCompile Include="..\..\..\Shared\Components\id.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\loginData.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\notificationText.cpp" />
+    <ClCompile Include="..\..\..\Shared\Components\playerMovement.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\string.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\version.cpp" />
+    <ClCompile Include="..\..\..\Shared\Objects\idObject.cpp" />
     <ClCompile Include="..\..\..\Shared\Systems\staticContainer.cpp" />
     <ClCompile Include="..\..\..\Shared\Systems\versionSystem.cpp" />
     <ClCompile Include="..\..\Components\menuLogin.cpp" />
@@ -162,11 +164,13 @@
     <ClCompile Include="..\..\main.cpp" />
     <ClCompile Include="..\..\Objects\CDetour.cpp" />
     <ClCompile Include="..\..\Objects\clientClient.cpp" />
+    <ClCompile Include="..\..\Objects\clientPlayer.cpp" />
     <ClCompile Include="..\..\Objects\clientWorld.cpp" />
     <ClCompile Include="..\..\Systems\inputSystem.cpp" />
     <ClCompile Include="..\..\Systems\loginSystem.cpp" />
     <ClCompile Include="..\..\Systems\menuSystem.cpp" />
     <ClCompile Include="..\..\Systems\networkSystem.cpp" />
+    <ClCompile Include="..\..\Systems\playerController.cpp" />
     <ClCompile Include="..\..\Systems\windowSystem.cpp" />
     <ClCompile Include="..\..\Systems\worldSystem.cpp" />
   </ItemGroup>
@@ -177,8 +181,13 @@
     <ClInclude Include="..\..\..\Shared\Components\id.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\loginData.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\notificationText.hpp" />
+    <ClInclude Include="..\..\..\Shared\Components\playerMovement.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\string.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\version.hpp" />
+    <ClInclude Include="..\..\..\Shared\Objects\client.hpp" />
+    <ClInclude Include="..\..\..\Shared\Objects\idObject.hpp" />
+    <ClInclude Include="..\..\..\Shared\Objects\player.hpp" />
+    <ClInclude Include="..\..\..\Shared\Objects\world.hpp" />
     <ClInclude Include="..\..\..\Shared\Systems\staticContainer.hpp" />
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\constants.hpp" />
@@ -195,6 +204,7 @@
     <ClInclude Include="..\..\Gothic\Classes\zCEventManager.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCFont.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCFontMan.hpp" />
+    <ClInclude Include="..\..\Gothic\Classes\zCModel.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOption.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOptionEntry.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOptionSection.hpp" />
@@ -206,8 +216,10 @@
     <ClInclude Include="..\..\Gothic\Classes\zCViewText.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCVob.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCWorld.hpp" />
+    <ClInclude Include="..\..\Gothic\Objects\oCAniCtrl_Human.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCGame.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCMob.hpp" />
+    <ClInclude Include="..\..\Gothic\Objects\oCNpc.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCVob.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCWorld.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCWorldTimer.hpp" />
@@ -238,11 +250,13 @@
     <ClInclude Include="..\..\Hooks\otherHooks.hpp" />
     <ClInclude Include="..\..\Objects\CDetour.h" />
     <ClInclude Include="..\..\Objects\clientClient.hpp" />
+    <ClInclude Include="..\..\Objects\clientPlayer.hpp" />
     <ClInclude Include="..\..\Objects\clientWorld.hpp" />
     <ClInclude Include="..\..\Systems\inputSystem.hpp" />
     <ClInclude Include="..\..\Systems\loginSystem.hpp" />
     <ClInclude Include="..\..\Systems\menuSystem.hpp" />
     <ClInclude Include="..\..\Systems\networkSystem.hpp" />
+    <ClInclude Include="..\..\Systems\playerController.hpp" />
     <ClInclude Include="..\..\Systems\windowSystem.hpp" />
     <ClInclude Include="..\..\Systems\worldSystem.hpp" />
     <ClInclude Include="..\..\Types\virtualKeys.hpp" />

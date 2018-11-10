@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../xcall.h"
+#include "../Types/zSTRING.hpp"
 
 class oCWorld
 {

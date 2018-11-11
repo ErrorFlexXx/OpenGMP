@@ -132,7 +132,13 @@
     <ClCompile Include="..\..\..\Shared\Components\id.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\loginData.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\notificationText.cpp" />
+    <ClCompile Include="..\..\..\Shared\Components\playerAttributes.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\playerMovement.cpp" />
+    <ClCompile Include="..\..\..\Shared\Components\playerSkills.cpp" />
+    <ClCompile Include="..\..\..\Shared\Components\playerTalents.cpp" />
+    <ClCompile Include="..\..\..\Shared\Components\playerVisual.cpp" />
+    <ClCompile Include="..\..\..\Shared\Components\position.cpp" />
+    <ClCompile Include="..\..\..\Shared\Components\scale.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\string.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\version.cpp" />
     <ClCompile Include="..\..\..\Shared\Objects\idObject.cpp" />
@@ -181,7 +187,13 @@
     <ClInclude Include="..\..\..\Shared\Components\id.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\loginData.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\notificationText.hpp" />
+    <ClInclude Include="..\..\..\Shared\Components\playerAttributes.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\playerMovement.hpp" />
+    <ClInclude Include="..\..\..\Shared\Components\playerSkills.hpp" />
+    <ClInclude Include="..\..\..\Shared\Components\playerTalents.hpp" />
+    <ClInclude Include="..\..\..\Shared\Components\playerVisual.hpp" />
+    <ClInclude Include="..\..\..\Shared\Components\position.hpp" />
+    <ClInclude Include="..\..\..\Shared\Components\scale.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\string.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\version.hpp" />
     <ClInclude Include="..\..\..\Shared\Objects\client.hpp" />
@@ -194,6 +206,8 @@
     <ClInclude Include="..\..\..\Shared\Types\Messages\loginSystemMessages.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\menuSystemMessages.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\networkSystemMessages.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\Messages\playerControllerMessages.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\Messages\worldSystemMessages.hpp" />
     <ClInclude Include="..\..\Components\menuLogin.hpp" />
     <ClInclude Include="..\..\Components\menuMain.hpp" />
     <ClInclude Include="..\..\Components\menuRegister.hpp" />
@@ -205,6 +219,7 @@
     <ClInclude Include="..\..\Gothic\Classes\zCFont.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCFontMan.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCModel.hpp" />
+    <ClInclude Include="..\..\Gothic\Classes\zCObject.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOption.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOptionEntry.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOptionSection.hpp" />
@@ -220,6 +235,7 @@
     <ClInclude Include="..\..\Gothic\Objects\oCGame.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCMob.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCNpc.hpp" />
+    <ClInclude Include="..\..\Gothic\Objects\oCObjectFactory.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCVob.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCWorld.hpp" />
     <ClInclude Include="..\..\Gothic\Objects\oCWorldTimer.hpp" />

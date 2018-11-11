@@ -108,6 +108,11 @@ public:
         XCALL(0x00624810);
     }
 
+    void RemoveVob(class zCVob *)
+    {
+        XCALL(0x00624B70);
+    }
+
     void RemoveVob(class zCTree<class zCVob> *)
     {
         XCALL(0x00624BA0);

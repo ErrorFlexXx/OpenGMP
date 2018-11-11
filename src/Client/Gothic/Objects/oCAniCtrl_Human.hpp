@@ -107,12 +107,12 @@ public:
     {
         XCALL(0x006AE080);
     }
-        
+
     int IsWalking()
     {
         XCALL(0x006AE0E0);
     }
-        
+
     int IsRunning()
     {
         XCALL(0x006AE200);

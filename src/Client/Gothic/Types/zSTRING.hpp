@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../xcall.h"
+#include <Shared/Components/string.hpp>
 #include <string>
 
 int __cdecl operator==(class zSTRING const &, char const * const);
@@ -30,6 +31,11 @@ public:
     zSTRING(char const *)
     {
         XCALL(0x004010C0);
+    }
+
+    zSTRING(const OpenGMP::String &text)
+        :zSTRING(text.text)
+    {
     }
 
     zSTRING(const std::string &text)

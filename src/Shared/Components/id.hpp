@@ -18,8 +18,10 @@ namespace OpenGMP
     public:
         Id();
         Id(int value);
+        Id(RakNet::BitStream &stream);
 
         operator int() const { return id; }
+        operator size_t() const { return (size_t)id; }
 
         int32_t id; //!< (available script attribute) an ID
 

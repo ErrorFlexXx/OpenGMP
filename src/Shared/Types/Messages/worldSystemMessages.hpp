@@ -4,7 +4,7 @@
 
 namespace OpenGMP
 {
-    enum worldSystemMessages : unsigned char
+    enum WorldSystemMessages : unsigned char
     {
         LOAD_WORLD
     };

@@ -4,6 +4,8 @@
 #include "oCVob.hpp"
 #include "oCAniCtrl_Human.hpp"
 #include "../Classes/zCModel.hpp"
+#include "../Types/zSTRING.hpp"
+#include <Shared/Objects/player.hpp>
 
 class oCNpc : public oCVob
 {
@@ -15,6 +17,19 @@ public:
     {
         static const unsigned int speedTurn = 0x100;
     } VarOffsets;
+
+    void Setup(const OpenGMP::Player &player)
+    {
+        SetPositionWorld(player.position);
+        ResetXZRotationsWorld();
+        RotateWorldY(player.position.angle);
+        SetAdditionalVisuals("Hum_Body_Naked0", 9, 0, "Hum_Head_Pony", 18, 0, 0);
+    }
+
+    void SetAdditionalVisuals(const zSTRING &body, int bodyTexNr, int bodyColor, const zSTRING &head, int headTextNr, int teethTexNr, int armorInst)
+    {
+        XCALL(0x00738350);
+    }
 
     float GetTurnSpeed()
     {

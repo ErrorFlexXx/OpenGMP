@@ -12,7 +12,8 @@ namespace OpenGMP
     {
         LoginSystemOrderingChannel = 1,
         MenuSystemOrderingChannel,
-        WorldSystemOrderingChannel
+        WorldSystemOrderingChannel,
+        PlayerControllerOrderingChannel
     };
 
     enum NetworkSystemMessages : unsigned char
@@ -20,6 +21,7 @@ namespace OpenGMP
         Ping = ID_USER_PACKET_ENUM,
         LoginSystem,
         MenuSystem,
-        WorldSystem
+        WorldSystem,
+        PlayerController
     };
 }

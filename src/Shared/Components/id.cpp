@@ -11,6 +11,11 @@ Id::Id(int value)
     id = value;
 }
 
+Id::Id(RakNet::BitStream &stream)
+{
+    ReadStream(stream);
+}
+
 void Id::WriteStream(RakNet::BitStream &stream) const
 {
     stream.Write(id);

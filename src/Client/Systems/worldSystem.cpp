@@ -6,6 +6,7 @@
 #include <Client/Gothic/cGameManager.hpp>
 #include <Client/Gothic/Classes/zCViewProgressBar.hpp>
 #include <Client/Gothic/Objects/oCGame.hpp>
+#include <Client/Gothic/Objects/oCWorld.hpp>
 #include <Shared/Types/Messages/worldSystemMessages.hpp>
 #include <Shared/Components/id.hpp>
 #include <BitStream.h>
@@ -30,10 +31,9 @@ void WorldSystem::Process(RakNet::Packet *packet)
 
     switch (command)
     {
-        case worldSystemMessages::LOAD_WORLD:
+        case WorldSystemMessages::LOAD_WORLD:
         {
-            Id id;
-            id.ReadStream(bsIn);
+            Id id(bsIn);
             ClientWorld &newWorld = gameClient.worldContainer.Get(id);
             newWorld.worldName.ReadStream(bsIn);
 
@@ -47,12 +47,12 @@ void WorldSystem::Process(RakNet::Packet *packet)
             progress->SetPercent(0, "");                            
             game->ClearGameState();
             progress->SetRange(0, 92);
-            game->LoadWorld(-2, newWorld.worldName.text);
+            game->LoadWorld(-2, newWorld.worldName);
             progress->ResetRange();
             progress->SetRange(92, 100);
-            game->EnterWorld(nullptr, true, "XARDAS");
+            game->EnterWorld(nullptr, true, "");
             game->SetTime(1, 12, 00);
-            gameClient.playerController.ControlCurrentPlayer(); //Test
+            game->GetWorld()->RemoveVob(oCNpc::GetHero()); //Remove default hero
             break;
         }
         default:

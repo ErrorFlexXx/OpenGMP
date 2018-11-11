@@ -194,6 +194,24 @@
     <ClCompile Include="..\..\..\Shared\Components\playerMovement.cpp">
       <Filter>Shared\Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\scale.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\playerAttributes.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\playerSkills.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\playerTalents.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\playerVisual.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Components\position.cpp">
+      <Filter>Shared\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Hooks\hGame.hpp">
@@ -448,6 +466,36 @@
       <Filter>Gothic\Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Shared\Components\playerMovement.hpp">
+      <Filter>Shared\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\Messages\playerControllerMessages.hpp">
+      <Filter>Shared\Types\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\Messages\worldSystemMessages.hpp">
+      <Filter>Shared\Types\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Objects\oCObjectFactory.hpp">
+      <Filter>Gothic\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gothic\Classes\zCObject.hpp">
+      <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\scale.hpp">
+      <Filter>Shared\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\playerAttributes.hpp">
+      <Filter>Shared\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\playerSkills.hpp">
+      <Filter>Shared\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\playerTalents.hpp">
+      <Filter>Shared\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\playerVisual.hpp">
+      <Filter>Shared\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\position.hpp">
       <Filter>Shared\Components</Filter>
     </ClInclude>
   </ItemGroup>

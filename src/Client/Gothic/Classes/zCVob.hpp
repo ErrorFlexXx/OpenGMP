@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../xcall.h"
+#include "zCObject.hpp"
 #include "../Types/zSTRING.hpp"
 #include "../Types/zCOLOR.hpp"
 #include "../Types/zVEC3.hpp"
@@ -13,7 +14,7 @@ class zCAIBase;             //Implement if needed
 class zCEventManager;       //Implement if needed
 class zCVisual;
 
-class zCVob
+class zCVob : public zCObject
 {
 public:
     static const enum class BitFlag0 : unsigned int

@@ -41,11 +41,6 @@ public:
         XCALL(0x0077F3F0);
     }
 
-    /*virtual*/ class zCTree<class zCVob> * AddVobAsChild(class zCVob *,class zCTree<class zCVob> *)
-    {
-        XCALL(0x0077FE30);
-    }
-
     /*virtual*/ void RemoveVob(class zCVob *)
     {
         XCALL(0x007800C0);
@@ -66,24 +61,9 @@ public:
         XCALL(0x00780460);
     }
 
-    /*virtual*/ class zCVob * SearchVob(class zCVob *,class zCTree<class zCVob> *)
-    {
-        XCALL(0x00780570);
-    }
-
-    /*virtual*/ class zCVob * SearchVobByID(unsigned long,class zCTree<class zCVob> *)
-    {
-        XCALL(0x007805C0);
-    }
-
     /*virtual*/ class zCVob * SearchVobByName(class zSTRING const &)
     {
         XCALL(0x00780610);
-    }
-
-    /*virtual*/ void SearchVobListByName(class zSTRING const &,class zCArray<class zCVob *> &)
-    {
-        XCALL(0x007806C0);
     }
 
     /*virtual*/ void TraverseVobList(class zCVobCallback &,void *)

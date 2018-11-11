@@ -3,6 +3,9 @@
 #include "../xcall.h"
 
 class oCWorldTimer;
+class oCWorld;
+class zCCamera;
+class zCVob;
 
 extern DWORD origRenderAddr;
 
@@ -16,6 +19,28 @@ public:
     {
         static const unsigned int Render = 0x006C86A0;
     } Addresses;
+
+    static const struct VarOffsets
+    {
+        static const unsigned int World  = 0x8;
+        static const unsigned int Cam    = 0x0C;
+        static const unsigned int CamVob = 0x14;
+    } VarOffsets;
+
+    zCCamera *GetCamera()
+    {
+        return *(zCCamera**)((DWORD)this + VarOffsets::Cam);
+    }
+
+    zCVob *GetCamVob()
+    {
+        return *(zCVob**)((DWORD)this + VarOffsets::CamVob);
+    }
+
+    oCWorld *GetWorld()
+    {
+        return *(oCWorld**)((DWORD)this + VarOffsets::World);
+    }
 
     void LoadWorld(int, class zSTRING const &)
     {

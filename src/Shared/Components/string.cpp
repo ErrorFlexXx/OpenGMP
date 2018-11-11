@@ -12,6 +12,10 @@ String::String(const std::string &value)
     text = value;
 }
 
+String::String(const char *value)
+    : text(value)
+{}
+
 void String::WriteStream(BitStream &stream) const
 {
     RakString rakString("%s", text.c_str());

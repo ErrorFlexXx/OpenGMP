@@ -16,6 +16,7 @@ namespace OpenGMP
     public:
         String();
         String(const std::string &value);
+        String(const char *value);
 
         operator std::string() { return text; }
         std::string text;

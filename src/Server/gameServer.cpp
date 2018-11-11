@@ -24,6 +24,7 @@ GameServer::GameServer(int gameport,
     , menuSystem(*this)
     , terminalSystem(*this)
     , worldSystem(*this)
+    , playerController(*this)
     , scriptSystem(*this) //Init after all other systems
     , serverRunning(true)
     , serverStopped(false)
@@ -125,4 +126,9 @@ MenuSystem &GameServer::GetMenuSystem()
 WorldSystem & GameServer::GetWorldSystem()
 {
     return worldSystem;
+}
+
+PlayerController &GameServer::GetPlayerController()
+{
+    return playerController;
 }

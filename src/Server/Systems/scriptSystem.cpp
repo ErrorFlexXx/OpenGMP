@@ -23,6 +23,7 @@
 #include "../Systems/menuSystem.hpp"
 #include "../Systems/mysql.hpp"
 #include "../Systems/worldSystem.hpp"
+#include "../Systems/playerController.hpp"
 #include <mysql/mysql.h>
 
 using namespace std;
@@ -331,6 +332,7 @@ void ScriptSystem::SetupMetaData()
                 ._method("GetScriptSystem", &GameServer::GetScriptSystem)
                 ._method("GetMenuSystem", &GameServer::GetMenuSystem)
                 ._method("GetWorldSystem", &GameServer::GetWorldSystem)
+                ._method("GetPlayerController", &GameServer::GetPlayerController)
                 ._method("Shutdown", &GameServer::Shutdown)
                 ;
 
@@ -431,6 +433,12 @@ void ScriptSystem::SetupMetaData()
                 ._method("AddWorld", &WorldSystem::AddWorld)
                 ._method("GetStoredWorld", &WorldSystem::GetStoredWorld)
                 ._method("LoadWorld", &WorldSystem::LoadWorld)
+                ;
+
+        RegisterClass(std::string("PlayerController"));
+        GDefineMetaClass<PlayerController>
+                ::define("PlayerController")
+                ._method("ControlPlayer", &PlayerController::ControlPlayer)
                 ;
     }
 }

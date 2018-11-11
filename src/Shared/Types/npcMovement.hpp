@@ -4,10 +4,21 @@ namespace OpenGMP
 {
     enum NPCMovement : unsigned char
     {
-        Stand,
-        Forward,
-        Backward,
-        Left,
-        Right
+        GOTOPOS,
+        GOTOVOB,
+        GOROUTE,
+        TURN,
+        TURNTOPOS,
+        TURNTOVOB,
+        TURNAWAY,
+        JUMP,
+        SETWALKMODE,
+        WHIRLAROUND,
+        STANDUP,
+        STRAFE,
+        GOTOFP,
+        DODGE,
+        BEAMTO,
+        ALIGNTOFP
     };
 }

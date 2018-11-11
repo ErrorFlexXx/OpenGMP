@@ -17,6 +17,7 @@
 #include "Systems/menuSystem.hpp"
 #include "Systems/terminalSystem.hpp"
 #include "Systems/worldSystem.hpp"
+#include "Systems/playerController.hpp"
 
 namespace OpenGMP
 {
@@ -64,17 +65,19 @@ namespace OpenGMP
         ScriptSystem scriptSystem;
         TerminalSystem terminalSystem;
         WorldSystem worldSystem;
+        PlayerController playerController;
 
         NetworkSystem &GetNetworkSystem();
         LoginSystem &GetLoginSystem();
         ScriptSystem &GetScriptSystem();
         MenuSystem &GetMenuSystem();
         WorldSystem &GetWorldSystem();
+        PlayerController &GetPlayerController();
 
         /* Global Containers */
-        NetDynamicContainer<ServerClient> clientContainer;
-        NetDynamicContainer<ServerPlayer> playerContainer;
-        StaticContainer<ServerWorld> worldContainer;
+        NetDynamicContainer<ServerClient> clientContainer; //!< Storage for clients on this server.
+        NetDynamicContainer<ServerPlayer> playerContainer; //!< Storage for player on this server.
+        StaticContainer<ServerWorld> worldContainer; //!< Storage for worlds on this server.
 
         std::string scriptDirectory;  //!< Directory to load server scripts from.
 

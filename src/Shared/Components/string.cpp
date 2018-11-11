@@ -32,3 +32,9 @@ bool String::ReadStream(BitStream &stream)
     }
     return success;
 }
+
+std::ostream & operator<< (std::ostream &out, const OpenGMP::String &t)
+{
+    out << t.text;
+    return out;
+}

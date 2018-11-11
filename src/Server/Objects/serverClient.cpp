@@ -6,7 +6,6 @@ using namespace RakNet;
 using namespace OpenGMP;
 
 ServerClient::ServerClient()
-    : world(nullptr)
 {
 }
 

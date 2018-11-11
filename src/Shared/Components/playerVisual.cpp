@@ -5,33 +5,23 @@ using namespace RakNet;
 using namespace OpenGMP;
 
 void PlayerVisual::WriteStream(BitStream &stream) const
-{
-    RakString rakBodyModel("%s", bodyModel.c_str());
-    RakString rakHeadModel("%s", headModel.c_str());
-    
-    stream.Write(rakBodyModel);
+{    
+    bodyModel.WriteStream(stream);
     stream.Write(bodyTextureId);
-    stream.Write(rakHeadModel);
+    headModel.WriteStream(stream);
     stream.Write(headTextureId);
     stream.Write(fatness);
 }
 
 bool PlayerVisual::ReadStream(BitStream &stream)
 {
-    RakString rakBodyModel;
-    RakString rakHeadModel;
     bool success;
 
-                success = stream.Read(rakBodyModel);
+                success = bodyModel.ReadStream(stream);
     if(success) success = stream.Read(bodyTextureId);
-    if(success) success = stream.Read(rakHeadModel);
+    if(success) success = headModel.ReadStream(stream);
     if(success) success = stream.Read(headTextureId);
     if(success) success = stream.Read(fatness);
 
-    if(success)
-    {
-        bodyModel = rakBodyModel;
-        headModel = rakHeadModel;
-    }
     return success;
 }

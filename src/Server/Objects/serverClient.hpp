@@ -19,7 +19,5 @@ namespace OpenGMP
     public:
         ServerClient();
         ~ServerClient();
-
-        ServerWorld *world;
     };
 }

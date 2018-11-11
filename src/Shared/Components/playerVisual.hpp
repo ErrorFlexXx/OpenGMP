@@ -2,16 +2,16 @@
 
 #include "../Objects/iStreamObject.hpp"
 #include <stdint.h>
-#include <string>
+#include "string.hpp"
 
 namespace OpenGMP
 {
     class PlayerVisual //: public IStreamObject
     {
     public:
-        std::string bodyModel;
+        String bodyModel;
         int32_t bodyTextureId;
-        std::string headModel;
+        String headModel;
         int32_t headTextureId;
         float fatness;
 

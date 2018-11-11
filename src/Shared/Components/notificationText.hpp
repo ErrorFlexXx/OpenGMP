@@ -2,7 +2,7 @@
 
 #include <Shared/Objects/iStreamObject.hpp>
 #include "color.hpp"
-#include <string>
+#include "string.hpp"
 #include <stdint.h>
 
 namespace OpenGMP
@@ -16,7 +16,7 @@ namespace OpenGMP
         void WriteStream(RakNet::BitStream &stream) const;
         bool ReadStream(RakNet::BitStream &stream);
 
-        std::string text;
+        String text;
         uint32_t posY;
         Color color;
         uint32_t duration;

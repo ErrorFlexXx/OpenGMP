@@ -1,7 +1,10 @@
 #include "staticContainer.hpp"
+#ifndef OPENGMPCLIENT
 #include <Server/Objects/serverWorld.hpp>
+#else
 #include <Client/Objects/clientWorld.hpp>
 #include <Client/Objects/clientPlayer.hpp>
+#endif
 #include <iostream>
 
 using namespace OpenGMP;

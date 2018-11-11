@@ -280,8 +280,7 @@ bool LoginSystem::CheckEntryExists(const std::string &filename, const std::strin
 
     if(0 == entry.size())
     {
-        LogInfo() << "Cannot lookup empty entry in list \"" << filename << "\".";
-        return false;
+        return false; //Not banned
     }
 
     if(!Utils::fileExists(filepath))

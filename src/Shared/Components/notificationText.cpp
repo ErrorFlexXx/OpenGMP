@@ -18,9 +18,7 @@ NotificationText::NotificationText(const std::string &text, uint32_t posY, const
 
 void NotificationText::WriteStream(BitStream &stream) const
 {
-    RakString rakText("%s", text.c_str());
-    
-    stream.Write(rakText);
+    text.WriteStream(stream);
     stream.Write(posY);
     color.WriteStream(stream);
     stream.Write(duration);    
@@ -28,17 +26,12 @@ void NotificationText::WriteStream(BitStream &stream) const
 
 bool NotificationText::ReadStream(BitStream &stream)
 {
-    RakString rakText;
     bool success;
 
-    success = stream.Read(rakText);
+    success = text.ReadStream(stream);
     if (success) success = stream.Read(posY);
     if (success) success = color.ReadStream(stream);
     if (success) success = stream.Read(duration);
 
-    if (success)
-    {
-        text = rakText;
-    }
     return success;
 }

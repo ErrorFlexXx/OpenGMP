@@ -2,6 +2,13 @@
 
 using namespace OpenGMP;
 
+PlayerSkills::PlayerSkills()
+        : skill_1h(0)
+        , skill_2h(0)
+        , skill_bow(0)
+        , skill_cbow(0)
+{}
+
 void PlayerSkills::WriteStream(RakNet::BitStream &stream) const
 {
     stream.Write(skill_1h);

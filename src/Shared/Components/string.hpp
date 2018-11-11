@@ -4,10 +4,10 @@
 #include <string>
 #include <BitStream.h>
 #include <RakNetTypes.h>
+#include <ostream>
 
 namespace OpenGMP
 {
-
     /**
      * @brief The String component
      */
@@ -17,9 +17,13 @@ namespace OpenGMP
         String();
         String(const std::string &value);
 
+        operator std::string() { return text; }
         std::string text;
 
         void WriteStream(RakNet::BitStream &stream) const;
         bool ReadStream(RakNet::BitStream &stream);
     };
 }
+
+//Support shifting in ostream (used in logger impl.)
+std::ostream & operator<< (std::ostream &out, const OpenGMP::String &t);

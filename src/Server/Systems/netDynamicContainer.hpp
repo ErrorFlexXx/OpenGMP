@@ -89,9 +89,9 @@ namespace OpenGMP
          */
         bool IsFreeId(const Id &id);
 
-        T failDummy;                    //<! Failure dummy for crash reference returning.
+        T failDummy;        //<! Failure dummy for crash reference returning.
         Id currentIndex;    //<! Current index, without attention to gaps.
-        std::list<Id> freeGapIds;       //<! Gap list with free IDs between 0 and currentIndex.
+        std::list<Id> freeGapIds; //<! Gap list with free IDs between 0 and currentIndex.
         std::vector<T> container;
         std::unordered_map<unsigned int, Id> rakIdMap;
     };

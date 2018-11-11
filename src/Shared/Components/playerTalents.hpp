@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Objects/iStreamObject.hpp"
+#include <stdint.h>
 
 namespace OpenGMP
 {
@@ -9,21 +10,23 @@ namespace OpenGMP
     public:
         typedef enum EnumTalents
         {
-            Sneaking,
+            Sneaking = 0,
             Thief,
             OpeningLocks,
             SloshBlades,
             CreatingRunes,
             Alchemy,
             CollectingTrophies,
-            Acrobatics
+            Acrobatics,
+            TALENTS_MAX = 32
         } EnumTalents;
 
-        int HasTalent(EnumTalents talent);
+        PlayerTalents();
+        uint32_t HasTalent(EnumTalents talent);
         void SetTalent(EnumTalents talent);
         void WriteStream(RakNet::BitStream &stream) const;
         bool ReadStream(RakNet::BitStream &stream);
 
-        int talents;
+        uint32_t talents;
     };
 }

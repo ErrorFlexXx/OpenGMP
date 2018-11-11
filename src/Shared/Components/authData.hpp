@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Shared/Objects/iStreamObject.hpp>
-#include <string>
+#include "string.hpp"
 #include <BitStream.h>
 #include <RakNetTypes.h>
 
@@ -20,7 +20,7 @@ namespace OpenGMP
     {
     public:
         uint32_t hddSerial;             //!< (available script attribute) the hdd serial
-        std::string macAddress;         //!< (available script attribute) the mac address
+        String macAddress;         //!< (available script attribute) the mac address
 
         void WriteStream(RakNet::BitStream &stream) const;
         bool ReadStream(RakNet::BitStream &stream);

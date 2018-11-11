@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Objects/netIdObject.hpp"
+#include "world.hpp"
 #include "../Components/color.hpp"
 #include "../Components/position.hpp"
 #include "../Components/scale.hpp"
@@ -21,12 +22,13 @@ namespace OpenGMP
     {
     public:
         Player() {}
-        Position position;
-        Scale scale;
-        PlayerTalents talents;
-        PlayerAttributes attributes;
-        PlayerSkills skills;
-        PlayerVisual visual;
-        PlayerMovement movement;
+        World world;        //!< World the player is in
+        Position position;  //!< Position and rotation of the player
+        Scale scale;        //!< Scaling of the player
+        PlayerTalents talents;  //!< Talents of the player (sneak, picklock, etc.)
+        PlayerAttributes attributes; //!< Attributes of the player (str, dex, etc.)
+        PlayerSkills skills;    //!< Skills (1h, 2h, bow, etc.)
+        PlayerVisual visual;    //!< Visual of the player (head, body, textures, etc.)
+        PlayerMovement movement;//!< Movement state (Forward, Left, TurnLeft, etc.)
     };
 }

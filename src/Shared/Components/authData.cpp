@@ -6,23 +6,16 @@ using namespace OpenGMP;
 
 void AuthData::WriteStream(BitStream &stream) const
 {
-    RakString rakMacAddress("%s", macAddress.c_str());
-
     stream.Write(hddSerial);
-    stream.Write(rakMacAddress);
+    macAddress.WriteStream(stream);
 }
 
 bool AuthData::ReadStream(BitStream &stream)
 {
-    RakString rakMacAddress;
     bool success;
 
                 success = stream.Read(hddSerial);
-    if(success) success = stream.Read(rakMacAddress);
+    if(success) success = macAddress.ReadStream(stream);
 
-    if(success)
-    {
-        macAddress = rakMacAddress;
-    }
     return success;
 }

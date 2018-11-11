@@ -2,7 +2,11 @@
 
 using namespace OpenGMP;
 
-int PlayerTalents::HasTalent(EnumTalents talent)
+PlayerTalents::PlayerTalents()
+    : talents(0)
+{}
+
+uint32_t PlayerTalents::HasTalent(EnumTalents talent)
 {
     return talents & (1 << talent);
 }

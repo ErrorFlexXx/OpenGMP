@@ -69,12 +69,19 @@ void PlayerController::Process(RakNet::Packet *packet)
             removePlayer.gothicPlayer->Release();
             removePlayer.gothicPlayer = nullptr;
         }
+        break;
     }
     case PlayerControllerMessages::CONTROL_PLAYER:
     {
         Id id(bsIn);
         ClientPlayer &controlPlayer = gameClient.playerContainer.Get(id);
         ControlPlayer(controlPlayer);
+        break;
+    }
+    case PlayerControllerMessages::STOP_CONTROL:
+    {
+        StopControl();
+        break;
     }
     case PlayerControllerMessages::MOVEMENT_CHANGE:
     {
@@ -155,7 +162,8 @@ void PlayerController::StopControl()
     active = false;
     if (activePlayer.movement != PlayerMovement::Stand)
     {
-        ; //Send server stop control
+        activePlayer.movement = PlayerMovement::Stand;
+        SendMovementStateChange();
     }
 }
 
@@ -177,6 +185,8 @@ void PlayerController::Update()
     {
         if (activePlayer.movement == PlayerMovement::Stand)
         {
+            bool movementChanged = true;
+
             if (BindingPressed(PlayerMovement::Forward))
             {
                 activePlayer.movement = PlayerMovement::Forward;
@@ -207,6 +217,12 @@ void PlayerController::Update()
                 activePlayer.movement = PlayerMovement::TurnRight;
                 activePlayer.gothicPlayer->GetAnictrl()->Turn(1.f, true);
             }
+            else //No key binding fired -> movement not changed.
+            {
+                movementChanged = false;
+            }
+            if (movementChanged)
+                SendMovementStateChange();
         }
         else //Stop running action ?
         {
@@ -217,6 +233,7 @@ void PlayerController::Update()
                 activePlayer.gothicPlayer->GetAnictrl()->StopTurnAnis();
                 activePlayer.gothicPlayer->GetAnictrl()->_Stand();
                 activePlayer.gothicPlayer->GetAnictrl()->SearchStandAni();
+                SendMovementStateChange();
             }
             else //Movement action running
             {
@@ -228,7 +245,7 @@ void PlayerController::Update()
                 {
                     activePlayer.gothicPlayer->GetAnictrl()->Turn(1.f, false);
                 }
-                Stream(GameTime::GetTicks());                
+                Stream(GameTime::GetTicks());
             }
         }
     }

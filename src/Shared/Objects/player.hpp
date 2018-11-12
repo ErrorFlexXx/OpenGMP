@@ -22,7 +22,6 @@ namespace OpenGMP
     {
     public:
         Player() {}
-        World world;        //!< World the player is in
         Position position;  //!< Position and rotation of the player
         Scale scale;        //!< Scaling of the player
         PlayerTalents talents;  //!< Talents of the player (sneak, picklock, etc.)

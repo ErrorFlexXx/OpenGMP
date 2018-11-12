@@ -125,12 +125,12 @@ bool ScriptSystem::UnloadScript(std::string &filename)
     return result;
 }
 
-void ScriptSystem::RegisterClass(const string &classname)
+void ScriptSystem::RegisterClass(string classname)
 {
     m_registeredClasses.push_back(classname);
 }
 
-void ScriptSystem::RegisterGlobal(const string &name)
+void ScriptSystem::RegisterGlobal(string name)
 {
     m_registeredGlobals.push_back(
                 name);
@@ -157,75 +157,75 @@ void ScriptSystem::SetupMetaData()
     using namespace cpgf;
 
     //Global meta definitions:
-    RegisterGlobal(std::string("mysql_init"));
-    RegisterGlobal(std::string("mysql_real_connect"));
-    RegisterGlobal(std::string("mysql_set_character_set"));
-    RegisterGlobal(std::string("mysql_error"));
-    RegisterGlobal(std::string("mysql_errno"));
-    RegisterGlobal(std::string("mysql_close"));
-    RegisterGlobal(std::string("mysql_info"));
-    RegisterGlobal(std::string("mysql_hex_string"));
-    RegisterGlobal(std::string("mysql_ping"));
-    RegisterGlobal(std::string("mysql_select_db"));
-    RegisterGlobal(std::string("mysql_warning_count"));
-    RegisterGlobal(std::string("mysql_ping"));
-    RegisterGlobal(std::string("mysql_change_user"));
-    RegisterGlobal(std::string("mysql_get_character_set_info"));
-    RegisterGlobal(std::string("mysql_get_client_info"));
-    RegisterGlobal(std::string("mysql_get_client_version"));
-    RegisterGlobal(std::string("mysql_get_host_info"));
-    RegisterGlobal(std::string("mysql_get_proto_info"));
-    RegisterGlobal(std::string("mysql_get_server_info"));
-    RegisterGlobal(std::string("mysql_get_server_version"));
-    RegisterGlobal(std::string("mysql_stat"));
-    RegisterGlobal(std::string("mysql_insert_id"));
+    RegisterGlobal("mysql_init");
+    RegisterGlobal("mysql_real_connect");
+    RegisterGlobal("mysql_set_character_set");
+    RegisterGlobal("mysql_error");
+    RegisterGlobal("mysql_errno");
+    RegisterGlobal("mysql_close");
+    RegisterGlobal("mysql_info");
+    RegisterGlobal("mysql_hex_string");
+    RegisterGlobal("mysql_ping");
+    RegisterGlobal("mysql_select_db");
+    RegisterGlobal("mysql_warning_count");
+    RegisterGlobal("mysql_ping");
+    RegisterGlobal("mysql_change_user");
+    RegisterGlobal("mysql_get_character_set_info");
+    RegisterGlobal("mysql_get_client_info");
+    RegisterGlobal("mysql_get_client_version");
+    RegisterGlobal("mysql_get_host_info");
+    RegisterGlobal("mysql_get_proto_info");
+    RegisterGlobal("mysql_get_server_info");
+    RegisterGlobal("mysql_get_server_version");
+    RegisterGlobal("mysql_stat");
+    RegisterGlobal("mysql_insert_id");
     //Mysql Result:
-    RegisterGlobal(std::string("mysql_query"));
-    RegisterGlobal(std::string("mysql_real_escape_string"));
-    RegisterGlobal(std::string("mysql_data_seek"));
-    RegisterGlobal(std::string("mysql_fetch_field"));
-    RegisterGlobal(std::string("mysql_fetch_field_direct"));
-    RegisterGlobal(std::string("mysql_fetch_fields"));
-    RegisterGlobal(std::string("mysql_fetch_lengths"));
-    RegisterGlobal(std::string("mysql_fetch_row"));
-    RegisterGlobal(std::string("mysql_field_count"));
-    RegisterGlobal(std::string("mysql_field_seek"));
-    RegisterGlobal(std::string("mysql_field_tell"));
-    RegisterGlobal(std::string("mysql_free_result"));
-    RegisterGlobal(std::string("mysql_num_rows"));
-    RegisterGlobal(std::string("mysql_more_results"));
-    RegisterGlobal(std::string("mysql_next_result"));
-    RegisterGlobal(std::string("mysql_num_fields"));
-    RegisterGlobal(std::string("mysql_affected_rows"));
-    RegisterGlobal(std::string("mysql_rollback"));
-    RegisterGlobal(std::string("mysql_row_seek"));
-    RegisterGlobal(std::string("mysql_row_tell"));
-    RegisterGlobal(std::string("mysql_store_result"));
+    RegisterGlobal("mysql_query");
+    RegisterGlobal("mysql_real_escape_string");
+    RegisterGlobal("mysql_data_seek");
+    RegisterGlobal("mysql_fetch_field");
+    RegisterGlobal("mysql_fetch_field_direct");
+    RegisterGlobal("mysql_fetch_fields");
+    RegisterGlobal("mysql_fetch_lengths");
+    RegisterGlobal("mysql_fetch_row");
+    RegisterGlobal("mysql_field_count");
+    RegisterGlobal("mysql_field_seek");
+    RegisterGlobal("mysql_field_tell");
+    RegisterGlobal("mysql_free_result");
+    RegisterGlobal("mysql_num_rows");
+    RegisterGlobal("mysql_more_results");
+    RegisterGlobal("mysql_next_result");
+    RegisterGlobal("mysql_num_fields");
+    RegisterGlobal("mysql_affected_rows");
+    RegisterGlobal("mysql_rollback");
+    RegisterGlobal("mysql_row_seek");
+    RegisterGlobal("mysql_row_tell");
+    RegisterGlobal("mysql_store_result");
     //Mysql Statements:
-    RegisterGlobal(std::string("mysql_stmt_init"));
-    RegisterGlobal(std::string("mysql_stmt_prepare"));
-    RegisterGlobal(std::string("mysql_stmt_bind_param"));
-    RegisterGlobal(std::string("mysql_stmt_bind_result"));
-    RegisterGlobal(std::string("mysql_stmt_execute"));
-    RegisterGlobal(std::string("mysql_stmt_attr_get"));
-    RegisterGlobal(std::string("mysql_stmt_attr_set"));
-    RegisterGlobal(std::string("mysql_stmt_affected_rows"));
-    RegisterGlobal(std::string("mysql_stmt_data_seek"));
-    RegisterGlobal(std::string("mysql_stmt_error"));
-    RegisterGlobal(std::string("mysql_stmt_errno"));
-    RegisterGlobal(std::string("mysql_stmt_fetch"));
-    RegisterGlobal(std::string("mysql_stmt_fetch_column"));
-    RegisterGlobal(std::string("mysql_stmt_field_count"));
-    RegisterGlobal(std::string("mysql_stmt_free_result"));
-    RegisterGlobal(std::string("mysql_stmt_next_result"));
-    RegisterGlobal(std::string("mysql_stmt_num_rows"));
-    RegisterGlobal(std::string("mysql_stmt_param_count"));
-    RegisterGlobal(std::string("mysql_stmt_reset"));
-    RegisterGlobal(std::string("mysql_stmt_row_seek"));
-    RegisterGlobal(std::string("mysql_stmt_row_tell"));
-    RegisterGlobal(std::string("mysql_stmt_store_result"));
-    RegisterGlobal(std::string("mysql_stmt_insert_id"));
-    RegisterGlobal(std::string("mysql_stmt_close"));
+    RegisterGlobal("mysql_stmt_init");
+    RegisterGlobal("mysql_stmt_prepare");
+    RegisterGlobal("mysql_stmt_bind_param");
+    RegisterGlobal("mysql_stmt_bind_result");
+    RegisterGlobal("mysql_stmt_execute");
+    RegisterGlobal("mysql_stmt_attr_get");
+    RegisterGlobal("mysql_stmt_attr_set");
+    RegisterGlobal("mysql_stmt_affected_rows");
+    RegisterGlobal("mysql_stmt_data_seek");
+    RegisterGlobal("mysql_stmt_error");
+    RegisterGlobal("mysql_stmt_errno");
+    RegisterGlobal("mysql_stmt_fetch");
+    RegisterGlobal("mysql_stmt_fetch_column");
+    RegisterGlobal("mysql_stmt_field_count");
+    RegisterGlobal("mysql_stmt_free_result");
+    RegisterGlobal("mysql_stmt_next_result");
+    RegisterGlobal("mysql_stmt_num_rows");
+    RegisterGlobal("mysql_stmt_param_count");
+    RegisterGlobal("mysql_stmt_reset");
+    RegisterGlobal("mysql_stmt_row_seek");
+    RegisterGlobal("mysql_stmt_row_tell");
+    RegisterGlobal("mysql_stmt_store_result");
+    RegisterGlobal("mysql_stmt_insert_id");
+    RegisterGlobal("mysql_stmt_close");
 
     if(!ScriptSystem::metaInited)
     {
@@ -305,7 +305,7 @@ void ScriptSystem::SetupMetaData()
                 ._method("mysql_stmt_close", &mysql_stmt_close)
                 ;
 
-        RegisterClass(std::string("Mysql"));
+        RegisterClass("Mysql");
         GDefineMetaClass<Mysql>
                 ::define("Mysql")
                 ._constructor<void *(const string&, unsigned int, const string&, const string&, const string&)>()
@@ -322,7 +322,186 @@ void ScriptSystem::SetupMetaData()
                 ._field("password", &Mysql::password)
                 ;
 
-        RegisterClass(std::string("GameServer"));
+        /***************/
+        /*  Components */
+        /***************/
+
+        RegisterClass("AuthData");
+        GDefineMetaClass<AuthData>
+                ::define("AuthData")
+                ._field("hddSerial", &AuthData::hddSerial)
+                ._field("macAddress", &AuthData::macAddress)
+                ;
+
+        RegisterClass("LoginData");
+        GDefineMetaClass<LoginData>
+                ::define("LoginData")
+                ._field("loginname", &LoginData::loginname)
+                ._field("password", &LoginData::password)
+                ;
+
+        RegisterClass("NetId");
+        GDefineMetaClass<NetId>
+                ::define("NetId")
+                ._field("rakNetId", &NetId::rakNetId)
+                ;
+
+        RegisterClass("Id");
+        GDefineMetaClass<Id>
+                ::define("Id")
+                ._field("id", &Id::id)
+                ;
+
+        RegisterClass("Color");
+        GDefineMetaClass<Color>
+                ::define("Color")
+                ._constructor<void *(uint8_t, uint8_t, uint8_t, uint8_t)>()
+                ._field("r", &Color::r)
+                ._field("g", &Color::g)
+                ._field("b", &Color::b)
+                ._field("a", &Color::a)
+                ;
+
+        RegisterClass("String");
+        GDefineMetaClass<String>
+                ::define("String")
+                ._constructor<void *(string&)>()
+                ;
+
+        RegisterClass("NotificationText");
+        GDefineMetaClass<NotificationText>
+                ::define("NotificationText")
+                ._constructor<void*(string&, uint32_t, Color&, uint32_t)>()
+                ._field("text", &NotificationText::text)
+                ._field("posY", &NotificationText::posY)
+                ._field("color", &NotificationText::color)
+                ._field("duration", &NotificationText::duration)
+                ;
+
+        RegisterClass("Position");
+        GDefineMetaClass<Position>
+                ::define("Position")
+                ._constructor<void*(float, float, float, float)>()
+                ._field("x", &Position::x)
+                ._field("y", &Position::y)
+                ._field("z", &Position::z)
+                ._field("angle", &Position::angle)
+                ;
+
+        RegisterClass("Scale");
+        GDefineMetaClass<Scale>
+                ::define("Scale")
+                ._constructor<void*(float, float, float)>()
+                ._field("x", &Scale::x)
+                ._field("y", &Scale::y)
+                ._field("z", &Scale::z)
+                ;
+
+        RegisterClass("PlayerTalents");
+        GDefineMetaClass<PlayerTalents>
+                ::define("PlayerTalents")
+                ._field("talents", &PlayerTalents::talents)
+                ._method("HasTalent", &PlayerTalents::HasTalent)
+                ._method("SetTalent", &PlayerTalents::SetTalent)
+                ._enum<int>("EnumTalents")
+                ._element("Sneaking", 0)
+                ._element("Thief", 1)
+                ._element("OpeningLocks", 2)
+                ._element("SloshBlades", 3)
+                ._element("CreatingRunes", 4)
+                ._element("Alchemy", 5)
+                ._element("CollectingTrophies", 6)
+                ._element("Acrobatics", 7)
+                ._element("CustomTalent1", 8)
+                ;
+
+        RegisterClass("PlayerAttributes");
+        GDefineMetaClass<PlayerAttributes>
+                ::define("PlayerAttributes")
+                ._field("level", &PlayerAttributes::level)
+                ._field("learn_points", &PlayerAttributes::learn_points)
+                ._field("experience", &PlayerAttributes::experience)
+                ._field("experience_next_level", &PlayerAttributes::experience_next_level)
+                ._field("magic_level", &PlayerAttributes::magic_level)
+                ._field("health", &PlayerAttributes::health)
+                ._field("max_health", &PlayerAttributes::max_health)
+                ._field("mana", &PlayerAttributes::mana)
+                ._field("max_mana", &PlayerAttributes::max_mana)
+                ._field("strength", &PlayerAttributes::strength)
+                ._field("dexterity", &PlayerAttributes::dexterity)
+                ;
+
+        RegisterClass("PlayerSkills");
+        GDefineMetaClass<PlayerSkills>
+                ::define("PlayerSkills")
+                ._field("skill_1h", &PlayerSkills::skill_1h)
+                ._field("skill_2h", &PlayerSkills::skill_2h)
+                ._field("skill_bow", &PlayerSkills::skill_bow)
+                ._field("skill_cbow", &PlayerSkills::skill_cbow)
+                ;
+
+        RegisterClass("PlayerVisual");
+        GDefineMetaClass<PlayerVisual>
+                ::define("PlayerVisual")
+                ._field("bodyModel", &PlayerVisual::bodyModel)
+                ._field("bodyTextureId", &PlayerVisual::bodyTextureId)
+                ._field("headModel", &PlayerVisual::headModel)
+                ._field("headTextureId", &PlayerVisual::headTextureId)
+                ._field("fatness", &PlayerVisual::fatness)
+                ;
+
+        RegisterClass("PlayerMovement");
+        GDefineMetaClass<PlayerMovement>
+                ::define("PlayerMovement")
+                ._field("movementState", &PlayerMovement::movementState)
+                ._enum<int>("Movement")
+                ._element("Stand", 0)
+                ._element("Forward", 1)
+                ._element("Backward", 2)
+                ._element("Left", 3)
+                ._element("Right", 4)
+                ._element("TurnLeft", 5)
+                ._element("TurnRight", 6)
+                ;
+
+        /*************/
+        /*  Objects: */
+        /*************/
+
+        RegisterClass("ServerClient");
+        GDefineMetaClass<ServerClient,Client,NetIdObject,IdObject>
+                ::define("ServerClient")
+                ._field("authData", &ServerClient::authData)
+                ._field("loginData", &ServerClient::loginData)
+                ;
+
+        RegisterClass("ServerWorld");
+        GDefineMetaClass<ServerWorld,IdObject>
+                ::define("ServerWorld")
+                ._field("id", &ServerWorld::id)
+                ._field("worldName", &ServerWorld::worldName)
+                ;
+
+        RegisterClass("ServerPlayer");
+        GDefineMetaClass<ServerPlayer,NetIdObject>
+                ::define("ServerPlayer")
+                ._field("id", &ServerPlayer::id)
+                ._field("world", &ServerPlayer::world)
+                ._field("client", &ServerPlayer::client)
+                ._field("position", &ServerPlayer::position)
+                ._field("scale", &ServerPlayer::scale)
+                ._field("talents", &ServerPlayer::talents)
+                ._field("attributes", &ServerPlayer::attributes)
+                ._field("skills", &ServerPlayer::skills)
+                ._field("visual", &ServerPlayer::visual)
+                ._field("movement", &ServerPlayer::movement)
+                ;
+
+        /***********/
+        /* Systems */
+        /***********/
+
+        RegisterClass("GameServer");
         GDefineMetaClass<GameServer>
                 ::define("GameServer")
                 //._constructor<void *(const string, const string)>()
@@ -336,72 +515,7 @@ void ScriptSystem::SetupMetaData()
                 ._method("Shutdown", &GameServer::Shutdown)
                 ;
 
-        RegisterClass(std::string("AuthData"));
-        GDefineMetaClass<AuthData>
-                ::define("AuthData")
-                ._field("hddSerial", &AuthData::hddSerial)
-                ._field("macAddress", &AuthData::macAddress)
-                ;
-
-        RegisterClass(std::string("LoginData"));
-        GDefineMetaClass<LoginData>
-                ::define("LoginData")
-                ._field("loginname", &LoginData::loginname)
-                ._field("password", &LoginData::password)
-                ;
-
-        RegisterClass(std::string("NetId"));
-        GDefineMetaClass<NetId>
-                ::define("NetId")
-                ._field("rakNetId", &NetId::rakNetId)
-                ;
-
-        RegisterClass(std::string("Id"));
-        GDefineMetaClass<Id>
-                ::define("Id")
-                ._field("id", &Id::id)
-                ;
-
-        RegisterClass(std::string("ServerClient"));
-        GDefineMetaClass<ServerClient,Client,NetIdObject,IdObject>
-                ::define("ServerClient")
-                ._field("authData", &ServerClient::authData)
-                ._field("loginData", &ServerClient::loginData)
-                ;
-
-        RegisterClass(std::string("ServerWorld"));
-        GDefineMetaClass<ServerWorld,IdObject>
-                ::define("ServerWorld")
-                ._field("id", &ServerWorld::id)
-                ._field("worldName", &ServerWorld::worldName)
-                ;
-
-        RegisterClass(std::string("ServerPlayer"));
-        GDefineMetaClass<ServerPlayer,NetIdObject>
-                ::define("ServerPlayer")
-                ;
-
-        RegisterClass(std::string("Color"));
-        GDefineMetaClass<Color>
-                ::define("Color")
-                ._constructor<void *(uint8_t, uint8_t, uint8_t, uint8_t)>()
-                ._field("r", &Color::r)
-                ._field("g", &Color::g)
-                ._field("b", &Color::b)
-                ._field("a", &Color::a)
-                ;
-
-        RegisterClass(std::string("NotificationText"));
-        GDefineMetaClass<NotificationText>
-                ::define("NotificationText")
-                ._constructor<void*(string&, uint32_t, Color&, uint32_t)>()
-                ._field("text", &NotificationText::text)
-                ._field("posY", &NotificationText::posY)
-                ._field("color", &NotificationText::color)
-                ._field("duration", &NotificationText::duration)
-                ;
-
-        RegisterClass(std::string("MenuSystem"));
+        RegisterClass("MenuSystem");
         GDefineMetaClass<MenuSystem>
                 ::define("MenuSystem")
                 ._method("ShowNotification", &MenuSystem::ShowNotification)
@@ -409,7 +523,7 @@ void ScriptSystem::SetupMetaData()
                 ._method("ClearNotification", &MenuSystem::HideNotification)
                 ;
 
-        RegisterClass(std::string("LoginSystem"));
+        RegisterClass("LoginSystem");
         GDefineMetaClass<LoginSystem>
                 ::define("LoginSystem")
                 ._method("BanByHDD", &LoginSystem::BanByHDD)
@@ -421,13 +535,13 @@ void ScriptSystem::SetupMetaData()
                 ._method("Unban", &LoginSystem::Unban)
                 ;
 
-        RegisterClass(std::string("NetworkSystem"));
+        RegisterClass("NetworkSystem");
         GDefineMetaClass<NetworkSystem>
                 ::define("NetworkSystem")
                 ._field("playerslots", &NetworkSystem::playerslots)
                 ;
 
-        RegisterClass(std::string("WorldSystem"));
+        RegisterClass("WorldSystem");
         GDefineMetaClass<WorldSystem>
                 ::define("WorldSystem")
                 ._method("AddWorld", &WorldSystem::AddWorld)
@@ -435,10 +549,15 @@ void ScriptSystem::SetupMetaData()
                 ._method("LoadWorld", &WorldSystem::LoadWorld)
                 ;
 
-        RegisterClass(std::string("PlayerController"));
+        RegisterClass("PlayerController");
         GDefineMetaClass<PlayerController>
                 ::define("PlayerController")
+                ._method("GetNewPlayer", &PlayerController::GetNewPlayer)
+                ._method("RemovePlayer", &PlayerController::RemovePlayer)
+                ._method("SpawnPlayer", &PlayerController::SpawnPlayer)
+                ._method("DespawnPlayer", &PlayerController::DespawnPlayer)
                 ._method("ControlPlayer", &PlayerController::ControlPlayer)
+                ._method("StopControl", &PlayerController::StopControl)
                 ;
     }
 }

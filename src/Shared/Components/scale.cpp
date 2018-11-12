@@ -2,6 +2,18 @@
 
 using namespace OpenGMP;
 
+Scale::Scale()
+    : x(1.f)
+    , y(1.f)
+    , z(1.f)
+{}
+
+Scale::Scale(float x, float y, float z)
+    : x(x)
+    , y(y)
+    , z(z)
+{}
+
 void Scale::WriteStream(RakNet::BitStream &stream) const
 {
     stream.Write(x);

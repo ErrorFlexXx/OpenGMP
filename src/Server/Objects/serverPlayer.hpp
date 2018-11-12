@@ -13,7 +13,7 @@ namespace OpenGMP
         ServerPlayer()
         {}
 
-        ServerWorld world;
-        ServerClient client;
+        ServerWorld world;      //!< World the player is in
+        ServerClient client;    //!< Client which controls the player
     };
 }

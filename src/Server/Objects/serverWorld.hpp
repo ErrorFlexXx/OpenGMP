@@ -6,7 +6,5 @@ namespace OpenGMP
 {
     class ServerWorld : public World
     {
-    public:
-
     };
 }

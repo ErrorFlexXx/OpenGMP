@@ -39,11 +39,10 @@ namespace OpenGMP
 
         /**
          * @brief CreateEntity returns a new object reference
-         * @param id (out) of the new object.
          * @param rakGuid (in), which gets registered for the new object.
          * @return reference to the new object.
          */
-        T &CreateEntity(Id &id, const RakNet::RakNetGUID &rakGuid);
+        T &CreateEntity(const RakNet::RakNetGUID &rakGuid);
 
         /**
          * @brief CheckSpace creates new elements in the container if necessary.

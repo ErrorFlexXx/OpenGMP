@@ -30,7 +30,13 @@ namespace OpenGMP
          * @brief Gets a new player object, assigns an free id and the client.
          * @return The reference of the new player.
          */
-        ServerPlayer &GetNewPlayer(ServerClient &client);
+        ServerPlayer &GetNewPlayer(const ServerClient &client);
+
+        /**
+         * @brief RemovePlayer removes a player entirely from the server.
+         * @param player to be deleted.
+         */
+        void RemovePlayer(ServerPlayer &player);
 
         /**
          * @brief Process processes RakNet messages reagarding PlayerController messages.
@@ -44,7 +50,13 @@ namespace OpenGMP
          * @param player player object to spawn.
          * @param world world to spawn player in.
          */
-        void SpawnPlayer(ServerPlayer &player, ServerWorld &world);
+        void SpawnPlayer(ServerPlayer &player, const ServerWorld &world);
+
+        /**
+         * @brief DespawnPlayer removes a player from a world
+         * @param player to be removed
+         */
+        void DespawnPlayer(ServerPlayer &player);
 
         /**
          * @brief ClientEnteringWorld called from worldSystem, if a client loads a world
@@ -57,7 +69,13 @@ namespace OpenGMP
          * @param client that shall control the player.
          * @param player that shall be controlled by the player.
          */
-        void ControlPlayer(const ServerClient &client, const ServerPlayer &player);
+        void ControlPlayer(const ServerClient &client, ServerPlayer &player);
+
+        /**
+         * @brief StopControl stops this client from controlling a player.
+         * @param client that should no longer control a player
+         */
+        void StopControl(const ServerClient &client);
 
         /**
          * @brief SendPlayerControllerMessage
@@ -69,6 +87,11 @@ namespace OpenGMP
     private:
         GameServer &gameServer;
 
+        /**
+         * @brief BuildAddPlayerPacket Insert data for an add player packet to a bitstream.
+         * @param bs to be prepared
+         * @param player to be added.
+         */
         void BuildAddPlayerPacket(RakNet::BitStream &bs, const ServerPlayer &player);
     };
 }

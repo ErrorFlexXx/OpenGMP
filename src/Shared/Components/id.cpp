@@ -26,3 +26,9 @@ bool Id::ReadStream(RakNet::BitStream &stream)
     bool success = stream.Read(id);
     return success;
 }
+
+std::ostream & operator<< (std::ostream &out, const OpenGMP::Id &t)
+{
+    out << t.id;
+    return out;
+}

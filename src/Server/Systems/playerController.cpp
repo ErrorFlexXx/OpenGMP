@@ -14,6 +14,21 @@ PlayerController::PlayerController(GameServer &gameServer)
 {
 }
 
+ServerPlayer &PlayerController::GetNewPlayer(const ServerClient &client)
+{
+    ServerPlayer &player = gameServer.playerContainer.CreateEntity(client);
+    player.client = client;
+    return player;
+}
+
+void PlayerController::RemovePlayer(ServerPlayer &player)
+{
+    if(player.world != ServerWorld()) //Player spawned currently ?
+        DespawnPlayer(player); //Then despawn it
+
+    gameServer.playerContainer.Remove(player.id);
+}
+
 void PlayerController::Process(RakNet::Packet *packet)
 {
     NetMessage command;
@@ -79,7 +94,7 @@ void PlayerController::Process(RakNet::Packet *packet)
     }
 }
 
-void PlayerController::SpawnPlayer(ServerPlayer &player, ServerWorld &world)
+void PlayerController::SpawnPlayer(ServerPlayer &player, const ServerWorld &world)
 {
     player.world = world;
     BitStream bs;
@@ -91,6 +106,23 @@ void PlayerController::SpawnPlayer(ServerPlayer &player, ServerWorld &world)
         if(client.world == world) //Send AddPlayer if client is in same world
             SendPlayerControllerMessage(client, bs);
     }
+}
+
+void PlayerController::DespawnPlayer(ServerPlayer &player)
+{
+    BitStream bs;
+    bs.Write((NetMessage) NetworkSystemMessages::PlayerController);
+    bs.Write((NetMessage)PlayerControllerMessages::REMOVE_PLAYER);
+    player.id.WriteStream(bs);
+
+    for(auto &sendPlayer : gameServer.playerContainer)
+    {
+        if(sendPlayer.world == player.world) //Send all players that are in same world
+        {
+            SendPlayerControllerMessage(sendPlayer, bs);
+        }
+    }
+    player.world = ServerWorld(); //Reset world
 }
 
 void PlayerController::ClientEnteringWorld(ServerClient &client)
@@ -106,12 +138,21 @@ void PlayerController::ClientEnteringWorld(ServerClient &client)
     }
 }
 
-void PlayerController::ControlPlayer(const ServerClient &client, const ServerPlayer &player)
+void PlayerController::ControlPlayer(const ServerClient &client, ServerPlayer &player)
 {
+    player.client = client;
     BitStream bs;
     bs.Write((NetMessage) NetworkSystemMessages::PlayerController);
     bs.Write((NetMessage) PlayerControllerMessages::CONTROL_PLAYER);
     player.id.WriteStream(bs);
+    SendPlayerControllerMessage(client, bs);
+}
+
+void PlayerController::StopControl(const ServerClient &client)
+{
+    BitStream bs;
+    bs.Write((NetMessage) NetworkSystemMessages::PlayerController);
+    bs.Write((NetMessage) PlayerControllerMessages::STOP_CONTROL);
     SendPlayerControllerMessage(client, bs);
 }
 

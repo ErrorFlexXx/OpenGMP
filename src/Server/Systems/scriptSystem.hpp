@@ -58,13 +58,13 @@ namespace OpenGMP
          * @param metaName meta name defined in GDefineMetaClass Macro/Function
          * @param classname name of class as it will be available in scripts.
          */
-        void RegisterClass(const std::string &classname);
+        void RegisterClass(std::string classname);
 
         /**
          * @brief RegisterGlobal registers a global function or var. to be avail. in scripts.
          * @param name name that shall the global be called in scripts.
          */
-        void RegisterGlobal(const std::string &name);
+        void RegisterGlobal(std::string name);
 
         /**
          * @brief GetRegisteredClasses returns a list of pairs with metaClassNames, classnames definitions.

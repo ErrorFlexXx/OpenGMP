@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Objects/iStreamObject.hpp"
+#include <ostream>
 
 namespace OpenGMP
 {
@@ -30,3 +31,6 @@ namespace OpenGMP
         bool ReadStream(RakNet::BitStream &stream);
     };
 }
+
+//Support shifting in ostream (used in logger impl.)
+std::ostream & operator<< (std::ostream &out, const OpenGMP::Id &t);

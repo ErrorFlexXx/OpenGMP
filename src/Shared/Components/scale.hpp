@@ -7,6 +7,9 @@ namespace OpenGMP
     class Scale : public IStreamObject
     {
     public:
+        Scale();
+        Scale(float x, float y, float z);
+
         float x;
         float y;
         float z;

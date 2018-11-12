@@ -16,7 +16,7 @@ NetDynamicContainer<T>::NetDynamicContainer(const size_t &capacity)
 }
 
 template <class T>
-T &NetDynamicContainer<T>::CreateEntity(Id &id, const RakNet::RakNetGUID &rakGuid)
+T &NetDynamicContainer<T>::CreateEntity(const RakNet::RakNetGUID &rakGuid)
 {
     Id freeId = GetFreeId();
     CheckSpace((size_t)freeId.id);
@@ -25,7 +25,6 @@ T &NetDynamicContainer<T>::CreateEntity(Id &id, const RakNet::RakNetGUID &rakGui
     obj.netId.rakNetId = rakGuid;
     obj.id = freeId;
     rakIdMap[obj.netId.rakNetId.ToUint32(obj.netId.rakNetId)] = freeId;
-    id = freeId;
     return obj;
 }
 

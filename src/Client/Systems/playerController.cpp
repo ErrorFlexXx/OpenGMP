@@ -288,16 +288,15 @@ void PlayerController::Stream(unsigned long long now)
         zVEC3 deltaPos = pos - activePlayer.position;
         float deltaAngle = azi - activePlayer.position.angle;
 
+        Position delta(deltaPos.x, deltaPos.y, deltaPos.z, deltaAngle);
+
         BitStream bsOut;
         bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
         bsOut.Write((NetMessage)PlayerControllerMessages::DELTA_UPDATE);
         activePlayer.id.WriteStream(bsOut);
-        bsOut.Write(deltaPos.x);
-        bsOut.Write(deltaPos.y);
-        bsOut.Write(deltaPos.z);
-        bsOut.Write(deltaAngle);
-        SendPlayerControllerPacket(bsOut);
+        delta.WriteStream(bsOut);
 
+        SendPlayerControllerPacket(bsOut);
         lastUpdate = now;
     }
 }

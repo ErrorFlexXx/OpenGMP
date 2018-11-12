@@ -2,6 +2,33 @@
 
 using namespace OpenGMP;
 
+Position::Position()
+    : x(0.f)
+    , y(0.f)
+    , z(0.f)
+    , angle(0.f)
+{}
+
+Position::Position(float x, float y, float z, float angle)
+    : x(x)
+    , y(y)
+    , z(z)
+    , angle(angle)
+{}
+
+Position::Position(RakNet::BitStream &stream)
+{
+    ReadStream(stream);
+}
+
+Position & Position::operator+=(const Position &rhs)
+{
+    x += rhs.x;
+    y += rhs.y;
+    z += rhs.z;
+    angle += rhs.angle;
+}
+
 void Position::WriteStream(RakNet::BitStream &stream) const
 {
     stream.Write(x);

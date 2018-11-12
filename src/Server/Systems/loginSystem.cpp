@@ -37,7 +37,7 @@ void LoginSystem::Process(Packet *packet)
                 RakNet::RakNetGUID guid = packet->guid;
                 std::string ip = packet->systemAddress.ToString(false);
                 Id id;
-                int connectedClients = gameServer.clientContainer.Count();
+                size_t connectedClients = gameServer.clientContainer.Count();
 
                 if(connectedClients >= gameServer.clientContainer.capacity)
                 {

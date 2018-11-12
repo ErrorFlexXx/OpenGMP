@@ -17,6 +17,10 @@ namespace OpenGMP
     class ServerWorld;
     class Id;
 
+    /**
+     * @brief The PlayerController class
+     *   Responsible for streaming player and it's controls to clients.
+     */
     class PlayerController
     {
     public:
@@ -29,7 +33,14 @@ namespace OpenGMP
         ServerPlayer &GetNewPlayer(ServerClient &client);
 
         /**
+         * @brief Process processes RakNet messages reagarding PlayerController messages.
+         * @param packet the inbound RakNet::Packet to process.
+         */
+        void Process(RakNet::Packet *packet);
+
+        /**
          * @brief SpawnPlayer spawns a player in a world.
+         *   Adds a player to a world and notifies all clients in a world about it.
          * @param player player object to spawn.
          * @param world world to spawn player in.
          */
@@ -57,5 +68,7 @@ namespace OpenGMP
 
     private:
         GameServer &gameServer;
+
+        void BuildAddPlayerPacket(RakNet::BitStream &bs, const ServerPlayer &player);
     };
 }

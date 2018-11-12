@@ -15,7 +15,7 @@ template <class T>
 T &DynamicContainer<T>::CreateEntity(Id &id)
 {
     Id freeId = GetFreeId();
-    CheckSpace(freeId.id);
+    CheckSpace((size_t)freeId.id);
     T &obj = container[freeId.id];
 
     obj.id = freeId;
@@ -24,7 +24,7 @@ T &DynamicContainer<T>::CreateEntity(Id &id)
 }
 
 template <class T>
-void DynamicContainer<T>::CheckSpace(int index)
+void DynamicContainer<T>::CheckSpace(size_t index)
 {
     while(index >= container.size())
         container.push_back(T());

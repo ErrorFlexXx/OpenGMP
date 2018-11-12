@@ -11,11 +11,9 @@ namespace OpenGMP
     {
     public:
         ServerPlayer()
-            : world(nullptr)
-            , client(nullptr)
         {}
 
-        ServerWorld *world;
-        ServerClient *client;
+        ServerWorld world;
+        ServerClient client;
     };
 }

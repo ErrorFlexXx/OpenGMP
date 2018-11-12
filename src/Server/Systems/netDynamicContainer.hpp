@@ -22,6 +22,21 @@ namespace OpenGMP
     public:
         NetDynamicContainer<T>(const size_t &capacity);
 
+        /* Iterator */
+        class Iterator
+        {
+        public:
+            Iterator (const NetDynamicContainer<T> *cont, int index);
+            const T &operator*() const;
+            Iterator &operator++();
+            bool operator== (const Iterator &rhs) const;
+            bool operator!= (const Iterator &rhs) const;
+
+        private:
+            const NetDynamicContainer<T> *cont;
+            int index;
+        };
+
         /**
          * @brief CreateEntity returns a new object reference
          * @param id (out) of the new object.
@@ -34,8 +49,7 @@ namespace OpenGMP
          * @brief CheckSpace creates new elements in the container if necessary.
          * @param index
          */
-        void CheckSpace(int index);
-
+        void CheckSpace(size_t index);
 
         /**
          * @brief Get returns the stored object with given id
@@ -71,9 +85,25 @@ namespace OpenGMP
          * @brief Count returns the currently stored elements.
          * @return the currently stored elements.
          */
-        int Count();
+        size_t Count();
 
         size_t capacity;
+
+        /* Iterator methods */
+        NetDynamicContainer<T>::Iterator begin() const
+        {
+            int i = 0;
+            while(i < currentIndex.id && (int)container[i].id == -1)
+            {
+                i++;
+            }
+            return NetDynamicContainer<T>::Iterator{ this, i };
+        }
+
+        NetDynamicContainer<T>::Iterator end() const
+        {
+            return NetDynamicContainer<T>::Iterator{ this, currentIndex.id };
+        }
 
     private:
         /**

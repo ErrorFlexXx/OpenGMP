@@ -17,6 +17,8 @@ namespace OpenGMP
     {
     public:
         Id id; //!< (available script attribute) the ID
+        bool operator==(const IdObject &rhs) const { return id == rhs.id; }
+        bool operator!=(const IdObject &rhs) const { return id != rhs.id; }
 
     protected:
         IdObject() {} //Abstract

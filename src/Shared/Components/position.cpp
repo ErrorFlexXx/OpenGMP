@@ -27,6 +27,7 @@ Position & Position::operator+=(const Position &rhs)
     y += rhs.y;
     z += rhs.z;
     angle += rhs.angle;
+    return *this;
 }
 
 void Position::WriteStream(RakNet::BitStream &stream) const

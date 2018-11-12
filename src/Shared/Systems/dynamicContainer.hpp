@@ -58,7 +58,7 @@ namespace OpenGMP
          * @brief CheckSpace enlarges the container if needed
          * @param index of the requested element
          */
-        void CheckSpace(int index);
+        void CheckSpace(size_t index);
 
         /**
          * @brief IsFreeId checks if the slot is really free

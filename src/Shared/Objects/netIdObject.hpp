@@ -20,7 +20,7 @@ namespace OpenGMP
     {
     public:
         NetId netId; //!< (available script attribute) the RakNet GUID
-
+        operator RakNet::RakNetGUID() const { return netId.rakNetId; }
     protected:
         NetIdObject() {} //Abstract
     };

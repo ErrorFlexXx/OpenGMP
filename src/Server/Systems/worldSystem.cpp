@@ -30,13 +30,13 @@ ServerWorld &WorldSystem::GetStoredWorld(int index)
 
 void WorldSystem::LoadWorld(ServerClient &client, ServerWorld &world)
 {
+    client.world = world; //Assign world to client.
     BitStream bs;
     bs.Write((NetMessage) NetworkSystemMessages::WorldSystem);
     bs.Write((NetMessage) WorldSystemMessages::LOAD_WORLD);
     world.id.WriteStream(bs);
     world.worldName.WriteStream(bs);
-    SendWorldSystemMessage(client.netId.rakNetId, bs);
-    client.world = world; //Assign world to client.
+    SendWorldSystemMessage(client, bs);
 }
 
 void WorldSystem::SendWorldSystemMessage(const RakNetGUID &dest, const BitStream &bsOut)

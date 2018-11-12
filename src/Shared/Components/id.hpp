@@ -21,7 +21,8 @@ namespace OpenGMP
         Id(RakNet::BitStream &stream);
 
         operator int() const { return id; }
-        operator size_t() const { return (size_t)id; }
+        bool operator==(const Id &rhs) const { return id == rhs.id; }
+        bool operator!=(const Id &rhs) const { return id != rhs.id; }
 
         int32_t id; //!< (available script attribute) an ID
 

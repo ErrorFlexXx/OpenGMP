@@ -133,6 +133,11 @@ bool NetworkSystem::Update()
                     gameServer.loginSystem.Process(packet);
                     break;
                 }
+                case NetworkSystemMessages::PlayerController:
+                {
+                    gameServer.playerController.Process(packet);
+                    break;
+                }
                 case NetworkSystemMessages::Ping:
                 {
                     break;

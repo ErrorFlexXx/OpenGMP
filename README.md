@@ -14,9 +14,10 @@ To build the server on a linux system, the following tools have to be installed:
 * cmake
 * build-essential
 * libssl1.0-dev
+* libmysqlclient-dev
 On debian based systems the software can be installed with the following command:
 ```
-sudo apt install git cmake build-essential libssl1.0-dev
+sudo apt install git cmake build-essential libssl1.0-dev libmysqlclient-dev
 ```
 On a windows system it's needed to have a program for CMake, Git and some build environment like VisualStudio.
 Instead of calling ```make``` you want to open the generated .sln file on windows.
@@ -60,12 +61,19 @@ On windows, there is a need to add the path to `jom.exe` from the Qt installatio
 Read more about scripting in the [ServerScripts](https://www.github.com/ErrorFlexXx/OpenGMP/tree/master/ServerScripts) directory.
 
 ## Known issues
-
 ### Server (Linux build):
+#### python missing link
 On Ubuntu systems there is a problem with the python2.7 packages, that causes the server to crash, if a phython script is going to be loaded.
 If the program crashs with a message like: `ImportError: No module named _sysconfigdata_nd` one can place a symbolic link to solve the problem.
 ```bash
 sudo ln -fs /usr/lib/python2.7/plat-x86_64-linux-gnu/_sysconfigdata_nd.py /usr/lib/python2.7/
+```
+#### Missing installation routine
+Currently there is no installation routine for the server under linux. Because of linux is not searching required libraries in the OpenGMP-Server binary dir, we have to add the directory to the search path, to get OpenGMP-Server load the created libraries.
+```
+cd build # cd to directory, where OpenGMP-Server and libs are located.
+export LD_LIBRARY_PATH=.
+./OpenGMP-Server # Start the server.
 ```
 
 ## Special thanks to

@@ -73,7 +73,7 @@ void PlayerController::Process(RakNet::Packet *packet)
             }
             break;
         }
-        case PlayerControllerMessages::DELTA_UPDATE:
+        case PlayerControllerMessages::POSITION_UPDATE:
         {
             bool success;
             Id id(bsIn);
@@ -81,8 +81,7 @@ void PlayerController::Process(RakNet::Packet *packet)
 
             if(success)
             {
-                Position delta(bsIn);
-                player.position += delta; //Do position update
+                player.position.ReadStream(bsIn);
                 for(auto &sendPlayer : gameServer.playerContainer)
                 {
                     if(sendPlayer.world == player.world &&  //If in same world and
@@ -103,8 +102,8 @@ void PlayerController::Process(RakNet::Packet *packet)
             ServerClient &client = gameServer.clientContainer.Get(packet->guid, found);
             if(found)
             {
-                gameServer.scriptSystem.InvokeScriptFunction("ClientEnteredWorld", client); //Script functions
                 ClientEnteringWorld(client); //Player streaming basics.
+                gameServer.scriptSystem.InvokeScriptFunction("ClientEnteredWorld", client); //Script functions
             }
             else
                 LogWarn() << "Client EnteredWorld, but can't find him in clientContainer! IP: " << ip;
@@ -195,4 +194,5 @@ void PlayerController::BuildAddPlayerPacket(RakNet::BitStream &bs, const ServerP
     player.skills.WriteStream(bs);
     player.talents.WriteStream(bs);
     player.visual.WriteStream(bs);
+    player.attributes.WriteStream(bs);
 }

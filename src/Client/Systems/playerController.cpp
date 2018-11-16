@@ -24,7 +24,7 @@ PlayerController::PlayerController(GameClient &gameClient)
     : gameClient(gameClient)
     , active(false)
     , lastUpdate(0)
-    , updateTimeSpan(200)
+    , updateTimeSpan(50)
     , posAccuracy(0.1f)
     , angleAccuracy(0.1f)
     , activePlayer(gameClient.playerContainer.Get(0)) //We just need any player reference.
@@ -98,37 +98,18 @@ void PlayerController::Process(RakNet::Packet *packet)
         std::cout << "Movement Change" << std::endl;
         break;
     }
-    case PlayerControllerMessages::DELTA_UPDATE:
+    case PlayerControllerMessages::POSITION_UPDATE:
     {
         Id id(bsIn);
         ClientPlayer &player = gameClient.playerContainer.Get(id);
-        Position oldPos = player.position;
         
-        //Receiving deltas
-        float dx, dy, dz, dangle; //Delta values
-        bsIn.Read(dx);
-        bsIn.Read(dy);
-        bsIn.Read(dz);
-        bsIn.Read(dangle);
-
-        //Update position
-        player.position.x += dx;
-        player.position.y += dy;
-        player.position.z += dz;
-        player.position.angle += dangle;
+        player.position.ReadStream(bsIn);
 
         //Check accuracy
-        if (fabs(player.position.x - oldPos.x) >= posAccuracy ||
-            fabs(player.position.y - oldPos.y) >= posAccuracy ||
-            fabs(player.position.z - oldPos.z) >= posAccuracy ||
-            fabs(player.position.angle - oldPos.angle) >= angleAccuracy)
-        {   //Correct position / rotation
-            player.gothicPlayer->SetPositionWorld(player.position);
-            player.gothicPlayer->ResetXZRotationsWorld(); //Reset azi + elev
-            player.gothicPlayer->RotateWorldY(player.position.angle); //Set azi
-        }
+        player.gothicPlayer->SetPositionWorld(player.position);
+        player.gothicPlayer->ResetXZRotationsWorld(); //Reset azi + elev
+        player.gothicPlayer->RotateWorldY(player.position.angle); //Set azi
         break;
-        std::cout << "Delta Update" << std::endl;
     }
     default:
     {
@@ -336,17 +317,14 @@ void PlayerController::Stream(unsigned long long now)
         float azi, elev;
         zVEC3 pos = activePlayer.gothicPlayer->GetPositionWorld();
         activePlayer.gothicPlayer->GetAngles(pos, azi, elev);
-
-        zVEC3 deltaPos = pos - activePlayer.position;
-        float deltaAngle = azi - activePlayer.position.angle;
-
-        Position delta(deltaPos.x, deltaPos.y, deltaPos.z, deltaAngle);
+        
+        Position newPosition(pos.x, pos.y, pos.z, azi);
 
         BitStream bsOut;
         bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
-        bsOut.Write((NetMessage)PlayerControllerMessages::DELTA_UPDATE);
+        bsOut.Write((NetMessage)PlayerControllerMessages::POSITION_UPDATE);
         activePlayer.id.WriteStream(bsOut);
-        delta.WriteStream(bsOut);
+        newPosition.WriteStream(bsOut);
 
         SendPlayerControllerPacket(bsOut);
         lastUpdate = now;

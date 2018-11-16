@@ -122,15 +122,14 @@ Id NetDynamicContainer<T>::GetFreeId()
  * Iterator class methods
  */
 template <class T>
-NetDynamicContainer<T>::Iterator::Iterator(const NetDynamicContainer<T> *cont, int index)
+NetDynamicContainer<T>::Iterator::Iterator(NetDynamicContainer<T> *cont, int index)
     : cont(cont)
     , index(index)
 {}
 
 template <class T>
-const T &NetDynamicContainer<T>::Iterator::operator*() const
+T &NetDynamicContainer<T>::Iterator::operator*()
 {
-    bool success;
     return cont->container[index];
 }
 
@@ -146,13 +145,13 @@ typename NetDynamicContainer<T>::Iterator &NetDynamicContainer<T>::Iterator::ope
 }
 
 template <class T>
-bool NetDynamicContainer<T>::Iterator::operator !=(const NetDynamicContainer<T>::Iterator &other) const
+bool NetDynamicContainer<T>::Iterator::operator !=(NetDynamicContainer<T>::Iterator &other)
 {
     return index != other.index;
 }
 
 template <class T>
-bool NetDynamicContainer<T>::Iterator::operator ==(const NetDynamicContainer<T>::Iterator &other) const
+bool NetDynamicContainer<T>::Iterator::operator ==(NetDynamicContainer<T>::Iterator &other)
 {
     return index == other.index;
 }

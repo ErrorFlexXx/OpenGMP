@@ -13,7 +13,7 @@ using namespace std;
 using namespace OpenGMP;
 
 string openGMPLibName = "OpenGMP.dll";
-string serverAddress = "127.0.0.1";
+string serverAddress = "192.168.1.201";
 unsigned short serverPort = 1760;
 
 bool setConnectDataEnvVars()

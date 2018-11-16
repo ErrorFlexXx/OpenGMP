@@ -33,6 +33,12 @@ namespace OpenGMP
         ServerPlayer &GetNewPlayer(const ServerClient &client);
 
         /**
+         * @brief RemoveClientPlayer removes all player that belongs to a client
+         * @param client that belongs to the player that are going to be removed.
+         */
+        void RemoveClientPlayer(ServerClient &client);
+
+        /**
          * @brief RemovePlayer removes a player entirely from the server.
          * @param player to be deleted.
          */

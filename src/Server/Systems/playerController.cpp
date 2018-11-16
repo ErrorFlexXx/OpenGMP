@@ -21,6 +21,15 @@ ServerPlayer &PlayerController::GetNewPlayer(const ServerClient &client)
     return player;
 }
 
+void PlayerController::RemoveClientPlayer(ServerClient &client)
+{
+    for(auto &player : gameServer.playerContainer)
+    {
+        if(player.client == client)
+            gameServer.playerController.RemovePlayer(player);
+    }
+}
+
 void PlayerController::RemovePlayer(ServerPlayer &player)
 {
     if(player.world != ServerWorld()) //Player spawned currently ?
@@ -85,6 +94,20 @@ void PlayerController::Process(RakNet::Packet *packet)
             {
                 LogError() << "Cannot find player with given Id!";
             }
+            break;
+        }
+        case PlayerControllerMessages::ENTERED_WORLD:
+        {
+            bool found;
+            std::string ip = packet->systemAddress.ToString(false);
+            ServerClient &client = gameServer.clientContainer.Get(packet->guid, found);
+            if(found)
+            {
+                gameServer.scriptSystem.InvokeScriptFunction("ClientEnteredWorld", client); //Script functions
+                ClientEnteringWorld(client); //Player streaming basics.
+            }
+            else
+                LogWarn() << "Client EnteredWorld, but can't find him in clientContainer! IP: " << ip;
             break;
         }
         default:
@@ -171,4 +194,5 @@ void PlayerController::BuildAddPlayerPacket(RakNet::BitStream &bs, const ServerP
     player.scale.WriteStream(bs);
     player.skills.WriteStream(bs);
     player.talents.WriteStream(bs);
+    player.visual.WriteStream(bs);
 }

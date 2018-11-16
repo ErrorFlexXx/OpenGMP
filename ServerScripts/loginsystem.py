@@ -4,6 +4,7 @@
 gameServer = GameServer.GetGameServerInstance()
 menuSys = gameServer.GetMenuSystem()
 worldSys = gameServer.GetWorldSystem()
+playerCtrl = gameServer.GetPlayerController()
 
 def Register(serverClient):
     inst = GameServer.GetGameServerInstance()
@@ -43,6 +44,23 @@ def Login(serverClient):
             print("Login incorrect. User: " + serverClient.loginData.loginname)
             menuSys.ShowTimedNotification(serverClient, NotificationText("Login fehlerhaft!", notifyPosY, red, 8))
             mysql_free_result(result)
+
+def ClientEnteredWorld(serverClient):
+    print("GetNewPlayer")
+    player = playerCtrl.GetNewPlayer(serverClient)
+    print("Got new player.")
+    player.visual.bodyModel = "Hum_Body_Naked0"
+    player.visual.bodyTextureId = 9
+    player.visual.headModel = "Hum_Head_Pony"
+    player.visual.headTextureId = 18
+    player.visual.fatness = 1
+    player.position = Position(29912.9, 5253.92, -15710, 0)
+    player.attributes.health = 100
+    player.attributes.max_health = 100
+    playerCtrl.SpawnPlayer(player, worldSys.GetStoredWorld(1))
+    print("Spawn player.")
+    playerCtrl.ControlPlayer(serverClient, player)
+    print("Control player")
 
 #Initialization:
 if mysql.Connect():

@@ -2,6 +2,7 @@
 #include "scriptSystem.hpp"
 #include <Server/gameServer.hpp>
 #include <Server/Objects/serverClient.hpp>
+#include <Server/Objects/serverPlayer.hpp>
 #include <Server/Utils/utils.h>
 #include <Shared/Systems/versionSystem.hpp>
 #include <Shared/Types/Messages/loginSystemMessages.hpp>
@@ -70,15 +71,31 @@ void LoginSystem::Process(Packet *packet)
             case ID_CONNECTION_LOST:
             {
                 std::string ip = packet->systemAddress.ToString(false);
-                bool removed = gameServer.clientContainer.Remove(packet->guid);
-                LogInfo() << "Client lost connection. IP: " << ip << ". " << (removed ? "Successfully removed from clientContainer." : "Wasn't in clientContainer, not removed.");
+                bool found;
+                ServerClient &client = gameServer.clientContainer.Get(packet->guid, found);
+                if(found)
+                {
+                    gameServer.playerController.RemoveClientPlayer(client);
+                    bool removed = gameServer.clientContainer.Remove(client);
+                    LogInfo() << "Client lost connection. IP: " << ip << ". " << (removed ? "Successfully removed from clientContainer." : "Wasn't in clientContainer, not removed.");
+                }
+                else
+                    LogWarn() << "Client not found in container! IP: " << ip;
                 break;
             }
             case ID_DISCONNECTION_NOTIFICATION:
             {
                 std::string ip = packet->systemAddress.ToString(false);
-                bool removed = gameServer.clientContainer.Remove(packet->guid);
-                LogInfo() << "Client disconnected. IP: " << ip << ". " << (removed ? "Successfully removed from clientContainer." : "Wasn't in clientContainer, not removed.");
+                bool found;
+                ServerClient &client = gameServer.clientContainer.Get(packet->guid, found);
+                if(found)
+                {
+                    gameServer.playerController.RemoveClientPlayer(client);
+                    bool removed = gameServer.clientContainer.Remove(client);
+                    LogInfo() << "Client disconnected. IP: " << ip << ". " << (removed ? "Successfully removed from clientContainer." : "Wasn't in clientContainer, not removed.");
+                }
+                else
+                    LogWarn() << "Client not found in container! IP: " << ip;
                 break;
             }
             default:

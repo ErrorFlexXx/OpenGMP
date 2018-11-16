@@ -26,14 +26,14 @@ namespace OpenGMP
         class Iterator
         {
         public:
-            Iterator (const NetDynamicContainer<T> *cont, int index);
-            const T &operator*() const;
+            Iterator (NetDynamicContainer<T> *cont, int index);
+            T &operator*();
             Iterator &operator++();
-            bool operator== (const Iterator &rhs) const;
-            bool operator!= (const Iterator &rhs) const;
+            bool operator== (Iterator &rhs);
+            bool operator!= (Iterator &rhs);
 
         private:
-            const NetDynamicContainer<T> *cont;
+            NetDynamicContainer<T> *cont;
             int index;
         };
 
@@ -89,7 +89,7 @@ namespace OpenGMP
         size_t capacity;
 
         /* Iterator methods */
-        NetDynamicContainer<T>::Iterator begin() const
+        NetDynamicContainer<T>::Iterator begin()
         {
             int i = 0;
             while(i < currentIndex.id && (int)container[i].id == -1)
@@ -99,7 +99,7 @@ namespace OpenGMP
             return NetDynamicContainer<T>::Iterator{ this, i };
         }
 
-        NetDynamicContainer<T>::Iterator end() const
+        NetDynamicContainer<T>::Iterator end()
         {
             return NetDynamicContainer<T>::Iterator{ this, currentIndex.id };
         }

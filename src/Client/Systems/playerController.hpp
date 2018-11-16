@@ -29,6 +29,7 @@ namespace OpenGMP
         void Update();
         void UpdatePlayerMovement(ClientPlayer &player);
         void SendMovementStateChange();
+        void SendEnteredWorld();
         void Stream(unsigned long long now);
         int BindingPressed(PlayerMovement move);
 

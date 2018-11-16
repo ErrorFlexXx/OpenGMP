@@ -42,6 +42,11 @@ public:
         return *(oCWorld**)((DWORD)this + VarOffsets::World);
     }
 
+    class zCAICamera * GetCameraAI() const
+    {
+        XCALL(0x005DE7A0);
+    }
+
     void LoadWorld(int, class zSTRING const &)
     {
         XCALL(0x006C90B0);

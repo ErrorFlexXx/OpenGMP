@@ -52,7 +52,10 @@ void WorldSystem::Process(RakNet::Packet *packet)
             progress->SetRange(92, 100);
             game->EnterWorld(nullptr, true, "");
             game->SetTime(1, 12, 00);
+            float x, y, z;
+            oCNpc::GetHero()->GetPosition(x, y, z);
             game->GetWorld()->RemoveVob(oCNpc::GetHero()); //Remove default hero
+            gameClient.playerController.SendEnteredWorld();
             break;
         }
         default:

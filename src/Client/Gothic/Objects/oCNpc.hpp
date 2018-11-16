@@ -1,11 +1,17 @@
 #pragma once
 
 #include "../xcall.h"
-#include "oCVob.hpp"
-#include "oCAniCtrl_Human.hpp"
-#include "../Classes/zCModel.hpp"
-#include "../Types/zSTRING.hpp"
+#include <Client/Gothic/cGameManager.hpp>
+#include <Client/Gothic/Objects/oCVob.hpp>
+#include <Client/Gothic/Objects/oCAniCtrl_Human.hpp>
+#include <Client/Gothic/Objects/oCGame.hpp>
+#include <Client/Gothic/Objects/oCWorld.hpp>
+#include <Client/Gothic/Classes/zCModel.hpp>
+#include <Client/Gothic/Types/zSTRING.hpp>
 #include <Shared/Objects/player.hpp>
+#include <iostream>
+
+extern DWORD origIsDeadAddr;
 
 class oCNpc : public oCVob
 {
@@ -16,19 +22,71 @@ public:
     static const struct VarOffsets
     {
         static const unsigned int speedTurn = 0x100;
+        static const unsigned int hp_current = 0x1B8;
+        static const unsigned int hp_max = 0x1BC;
+        static const unsigned int mp_current = 0x1C0;
+        static const unsigned int mp_max = 0x1C4;
+        static const unsigned int strength = 0x1C8;
+        static const unsigned int dexterity = 0x1CC;
     } VarOffsets;
+
+    static const struct Addresses
+    {
+        static const unsigned int IsDead = 0x00736740;
+    } Addresses;
 
     void Setup(const OpenGMP::Player &player)
     {
-        SetPositionWorld(player.position);
+        SetVobName("PC_Hero");
+        SetVisual("HUMANS.MDS");
+        GetModel();
+        InitHumanAI();
+        GetAnictrl()->InitAnimations();
+        SetCollDet(0);
+        SetPosition(player.position);
         ResetXZRotationsWorld();
         RotateWorldY(player.position.angle);
-        SetAdditionalVisuals("Hum_Body_Naked0", 9, 0, "Hum_Head_Pony", 18, 0, 0);
+        SetCollDet(1);
+        SetSleeping(0);
+        CGameManager::GetInstance()->GetGame()->GetWorld()->EnableVob(this);
+        SetAdditionalVisuals(player.visual.bodyModel, player.visual.bodyTextureId, 0, player.visual.headModel, player.visual.headTextureId, 0, -1);
+        HP_Max(player.attributes.max_health);
+        HP(player.attributes.health);
+    }
+
+    int HP()
+    {
+        return *(int*)((DWORD)this + VarOffsets::hp_current);
+    }
+
+    void HP(int value)
+    {
+        *(int*)((DWORD)this + VarOffsets::hp_current) = value;
+    }
+
+    int HP_Max()
+    {
+        return *(int*)((DWORD)this + VarOffsets::hp_max);
+    }
+
+    void HP_Max(int value)
+    {
+        *(int*)((DWORD)this + VarOffsets::hp_max) = value;
+    }
+
+    void SetAsPlayer()
+    {
+        XCALL(0x007426A0);
     }
 
     void SetAdditionalVisuals(const zSTRING &body, int bodyTexNr, int bodyColor, const zSTRING &head, int headTextNr, int teethTexNr, int armorInst)
     {
         XCALL(0x00738350);
+    }
+
+    void InitHumanAI()
+    {
+        XCALL(0x0072F5B0);
     }
 
     float GetTurnSpeed()
@@ -109,5 +167,15 @@ public:
     inline static void SetHero(oCNpc* newHero)
     {
         *(oCNpc**)0x00AB2684 = newHero;
+    }
+
+    int Orig_IsDead()
+    {
+        XCALL(origIsDeadAddr);
+    }
+
+    int GMP_IsDead()
+    {
+        return false;
     }
 };

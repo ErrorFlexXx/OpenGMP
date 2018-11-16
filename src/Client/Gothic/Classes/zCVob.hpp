@@ -94,6 +94,21 @@ public:
         XCALL(0x005FE440);
     }
 
+    void SetCollDet(int)
+    {
+        XCALL(0x006D0000);
+    }
+
+    float VisualAlpha() const
+    {
+        return *(float*)((DWORD)this + VarOffsets::visualAlpha);
+    }
+
+    void VisualAlpha(float value)
+    {
+        *(float*)((DWORD)this + VarOffsets::visualAlpha) = value;
+    }
+
     static unsigned long GetNextFreeVobID()
     {
         XCALL(0x005FE8D0);
@@ -432,6 +447,20 @@ public:
     void SetPositionWorld(class zVEC3 const &)
     {
         XCALL(0x0061BB70);
+    }
+
+    void SetPosition(const zVEC3 &set)
+    {
+        *(float*)((DWORD)this + 0x48) = set.x; //(float)zCVob + 0x48 X
+        *(float*)((DWORD)this + 0x58) = set.y; //(float)zCVob + 0x68 Y
+        *(float*)((DWORD)this + 0x68) = set.z; //(float)zCVob + 0x58 Z
+    }
+
+    void GetPosition(float &x, float &y, float &z)
+    {
+        x = *(float*)((DWORD)this + 0x48); //(float)zCVob + 0x48 X
+        y = *(float*)((DWORD)this + 0x58); //(float)zCVob + 0x68 Y
+        z = *(float*)((DWORD)this + 0x68); //(float)zCVob + 0x58 Z
     }
         
     void SetTrafo(class zMAT4 const &)

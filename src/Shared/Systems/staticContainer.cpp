@@ -20,6 +20,7 @@ template <class T>
 T &StaticContainer<T>::Get(size_t id)
 {
     CheckSpace(id);
+    container[id].id = id;
     return container[id];
 }
 

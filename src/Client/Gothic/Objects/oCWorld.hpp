@@ -51,7 +51,7 @@ public:
         XCALL(0x00780330);
     }
 
-    /*virtual*/ void EnableVob(class zCVob *,class zCVob *)
+    /*virtual*/ void EnableVob(class zCVob *vob, class zCVob *parent = nullptr)
     {
         XCALL(0x00780340);
     }

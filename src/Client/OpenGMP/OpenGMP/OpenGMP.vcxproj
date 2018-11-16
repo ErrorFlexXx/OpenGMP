@@ -214,6 +214,7 @@
     <ClInclude Include="..\..\Components\notificationBox.hpp" />
     <ClInclude Include="..\..\gameClient.hpp" />
     <ClInclude Include="..\..\Gothic\cGameManager.hpp" />
+    <ClInclude Include="..\..\Gothic\Classes\zCAICamera.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCCamera.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCEventManager.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCFont.hpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="..\..\Gothic\Classes\zCOption.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOptionEntry.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCOptionSection.hpp" />
+    <ClInclude Include="..\..\Gothic\Classes\zCParser.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCRenderer.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCSkyController.hpp" />
     <ClInclude Include="..\..\Gothic\Classes\zCTree.hpp" />

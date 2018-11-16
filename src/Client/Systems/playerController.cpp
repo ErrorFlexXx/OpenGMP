@@ -6,6 +6,8 @@
 #include <Client/Gothic/cGameManager.hpp>
 #include <Client/Gothic/Objects/oCGame.hpp>
 #include <Client/Gothic/Objects/oCWorld.hpp>
+#include <Client/Gothic/Classes/zCParser.hpp>
+#include <Client/Gothic/Classes/zCAICamera.hpp>
 #include <Client/Systems/inputSystem.hpp>
 #include <Shared/Types/Messages/playerControllerMessages.hpp>
 #include <Shared/Components/gameTime.hpp>
@@ -53,10 +55,11 @@ void PlayerController::Process(RakNet::Packet *packet)
         addPlayer.scale.ReadStream(bsIn);
         addPlayer.skills.ReadStream(bsIn);
         addPlayer.talents.ReadStream(bsIn);
-        
-        addPlayer.gothicPlayer = oCObjectFactory::GetFactory()->CreateNpc();
+        addPlayer.visual.ReadStream(bsIn);
+        addPlayer.gothicPlayer = oCObjectFactory::GetFactory()->CreateNpc(/*zCParser::GetParser()->GetIndex("PC_Hero")*/);
         addPlayer.gothicPlayer->Setup(addPlayer);
         CGameManager::GetInstance()->GetGame()->GetWorld()->InsertVobInWorld(addPlayer.gothicPlayer);
+        std::cout << "Add_Player" << std::endl;
         break;
     }
     case PlayerControllerMessages::REMOVE_PLAYER:
@@ -69,6 +72,7 @@ void PlayerController::Process(RakNet::Packet *packet)
             removePlayer.gothicPlayer->Release();
             removePlayer.gothicPlayer = nullptr;
         }
+        std::cout << "Remove_Player" << std::endl;
         break;
     }
     case PlayerControllerMessages::CONTROL_PLAYER:
@@ -76,11 +80,13 @@ void PlayerController::Process(RakNet::Packet *packet)
         Id id(bsIn);
         ClientPlayer &controlPlayer = gameClient.playerContainer.Get(id);
         ControlPlayer(controlPlayer);
+        std::cout << "Control_Player" << std::endl;
         break;
     }
     case PlayerControllerMessages::STOP_CONTROL:
     {
         StopControl();
+        std::cout << "StopControl_Player" << std::endl;
         break;
     }
     case PlayerControllerMessages::MOVEMENT_CHANGE:
@@ -89,6 +95,7 @@ void PlayerController::Process(RakNet::Packet *packet)
         ClientPlayer &player = gameClient.playerContainer.Get(id);
         player.movement.ReadStream(bsIn);
         UpdatePlayerMovement(player);
+        std::cout << "Movement Change" << std::endl;
         break;
     }
     case PlayerControllerMessages::DELTA_UPDATE:
@@ -121,6 +128,7 @@ void PlayerController::Process(RakNet::Packet *packet)
             player.gothicPlayer->RotateWorldY(player.position.angle); //Set azi
         }
         break;
+        std::cout << "Delta Update" << std::endl;
     }
     default:
     {
@@ -152,7 +160,16 @@ void PlayerController::ControlPlayer(ClientPlayer &player)
     
     if (player.gothicPlayer)
     {
+        //player.gothicPlayer->SetAsPlayer();
         oCNpc::SetHero(player.gothicPlayer);
+        oCGame *game = CGameManager::GetInstance()->GetGame();
+        zCAICamera *aiCam = game->GetCameraAI();
+        zCVob *camVob = game->GetCamVob();
+        aiCam->ClearTargetList();
+        aiCam->SetTarget(player.gothicPlayer);
+        aiCam->ReceiveMsg(zPLAYER_BEAMED);
+        camVob->SetPositionWorld(player.gothicPlayer->GetPositionWorld() - player.gothicPlayer->GetAtVectorWorld() * 200);
+        camVob->SetHeadingAtWorld(player.gothicPlayer->GetAtVectorWorld());
         active = true;
     }
 }
@@ -186,6 +203,16 @@ void PlayerController::Update()
         if (activePlayer.movement == PlayerMovement::Stand)
         {
             bool movementChanged = true;
+
+            if (gameClient.inputSystem.IsPressed(VirtualKeys::P))
+            {
+                if (oCNpc::GetHero())
+                {
+                    float x, y, z;
+                    oCNpc::GetHero()->GetPosition(x, y, z);
+                    std::cout << "Pos: " << x << " " << y << " " << z << std::endl;
+                }
+            }
 
             if (BindingPressed(PlayerMovement::Forward))
             {
@@ -291,6 +318,14 @@ void PlayerController::SendMovementStateChange()
     bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
     bsOut.Write((NetMessage)PlayerControllerMessages::MOVEMENT_CHANGE);
     bsOut.Write(activePlayer.movement.movementState);
+    SendPlayerControllerPacket(bsOut);
+}
+
+void PlayerController::SendEnteredWorld()
+{
+    BitStream bsOut;
+    bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
+    bsOut.Write((NetMessage)PlayerControllerMessages::ENTERED_WORLD);
     SendPlayerControllerPacket(bsOut);
 }
 

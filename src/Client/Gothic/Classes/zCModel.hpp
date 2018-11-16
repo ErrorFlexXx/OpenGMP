@@ -29,4 +29,9 @@ public:
     {
         XCALL(0x00576690);
     }
+
+    int ApplyModelProtoOverlay(class zSTRING const &)
+    {
+        XCALL(0x005787F0);
+    }
 };

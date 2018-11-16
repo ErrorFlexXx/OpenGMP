@@ -127,4 +127,9 @@ public:
     {
         XCALL(0x006AE540);
     }
+
+    void InitAnimations()
+    {
+        XCALL(0x006A4010);
+    }
 };

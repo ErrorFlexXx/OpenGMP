@@ -76,17 +76,23 @@ void PlayerController::Process(RakNet::Packet *packet)
         case PlayerControllerMessages::POSITION_UPDATE:
         {
             bool success;
+
             Id id(bsIn);
             ServerPlayer &player = gameServer.playerContainer.Get(id, success);
 
             if(success)
             {
                 player.position.ReadStream(bsIn);
+                BitStream bsOut;
+                bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
+                bsOut.Write((NetMessage)PlayerControllerMessages::POSITION_UPDATE);
+                id.WriteStream(bsOut);
+                player.position.WriteStream(bsOut);
                 for(auto &sendPlayer : gameServer.playerContainer)
                 {
                     if(sendPlayer.world == player.world &&  //If in same world and
                        sendPlayer != player)                //not the delta update player itself
-                        SendPlayerControllerMessage(sendPlayer, bsIn); //Stream to all other players
+                        SendPlayerControllerMessage(sendPlayer, bsOut); //Stream to all other players
                 }
             }
             else

@@ -58,6 +58,16 @@ namespace OpenGMP
             player.rotation.WriteStream(bsOut);
         }
 
+        static inline void Pack(RakNet::BitStream &bsOut, const Id &id, const Vec3 &position, const Vec3 &rotation)
+        {
+            bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
+            bsOut.Write((NetMessage)PlayerControllerMessages::POSITION_UPDATE);
+            id.WriteStream(bsOut);
+
+            position.WriteStream(bsOut);
+            rotation.WriteStream(bsOut);
+        }
+
         static inline bool Unpack(RakNet::BitStream &bsIn, Player &player)
         {
             bool success;

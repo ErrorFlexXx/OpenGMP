@@ -59,8 +59,9 @@ void PlayerController::Process(RakNet::Packet *packet)
         addPlayer.visual.ReadStream(bsIn);
         addPlayer.attributes.ReadStream(bsIn);
         addPlayer.gothicPlayer = oCObjectFactory::GetFactory()->CreateNpc(/*zCParser::GetParser()->GetIndex("PC_Hero")*/);
-        addPlayer.gothicPlayer->Setup(addPlayer);
         CGameManager::GetInstance()->GetGame()->GetWorld()->InsertVobInWorld(addPlayer.gothicPlayer);
+        addPlayer.gothicPlayer->Setup(addPlayer);
+        Stream(GameTime::GetTicks());
         break;
     }
     case PlayerControllerMessages::REMOVE_PLAYER:

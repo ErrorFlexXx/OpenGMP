@@ -44,7 +44,7 @@ public:
         GetAnictrl()->InitAnimations();
         SetCollDet(0);
         SetPosition(player.position);
-        SetHeadingAtWorld(player.rotation);
+        //SetHeadingAtWorld(player.rotation);
         SetCollDet(1);
         SetSleeping(0);
         CGameManager::GetInstance()->GetGame()->GetWorld()->EnableVob(this);

@@ -69,9 +69,9 @@ bool NetDynamicContainer<T>::Remove(const Id &id)
     if(0 <= id.id && id.id < currentIndex.id)
     {
         NetIdObject &obj = dynamic_cast<NetIdObject&>(container[id.id]);
-        obj.id = -1; //Flag id as unset.
         rakIdMap.erase(obj.netId.rakNetId.ToUint32(obj.netId.rakNetId));
         freeGapIds.push_back(id);
+        obj.id = -1; //Flag id as unset.
         return true; //Successfully freed
     }
     return false; //Invalid id!

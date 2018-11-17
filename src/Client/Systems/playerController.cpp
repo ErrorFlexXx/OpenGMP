@@ -88,7 +88,7 @@ void PlayerController::Process(RakNet::Packet *packet)
     {
         Id id(bsIn);
         ClientPlayer &player = gameClient.playerContainer.Get(id);
-        player.movement.ReadStream(bsIn);
+        MovementChangeMessage::Unpack(bsIn, player);
         UpdatePlayerMovement(player);
         std::cout << "Movement Change" << std::endl;
         break;
@@ -289,9 +289,7 @@ void PlayerController::UpdatePlayerMovement(ClientPlayer &player)
 void PlayerController::SendMovementStateChange()
 {
     BitStream bsOut;
-    bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
-    bsOut.Write((NetMessage)PlayerControllerMessages::MOVEMENT_CHANGE);
-    bsOut.Write(activePlayer.movement.movementState);
+    MovementChangeMessage::Pack(bsOut, activePlayer);
     SendPlayerControllerPacket(bsOut);
 }
 

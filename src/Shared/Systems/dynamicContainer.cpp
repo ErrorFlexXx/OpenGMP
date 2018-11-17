@@ -47,8 +47,8 @@ bool DynamicContainer<T>::Remove(const Id &id)
 {
     if(0 <= id.id && id.id < currentIndex.id)
     {
-        container[id.id].id.id = -1; //Flag id as unset.
         freeGapIds.push_back(id);
+        container[id.id].id.id = -1; //Flag id as unset.
         return true;
     }
     return false;

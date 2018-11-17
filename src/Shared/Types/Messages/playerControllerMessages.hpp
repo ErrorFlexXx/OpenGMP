@@ -45,4 +45,25 @@ namespace OpenGMP
             return success;
         }
     };
+
+    struct PositionUpdateMessage
+    {
+        static inline void Pack(RakNet::BitStream &bsOut, const Player &player)
+        {
+            bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
+            bsOut.Write((NetMessage)PlayerControllerMessages::POSITION_UPDATE);
+            player.id.WriteStream(bsOut);
+
+            player.position.WriteStream(bsOut);
+            player.rotation.WriteStream(bsOut);
+        }
+
+        static inline bool Unpack(RakNet::BitStream &bsIn, Player &player)
+        {
+            bool success;
+                        success = player.position.ReadStream(bsIn);
+            if(success) success = player.rotation.ReadStream(bsIn);
+            return success;
+        }
+    };
 }

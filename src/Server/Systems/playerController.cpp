@@ -82,14 +82,9 @@ void PlayerController::Process(RakNet::Packet *packet)
 
             if(success)
             {
-                player.position.ReadStream(bsIn);
-                player.rotation.ReadStream(bsIn);
+                PositionUpdateMessage::Unpack(bsIn, player);
                 BitStream bsOut;
-                bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
-                bsOut.Write((NetMessage)PlayerControllerMessages::POSITION_UPDATE);
-                id.WriteStream(bsOut);
-                player.position.WriteStream(bsOut);
-                player.rotation.WriteStream(bsOut);
+                PositionUpdateMessage::Pack(bsOut, player);
                 for(auto &sendPlayer : gameServer.playerContainer)
                 {
                     if(sendPlayer.world == player.world &&  //If in same world and

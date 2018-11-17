@@ -54,12 +54,12 @@ void PlayerController::Process(RakNet::Packet *packet)
 
             if(success)
             {
-                player.movement.ReadStream(bsIn);
+                Id id(bsIn);
+                MovementChangeMessage::Unpack(bsIn, player);
+
                 BitStream bs;
-                bs.Write((NetMessage)NetworkSystemMessages::PlayerController);
-                bs.Write((NetMessage)PlayerControllerMessages::MOVEMENT_CHANGE);
-                player.id.WriteStream(bs);
-                player.movement.WriteStream(bs);
+                MovementChangeMessage::Pack(bs, player);
+
                 for(auto &sendPlayer : gameServer.playerContainer)
                 {
                     if(sendPlayer.world == player.world &&  //If in same world and

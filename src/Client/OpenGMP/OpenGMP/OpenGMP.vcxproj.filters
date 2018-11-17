@@ -194,9 +194,6 @@
     <ClCompile Include="..\..\..\Shared\Components\playerMovement.cpp">
       <Filter>Shared\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Shared\Components\scale.cpp">
-      <Filter>Shared\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Shared\Components\playerAttributes.cpp">
       <Filter>Shared\Components</Filter>
     </ClCompile>
@@ -209,7 +206,7 @@
     <ClCompile Include="..\..\..\Shared\Components\playerVisual.cpp">
       <Filter>Shared\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Shared\Components\position.cpp">
+    <ClCompile Include="..\..\..\Shared\Components\vec3.cpp">
       <Filter>Shared\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -480,9 +477,6 @@
     <ClInclude Include="..\..\Gothic\Classes\zCObject.hpp">
       <Filter>Gothic\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Shared\Components\scale.hpp">
-      <Filter>Shared\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Shared\Components\playerAttributes.hpp">
       <Filter>Shared\Components</Filter>
     </ClInclude>
@@ -495,14 +489,14 @@
     <ClInclude Include="..\..\..\Shared\Components\playerVisual.hpp">
       <Filter>Shared\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Shared\Components\position.hpp">
-      <Filter>Shared\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Gothic\Classes\zCAICamera.hpp">
       <Filter>Gothic\Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Gothic\Classes\zCParser.hpp">
       <Filter>Gothic\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Components\vec3.hpp">
+      <Filter>Shared\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

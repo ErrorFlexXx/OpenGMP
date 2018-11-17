@@ -137,8 +137,7 @@
     <ClCompile Include="..\..\..\Shared\Components\playerSkills.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\playerTalents.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\playerVisual.cpp" />
-    <ClCompile Include="..\..\..\Shared\Components\position.cpp" />
-    <ClCompile Include="..\..\..\Shared\Components\scale.cpp" />
+    <ClCompile Include="..\..\..\Shared\Components\vec3.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\string.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\version.cpp" />
     <ClCompile Include="..\..\..\Shared\Objects\idObject.cpp" />
@@ -192,8 +191,7 @@
     <ClInclude Include="..\..\..\Shared\Components\playerSkills.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\playerTalents.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\playerVisual.hpp" />
-    <ClInclude Include="..\..\..\Shared\Components\position.hpp" />
-    <ClInclude Include="..\..\..\Shared\Components\scale.hpp" />
+    <ClInclude Include="..\..\..\Shared\Components\vec3.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\string.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\version.hpp" />
     <ClInclude Include="..\..\..\Shared\Objects\client.hpp" />

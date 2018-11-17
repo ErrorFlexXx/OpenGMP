@@ -4,19 +4,16 @@
 
 namespace OpenGMP
 {
-    class Position : public IStreamObject
+    class Vec3 : public IStreamObject
     {
     public:
-        Position();
-        Position(float x, float y, float z, float angle);
-        Position(RakNet::BitStream &stream);
-
-        Position & operator+=(const Position &rhs);
+        Vec3();
+        Vec3(float x, float y, float z);
+        Vec3(RakNet::BitStream &stream);
 
         float x;
         float y;
         float z;
-        float angle;
 
         void WriteStream(RakNet::BitStream &stream) const;
         bool ReadStream(RakNet::BitStream &stream);

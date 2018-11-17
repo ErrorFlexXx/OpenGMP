@@ -97,6 +97,7 @@ void NetworkSystem::Update()
             case ID_CONNECTION_LOST:
             case ID_CONNECTION_REQUEST_ACCEPTED:
             case ID_CONNECTION_ATTEMPT_FAILED:
+            case ID_DISCONNECTION_NOTIFICATION:
             {
                 gameClient.loginSystem.Process(packet);
                 break;

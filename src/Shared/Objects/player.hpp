@@ -3,8 +3,7 @@
 #include "../Objects/netIdObject.hpp"
 #include "world.hpp"
 #include "../Components/color.hpp"
-#include "../Components/position.hpp"
-#include "../Components/scale.hpp"
+#include "../Components/vec3.hpp"
 #include "../Components/id.hpp"
 #include "../Components/playerTalents.hpp"
 #include "../Components/playerAttributes.hpp"
@@ -22,8 +21,9 @@ namespace OpenGMP
     {
     public:
         Player() {}
-        Position position;  //!< Position and rotation of the player
-        Scale scale;        //!< Scaling of the player
+        Vec3 position;  //!< Position and rotation of the player
+        Vec3 rotation;  //!< Position and rotation of the player
+        Vec3 scale;        //!< Scaling of the player
         PlayerTalents talents;  //!< Talents of the player (sneak, picklock, etc.)
         PlayerAttributes attributes; //!< Attributes of the player (str, dex, etc.)
         PlayerSkills skills;    //!< Skills (1h, 2h, bow, etc.)

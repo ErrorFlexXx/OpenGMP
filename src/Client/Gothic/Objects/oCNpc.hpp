@@ -44,8 +44,7 @@ public:
         GetAnictrl()->InitAnimations();
         SetCollDet(0);
         SetPosition(player.position);
-        ResetXZRotationsWorld();
-        RotateWorldY(player.position.angle);
+        SetHeadingAtWorld(player.rotation);
         SetCollDet(1);
         SetSleeping(0);
         CGameManager::GetInstance()->GetGame()->GetWorld()->EnableVob(this);
@@ -117,6 +116,16 @@ public:
     void GetAngles(zCVob *to, float &azimuth, float &elevation)
     {
         XCALL(0x00681680);
+    }
+
+    class zVEC3 GetAtVectorWorld() const
+    {
+        XCALL(0x0052DCB0);
+    }
+
+    void SetHeadingAtWorld(class zVEC3 const &)
+    {
+        XCALL(0x0061CBC0);
     }
 
     float GetDistanceToPos2(zVEC3 &position, int dimension)

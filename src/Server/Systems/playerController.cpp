@@ -83,11 +83,13 @@ void PlayerController::Process(RakNet::Packet *packet)
             if(success)
             {
                 player.position.ReadStream(bsIn);
+                player.rotation.ReadStream(bsIn);
                 BitStream bsOut;
                 bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
                 bsOut.Write((NetMessage)PlayerControllerMessages::POSITION_UPDATE);
                 id.WriteStream(bsOut);
                 player.position.WriteStream(bsOut);
+                player.rotation.WriteStream(bsOut);
                 for(auto &sendPlayer : gameServer.playerContainer)
                 {
                     if(sendPlayer.world == player.world &&  //If in same world and
@@ -196,6 +198,7 @@ void PlayerController::BuildAddPlayerPacket(RakNet::BitStream &bs, const ServerP
     bs.Write((NetMessage) PlayerControllerMessages::ADD_PLAYER);
     player.id.WriteStream(bs);
     player.position.WriteStream(bs);
+    player.rotation.WriteStream(bs);
     player.scale.WriteStream(bs);
     player.skills.WriteStream(bs);
     player.talents.WriteStream(bs);

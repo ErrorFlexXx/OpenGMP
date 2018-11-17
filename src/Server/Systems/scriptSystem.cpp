@@ -378,23 +378,13 @@ void ScriptSystem::SetupMetaData()
                 ._field("duration", &NotificationText::duration)
                 ;
 
-        RegisterClass("Position");
-        GDefineMetaClass<Position>
-                ::define("Position")
-                ._constructor<void*(float, float, float, float)>()
-                ._field("x", &Position::x)
-                ._field("y", &Position::y)
-                ._field("z", &Position::z)
-                ._field("angle", &Position::angle)
-                ;
-
-        RegisterClass("Scale");
-        GDefineMetaClass<Scale>
-                ::define("Scale")
+        RegisterClass("Vec3");
+        GDefineMetaClass<Vec3>
+                ::define("Vec3")
                 ._constructor<void*(float, float, float)>()
-                ._field("x", &Scale::x)
-                ._field("y", &Scale::y)
-                ._field("z", &Scale::z)
+                ._field("x", &Vec3::x)
+                ._field("y", &Vec3::y)
+                ._field("z", &Vec3::z)
                 ;
 
         RegisterClass("PlayerTalents");
@@ -489,6 +479,7 @@ void ScriptSystem::SetupMetaData()
                 ._field("world", &ServerPlayer::world)
                 ._field("client", &ServerPlayer::client)
                 ._field("position", &ServerPlayer::position)
+                ._field("rotation", &ServerPlayer::rotation)
                 ._field("scale", &ServerPlayer::scale)
                 ._field("talents", &ServerPlayer::talents)
                 ._field("attributes", &ServerPlayer::attributes)

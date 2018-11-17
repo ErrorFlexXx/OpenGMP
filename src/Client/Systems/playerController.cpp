@@ -51,13 +51,7 @@ void PlayerController::Process(RakNet::Packet *packet)
     {
         Id id(bsIn);
         ClientPlayer &addPlayer = gameClient.playerContainer.Get(id);
-        addPlayer.position.ReadStream(bsIn);
-        addPlayer.rotation.ReadStream(bsIn);
-        addPlayer.scale.ReadStream(bsIn);
-        addPlayer.skills.ReadStream(bsIn);
-        addPlayer.talents.ReadStream(bsIn);
-        addPlayer.visual.ReadStream(bsIn);
-        addPlayer.attributes.ReadStream(bsIn);
+        AddPlayerMessage::Unpack(bsIn, addPlayer);
         addPlayer.gothicPlayer = oCObjectFactory::GetFactory()->CreateNpc(/*zCParser::GetParser()->GetIndex("PC_Hero")*/);
         CGameManager::GetInstance()->GetGame()->GetWorld()->InsertVobInWorld(addPlayer.gothicPlayer);
         addPlayer.gothicPlayer->Setup(addPlayer);

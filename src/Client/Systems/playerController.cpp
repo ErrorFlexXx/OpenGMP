@@ -98,8 +98,7 @@ void PlayerController::Process(RakNet::Packet *packet)
         Id id(bsIn);
         ClientPlayer &player = gameClient.playerContainer.Get(id);
         
-        player.position.ReadStream(bsIn);
-        player.rotation.ReadStream(bsIn);
+        PositionUpdateMessage::Unpack(bsIn, player);
 
         player.gothicPlayer->SetPositionWorld(player.position);
         player.gothicPlayer->SetHeadingAtWorld(player.rotation);
@@ -308,15 +307,11 @@ void PlayerController::Stream(unsigned long long now)
 {
     if (lastUpdate + updateTimeSpan < now) //Update required ?
     {
-        Vec3 rot = activePlayer.gothicPlayer->GetAtVectorWorld();
-        Vec3 pos = activePlayer.gothicPlayer->GetPositionWorld();
+        activePlayer.position = activePlayer.gothicPlayer->GetPositionWorld();
+        activePlayer.rotation = activePlayer.gothicPlayer->GetAtVectorWorld();
 
         BitStream bsOut;
-        bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
-        bsOut.Write((NetMessage)PlayerControllerMessages::POSITION_UPDATE);
-        activePlayer.id.WriteStream(bsOut);
-        pos.WriteStream(bsOut);
-        rot.WriteStream(bsOut);
+        PositionUpdateMessage::Pack(bsOut, activePlayer);
 
         SendPlayerControllerPacket(bsOut);
         lastUpdate = now;

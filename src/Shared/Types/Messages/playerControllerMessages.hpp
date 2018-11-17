@@ -14,4 +14,35 @@ namespace OpenGMP
         POSITION_UPDATE,   //Sent, if a player position/rot gets an update.
         ENTERED_WORLD   //Sent, if the player finished entering the world (loading)
     };
+
+    struct AddPlayerMessage
+    {
+        static inline void Pack(RakNet::BitStream &bsOut, const Player &player)
+        {
+            bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
+            bsOut.Write((NetMessage)PlayerControllerMessages::ADD_PLAYER);
+            player.id.WriteStream(bsOut);
+
+            player.position.WriteStream(bsOut);
+            player.rotation.WriteStream(bsOut);
+            player.scale.WriteStream(bsOut);
+            player.skills.WriteStream(bsOut);
+            player.talents.WriteStream(bsOut);
+            player.visual.WriteStream(bsOut);
+            player.attributes.WriteStream(bsOut);
+        }
+
+        static inline bool Unpack(RakNet::BitStream &bsIn, Player &player)
+        {
+            bool success;
+            success = player.position.ReadStream(bsIn);
+            if(success) success = player.rotation.ReadStream(bsIn);
+            if(success) success = player.scale.ReadStream(bsIn);
+            if(success) success = player.skills.ReadStream(bsIn);
+            if(success) success = player.talents.ReadStream(bsIn);
+            if(success) success = player.visual.ReadStream(bsIn);
+            if(success) success = player.attributes.ReadStream(bsIn);
+            return success;
+        }
+    };
 }

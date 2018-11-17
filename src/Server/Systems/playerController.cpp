@@ -194,14 +194,5 @@ void PlayerController::SendPlayerControllerMessage(const RakNetGUID &dest, const
 
 void PlayerController::BuildAddPlayerPacket(RakNet::BitStream &bs, const ServerPlayer &player)
 {
-    bs.Write((NetMessage) NetworkSystemMessages::PlayerController);
-    bs.Write((NetMessage) PlayerControllerMessages::ADD_PLAYER);
-    player.id.WriteStream(bs);
-    player.position.WriteStream(bs);
-    player.rotation.WriteStream(bs);
-    player.scale.WriteStream(bs);
-    player.skills.WriteStream(bs);
-    player.talents.WriteStream(bs);
-    player.visual.WriteStream(bs);
-    player.attributes.WriteStream(bs);
+    AddPlayerMessage::Pack(bs, player);
 }

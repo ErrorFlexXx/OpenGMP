@@ -184,7 +184,8 @@ void PlayerController::Update()
                 {
                     float x, y, z;
                     oCNpc::GetHero()->GetPosition(x, y, z);
-                    std::cout << "Pos: " << x << " " << y << " " << z << std::endl;
+                    zVEC3 rot = oCNpc::GetHero()->GetAtVectorWorld();
+                    std::cout << "Pos: " << x << " " << y << " " << z << " rx: " << rot.x << " ry: " << rot.y << " rz: " << rot.z << ::endl;
                 }
             }
 

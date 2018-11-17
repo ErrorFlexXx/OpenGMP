@@ -35,7 +35,7 @@ public:
         static const unsigned int IsDead = 0x00736740;
     } Addresses;
 
-    void Setup(const OpenGMP::Player &player)
+    void Setup(OpenGMP::Player &player)
     {
         SetVobName("PC_Hero");
         SetVisual("HUMANS.MDS");
@@ -44,7 +44,11 @@ public:
         GetAnictrl()->InitAnimations();
         SetCollDet(0);
         SetPosition(player.position);
-        //SetHeadingAtWorld(player.rotation);
+        if (player.rotation.x == 0.f) //rot x and rot z must not be 0!
+            player.rotation.x = 0.01f;//gothic will freeze otherwise
+        if (player.rotation.z == 0.f)
+            player.rotation.z = 0.01f;
+        SetHeadingAtWorld(player.rotation);
         SetCollDet(1);
         SetSleeping(0);
         CGameManager::GetInstance()->GetGame()->GetWorld()->EnableVob(this);

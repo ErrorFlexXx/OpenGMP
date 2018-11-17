@@ -52,6 +52,7 @@ void PlayerController::Process(RakNet::Packet *packet)
         Id id(bsIn);
         ClientPlayer &addPlayer = gameClient.playerContainer.Get(id);
         addPlayer.position.ReadStream(bsIn);
+        addPlayer.rotation.ReadStream(bsIn);
         addPlayer.scale.ReadStream(bsIn);
         addPlayer.skills.ReadStream(bsIn);
         addPlayer.talents.ReadStream(bsIn);

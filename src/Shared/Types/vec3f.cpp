@@ -136,6 +136,21 @@ Vec3f Vec3f::CorrectDirection() const
     return ret;
 }
 
+
+float Vec3f::GetYawFromAtVector() const
+{
+    Vec3f tmp = *this;
+    return (float)atan2(tmp.x, tmp.z);
+}
+
+Vec3f &Vec3f::GetAtVectorFromYaw(float yaw)
+{
+    z = (float)sin(yaw);
+    x = (float)cos(yaw);
+    return *this;
+}
+
+
 String Vec3f::ToString() const
 {
     String str;

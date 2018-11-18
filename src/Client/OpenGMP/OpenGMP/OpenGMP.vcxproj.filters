@@ -179,9 +179,6 @@
     <ClCompile Include="..\..\Systems\worldSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Shared\Components\string.cpp">
-      <Filter>Shared\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Systems\playerController.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
@@ -210,6 +207,9 @@
       <Filter>Shared\Types</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Shared\Types\vec3f.cpp">
+      <Filter>Shared\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Types\string.cpp">
       <Filter>Shared\Types</Filter>
     </ClCompile>
   </ItemGroup>
@@ -435,9 +435,6 @@
     <ClInclude Include="..\..\Systems\worldSystem.hpp">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Shared\Components\string.hpp">
-      <Filter>Shared\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Systems\playerController.hpp">
       <Filter>Systems</Filter>
     </ClInclude>
@@ -502,6 +499,9 @@
       <Filter>Shared\Types</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Shared\Types\vec3f.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\string.hpp">
       <Filter>Shared\Types</Filter>
     </ClInclude>
   </ItemGroup>

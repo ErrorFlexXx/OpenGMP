@@ -52,6 +52,7 @@ void PlayerController::Process(RakNet::Packet *packet)
         Id id(bsIn);
         ClientPlayer &addPlayer = gameClient.playerContainer.Get(id);
         AddPlayerMessage::Unpack(bsIn, addPlayer);
+        std::cout << "Add player Rot: " << addPlayer.rotation.ToString() << std::endl;
         addPlayer.gothicPlayer = oCObjectFactory::GetFactory()->CreateNpc(/*zCParser::GetParser()->GetIndex("PC_Hero")*/);
         CGameManager::GetInstance()->GetGame()->GetWorld()->InsertVobInWorld(addPlayer.gothicPlayer);
         addPlayer.gothicPlayer->Setup(addPlayer);

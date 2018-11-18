@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../xcall.h"
-#include <Shared/Components/string.hpp>
+#include <Shared/Types/string.hpp>
 #include <string>
 
 int __cdecl operator==(class zSTRING const &, char const * const);

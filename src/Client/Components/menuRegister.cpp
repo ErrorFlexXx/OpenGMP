@@ -46,8 +46,8 @@ void MenuRegister::Open()
 
 void MenuRegister::Register()
 {
-    gameClient.client.loginData.loginname = *txtUsername;
-    gameClient.client.loginData.password = *txtPassword;
+    gameClient.client.loginData.loginname = (std::string)*txtUsername;
+    gameClient.client.loginData.password = (std::string)*txtPassword;
     gameClient.loginSystem.SendRegister(gameClient.client.loginData);
 }
 

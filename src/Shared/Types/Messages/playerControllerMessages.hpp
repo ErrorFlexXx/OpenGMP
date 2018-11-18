@@ -61,7 +61,7 @@ namespace OpenGMP
             id.WriteStream(bsOut);
 
             position.WriteStream(bsOut);
-            bsOut.Write(Angles::GetYawFromAtVector(rotation));
+            bsOut.Write(rotation.GetYawFromAtVector());
         }
 
         static inline bool Unpack(RakNet::BitStream &bsIn, Player &player)
@@ -70,7 +70,7 @@ namespace OpenGMP
             float yaw;
             success = player.position.ReadStream(bsIn);
             if (success) success = bsIn.Read(yaw);
-            player.rotation = Angles::GetAtVectorFromYaw(yaw);
+            player.rotation.GetAtVectorFromYaw(yaw);
             return success;
         }
     };

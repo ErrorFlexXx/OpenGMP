@@ -3,6 +3,7 @@
 #include "../GUI/menuButton.hpp"
 #include "../GUI/menuTextBox.hpp"
 #include "../Systems/menuSystem.hpp"
+#include <Shared/Types/string.hpp>
 #include <libintl.h>
 #define _(string) gettext (string)
 
@@ -46,8 +47,8 @@ void MenuLogin::Open()
 
 void MenuLogin::Login()
 {
-    gameClient.client.loginData.loginname = *txtUsername;
-    gameClient.client.loginData.password = *txtPassword;
+    gameClient.client.loginData.loginname = (std::string)*txtUsername;
+    gameClient.client.loginData.password = (std::string)*txtPassword;
     gameClient.loginSystem.SendLogin(gameClient.client.loginData);
 }
 

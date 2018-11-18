@@ -131,6 +131,19 @@ namespace OpenGMP
         Vec3f CorrectDirection() const;
 
         /**
+         * @brief GetYawFromAtVector returns the angle between x and z from normalized version of this vector.
+         * @return angle between x and z component.
+         */
+        float GetYawFromAtVector() const;
+
+        /**
+         * @brief GetAtVectorFromYaw sets the x and z component, regarding to the yaw angle.
+         * @param yaw the angle to setup the vector with.
+         * @return reference of this vector.
+         */
+        Vec3f &GetAtVectorFromYaw(float yaw);
+
+        /**
          * @brief ToString creates a string representation of the vector.
          * @return a String representing the vector.
          */

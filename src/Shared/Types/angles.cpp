@@ -78,20 +78,6 @@ float Angles::ClampToPi(float radians)
     return radians - Pi;
 }
 
-float Angles::GetYawFromAtVector(const Vec3f &at)
-{
-    Vec3f tmp = at.Normalise();
-    return (float)atan2(tmp.x, tmp.z);
-}
-
-Vec3f Angles::GetAtVectorFromYaw(float yaw)
-{
-    Vec3f at;
-    at.z = (float)sin(yaw);
-    at.x = (float)cos(yaw);
-    return at;
-}
-
 Angles Angles::FromAtVector(const Vec3f &at)
 {
     Angles ret;

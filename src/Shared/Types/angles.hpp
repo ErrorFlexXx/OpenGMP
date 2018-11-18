@@ -18,8 +18,6 @@ namespace OpenGMP
         static float ClampTo2Pi(float radians);
         static float ClampTo180(float degrees);
         static float ClampToPi(float radians);
-        static float GetYawFromAtVector(const Vec3f &at);
-        static Vec3f GetAtVectorFromYaw(float yaw);
         static Angles FromAtVector(const Vec3f &at);
 
         /* Constructors and Methods */

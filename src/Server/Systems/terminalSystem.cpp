@@ -1,13 +1,18 @@
 #include "terminalSystem.hpp"
 #include "../gameServer.hpp"
 #include <utils/logger.h>
+#ifndef WIN32
 #include <unistd.h>
 #include <sys/select.h>
 #include <termios.h>
+#else
+#pragma warning "Non blocking read implementation for windows missing!"
+#endif
 
 using namespace std;
 using namespace OpenGMP;
 
+#ifndef WIN32
 struct termios orig_termios;
 
 void reset_terminal_mode()
@@ -48,6 +53,7 @@ int getch()
         return c;
     }
 }
+#endif
 
 TerminalSystem::TerminalSystem(GameServer &gameServer)
     : gameServer(gameServer)
@@ -62,7 +68,7 @@ bool TerminalSystem::Startup()
 bool TerminalSystem::Update()
 {
     bool idle = true;
-
+#ifndef WIN32
     if(kbhit())
     {
         idle = false;
@@ -88,6 +94,7 @@ bool TerminalSystem::Update()
         inputLine.clear();
         commandReady = false;
     }
+#endif
     return !idle; //Return if we have done something.
 }
 

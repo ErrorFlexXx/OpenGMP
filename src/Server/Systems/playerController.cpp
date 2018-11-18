@@ -87,8 +87,7 @@ void PlayerController::Process(RakNet::Packet *packet)
                 PositionUpdateMessage::Pack(bsOut, player);
                 for(auto &sendPlayer : gameServer.playerContainer)
                 {
-                    if(sendPlayer.world == player.world &&  //If in same world and
-                       sendPlayer != player)                //not the delta update player itself
+                    if(sendPlayer.world == player.world) //If in same world and
                         SendPlayerControllerMessage(sendPlayer, bsOut); //Stream to all other players
                 }
             }

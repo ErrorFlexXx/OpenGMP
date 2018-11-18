@@ -8,16 +8,32 @@ const float Angles::Pi = 3.1415926535897931f;
 const float Angles::TwoPi = 6.2831853071795865f;
 
 Angles::Angles()
-{
-    m_pitch = 0.f;
-    m_yaw = 0.f;
-    m_roll = 0.f;
-}
+    : pitch(0.f)
+    , yaw(0.f)
+    , roll(0.f)
+{}
+
+Angles::Angles(float data[])
+    : pitch(data[0])
+    , yaw(data[1])
+    , roll(data[2])
+{}
+
+Angles::Angles(double pitch, double yaw, double roll)
+    : pitch((float) pitch)
+    , yaw((float) yaw)
+    , roll((float) roll)
+{}
+
+Angles::Angles(float pitch, float yaw, float roll)
+    : pitch(pitch)
+    , yaw(yaw)
+    , roll(roll)
+{}
 
 Angles Angles::Null()
 {
-    Angles ret;
-    return ret;
+    return Angles();
 }
 
 float Angles::Deg2Rad(float degrees)
@@ -62,146 +78,130 @@ float Angles::ClampToPi(float radians)
     return radians - Pi;
 }
 
-float Angles::getYawFromAtVector(Vec3f at)
+float Angles::GetYawFromAtVector(const Vec3f &at)
 {
-    Vec3f tmp = at.normalise();
-    return (float)atan2(-tmp.m_x, tmp.m_z);
+    Vec3f tmp = at.Normalise();
+    return (float)atan2(-tmp.x, tmp.z);
 }
 
-Angles Angles::fromAtVector(Vec3f at)
+Vec3f Angles::GetAtVectorFromYaw(float yaw)
 {
-    Angles ret = Angles::Null();
-    ret.setByAtVector(at);
+    Vec3f at;
+    at.z = sin(yaw);
+    at.x = cos(yaw);
+    return at;
+}
+
+Angles Angles::FromAtVector(const Vec3f &at)
+{
+    Angles ret;
+    ret.SetByAtVector(at);
     return ret;
 }
 
-Angles::Angles(float data[])
+Angles Angles::Clamp()
 {
-    m_pitch = data[0];
-    m_yaw   = data[1];
-    m_roll  = data[2];
+    return Angles(ClampToPi(pitch), ClampToPi(yaw), ClampToPi(roll));
 }
 
-Angles::Angles(double pitch, double yaw, double roll)
+void Angles::Reset()
 {
-    m_pitch = (float) pitch;
-    m_yaw   = (float) yaw;
-    m_roll  = (float) roll;
+    pitch = 0.f;
+    yaw   = 0.f;
+    roll  = 0.f;
 }
 
-Angles::Angles(float pitch, float yaw, float roll)
+void Angles::Set(float pitch, float yaw, float roll)
 {
-    m_pitch = pitch;
-    m_yaw   = yaw;
-    m_roll  = roll;
+    this->pitch = pitch;
+    this->yaw   = yaw;
+    this->roll  = roll;
 }
 
-Angles Angles::clamp()
+void Angles::SetByAtVector(const Vec3f &at)
 {
-    Angles ret(ClampToPi(m_pitch), ClampToPi(m_yaw), ClampToPi(m_roll));
-    return ret;
+    Vec3f tmp = at.Normalise();
+    pitch     = -(float)acos(tmp.y) + Pi / 2;
+    pitch     = ClampToPi(pitch);
+    yaw       = (float)atan2(-tmp.x, tmp.z);
+    roll      = 0.f;
 }
 
-void Angles::reset()
+Vec3f Angles::ToRightVector()
 {
-    m_pitch = 0.f;
-    m_yaw   = 0.f;
-    m_roll  = 0.f;
+    float rollSin = (float)sin(roll);
+    float rollCos = (float)cos(roll);
+    float yawSin  = (float)sin(yaw);
+    float yawCos  = (float)cos(yaw);
+
+    return Vec3f(rollCos * yawCos, rollCos * yawSin, -rollSin);
 }
 
-void Angles::set(float pitch, float yaw, float roll)
+Vec3f Angles::ToUpVector()
 {
-    m_pitch = pitch;
-    m_yaw   = yaw;
-    m_roll  = roll;
+    float rollSin  = (float)sin(roll);
+    float rollCos  = (float)cos(roll);
+    float yawSin   = (float)sin(yaw);
+    float yawCos   = (float)cos(yaw);
+    float pitchSin = -(float)cos(pitch);
+    float pitchCos = (float)sin(pitch);
+
+    return Vec3f (pitchSin * rollSin * yawCos - pitchCos * yawSin,
+                  pitchSin * rollSin * yawSin + pitchCos * yawCos,
+                  pitchSin * rollCos);
 }
 
-void Angles::setByAtVector(Vec3f at)
+Vec3f Angles::ToAtVector()
 {
-    Vec3f tmp = at.normalise();
-    m_pitch = -(float)acos(tmp.m_y) + Pi / 2;
-    m_pitch = ClampToPi(m_pitch);
-    m_yaw = (float)atan2(-tmp.m_x, tmp.m_z);
-    m_roll = 0.f;
+    float rollSin  =  (float)sin(roll);
+    float rollCos  =  (float)cos(roll);
+    float yawSin   =  (float)sin(yaw);
+    float yawCos   =  (float)cos(yaw);
+    float pitchSin = -(float)cos(pitch);
+    float pitchCos =  (float)sin(pitch);
+
+    return Vec3f (pitchCos * rollSin * yawCos + pitchSin * yawSin,
+                  pitchCos * rollSin * yawSin - pitchSin * yawCos,
+                  pitchCos * rollCos);
 }
 
-Vec3f Angles::toRightVector()
-{
-    float rollSin = (float)sin(m_roll);
-    float rollCos = (float)cos(m_roll);
-    float yawSin = (float)sin(m_yaw);
-    float yawCos = (float)cos(m_yaw);
-    Vec3f ret(rollCos * yawCos, rollCos * yawSin, -rollSin);
-    return ret;
-}
+/***************
+ * Operators   *
+ ***************/
 
-Vec3f Angles::toUpVector()
-{
-    float rollSin = (float)sin(m_roll);
-    float rollCos = (float)cos(m_roll);
-    float yawSin = (float)sin(m_yaw);
-    float yawCos = (float)cos(m_yaw);
-    float pitchSin = -(float)cos(m_pitch);
-    float pitchCos = (float)sin(m_pitch);
-    Vec3f ret(pitchSin * rollSin * yawCos - pitchCos * yawSin,
-              pitchSin * rollSin * yawSin + pitchCos * yawCos,
-              pitchSin * rollCos);
-    return ret;
-}
-
-Vec3f Angles::toAtVector()
-{
-    float rollSin = (float)sin(m_roll);
-    float rollCos = (float)cos(m_roll);
-    float yawSin = (float)sin(m_yaw);
-    float yawCos = (float)cos(m_yaw);
-    float pitchSin = -(float)cos(m_pitch);
-    float pitchCos = (float)sin(m_pitch);
-    Vec3f ret(pitchCos * rollSin * yawCos + pitchSin * yawSin,
-              pitchCos * rollSin * yawSin - pitchSin * yawCos,
-              pitchCos * rollCos);
-    return ret;
-}
-
-/* Operators */
-
-float Angles::operator [](int x)
+float Angles::operator [](int x) const
 {
     if(x == 0)
-        return m_pitch;
+        return pitch;
     else if(x == 1)
-        return m_yaw;
+        return yaw;
     else if(x == 2)
-        return m_roll;
+        return roll;
     else
         return 0.0f;
 }
 
-Angles Angles::operator +(const Angles& rhs)
+Angles Angles::operator +(const Angles& rhs) const
 {
-    Angles ret(m_pitch + rhs.m_pitch, m_yaw + rhs.m_yaw, m_roll + rhs.m_roll);
-    return ret;
+    return Angles(pitch + rhs.pitch, yaw + rhs.yaw, roll + rhs.roll);
 }
 
-float Angles::operator *(const Angles& rhs)
+float Angles::operator *(const Angles& rhs) const
 {
-    return m_pitch * rhs.m_pitch + m_yaw * rhs.m_yaw + m_roll * rhs.m_roll;
+    return pitch * rhs.pitch + yaw * rhs.yaw + roll * rhs.roll;
 }
 
-Angles Angles::operator *(float factor)
+Angles Angles::operator *(float factor) const
 {
-    Angles ret(m_pitch * factor, m_yaw * factor, m_roll * factor);
-    return ret;
+    return Angles(pitch * factor, yaw * factor, roll * factor);
 }
 
-Angles Angles::operator -(const Angles& rhs)
+Angles Angles::operator -(const Angles& rhs) const
 {
-    Angles ret(m_pitch - rhs.m_pitch, m_yaw - rhs.m_yaw, m_roll - rhs.m_roll);
-    return ret;
+    return Angles(pitch - rhs.pitch, yaw - rhs.yaw, roll - rhs.roll);
 }
 
-Angles Angles::operator /(float factor)
+Angles Angles::operator /(float factor) const
 {
-    Angles ret(m_pitch / factor, m_yaw / factor, m_roll / factor);
-    return ret;
+    return Angles(pitch / factor, yaw / factor, roll / factor);
 }

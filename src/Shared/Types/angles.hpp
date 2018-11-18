@@ -2,7 +2,7 @@
 
 namespace OpenGMP
 {
-    class Vec3f; //Forward declaration of Vec3f class.
+    class Vec3f;
 
     /**
      * @brief The Angles class holds all three common angles.
@@ -11,7 +11,6 @@ namespace OpenGMP
     class Angles
     {
     public:
-        /* Static Methods */
         static Angles Null();
         static float Deg2Rad(float degrees);
         static float Rad2Deg(float radians);
@@ -19,34 +18,34 @@ namespace OpenGMP
         static float ClampTo2Pi(float radians);
         static float ClampTo180(float degrees);
         static float ClampToPi(float radians);
-        static float getYawFromAtVector(Vec3f at);
-        static Angles fromAtVector(Vec3f at);
+        static float GetYawFromAtVector(const Vec3f &at);
+        static Vec3f GetAtVectorFromYaw(float yaw);
+        static Angles FromAtVector(const Vec3f &at);
 
         /* Constructors and Methods */
         Angles();
         Angles(float data[]);
         Angles(double pitch, double yaw, double roll);
         Angles(float pitch, float yaw, float roll);
-        Angles clamp();
-        void reset();
-        void set(float pitch, float yaw, float roll);
-        void setByAtVector(Vec3f at);
-        Vec3f toRightVector();
-        Vec3f toUpVector();
-        Vec3f toAtVector();
+        Angles Clamp();
+        void Reset();
+        void Set(float pitch, float yaw, float roll);
+        void SetByAtVector(const Vec3f &at);
+        Vec3f ToRightVector();
+        Vec3f ToUpVector();
+        Vec3f ToAtVector();
 
         /* Operators */
-        //To Do: Mark operators as friend and implement operators as non member functions!
-        float operator[] (int x);
-        Angles operator+ (const Angles& rhs);
-        float operator* (const Angles& rhs);
-        Angles operator* (float factor);
-        Angles operator- (const Angles& rhs);
-        Angles operator/ (float factor);
+        float operator[] (int x) const;
+        Angles operator+ (const Angles& rhs) const;
+        float  operator* (const Angles& rhs) const;
+        Angles operator* (float factor) const;
+        Angles operator- (const Angles& rhs) const;
+        Angles operator/ (float factor) const;
 
-        float m_pitch;
-        float m_yaw;
-        float m_roll;
+        float pitch;
+        float yaw;
+        float roll;
 
         static const float Pi;     //!< The Pi constant.
         static const float TwoPi;  //!< Two Pi constant.

@@ -323,6 +323,19 @@ void ScriptSystem::SetupMetaData()
                 ;
 
         /***************/
+        /*    Types    */
+        /***************/
+
+        RegisterClass("Vec3f");
+        GDefineMetaClass<Vec3f>
+                ::define("Vec3f")
+                ._constructor<void*(float, float, float)>()
+                ._field("x", &Vec3f::x)
+                ._field("y", &Vec3f::y)
+                ._field("z", &Vec3f::z)
+                ;
+
+        /***************/
         /*  Components */
         /***************/
 
@@ -376,15 +389,6 @@ void ScriptSystem::SetupMetaData()
                 ._field("posY", &NotificationText::posY)
                 ._field("color", &NotificationText::color)
                 ._field("duration", &NotificationText::duration)
-                ;
-
-        RegisterClass("Vec3");
-        GDefineMetaClass<Vec3>
-                ::define("Vec3")
-                ._constructor<void*(float, float, float)>()
-                ._field("x", &Vec3::x)
-                ._field("y", &Vec3::y)
-                ._field("z", &Vec3::z)
                 ;
 
         RegisterClass("PlayerTalents");

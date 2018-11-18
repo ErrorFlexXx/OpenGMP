@@ -103,8 +103,8 @@ void PlayerController::Process(RakNet::Packet *packet)
         
         if (active && id == activePlayer.id) //Do not update myself, if I'm controlling
             break;
-        player.gothicPlayer->SetPositionWorld(player.position);
-        player.gothicPlayer->SetHeadingAtWorld(player.rotation);
+        player.gothicPlayer->SetPositionWorld(player.position.ClampToWorldLimits());
+        player.gothicPlayer->SetHeadingAtWorld(player.rotation.ClampToWorldLimits());
         
         break;
     }

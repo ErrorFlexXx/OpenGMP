@@ -45,8 +45,7 @@ public:
         SetCollDet(0);
         player.position = player.position.ClampToWorldLimits();
         SetPosition(player.position);
-        player.rotation = player.rotation.ClampToWorldLimits();
-        SetHeadingAtWorld(player.rotation);
+        SetHeadingYWorld(player.rotation.ClampToWorldLimits());
         SetCollDet(1);
         SetSleeping(0);
         CGameManager::GetInstance()->GetGame()->GetWorld()->EnableVob(this);

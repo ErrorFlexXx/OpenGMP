@@ -87,8 +87,8 @@ float Angles::GetYawFromAtVector(const Vec3f &at)
 Vec3f Angles::GetAtVectorFromYaw(float yaw)
 {
     Vec3f at;
-    at.z = sin(yaw);
-    at.x = cos(yaw);
+    at.z = (float)sin(yaw);
+    at.x = (float)cos(yaw);
     return at;
 }
 

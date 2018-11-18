@@ -2,7 +2,7 @@
 
 #include "../xcall.h"
 #include "zSTRING.hpp"
-#include <Shared/Components/vec3.hpp>
+#include <Shared/Types/vec3f.hpp>
 
 class zVEC3
 {
@@ -17,16 +17,16 @@ public:
         XCALL(0x00408EC0);
     }
 
-    zVEC3(const OpenGMP::Vec3 &vec)
+    zVEC3(const OpenGMP::Vec3f &vec)
     {
         x = vec.x;
         y = vec.y;
         z = vec.z;
     }
 
-    operator OpenGMP::Vec3()
+    operator OpenGMP::Vec3f()
     {
-        return OpenGMP::Vec3(x, y, z);
+        return OpenGMP::Vec3f(x, y, z);
     }
 
     zVEC3(float)

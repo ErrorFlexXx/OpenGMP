@@ -137,12 +137,13 @@
     <ClCompile Include="..\..\..\Shared\Components\playerSkills.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\playerTalents.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\playerVisual.cpp" />
-    <ClCompile Include="..\..\..\Shared\Components\vec3.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\string.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\version.cpp" />
     <ClCompile Include="..\..\..\Shared\Objects\idObject.cpp" />
     <ClCompile Include="..\..\..\Shared\Systems\staticContainer.cpp" />
     <ClCompile Include="..\..\..\Shared\Systems\versionSystem.cpp" />
+    <ClCompile Include="..\..\..\Shared\Types\angles.cpp" />
+    <ClCompile Include="..\..\..\Shared\Types\vec3f.cpp" />
     <ClCompile Include="..\..\Components\menuLogin.cpp" />
     <ClCompile Include="..\..\Components\menuMain.cpp" />
     <ClCompile Include="..\..\Components\menuRegister.cpp" />
@@ -191,7 +192,6 @@
     <ClInclude Include="..\..\..\Shared\Components\playerSkills.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\playerTalents.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\playerVisual.hpp" />
-    <ClInclude Include="..\..\..\Shared\Components\vec3.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\string.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\version.hpp" />
     <ClInclude Include="..\..\..\Shared\Objects\client.hpp" />
@@ -200,12 +200,14 @@
     <ClInclude Include="..\..\..\Shared\Objects\world.hpp" />
     <ClInclude Include="..\..\..\Shared\Systems\staticContainer.hpp" />
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\angles.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\constants.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\loginSystemMessages.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\menuSystemMessages.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\networkSystemMessages.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\playerControllerMessages.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\worldSystemMessages.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\vec3f.hpp" />
     <ClInclude Include="..\..\Components\menuLogin.hpp" />
     <ClInclude Include="..\..\Components\menuMain.hpp" />
     <ClInclude Include="..\..\Components\menuRegister.hpp" />

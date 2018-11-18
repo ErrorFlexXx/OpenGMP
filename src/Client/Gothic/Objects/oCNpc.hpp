@@ -43,11 +43,9 @@ public:
         InitHumanAI();
         GetAnictrl()->InitAnimations();
         SetCollDet(0);
+        player.position = player.position.ClampToWorldLimits();
         SetPosition(player.position);
-        if (player.rotation.x == 0.f) //rot x and rot z must not be 0!
-            player.rotation.x = 0.01f;//gothic will freeze otherwise
-        if (player.rotation.z == 0.f)
-            player.rotation.z = 0.01f;
+        player.rotation = player.rotation.ClampToWorldLimits();
         SetHeadingAtWorld(player.rotation);
         SetCollDet(1);
         SetSleeping(0);

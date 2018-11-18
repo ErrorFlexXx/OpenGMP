@@ -206,8 +206,11 @@
     <ClCompile Include="..\..\..\Shared\Components\playerVisual.cpp">
       <Filter>Shared\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Shared\Components\vec3.cpp">
-      <Filter>Shared\Components</Filter>
+    <ClCompile Include="..\..\..\Shared\Types\angles.cpp">
+      <Filter>Shared\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Types\vec3f.cpp">
+      <Filter>Shared\Types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -495,8 +498,11 @@
     <ClInclude Include="..\..\Gothic\Classes\zCParser.hpp">
       <Filter>Gothic\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Shared\Components\vec3.hpp">
-      <Filter>Shared\Components</Filter>
+    <ClInclude Include="..\..\..\Shared\Types\angles.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\vec3f.hpp">
+      <Filter>Shared\Types</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

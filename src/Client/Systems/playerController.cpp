@@ -309,8 +309,8 @@ void PlayerController::Stream(unsigned long long now)
 {
     if (lastUpdate + updateTimeSpan < now) //Update required ?
     {
-        Vec3 position = activePlayer.gothicPlayer->GetPositionWorld();
-        Vec3 rotation = activePlayer.gothicPlayer->GetAtVectorWorld();
+        Vec3f position = activePlayer.gothicPlayer->GetPositionWorld();
+        Vec3f rotation = activePlayer.gothicPlayer->GetAtVectorWorld();
 
         BitStream bsOut;
         PositionUpdateMessage::Pack(bsOut, activePlayer.id, position, rotation);

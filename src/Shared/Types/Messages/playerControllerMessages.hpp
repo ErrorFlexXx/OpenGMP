@@ -1,6 +1,7 @@
 #pragma once
 
 #include "networkSystemMessages.hpp"
+#include <Shared/Types/angles.hpp>
 
 namespace OpenGMP
 {
@@ -50,12 +51,7 @@ namespace OpenGMP
     {
         static inline void Pack(RakNet::BitStream &bsOut, const Player &player)
         {
-            bsOut.Write((NetMessage)NetworkSystemMessages::PlayerController);
-            bsOut.Write((NetMessage)PlayerControllerMessages::POSITION_UPDATE);
-            player.id.WriteStream(bsOut);
-
-            player.position.WriteStream(bsOut);
-            player.rotation.WriteStream(bsOut);
+            Pack(bsOut, player.id, player.position, player.rotation);
         }
 
         static inline void Pack(RakNet::BitStream &bsOut, const Id &id, const Vec3f &position, const Vec3f &rotation)
@@ -65,14 +61,16 @@ namespace OpenGMP
             id.WriteStream(bsOut);
 
             position.WriteStream(bsOut);
-            rotation.WriteStream(bsOut);
+            bsOut.Write(Angles::GetYawFromAtVector(rotation));
         }
 
         static inline bool Unpack(RakNet::BitStream &bsIn, Player &player)
         {
             bool success;
-                        success = player.position.ReadStream(bsIn);
-            if(success) success = player.rotation.ReadStream(bsIn);
+            float yaw;
+            success = player.position.ReadStream(bsIn);
+            if (success) success = bsIn.Read(yaw);
+            player.rotation = Angles::GetAtVectorFromYaw(yaw);
             return success;
         }
     };

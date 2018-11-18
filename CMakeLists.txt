@@ -25,7 +25,6 @@ elseif(MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /MP /bigobj")
     set(USE_MSVC_RUNTIME_LIBRARY_DLL ON)
     add_definitions(-DNOMINMAX)
-    add_definitions(-DWIN32_LEAN_AND_MEAN)
 endif()
 
 # ---------------- Doxygen documentation ------------
@@ -96,6 +95,11 @@ file(GLOB serverSources
     "src/Shared/Types/Messages/*.cpp"
     "src/Shared/Types/Messages/*.hpp"
 )
+
+# Prevent conflict between windows.h and raknet (winsock2.h) redefinitions.
+if(MSVC)
+    add_definitions(-DWIN32_LEAN_AND_MEAN)
+endif()
 
 # Build commands server
 message("Will build server.")

@@ -25,6 +25,7 @@ elseif(MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /MP /bigobj")
     set(USE_MSVC_RUNTIME_LIBRARY_DLL ON)
     add_definitions(-DNOMINMAX)
+    add_definitions(-DWIN32_LEAN_AND_MEAN)
 endif()
 
 # ---------------- Doxygen documentation ------------
@@ -61,13 +62,10 @@ add_subdirectory(lib/RakNet)
 add_subdirectory(lib/ZenLib)
 add_subdirectory(lib/lua)
 
-if(UNIX)
-	add_subdirectory(lib/python-cmake-buildsystem)
-	include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/python-cmake-buildsystem/bin) # generated from python cmake file.
-	include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/Python-2.7.6/Include)
-else()
-	find_package(PythonLibs 2.7 EXACT REQUIRED)
-endif()
+add_subdirectory(lib/python-cmake-buildsystem)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/python-cmake-buildsystem/bin) # generated from python cmake file.
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/Python-2.7.6/Include)
+
 add_subdirectory(lib/cpgf)
 
 #Server

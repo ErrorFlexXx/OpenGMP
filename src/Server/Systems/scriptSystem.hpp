@@ -71,7 +71,7 @@ namespace OpenGMP
          *  Mostly used as support function in Script class.
          * @return std::list<std::pair<std::string, std::string>>
          */
-        const std::list<const std::string> &GetRegisteredClasses();
+        const std::list<std::string> &GetRegisteredClasses();
 
         /**
          * @brief GetRegisteredGlobals returns a list of names for registered globals.
@@ -103,7 +103,7 @@ namespace OpenGMP
 
     private:
         std::list<Script*> m_registeredScripts; //!< Container to hold loaded script objects in.
-        std::list<const std::string> m_registeredClasses; //!< Container with names of registered meta classes.
+        std::list<std::string> m_registeredClasses; //!< Container with names of registered meta classes.
         std::list<std::string> m_registeredGlobals; //!< Container with names of registered globals
         GameServer &gameServer; //!< The GameServer instance this System acts for.
         static bool metaInited;

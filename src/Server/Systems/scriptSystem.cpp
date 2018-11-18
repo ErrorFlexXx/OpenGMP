@@ -136,7 +136,7 @@ void ScriptSystem::RegisterGlobal(string name)
                 name);
 }
 
-const std::list<const std::string> &ScriptSystem::GetRegisteredClasses()
+const std::list<std::string> &ScriptSystem::GetRegisteredClasses()
 {
     return m_registeredClasses;
 }

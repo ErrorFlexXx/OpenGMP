@@ -52,6 +52,11 @@ public:
         SetAdditionalVisuals(player.visual.bodyModel, player.visual.bodyTextureId, 0, player.visual.headModel, player.visual.headTextureId, 0, -1);
         HP_Max(player.attributes.max_health);
         HP(player.attributes.health);
+        if (!player.rotation.IsNull())
+        {
+            //CGameManager::GetInstance()->GetGame()->Orig_Render();
+            SetHeadingAtWorld(player.rotation.ClampToWorldLimits());
+        }
     }
 
     int HP()

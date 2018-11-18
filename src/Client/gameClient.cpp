@@ -2,6 +2,7 @@
 #include "Hooks/otherHooks.hpp"
 #include "Hooks/hGame.hpp"
 #include <Shared/Types/constants.hpp>
+#include <Client/Gothic/cGameManager.hpp>
 #include <libintl.h>
 #include <locale>
 #include <iostream>
@@ -42,7 +43,8 @@ void GameClient::Startup(HINSTANCE inst)
 
 void GameClient::Stop()
 {
-    ;
+    networkSystem.Shutdown();
+    exit(0);
 }
 
 bool GameClient::IsGothic2exe()

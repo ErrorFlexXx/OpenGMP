@@ -192,6 +192,10 @@ void PlayerController::Update()
                     std::cout << "Pos: " << x << " " << y << " " << z << " rx: " << rot.x << " ry: " << rot.y << " rz: " << rot.z << ::endl;
                 }
             }
+            if (gameClient.inputSystem.IsPressed(VirtualKeys::Escape))
+            {
+                gameClient.Stop();
+            }
 
             if (BindingPressed(PlayerMovement::Forward))
             {

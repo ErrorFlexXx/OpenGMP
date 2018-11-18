@@ -19,5 +19,7 @@ namespace OpenGMP
     public:
         ServerClient();
         ~ServerClient();
+
+        bool hasEnteredWorld;
     };
 }

@@ -7,6 +7,7 @@ using namespace OpenGMP;
 
 ServerClient::ServerClient()
     : Client()
+    , hasEnteredWorld(false)
 {
 }
 

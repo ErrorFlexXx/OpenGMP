@@ -127,7 +127,7 @@ void PlayerController::SpawnPlayer(ServerPlayer &player, const ServerWorld &worl
 
     for(auto &client : gameServer.clientContainer)
     {
-        if(client.world == world) //Send AddPlayer if client is in same world
+        if(client.world == world && client.hasEnteredWorld) //Send AddPlayer if client is in same world
             SendPlayerControllerMessage(client, bs);
     }
 }
@@ -151,6 +151,8 @@ void PlayerController::DespawnPlayer(ServerPlayer &player)
 
 void PlayerController::ClientEnteringWorld(ServerClient &client)
 {
+    client.hasEnteredWorld = true;
+
     for(auto &player : gameServer.playerContainer) //Send all player
     {
         if(player.world == client.world) //which are in the same world.

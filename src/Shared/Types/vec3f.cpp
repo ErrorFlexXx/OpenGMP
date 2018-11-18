@@ -74,8 +74,7 @@ Vec3f Vec3f::Normalise() const
     float length = GetLength();
     if(length != 0)
     {
-        Vec3f ret(x / length, y / length, z / length);
-        return ret;
+        return Vec3f(x / length, y / length, z / length);
     }
     return *this;
 }

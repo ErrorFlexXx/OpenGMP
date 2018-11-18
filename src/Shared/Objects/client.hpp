@@ -24,6 +24,8 @@ namespace OpenGMP
     class Client : public NetIdObject
     {
     public:
+        Client()
+            : NetIdObject() {}
         World world;        //!< world the client has loaded (as player or spectator)
         Version version;    //!< (available script attribute) version of a client
         AuthData authData;  //!< (available script attribute) auth data of a client

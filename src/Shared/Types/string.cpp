@@ -5,6 +5,7 @@ using namespace RakNet;
 using namespace OpenGMP;
 
 String::String()
+    : text("")
 {}
 
 String::String(const std::string &value)

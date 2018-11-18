@@ -6,6 +6,7 @@ using namespace RakNet;
 using namespace OpenGMP;
 
 ServerClient::ServerClient()
+    : Client()
 {
 }
 

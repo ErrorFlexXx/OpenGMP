@@ -10,8 +10,7 @@ namespace OpenGMP
     class ServerPlayer : public Player
     {
     public:
-        ServerPlayer()
-        {}
+        ServerPlayer() : Player() {}
 
         ServerWorld world;      //!< World the player is in
         ServerClient client;    //!< Client which controls the player

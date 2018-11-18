@@ -20,7 +20,7 @@ namespace OpenGMP
     class Player : public NetIdObject
     {
     public:
-        Player() {}
+        Player() : NetIdObject() {}
         Vec3f position;  //!< Position and rotation of the player
         Vec3f rotation;  //!< Position and rotation of the player
         Vec3f scale;        //!< Scaling of the player

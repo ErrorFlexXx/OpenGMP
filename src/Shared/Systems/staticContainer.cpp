@@ -36,7 +36,7 @@ bool StaticContainer<T>::Remove(size_t id)
 {
     if(0 <= id && id < container.size())
     {
-        container[id].id = -1; //Flag id as unset.
+        container[id] = T();
         return true;
     }
     return false;

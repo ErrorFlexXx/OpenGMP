@@ -9,6 +9,7 @@ namespace OpenGMP
     class World : public IdObject
     {
     public:
+        World() : IdObject() {}
         String worldName;
     };
 }

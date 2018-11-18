@@ -21,6 +21,7 @@ namespace OpenGMP
         bool operator!=(const IdObject &rhs) const { return id != rhs.id; }
 
     protected:
-        IdObject() {} //Abstract
+        IdObject()
+            : id() {} //Abstract
     };
 }

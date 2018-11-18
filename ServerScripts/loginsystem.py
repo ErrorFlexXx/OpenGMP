@@ -54,8 +54,8 @@ def ClientEnteredWorld(serverClient):
     player.visual.headModel = "Hum_Head_Pony"
     player.visual.headTextureId = 18
     player.visual.fatness = 1
-    player.position = Vec3(29912.9, 5253.92, -15710)
-    player.rotation = Vec3(0, 0, 0)
+    player.position = Vec3f(29912.9, 5253.92, -15710)
+    player.rotation = Vec3f(0, 0, 0)
     player.attributes.health = 100
     player.attributes.max_health = 100
     playerCtrl.SpawnPlayer(player, worldSys.GetStoredWorld(1))

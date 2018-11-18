@@ -114,6 +114,8 @@ float Vec3f::ClampToWorldLimits(float correct)
         correct = -GOTHIC_POS_LIMIT;
     else if(correct > GOTHIC_POS_LIMIT)
         correct = GOTHIC_POS_LIMIT;
+    else if(correct == 0.f)
+        correct = NULL_LIMIT;
     return correct;
 }
 

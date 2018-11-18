@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../Objects/iStreamObject.hpp"
+#include <Shared/Types/string.hpp>
 #include <stdint.h>
-#include "string.hpp"
 
 namespace OpenGMP
 {

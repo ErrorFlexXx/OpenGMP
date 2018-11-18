@@ -1,5 +1,6 @@
 #pragma once
 
+#include "string.hpp"
 #include <BitStream.h>
 
 #define NULL_LIMIT          0.0000001f
@@ -128,6 +129,12 @@ namespace OpenGMP
          * @return a normalised vector with z=1 if vec. was zero.
          */
         Vec3f CorrectDirection() const;
+
+        /**
+         * @brief ToString creates a string representation of the vector.
+         * @return a String representing the vector.
+         */
+        String ToString() const;
 
         /***************/
         /** Operators **/

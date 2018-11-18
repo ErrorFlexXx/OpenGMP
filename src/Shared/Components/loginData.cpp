@@ -1,31 +1,20 @@
 #include "loginData.hpp"
-#include <RakString.h>
 
 using namespace RakNet;
 using namespace OpenGMP;
 
 void LoginData::WriteStream(BitStream &stream) const
 {
-    RakString rakLoginname("%s", loginname.c_str());
-    RakString rakPassword("%s", password.c_str());
-
-    stream.Write(rakLoginname);
-    stream.Write(rakPassword);
+    loginname.WriteStream(stream);
+    password.WriteStream(stream);
 }
 
 bool LoginData::ReadStream(BitStream &stream)
 {
-    RakString rakLoginname;
-    RakString rakPassword;
     bool success;
 
-                success = stream.Read(rakLoginname);
-    if(success) success = stream.Read(rakPassword);
+    success = loginname.ReadStream(stream);
+    if(success) success = password.ReadStream(stream);
 
-    if(success)
-    {
-        loginname = rakLoginname;
-        password = rakPassword;
-    }
     return success;
 }

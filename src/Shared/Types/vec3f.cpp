@@ -120,11 +120,9 @@ float Vec3f::ClampToWorldLimits(float correct)
 
 Vec3f Vec3f::ClampToWorldLimits() const
 {
-    Vec3f ret(x, y, z);
-    ret.x = Vec3f::ClampToWorldLimits(ret.x);
-    ret.y = Vec3f::ClampToWorldLimits(ret.y);
-    ret.z = Vec3f::ClampToWorldLimits(ret.z);
-    return ret;
+    return Vec3f(ClampToWorldLimits(x),
+                 ClampToWorldLimits(y),
+                 ClampToWorldLimits(z));
 }
 
 Vec3f Vec3f::CorrectDirection() const
@@ -136,6 +134,13 @@ Vec3f Vec3f::CorrectDirection() const
     }
     Vec3f ret = this->Normalise();
     return ret;
+}
+
+String Vec3f::ToString() const
+{
+    String str;
+    str << "x: " << x << " y: " << y << " z: " << z;
+    return str;
 }
 
 /***************/

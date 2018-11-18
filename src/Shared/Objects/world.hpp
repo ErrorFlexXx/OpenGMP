@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "../Components/string.hpp"
+#include <Shared/Types/string.hpp>
 #include "../Objects/netIdObject.hpp"
 
 namespace OpenGMP

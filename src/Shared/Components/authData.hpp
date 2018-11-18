@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Shared/Objects/iStreamObject.hpp>
-#include "string.hpp"
+#include <Shared/Types/string.hpp>
 #include <BitStream.h>
 #include <RakNetTypes.h>
 

@@ -25,7 +25,7 @@ bool LuaScript::Load()
 
     //lua_call(m_lState, 0, LUA_MULTRET);
     m_service = new GScopedInterface<IMetaService>(createDefaultMetaService());
-    m_binding = new GScopedPointer<GScriptObject>(createLuaScriptObject(m_service->get(), m_lState));
+    m_binding = new unique_ptr<GScriptObject>(createLuaScriptObject(m_service->get(), m_lState));
     m_scope = new GScopedInterface<IScriptObject>(m_binding->get()->createScriptObject("OpenGMP").toScriptObject());
 
     m_binding->get()->bindCoreService("cpgf", nullptr);

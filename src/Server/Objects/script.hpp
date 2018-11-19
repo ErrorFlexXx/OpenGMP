@@ -91,7 +91,7 @@ namespace OpenGMP
         std::string m_fullFilePath; //!< Filename of the loaded script.
         std::string m_filename;     //!< Filename without path & extension
         cpgf::GScopedInterface<cpgf::IMetaService> *m_service; //!< service object for this script instance.
-        cpgf::GScopedPointer<cpgf::GScriptObject> *m_binding; //!< binding for this script.
+        std::unique_ptr<cpgf::GScriptObject> *m_binding; //!< binding for this script.
         cpgf::GScopedInterface<cpgf::IScriptObject> *m_scope; //!< scope object for this script instance.
         GameServer &m_gameServer;
     };

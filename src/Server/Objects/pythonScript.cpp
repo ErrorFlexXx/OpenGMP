@@ -44,7 +44,7 @@ bool PythonScript::Load()
     m_pyDict = PyModule_GetDict(m_pyObject);
     Py_XINCREF(m_pyDict);
     m_service = new GScopedInterface<IMetaService>(createDefaultMetaService());
-    m_binding = new GScopedPointer<GScriptObject>(createPythonScriptObject(m_service->get(), m_pyObject));
+    m_binding = new unique_ptr<GScriptObject>(createPythonScriptObject(m_service->get(), m_pyObject));
     m_scope = new GScopedInterface<IScriptObject>(m_binding->get()->createScriptObject("OpenGMP").toScriptObject());
 
     //Load cpgf core lib

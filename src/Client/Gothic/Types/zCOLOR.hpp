@@ -2,7 +2,7 @@
 
 #include "../xcall.h"
 #include "zSTRING.hpp"
-#include <Shared/Components/color.hpp>
+#include <Shared/Types/color.hpp>
 
 class zCOLOR
 {

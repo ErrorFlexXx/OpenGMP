@@ -3,7 +3,6 @@
 #include "../Objects/netIdObject.hpp"
 #include "world.hpp"
 #include "../Types/vec3f.hpp"
-#include "../Components/color.hpp"
 #include "../Components/id.hpp"
 #include "../Components/playerTalents.hpp"
 #include "../Components/playerAttributes.hpp"

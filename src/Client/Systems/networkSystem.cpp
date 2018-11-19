@@ -3,7 +3,7 @@
 #include <BitStream.h>
 #include <GetTime.h>
 #include <MessageIdentifiers.h>
-#include <Shared/Components/color.hpp>
+#include <Shared/Types/color.hpp>
 #include <Shared/Types/Messages/networkSystemMessages.hpp>
 #include <Shared/Types/Messages/menuSystemMessages.hpp>
 #include <NativeFeatureIncludes.h>

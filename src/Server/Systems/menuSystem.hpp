@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <Shared/Components/color.hpp>
+#include <Shared/Types/color.hpp>
 
 //Forward declarations:
 namespace RakNet

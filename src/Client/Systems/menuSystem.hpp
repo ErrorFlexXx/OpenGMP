@@ -5,7 +5,7 @@
 #include <Client/Components/menuRegister.hpp>
 #include <Client/Components/menuLogin.hpp>
 #include <Client/Components/notificationBox.hpp>
-#include <Shared/Components/color.hpp>
+#include <Shared/Types/color.hpp>
 #include <list>
 
 //Forward declarations:

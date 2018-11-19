@@ -16,7 +16,6 @@
 #include <Shared/Components/loginData.hpp>
 #include <Shared/Components/netId.hpp>
 #include <Shared/Components/id.hpp>
-#include <Shared/Components/color.hpp>
 #include <Shared/Components/notificationText.hpp>
 #include "../gameServer.hpp"
 #include "../Systems/loginSystem.hpp"

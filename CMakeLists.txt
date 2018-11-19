@@ -63,7 +63,7 @@ add_subdirectory(lib/lua)
 
 add_subdirectory(lib/python-cmake-buildsystem)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/python-cmake-buildsystem/bin) # generated from python cmake file.
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/Python-2.7.6/Include)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/Python-2.7.13/Include)
 
 add_subdirectory(lib/cpgf)
 

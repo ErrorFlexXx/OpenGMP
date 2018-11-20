@@ -23,16 +23,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp\
-        openGMP.cpp
+        openGMP.cpp \
+    inject.cpp
 
-HEADERS  += openGMP.h
+HEADERS  += openGMP.h \
+    inject.h \
+    ../../lib/tinydir/tinydir.h
 
 FORMS    += openGMP.ui
 
 # Compile libraries:
 # Physfs:
 
-INCLUDEPATH += ../../lib/physfs/src
+INCLUDEPATH += ../../lib
 
 unix  {
 }
@@ -40,23 +43,4 @@ win32 {
 }
 
 SOURCES += \
-../../lib/physfs/src/physfs_archiver_7z.c \
-../../lib/physfs/src/physfs_archiver_dir.c \
-../../lib/physfs/src/physfs_archiver_grp.c \
-../../lib/physfs/src/physfs_archiver_hog.c \
-../../lib/physfs/src/physfs_archiver_iso9660.c \
-../../lib/physfs/src/physfs_archiver_mvl.c \
-../../lib/physfs/src/physfs_archiver_qpak.c \
-../../lib/physfs/src/physfs_archiver_slb.c \
-../../lib/physfs/src/physfs_archiver_unpacked.c \
-../../lib/physfs/src/physfs_archiver_vdf.c \
-../../lib/physfs/src/physfs_archiver_wad.c \
-../../lib/physfs/src/physfs_archiver_zip.c \
-../../lib/physfs/src/physfs_byteorder.c \
-../../lib/physfs/src/physfs.c \
-../../lib/physfs/src/physfs_platform_os2.c \
-../../lib/physfs/src/physfs_platform_posix.c \
-../../lib/physfs/src/physfs_platform_qnx.c \
-../../lib/physfs/src/physfs_platform_unix.c \
-../../lib/physfs/src/physfs_platform_windows.c \
-../../lib/physfs/src/physfs_unicode.c
+

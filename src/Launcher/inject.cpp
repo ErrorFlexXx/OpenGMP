@@ -10,18 +10,18 @@ Inject::Inject()
     , parameters("")
 {}
 
-bool Inject::SetStartProgram(const std::string &startProgramFullPath,
-                             const std::string &parameters)
+bool Inject::SetStartProgram(const std::wstring &startProgramFullPath,
+                             const std::wstring &parameters)
 {
     return GetFile(startProgramSet, startProgramFullPath, startProgram);
 }
 
-bool Inject::SetInjectProgram(const std::string &injectProgramFullPath)
+bool Inject::SetInjectProgram(const std::wstring &injectProgramFullPath)
 {
     return GetFile(injectProgramSet, injectProgramFullPath, injectProgram);
 }
 
-bool Inject::Start(bool blocking = false)
+bool Inject::Start(bool blocking)
 {
     if(!startProgramSet)
     {
@@ -48,9 +48,9 @@ void Inject::AddEnvironmentVariable(
     environmentVariables.push_back(environmentVar); //Store in environment variables list.
 }
 
-bool Inject::GetFile(bool &success, const std::string &filepath, tinydir_file &file)
+bool Inject::GetFile(bool &success, const std::wstring &filepath, tinydir_file &file)
 {
-    if(-1 == tinydir_file_open(&file, filepath.c_str()))
+    if(-1 == tinydir_file_open(&file, (filepath.c_str())))
     {
         LogWarn() << "File " << filepath << " cannot be found!";
         success = false;

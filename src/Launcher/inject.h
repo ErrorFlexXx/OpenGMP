@@ -3,7 +3,7 @@
 #include <list>
 #include <string>
 #include <tinydir/tinydir.h>
-#include <windows.h>
+#include <Windows.h>
 #include <stdlib.h> //putenv
 
 /**
@@ -14,19 +14,21 @@
 class Inject
 {
 public:
+    Inject();
+
     /**
      * @brief SetStartProgram sets the path to the program, that shall be started.
      * @param startProgramFullPath the full path to the executable file.
      * @return true, if the file was found, false otherwise.
      */
-    bool SetStartProgram(const std::string &startProgramFullPath, const std::string &parameters);
+    bool SetStartProgram(const std::wstring &startProgramFullPath, const std::wstring &parameters);
 
     /**
      * @brief SetInjectProgram sets the path to the library, that shall be injected.
      * @param injectProgramFullPath full path to the library file.
      * @return true, if the file was found, false otherwise.
      */
-    bool SetInjectProgram(const std::string &injectProgramFullPath);
+    bool SetInjectProgram(const std::wstring &injectProgramFullPath);
 
     /**
      * @brief Start starts the program and injection.
@@ -55,7 +57,7 @@ protected:
      * @param file (out) the file object to store the informations in.
      * @return true, if file was found, false otherwise.
      */
-    bool GetFile(bool &success, const std::string &filepath, tinydir_file &file);
+    bool GetFile(bool &success, const std::wstring &filepath, tinydir_file &file);
 
     /**
      * @brief SetupEnvironmentVariables sets all registered environment variables for this process.

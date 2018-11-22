@@ -19,3 +19,6 @@
 [submodule "lib/physfs"]
 	path = lib/physfs
 	url = https://github.com/REGoth-project/physfs.git
+[submodule "lib/cpp-httplib"]
+	path = lib/cpp-httplib
+	url = https://github.com/yhirose/cpp-httplib.git

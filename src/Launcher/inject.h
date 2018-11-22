@@ -66,11 +66,26 @@ protected:
      */
     bool SetupEnvironmentVariables();
 
+    /**
+     * @brief StartProcess starts the actual process.
+     * @return true, if the process was started, false otherwise.
+     */
+    bool StartProcess();
+
+    /**
+     * @brief DoInjection does the actual injection.
+     * @return true, if the library was injected successfully.
+     */
+    bool DoInjection();
+
 private:
     bool startProgramSet;       //!< Reminder, if a start program has been set.
     tinydir_file startProgram;  //!< Program that shall be started
-    std::string parameters;     //!< Parameters, passed to startProgram on start.
+    std::wstring parameters;     //!< Parameters, passed to startProgram on start.
     bool injectProgramSet;      //!< Reminder, if an inject program has been set.
     tinydir_file injectProgram; //!< Program that is injected into started program.
     std::list<std::pair<std::string, std::string>> environmentVariables; //!< List of environment variable key pairs.
+    bool running;           //!< Running flag of started process.
+    STARTUPINFO si;         //!< StartupInfo structure for CreateProcess.
+    PROCESS_INFORMATION pi; //!< ProcessInformation for CreateProcess.
 };

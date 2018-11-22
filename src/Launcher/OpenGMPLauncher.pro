@@ -38,6 +38,7 @@ FORMS    += openGMP.ui
 INCLUDEPATH += ../../lib
 
 unix  {
+    INCLUDEPATH += /usr/i686-w64-mingw32/include/
 }
 win32 {
 }

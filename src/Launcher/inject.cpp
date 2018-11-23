@@ -62,7 +62,7 @@ bool Inject::Start(bool blocking)
     }
     //Non blocking:
     running = true;
-    ResumeThread(pi.hProcess);
+    ResumeThread(pi.hThread);
     return true;
 }
 
@@ -79,7 +79,7 @@ bool Inject::Stop()
 
 bool Inject::DoInjection()
 {
-    wstring strFullpath = injectProgram.wstring();
+    string strFullpath = injectProgram.string();
 
     HANDLE process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pi.dwProcessId);
     if(process == nullptr)
@@ -87,7 +87,7 @@ bool Inject::DoInjection()
         LogWarn() << "Process cannot be opened!";
         return false;
     }
-    LPVOID pLoadLibrary = reinterpret_cast<LPVOID>(GetProcAddress(GetModuleHandleW(L"kernel32.dll"), "LoadLibraryW"));
+    LPVOID pLoadLibrary = reinterpret_cast<LPVOID>(GetProcAddress(GetModuleHandleA("kernel32.dll"), "LoadLibraryA"));
     if(pLoadLibrary == nullptr)
     {
         LogWarn() << "Cannot inject library! LoadLibraryA function not found!";
@@ -106,9 +106,9 @@ bool Inject::DoInjection()
         return false;
     }
     HANDLE hThread = CreateRemoteThread(pi.hProcess, nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(pLoadLibrary), pRemoteLibPath, 0, nullptr);
-    if(hThread)
+    if(hThread == nullptr)
     {
-        LogWarn() << "Creation of remote thread LoadLibraryA failed!";
+        LogWarn() << "Creation of remote thread LoadLibraryA failed! Error Code: " << GetLastError();
         return false;
     }
 
@@ -122,10 +122,14 @@ bool Inject::StartProcess()
     ZeroMemory( &pi, sizeof(pi) );
 
     //Prepare a non const wchar ptr for ms api.
-    wstring strFullpath = startProgram.wstring();
-    vector<wchar_t> fullpath(strFullpath.begin(), strFullpath.end());
+    string strFullpath = startProgram.string();
+    vector<char> fullpath(strFullpath.begin(), strFullpath.end());
+    fullpath.push_back(0);
 
-    if(!CreateProcess(nullptr,
+    LogInfo() << "Starting process: " << startProgram;
+    LogInfo() << "PATH=" << getenv("PATH");
+
+    if(!CreateProcessA(nullptr,
                       fullpath.data(),
                       nullptr,
                       nullptr,
@@ -139,19 +143,19 @@ bool Inject::StartProcess()
         LogWarn() << "Create Process failed!";
         return false;
     }
-
-    if(0 != WaitForInputIdle(pi.hProcess, 5000)) //Wait till process loading is finished.
-    {
-        LogWarn() << "Process setup failed (Timeout).";
-        return false;
-    }
     return true;
 }
 
 void Inject::AddEnvironmentVariable(
-        std::pair<string, string> environmentVar)
+        pair<string, string> environmentVar)
 {
-    environmentVariables.push_back(environmentVar); //Store in environment variables list.
+    envVars.push_back(environmentVar); //Store in environment variables list.
+}
+
+void Inject::AppendEnvironmentVariable(
+        pair<string, string> environmentVar)
+{
+    envAppendVars.push_back(environmentVar);
 }
 
 bool Inject::GetFile(bool &success, const string &filepath, experimental::filesystem::path &file)
@@ -173,10 +177,25 @@ bool Inject::SetupEnvironmentVariables()
 {
     bool result = true;
 
-    for(const auto &envPair : environmentVariables) //For all registered variables
+    for(const auto &envPair : envVars) //For all registered variables
     {
         string set;
         set.append(envPair.first).append("=").append(envPair.second);
+        result = (0 == _putenv(set.c_str()) && result);
+    }
+
+    for(const auto &appEnvPair : envAppendVars)
+    {
+        char *existing = getenv(appEnvPair.first.c_str());
+        string vars;
+        if(existing)
+        {
+            vars.append(existing);
+            vars.append(";");
+        }
+        vars.append(appEnvPair.second);
+        string set;
+        set.append(appEnvPair.first).append("=").append(vars);
         result = (0 == _putenv(set.c_str()) && result);
     }
 

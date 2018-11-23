@@ -22,20 +22,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+# Backward compatibility for XP and wine (fixes QtWidgets unimpl. call).
+QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
+
 SOURCES += main.cpp\
-        openGMP.cpp \
         ../../lib/ZenLib/Utils/logger.cpp \
-    inject.cpp
+    inject.cpp \
+    openGMPFrmMain.cpp
 
-HEADERS += openGMP.h \
+HEADERS += \
     inject.h \
-    ../../lib/tinydir/tinydir.h
+    ../../lib/tinydir/tinydir.h \
+    openGMPFrmMain.h
 
-FORMS += openGMP.ui
+FORMS += \
+    openGMPFrmMain.ui
 
 # Compile libraries:
 # Physfs:
 
-INCLUDEPATH += ../../lib
+INCLUDEPATH += ../../lib \
+               ../
 
 LIBS += -luser32

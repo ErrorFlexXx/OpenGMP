@@ -49,6 +49,12 @@ public:
      */
     void AddEnvironmentVariable(std::pair<std::string, std::string> environmentVar);
 
+    /**
+     * @brief AppendEnvironmentVariable appends an environment variable. Values are appended with ;
+     * @param environmentVar that will get appended to existing env var content.
+     */
+    void AppendEnvironmentVariable(std::pair<std::string, std::string> environmentVar);
+
 protected:
     /**
      * @brief GetFile gets file informations and sets a successflag.
@@ -84,8 +90,9 @@ private:
     std::string parameters;     //!< Parameters, passed to startProgram on start.
     bool injectProgramSet;      //!< Reminder, if an inject program has been set.
     std::experimental::filesystem::path injectProgram; //!< Program that is injected into started program.
-    std::list<std::pair<std::string, std::string>> environmentVariables; //!< List of environment variable key pairs.
+    std::list<std::pair<std::string, std::string>> envVars; //!< List of environment variable key pairs.
+    std::list<std::pair<std::string, std::string>> envAppendVars; //!< List of environment variable key pairs (values are appended with semicolon).
     bool running;           //!< Running flag of started process.
-    STARTUPINFO si;         //!< StartupInfo structure for CreateProcess.
+    STARTUPINFOA si;         //!< StartupInfo structure for CreateProcess.
     PROCESS_INFORMATION pi; //!< ProcessInformation for CreateProcess.
 };

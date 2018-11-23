@@ -1,10 +1,10 @@
-#include "openGMP.h"
+#include "openGMPFrmMain.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    OpenGMP w;
+    OpenGMPFrmMain w;
     w.show();
 
     return a.exec();

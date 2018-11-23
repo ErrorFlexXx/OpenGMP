@@ -12,7 +12,7 @@ class OpenGMP : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit OpenGMP(QWidget *parent = 0);
+    explicit OpenGMP(QWidget *parent = nullptr);
     ~OpenGMP();
 
 private:

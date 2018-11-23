@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,24 +24,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         openGMP.cpp \
+        ../../lib/ZenLib/Utils/logger.cpp \
     inject.cpp
 
-HEADERS  += openGMP.h \
+HEADERS += openGMP.h \
     inject.h \
     ../../lib/tinydir/tinydir.h
 
-FORMS    += openGMP.ui
+FORMS += openGMP.ui
 
 # Compile libraries:
 # Physfs:
 
 INCLUDEPATH += ../../lib
 
-unix  {
-    INCLUDEPATH += /usr/i686-w64-mingw32/include/
-}
-win32 {
-}
-
-SOURCES += \
-
+LIBS += -luser32

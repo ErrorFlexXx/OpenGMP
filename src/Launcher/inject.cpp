@@ -1,24 +1,26 @@
 #include "inject.h"
-#include <tinydir/tinydir.h>
 #include <ZenLib/utils/logger.h>
+#include <fstream>
+#include <filesystem>
+#include <vector>
 
 using namespace std;
 
 Inject::Inject()
     : startProgramSet(false)
-    , injectProgramSet(false)
     , parameters("")
+    , injectProgramSet(false)
     , running(false)
 {}
 
-bool Inject::SetStartProgram(const std::wstring &startProgramFullPath,
-                             const std::wstring &parameters)
+bool Inject::SetStartProgram(const std::string &startProgramFullPath,
+                             const std::string &parameters)
 {
     this->parameters = parameters;
     return GetFile(startProgramSet, startProgramFullPath, startProgram);
 }
 
-bool Inject::SetInjectProgram(const std::wstring &injectProgramFullPath)
+bool Inject::SetInjectProgram(const std::string &injectProgramFullPath)
 {
     return GetFile(injectProgramSet, injectProgramFullPath, injectProgram);
 }
@@ -77,38 +79,33 @@ bool Inject::Stop()
 
 bool Inject::DoInjection()
 {
-    wstring libraryFullpath;
-    libraryFullpath.append(injectProgram.path);
-    libraryFullpath.append(L"/");
-    libraryFullpath.append(injectProgram.name);
-    libraryFullpath.append(L".");
-    libraryFullpath.append(injectProgram.extension);
+    wstring strFullpath = injectProgram.wstring();
 
     HANDLE process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pi.dwProcessId);
-    if(process == NULL)
+    if(process == nullptr)
     {
         LogWarn() << "Process cannot be opened!";
         return false;
     }
-    LPVOID pLoadLibrary = (LPVOID)GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryW");
-    if(pLoadLibrary == NULL)
+    LPVOID pLoadLibrary = reinterpret_cast<LPVOID>(GetProcAddress(GetModuleHandleW(L"kernel32.dll"), "LoadLibraryW"));
+    if(pLoadLibrary == nullptr)
     {
         LogWarn() << "Cannot inject library! LoadLibraryA function not found!";
         return false;
     }
-    LPVOID pRemoteLibPath = (LPVOID)VirtualAllocEx(pi.hProcess, NULL, libraryFullpath.length() + 1, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
-    if(pRemoteLibPath == NULL)
+    LPVOID pRemoteLibPath = reinterpret_cast<LPVOID>(VirtualAllocEx(pi.hProcess, nullptr, strFullpath.length() + 1, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE));
+    if(pRemoteLibPath == nullptr)
     {
         LogWarn() << "Cannot get memory inside the remote process";
         return false;
     }
-    int n = WriteProcessMemory(pi.hProcess, pRemoteLibPath, libraryFullpath, libraryFullpath.length(), NULL);
+    int n = WriteProcessMemory(pi.hProcess, pRemoteLibPath, strFullpath.c_str(), strFullpath.length(), nullptr);
     if(n == 0)
     {
         LogWarn() << "Write to remote process failed!";
         return false;
     }
-    HANDLE hThread = CreateRemoteThread(pi.hProcess, NULL, 0, (LPTHREAD_START_ROUTINE) pLoadLibrary, pRemoteLibPath, NULL, NULL);
+    HANDLE hThread = CreateRemoteThread(pi.hProcess, nullptr, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(pLoadLibrary), pRemoteLibPath, 0, nullptr);
     if(hThread)
     {
         LogWarn() << "Creation of remote thread LoadLibraryA failed!";
@@ -124,21 +121,18 @@ bool Inject::StartProcess()
     si.cb = sizeof(si);
     ZeroMemory( &pi, sizeof(pi) );
 
-    wstring startProgramFullpath;
-    startProgramFullpath.append(startProgram.path);
-    startProgramFullpath.append(L"/");
-    startProgramFullpath.append(startProgram.name);
-    startProgramFullpath.append(L".");
-    startProgramFullpath.append(startProgram.extension);
+    //Prepare a non const wchar ptr for ms api.
+    wstring strFullpath = startProgram.wstring();
+    vector<wchar_t> fullpath(strFullpath.begin(), strFullpath.end());
 
-    if(!CreateProcess(NULL,
-                      startProgramFullpath.c_str(),
-                      NULL,
-                      NULL,
+    if(!CreateProcess(nullptr,
+                      fullpath.data(),
+                      nullptr,
+                      nullptr,
                       FALSE,
                       CREATE_SUSPENDED,
-                      NULL,
-                      NULL,
+                      nullptr,
+                      nullptr,
                       &si,
                       &pi))
     {
@@ -155,26 +149,29 @@ bool Inject::StartProcess()
 }
 
 void Inject::AddEnvironmentVariable(
-        std::pair<std::string, std::string> environmentVar)
+        std::pair<string, string> environmentVar)
 {
     environmentVariables.push_back(environmentVar); //Store in environment variables list.
 }
 
-bool Inject::GetFile(bool &success, const std::wstring &filepath, tinydir_file &file)
+bool Inject::GetFile(bool &success, const string &filepath, experimental::filesystem::path &file)
 {
-    if(-1 == tinydir_file_open(&file, (filepath.c_str())))
+    file.assign(filepath);
+
+    ifstream test(file.string());
+    if(!test.good())
     {
-        LogWarn() << "The specified file cannot be found!";
+        LogWarn() << "The specified file " << file.string() << " cannot be opened!";
         success = false;
         return success;
     }
 
-    return success;
+    return success = true;
 }
 
 bool Inject::SetupEnvironmentVariables()
 {
-    int result = true;
+    bool result = true;
 
     for(const auto &envPair : environmentVariables) //For all registered variables
     {

@@ -155,9 +155,6 @@
     <ClCompile Include="..\..\Objects\CDetour.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Shared\Components\color.cpp">
-      <Filter>Shared\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Components\notificationBox.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -210,6 +207,9 @@
       <Filter>Shared\Types</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Shared\Types\string.cpp">
+      <Filter>Shared\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Types\color.cpp">
       <Filter>Shared\Types</Filter>
     </ClCompile>
   </ItemGroup>
@@ -408,9 +408,6 @@
     <ClInclude Include="..\..\Objects\CDetour.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Shared\Components\color.hpp">
-      <Filter>Shared\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Shared\Types\Messages\menuSystemMessages.hpp">
       <Filter>Shared\Types\Messages</Filter>
     </ClInclude>
@@ -502,6 +499,9 @@
       <Filter>Shared\Types</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Shared\Types\string.hpp">
+      <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Types\color.hpp">
       <Filter>Shared\Types</Filter>
     </ClInclude>
   </ItemGroup>

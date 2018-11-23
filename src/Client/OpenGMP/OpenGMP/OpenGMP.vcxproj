@@ -28,13 +28,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -127,7 +127,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Shared\Components\authData.cpp" />
-    <ClCompile Include="..\..\..\Shared\Components\color.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\gameTime.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\id.cpp" />
     <ClCompile Include="..\..\..\Shared\Components\loginData.cpp" />
@@ -142,6 +141,7 @@
     <ClCompile Include="..\..\..\Shared\Systems\staticContainer.cpp" />
     <ClCompile Include="..\..\..\Shared\Systems\versionSystem.cpp" />
     <ClCompile Include="..\..\..\Shared\Types\angles.cpp" />
+    <ClCompile Include="..\..\..\Shared\Types\color.cpp" />
     <ClCompile Include="..\..\..\Shared\Types\string.cpp" />
     <ClCompile Include="..\..\..\Shared\Types\vec3f.cpp" />
     <ClCompile Include="..\..\Components\menuLogin.cpp" />
@@ -182,7 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Shared\Components\authData.hpp" />
-    <ClInclude Include="..\..\..\Shared\Components\color.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\gameTime.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\id.hpp" />
     <ClInclude Include="..\..\..\Shared\Components\loginData.hpp" />
@@ -200,6 +199,7 @@
     <ClInclude Include="..\..\..\Shared\Systems\staticContainer.hpp" />
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\angles.hpp" />
+    <ClInclude Include="..\..\..\Shared\Types\color.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\constants.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\loginSystemMessages.hpp" />
     <ClInclude Include="..\..\..\Shared\Types\Messages\menuSystemMessages.hpp" />

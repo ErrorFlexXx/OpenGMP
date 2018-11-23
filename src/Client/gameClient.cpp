@@ -31,8 +31,9 @@ void GameClient::Startup(HINSTANCE inst)
 {
     if (!inited && IsGothic2exe()) //If no instance created yet and we are in a gothic process
     {
+        std::string localePath = ReadEnvironmentVariable(localeEnvVarName);
         setlocale(LC_ALL, "");
-        bindtextdomain("OpenGMP", "locale");
+        bindtextdomain("OpenGMP", localePath.c_str());
         textdomain("OpenGMP");
         OtherHooks::Hook(); //Controls, SpawnRange, Camera, etc...
         hookGame.Startup(); //Hook Game Loops (Menu & Ingame)
@@ -63,25 +64,27 @@ bool GameClient::IsGothic2exe()
     return (filenameStr.find(gothicFilename) != string::npos);
 }
 
-void GameClient::ReadEnvironmentConnectData()
+std::string GameClient::ReadEnvironmentVariable(const char *varName)
 {
-    //Read connect data from environment variables
     char* buf = nullptr;
     size_t sz = 0;
-    
-    if (_dupenv_s(&buf, &sz, hostnameEnvVarName) == 0 && buf != nullptr)
-    {
-        GameClient::serverName = buf;
-        free(buf);
-        buf = nullptr;
-        sz = 0;
-    }
 
-    if (_dupenv_s(&buf, &sz, portEnvVarName) == 0 && buf != nullptr)
+    if (_dupenv_s(&buf, &sz, varName) == 0 && buf != nullptr)
     {
-        GameClient::serverPort = atoi(buf);
+        std::string ret = buf;
         free(buf);
-        buf = nullptr;
-        sz = 0;
+        return ret;
     }
+    return "";
+}
+
+void GameClient::ReadEnvironmentConnectData()
+{
+    std::string hostname = ReadEnvironmentVariable(hostnameEnvVarName);
+    std::string port = ReadEnvironmentVariable(portEnvVarName);
+
+    if (0 < hostname.length())
+        GameClient::serverName = hostname;
+    if (0 < port.length())
+        GameClient::serverPort = atoi(port.c_str());
 }

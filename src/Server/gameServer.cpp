@@ -7,9 +7,10 @@
 using namespace std;
 using namespace OpenGMP;
 
-GameServer *GameServer::gameServer = nullptr;
+GameServer *GameServer::gameServer;
 
 GameServer::GameServer(int gameport,
+                       int webport,
                        int playerslots,
                        const std::string &scriptDirectory,
                        const std::string &keyDir,
@@ -19,6 +20,7 @@ GameServer::GameServer(int gameport,
     , playerContainer(playerslots)
     , worldContainer(10)
     , networkSystem(*this, gameport, playerslots, keyDir, pubKeyfileName, privKeyfileName)
+    , webStatusSystem(*this, webport)
     , loginSystem(*this)
     , scriptDirectory(scriptDirectory)
     , menuSystem(*this)
@@ -29,6 +31,7 @@ GameServer::GameServer(int gameport,
     , serverRunning(true)
     , serverStopped(false)
 {
+    GameServer::gameServer = this;
 }
 
 GameServer::~GameServer()
@@ -45,6 +48,12 @@ bool GameServer::Startup()
     if(!networkSystem.Startup()) //Start network
     {
         LogError() << "NetworkSystem startup failed! Aborting.";
+        return false;
+    }
+
+    if(!webStatusSystem.Startup()) //Start webserver
+    {
+        LogError() << "WebStatusSystem startup failed! Aborting.";
         return false;
     }
 
@@ -72,15 +81,6 @@ void GameServer::Shutdown()
 {
     LogInfo() << "GameServer is going to shutdown now.";
     serverRunning = false;
-    for(int i = 0; !serverStopped && i < 100; i++) //While serverRunning and time < 10 s
-    {
-        Process();
-        RakSleep(100); //Wait for server shutdown.
-    }
-    if(serverStopped)
-        LogInfo() << "GameServer loop exited normally.";
-    else
-        LogInfo() << "GameServer loop exited by timeout.";
 }
 
 void GameServer::Process()
@@ -100,7 +100,7 @@ void GameServer::Process()
 
 GameServer &GameServer::GetGameServerInstance()
 {
-    return *gameServer;
+    return *GameServer::gameServer;
 }
 
 NetworkSystem &GameServer::GetNetworkSystem()

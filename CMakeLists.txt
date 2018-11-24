@@ -55,6 +55,8 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/lib/lua) #luaconf.h generated fr
 include_directories(lib/cpgf/include)
 include_directories(lib/json)
 include_directories(lib/tinydir)
+include_directories(lib/cpp-httplib)
+include_directories(lib)
 include_directories(src)
 
 add_subdirectory(lib/RakNet)

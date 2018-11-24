@@ -9,6 +9,7 @@ namespace Flags
 {
     Cli::Flag help("h", "help", 0, "Prints this message");
     Cli::Flag gameport("gp", "game-port", 1, "Network listening port", {"1760"}, "Serversettings");
+    Cli::Flag webport("wp", "web-port", 1, "Webserver listening port", {"1761"}, "Serversettings");
     Cli::Flag gameSlots("s", "slots", 1, "Player slots", {"200"}, "Gamesettings");
     Cli::Flag scriptDirectory("sd", "script-dir", 1, "Script directory", {"scripts"}, "Serversettings");
     Cli::Flag genKeys("gk", "generate-keys", 0, "Generates encryption keys.");
@@ -29,8 +30,9 @@ void exitHandler(int signum)
         {
             GameServer::gameServer->Shutdown();
             delete GameServer::gameServer;
+            LogInfo() << "GameServer Shutdown completed!";
         }
-        exit(0); //Quit this programm
+	exit(0);
     }
 }
 
@@ -75,6 +77,7 @@ int main(int argc, char **argv)
         signal(SIGABRT, exitHandler);
 
         GameServer::gameServer = new GameServer(std::stoi(Flags::gameport.getParam(0).c_str()),
+                                                std::stoi(Flags::webport.getParam(0).c_str()),
                                                 std::stoi(Flags::gameSlots.getParam(0).c_str()),
                                                 Flags::scriptDirectory.getParam(0),
                                                 Flags::keyDir.getParam(0),
@@ -85,7 +88,9 @@ int main(int argc, char **argv)
             return 1;
 
         GameServer::gameServer->Process();
+        GameServer::gameServer->Shutdown();
         delete GameServer::gameServer;
+        LogInfo() << "GameServer Shutdown complete!";
     }
     catch(std::bad_alloc& ba) //Out of memory
     {

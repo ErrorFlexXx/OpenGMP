@@ -11,6 +11,7 @@
 #include "Objects/serverPlayer.hpp"
 #include "Objects/serverWorld.hpp"
 #include "Systems/networkSystem.hpp"
+#include "Systems/webStatusSystem.hpp"
 #include "Systems/loginSystem.hpp"
 #include "Systems/netDynamicContainer.hpp"
 #include "Systems/scriptSystem.hpp"
@@ -28,6 +29,7 @@ namespace OpenGMP
     {
     public:
         GameServer(int gameport,
+                   int webport,
                    int playerslots,
                    const std::string &scriptDirectory,
                    const std::string &keyDir,
@@ -60,6 +62,7 @@ namespace OpenGMP
         /* Global Systems */
         static GameServer *gameServer;
         NetworkSystem networkSystem;
+        WebStatusSystem webStatusSystem;
         LoginSystem loginSystem;
         MenuSystem menuSystem;
         ScriptSystem scriptSystem;

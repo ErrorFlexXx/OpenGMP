@@ -84,6 +84,7 @@ namespace OpenGMP
             return pubKeyString;
         }
 
+        std::string servername;         //!< The name of the server.
         std::string hostname;           //!< Hostname of the server.
         unsigned short port;            //!< Port to connect to.
         std::vector<char> publicKey;    //!< Public encryption key.

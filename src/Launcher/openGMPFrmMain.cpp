@@ -48,17 +48,6 @@ void OpenGMPFrmMain::on_btnTest_clicked()
 //        injTest.AppendEnvironmentVariable(make_pair<string, string>("PATH", gmpPath.string())); //PATH=gmp
 //        injTest.Start(false);
 //        }
-        Server test;
-        test.hostname = "Test Host";
-        test.port = 1337;
-        test.password = "thepassword";
-        test.publicKey = {'A', 'B', 'C', 'D'};
-        std::string jsonOutput;
-        jsonOutput = test.ToJson();
 
-        Server test2;
-        test2.FromJson("{\"hostname\":\"Test Host\",\"password\":\"thepassword\",\"port\":1337}");
 
-        LogInfo() << "To Json: " << jsonOutput;
-        LogInfo() << "From Json: " << test2.ToString();
 }

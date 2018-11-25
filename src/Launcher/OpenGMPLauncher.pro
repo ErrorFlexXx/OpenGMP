@@ -25,12 +25,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # Backward compatibility for XP and wine (fixes QtWidgets unimpl. call).
 QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
 
-SOURCES += main.cpp\
+DEFINES += LAUNCHER
+
+SOURCES += main.cpp \
+        ../Shared/Systems/versionSystem.cpp \
+        ../Shared/Components/version.cpp \
         ../../lib/ZenLib/Utils/logger.cpp \
         inject.cpp \
         openGMPFrmMain.cpp
 
 HEADERS +=  \
+            ../Shared/Components/version.hpp \
             inject.h \
             openGMPFrmMain.h
 
@@ -43,4 +48,5 @@ FORMS += \
 INCLUDEPATH += ../../lib \
                ../
 
-LIBS += -luser32
+LIBS += -luser32 \
+        -lws2_32

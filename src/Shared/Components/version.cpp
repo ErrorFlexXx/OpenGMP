@@ -1,7 +1,9 @@
 #include "version.hpp"
+#ifndef LAUNCHER
 #include <BitStream.h>
-
 using namespace RakNet;
+#endif
+
 using namespace OpenGMP;
 
 Version::Version()
@@ -13,6 +15,7 @@ Version::Version(uint32_t version)
 {
 }
 
+#ifndef LAUNCHER
 void Version::WriteStream(BitStream &stream) const
 {
     stream.Write(version);
@@ -26,3 +29,4 @@ bool Version::ReadStream(BitStream &stream)
 
     return success;
 }
+#endif

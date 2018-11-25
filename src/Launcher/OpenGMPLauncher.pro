@@ -29,16 +29,21 @@ DEFINES += LAUNCHER
 DEFINES += CPPHTTPLIB_OPENSSL_SUPPORT
 
 SOURCES += main.cpp \
+        Systems/serverStorage.cpp \
+        Systems/jsonUserConfiguration.cpp \
         ../Shared/Systems/versionSystem.cpp \
         ../Shared/Components/version.cpp \
         ../../lib/ZenLib/Utils/logger.cpp \
         inject.cpp \
-        openGMPFrmMain.cpp
+        openGMPFrmMain.cpp \
 
 HEADERS +=  \
+            Systems/serverStorage.hpp \
+            Systems/jsonUserConfiguration.cpp \
             ../Shared/Components/version.hpp \
             inject.h \
-            openGMPFrmMain.h
+            openGMPFrmMain.h \
+    Systems/jsonUserConfiguration.hpp
 
 FORMS += \
     openGMPFrmMain.ui

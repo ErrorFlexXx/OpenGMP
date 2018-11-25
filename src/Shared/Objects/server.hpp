@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 #include <json/json.hpp>
+#include <Shared/Components/version.hpp>
+#include <Shared/Systems/versionSystem.hpp>
 
 namespace OpenGMP
 {
@@ -13,6 +15,10 @@ namespace OpenGMP
     class Server
     {
     public:
+        Server()
+            : version(VersionSystem::version)
+        {}
+
         /**
          * @brief ToJson parse this object to a json string.
          * @return a std::string json string.
@@ -20,11 +26,13 @@ namespace OpenGMP
         inline std::string ToJson() const
         {
             nlohmann::json j = {
+                {"servername", servername},
                 {"hostname", hostname},
                 {"gamePort", gamePort},
                 {"webPort" , webPort},
                 {"pubKey"  , PublicKeyToHexString()},
-                {"password", password}
+                {"password", password},
+                {"version", version.version}
             };
             return j.dump();
         }
@@ -37,10 +45,12 @@ namespace OpenGMP
         {
             nlohmann::json j = nlohmann::json::parse(json);
             hostname = j["hostname"].get<std::string>(); //Required may not fail
-            gamePort = j["gamePort"].get<int>(); //Required may not fail
             webPort  = j["webPort"].get<int>(); //Required may not fail
+            try { servername = j["servername"].get<std::string>(); } catch(...) { servername.clear(); } //May fail
+            try { gamePort = j["gamePort"].get<int>(); } catch(...) { gamePort = 0; } //May fail
             try { PublicKeyFromHexString(j["pubKey"].get<std::string>()); } catch(...) { publicKey.clear(); } //May fail
             try { password = j["password"].get<std::string>(); } catch(...) { password.clear(); } //May fail
+            try { version = j["version"].get<uint32_t>(); } catch(...) { } //May fail
         }
 
         /**
@@ -93,5 +103,6 @@ namespace OpenGMP
         int webPort;                    //!< WebStatus port.
         std::vector<char> publicKey;    //!< Public encryption key.
         std::string password;           //!< RakNet password, if used.
+        Version version;                //!< The version of the server.
     };
 }

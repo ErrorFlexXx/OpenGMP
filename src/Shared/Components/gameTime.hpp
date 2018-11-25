@@ -1,14 +1,18 @@
 #pragma once
 
 #include <GetTime.h>
-#include "../Objects/iStreamObject.hpp"
 
 #define TICKS_PER_SECOND        1000
 #define TICKS_PER_MILLISECOND   1
 
+namespace RakNet
+{
+    class BitStream;
+}
+
 namespace OpenGMP
 {
-    class GameTime : public IStreamObject
+    class GameTime
     {
     public:
         /**

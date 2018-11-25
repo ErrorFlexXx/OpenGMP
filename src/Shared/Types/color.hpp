@@ -1,13 +1,18 @@
 #pragma once
 
-#include "../Objects/iStreamObject.hpp"
+#include <stdint.h>
+
+namespace RakNet
+{
+    class BitStream;
+}
 
 namespace OpenGMP
 {
     /**
      * @brief The Color class
      */
-    class Color : public IStreamObject
+    class Color
     {
     public:
         Color();

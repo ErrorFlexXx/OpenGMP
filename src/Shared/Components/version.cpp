@@ -1,4 +1,5 @@
 #include "version.hpp"
+#include <BitStream.h>
 
 using namespace RakNet;
 using namespace OpenGMP;

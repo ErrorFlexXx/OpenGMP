@@ -27,13 +27,12 @@ QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
 
 SOURCES += main.cpp\
         ../../lib/ZenLib/Utils/logger.cpp \
-    inject.cpp \
-    openGMPFrmMain.cpp
+        inject.cpp \
+        openGMPFrmMain.cpp
 
-HEADERS += \
-    inject.h \
-    ../../lib/tinydir/tinydir.h \
-    openGMPFrmMain.h
+HEADERS +=  \
+            inject.h \
+            openGMPFrmMain.h
 
 FORMS += \
     openGMPFrmMain.ui

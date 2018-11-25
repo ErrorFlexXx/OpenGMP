@@ -1,5 +1,6 @@
 #include "gameTime.hpp"
 #include <limits.h>
+#include <BitStream.h>
 
 using namespace RakNet;
 using namespace OpenGMP;

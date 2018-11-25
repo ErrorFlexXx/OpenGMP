@@ -1,6 +1,5 @@
 #pragma once
 
-#include <Shared/Objects/iStreamObject.hpp>
 #include <Shared/Types/string.hpp>
 #include <BitStream.h>
 #include <RakNetTypes.h>
@@ -16,7 +15,7 @@ namespace OpenGMP
      * @brief The AuthData component
      * @ingroup scriptObject
      */
-    class AuthData : public IStreamObject
+    class AuthData
     {
     public:
         uint32_t hddSerial;        //!< (available script attribute) the hdd serial

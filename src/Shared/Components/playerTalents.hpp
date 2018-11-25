@@ -1,11 +1,15 @@
 #pragma once
 
-#include "../Objects/iStreamObject.hpp"
 #include <stdint.h>
+
+namespace RakNet
+{
+    class BitStream;
+}
 
 namespace OpenGMP
 {
-    class PlayerTalents : public IStreamObject
+    class PlayerTalents
     {
     public:
         typedef enum EnumTalents

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <Shared/Objects/iStreamObject.hpp>
 #include <Shared/Types/string.hpp>
 #include <BitStream.h>
 #include <RakNetTypes.h>
@@ -16,7 +15,7 @@ namespace OpenGMP
      * @brief The AuthData component
      * @ingroup scriptObject
      */
-    class LoginData : public IStreamObject
+    class LoginData
     {
     public:
         String loginname;          //!< (available script attribute) the loginname

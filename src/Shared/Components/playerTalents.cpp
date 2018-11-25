@@ -1,4 +1,5 @@
 #include "playerTalents.hpp"
+#include <BitStream.h>
 
 using namespace OpenGMP;
 

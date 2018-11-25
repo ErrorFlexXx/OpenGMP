@@ -1,4 +1,5 @@
 #include "color.hpp"
+#include <BitStream.h>
 
 using namespace OpenGMP;
 

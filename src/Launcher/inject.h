@@ -8,8 +8,8 @@
 
 /**
  * @brief The Inject class
- * @author Christian Löpke <loepke@edfritsch.de>
  *   Class used to start a program and inject another program in it on windows.
+ * @author Christian Löpke <loepke@edfritsch.de>
  */
 class Inject
 {

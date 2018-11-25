@@ -55,7 +55,8 @@ To update translation files or create a translation for a new language, one can 
 to create a new translation click File->New->Select Language->Extract from source.
 
 ### Building the Launcher
-On windows, there is a need to add the path to `jom.exe` from the Qt installation to the path variable.
+On windows, there can be a need to add the path to `jom.exe` from the Qt installation to the path variable.
+Additionally Qt might complain about rc.exe cannot be run. In this case add the path to your windows kit (if using microsoft compoilers) to the path variable (on the left side projects -> systemenvironment). In my case the path is `C:\Program Files (x86)\Windows Kits\10\bin\10.0.15063.0\x86`.
 
 ## Scripting
 Read more about scripting in the [ServerScripts](https://www.github.com/ErrorFlexXx/OpenGMP/tree/master/ServerScripts) directory.

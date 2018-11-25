@@ -1,11 +1,15 @@
 #pragma once
 
-#include "../Objects/iStreamObject.hpp"
 #include <stdint.h>
+
+namespace RakNet
+{
+    class BitStream;
+}
 
 namespace OpenGMP
 {
-    class PlayerAttributes : public IStreamObject
+    class PlayerAttributes
     {
     public:
         int32_t level;

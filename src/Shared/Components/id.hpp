@@ -1,7 +1,11 @@
 #pragma once
 
-#include "../Objects/iStreamObject.hpp"
 #include <ostream>
+
+namespace RakNet
+{
+    class BitStream;
+}
 
 namespace OpenGMP
 {
@@ -14,7 +18,7 @@ namespace OpenGMP
      * @brief The Id component
      * @ingroup scriptObject
      */
-    class Id : public IStreamObject
+    class Id
     {
     public:
         Id();

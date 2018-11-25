@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../Objects/iStreamObject.hpp"
 #include <Shared/Types/string.hpp>
 #include <stdint.h>
 
 namespace OpenGMP
 {
-    class PlayerVisual //: public IStreamObject
+    class PlayerVisual
     {
     public:
         String bodyModel;

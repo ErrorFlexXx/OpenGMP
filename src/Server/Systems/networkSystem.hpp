@@ -59,7 +59,6 @@ namespace OpenGMP
 
         RakNet::RakPeerInterface *peerInterface;    //!< RakNet PeerInterface object.
         int playerslots;        //!< Currently accepted simulateously active connected players.
-        Server server;          //!< The server object this networkSystem acts with.
 
     private:
         GameServer &gameServer; //!< The GameServer instance this System acts for.

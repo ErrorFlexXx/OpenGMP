@@ -21,8 +21,9 @@ namespace OpenGMP
         {
             nlohmann::json j = {
                 {"hostname", hostname},
-                {"port", port},
-                {"pubKey", PublicKeyToHexString()},
+                {"gamePort", gamePort},
+                {"webPort" , webPort},
+                {"pubKey"  , PublicKeyToHexString()},
                 {"password", password}
             };
             return j.dump();
@@ -36,7 +37,8 @@ namespace OpenGMP
         {
             nlohmann::json j = nlohmann::json::parse(json);
             hostname = j["hostname"].get<std::string>(); //Required may not fail
-            port = j["port"].get<int>(); //Required may not fail
+            gamePort = j["gamePort"].get<int>(); //Required may not fail
+            webPort  = j["webPort"].get<int>(); //Required may not fail
             try { PublicKeyFromHexString(j["pubKey"].get<std::string>()); } catch(...) { publicKey.clear(); } //May fail
             try { password = j["password"].get<std::string>(); } catch(...) { password.clear(); } //May fail
         }
@@ -48,7 +50,7 @@ namespace OpenGMP
         inline std::string ToString() const
         {
             std::string output;
-            output.append(hostname).append(":").append(std::to_string(port)).append(
+            output.append(hostname).append(":").append(std::to_string(gamePort)).append(
                         " PW: ").append(password).append(" Key: ").append(PublicKeyToHexString());
             return output;
         }
@@ -87,7 +89,8 @@ namespace OpenGMP
 
         std::string servername;         //!< The name of the server.
         std::string hostname;           //!< Hostname of the server.
-        unsigned short port;            //!< Port to connect to.
+        unsigned short gamePort;        //!< Port to connect to RakNet.
+        int webPort;                    //!< WebStatus port.
         std::vector<char> publicKey;    //!< Public encryption key.
         std::string password;           //!< RakNet password, if used.
     };

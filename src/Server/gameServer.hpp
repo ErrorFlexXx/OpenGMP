@@ -90,6 +90,7 @@ namespace OpenGMP
 
         std::string scriptDirectory;    //!< Directory to load server scripts from.
         std::thread::id ownerThreadId;  //!< Owner thread of this gameServer.
+        Server server;                  //!< Server object this gameServer represents.
 
     private:
         bool serverRunning;

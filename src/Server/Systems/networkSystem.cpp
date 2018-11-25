@@ -53,9 +53,9 @@ bool NetworkSystem::ReadEncryptionKeys()
     }
 
     //Update the public key in the server object.
-    server.publicKey.clear();
+    gameServer.server.publicKey.clear();
     for(size_t i = 0; i < expectedPubKeySize; i++)
-        server.publicKey.push_back(public_key[i]);
+        gameServer.server.publicKey.push_back(public_key[i]);
 
     fp = fopen(privKeyFilepath.c_str(), "r");
     if(!fp)
@@ -98,9 +98,9 @@ bool NetworkSystem::Startup()
     if(res == RAKNET_STARTED)
     {
         //Update server object.
-        server.servername = "OpenGMP-Server";
-        server.password.clear();
-        server.port = gameport;
+        gameServer.server.servername = "OpenGMP-Server";
+        gameServer.server.password.clear();
+        gameServer.server.gamePort = gameport;
         LogInfo() << "NetworkController started! Listening on port " << gameport << " with " << playerslots << " slots.";
         peerInterface->SetMaximumIncomingConnections(2 * playerslots);
         peerInterface->SetOccasionalPing(1);

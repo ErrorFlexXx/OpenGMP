@@ -37,6 +37,8 @@ bool WebStatusSystem::Startup()
         setupDone = true;
     }
 
+    gameServer.server.webPort = port;
+
     std::thread([=]() {
         webServer.listen("0.0.0.0", port);
     }).detach();
@@ -64,5 +66,5 @@ std::string WebStatusSystem::GetStatus() const
 
 std::string WebStatusSystem::GetConnect() const
 {
-    return gameServer.networkSystem.server.ToJson();
+    return gameServer.server.ToJson();
 }

@@ -74,12 +74,13 @@ namespace OpenGMP
         inline std::string PublicKeyToHexString() const
         {
             std::string pubKeyString;
+            char part[3];   //Buffer to create hex output.
+            part[2] = 0;    //Zero terminate
+
             for(const char &c : publicKey)
             {
-                char part[3];
-                sprintf(part, "%02X", c);
-                part[2] = 0;
-                pubKeyString.append(part, 2);
+                sprintf(part, "%02X", static_cast<unsigned char>(c));
+                pubKeyString.append(part);
             }
             return pubKeyString;
         }

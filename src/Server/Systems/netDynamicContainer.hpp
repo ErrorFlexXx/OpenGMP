@@ -84,7 +84,7 @@ namespace OpenGMP
          * @brief Count returns the currently stored elements.
          * @return the currently stored elements.
          */
-        size_t Count();
+        size_t Count() const;
 
         size_t capacity;
 

@@ -98,7 +98,7 @@ bool NetworkSystem::Startup()
     if(res == RAKNET_STARTED)
     {
         //Update server object.
-        server.servername = "OpenGMP Server";
+        server.servername = "OpenGMP-Server";
         server.password.clear();
         server.port = gameport;
         LogInfo() << "NetworkController started! Listening on port " << gameport << " with " << playerslots << " slots.";

@@ -3,6 +3,7 @@
 #include "WorldObjects/serverWorld.hpp"
 #include "Systems/scriptSystem.hpp"
 #include <RakSleep.h>
+#include <thread>
 
 using namespace std;
 using namespace OpenGMP;
@@ -30,6 +31,7 @@ GameServer::GameServer(int gameport,
     , scriptSystem(*this) //Init after all other systems
     , serverRunning(true)
     , serverStopped(false)
+    , ownerThreadId(std::this_thread::get_id())
 {
     GameServer::gameServer = this;
 }
@@ -79,7 +81,6 @@ bool GameServer::Startup()
 
 void GameServer::Shutdown()
 {
-    LogInfo() << "GameServer is going to shutdown now.";
     serverRunning = false;
 }
 
@@ -96,6 +97,13 @@ void GameServer::Process()
             RakSleep(1); //Then don't waste the cpu
     }
     serverStopped = true;
+}
+
+bool GameServer::IAmOwner() const
+{
+    if(std::this_thread::get_id() == ownerThreadId)
+        return true;
+    return false;
 }
 
 GameServer &GameServer::GetGameServerInstance()

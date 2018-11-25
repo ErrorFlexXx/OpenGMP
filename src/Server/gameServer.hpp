@@ -59,6 +59,12 @@ namespace OpenGMP
          */
         static GameServer &GetGameServerInstance();
 
+        /**
+         * @brief IAmOwner checks if calling thread owns (created) this object.
+         * @return true, if thread id created this object, false otherwise.
+         */
+        bool IAmOwner() const;
+
         /* Global Systems */
         static GameServer *gameServer;
         NetworkSystem networkSystem;
@@ -82,7 +88,8 @@ namespace OpenGMP
         NetDynamicContainer<ServerPlayer> playerContainer; //!< Storage for player on this server.
         StaticContainer<ServerWorld> worldContainer; //!< Storage for worlds on this server.
 
-        std::string scriptDirectory;  //!< Directory to load server scripts from.
+        std::string scriptDirectory;    //!< Directory to load server scripts from.
+        std::thread::id ownerThreadId;  //!< Owner thread of this gameServer.
 
     private:
         bool serverRunning;

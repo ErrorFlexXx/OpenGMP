@@ -23,16 +23,25 @@ using namespace OpenGMP;
 void exitHandler(int signum)
 {
     if(signum == SIGINT  ||
-            signum == SIGABRT ||
-            signum == SIGTERM)
+       signum == SIGABRT ||
+       signum == SIGTERM)
     {
         if(GameServer::gameServer)
         {
-            GameServer::gameServer->Shutdown();
-            delete GameServer::gameServer;
-            LogInfo() << "GameServer Shutdown completed!";
+            if(signum == SIGINT) //Shutdown by user signal (e.g. ctrl+c keystroke)
+            {
+                LogInfo() << "GameServer is going to halt now.";
+            }
+            else //Emergency shutdown - some thread may have crashed.
+            {
+                LogInfo() << "GameServer Emergency shutdown!";
+            }
+            GameServer::gameServer->Shutdown();     //Trigger shutdown
+            if(GameServer::gameServer->IAmOwner())  //If I am the owner
+                delete GameServer::gameServer;      //delete the gameserver now.
+                                                    //otherwise the main function will exit the main thread now.
         }
-	exit(0);
+        exit(0);
     }
 }
 
@@ -88,9 +97,7 @@ int main(int argc, char **argv)
             return 1;
 
         GameServer::gameServer->Process();
-        GameServer::gameServer->Shutdown();
         delete GameServer::gameServer;
-        LogInfo() << "GameServer Shutdown complete!";
     }
     catch(std::bad_alloc& ba) //Out of memory
     {

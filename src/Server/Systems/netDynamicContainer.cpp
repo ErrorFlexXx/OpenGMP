@@ -89,7 +89,7 @@ bool NetDynamicContainer<T>::Remove(const RakNet::RakNetGUID &rakId)
 }
 
 template <class T>
-size_t NetDynamicContainer<T>::Count()
+size_t NetDynamicContainer<T>::Count() const
 {
     return (size_t)currentIndex - freeGapIds.size();
 }

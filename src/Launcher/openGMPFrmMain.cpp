@@ -8,6 +8,7 @@
 #include <qfiledialog.h>
 
 using namespace std;
+using namespace httplib;
 using namespace OpenGMP;
 
 OpenGMPFrmMain::OpenGMPFrmMain(QWidget *parent) :
@@ -20,6 +21,17 @@ OpenGMPFrmMain::OpenGMPFrmMain(QWidget *parent) :
 OpenGMPFrmMain::~OpenGMPFrmMain()
 {
     delete ui;
+}
+
+void OpenGMPFrmMain::GetServerlist()
+{
+    SSLClient client("raw.githubusercontent.com", 443);
+    auto res = client.Get("/ErrorFlexXx/OpenGMP/master/ServerList/serverList.json");
+    if (res) //&& res->status == 200)
+    {
+        LogInfo() << res->status;
+        LogInfo() << res->body;
+    }
 }
 
 void OpenGMPFrmMain::on_btnTest_clicked()
@@ -48,6 +60,5 @@ void OpenGMPFrmMain::on_btnTest_clicked()
 //        injTest.AppendEnvironmentVariable(make_pair<string, string>("PATH", gmpPath.string())); //PATH=gmp
 //        injTest.Start(false);
 //        }
-
-
+    GetServerlist();
 }

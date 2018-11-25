@@ -17,6 +17,7 @@ public:
     explicit OpenGMPFrmMain(QWidget *parent = nullptr);
     ~OpenGMPFrmMain();
 
+    void GetServerlist();
     std::vector<OpenGMP::Server> serverList; //!< List of known servers.
 
 private slots:

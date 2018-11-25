@@ -26,6 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
 
 DEFINES += LAUNCHER
+DEFINES += CPPHTTPLIB_OPENSSL_SUPPORT
 
 SOURCES += main.cpp \
         ../Shared/Systems/versionSystem.cpp \
@@ -46,7 +47,11 @@ FORMS += \
 # Physfs:
 
 INCLUDEPATH += ../../lib \
+               ../../lib/openssl/include \
                ../
 
 LIBS += -luser32 \
-        -lws2_32
+        -lws2_32 \
+        -L../../lib/openssl/lib \
+        -llibsslMD \
+        -llibcryptoMD

@@ -1,10 +1,13 @@
 #pragma once
 
-#include "../Objects/iStreamObject.hpp"
+namespace RakNet
+{
+    class BitStream;
+}
 
 namespace OpenGMP
 {
-    class Scale : public IStreamObject
+    class Scale
     {
     public:
         Scale();

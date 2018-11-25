@@ -1,10 +1,13 @@
 #pragma once
 
-#include "../Objects/iStreamObject.hpp"
+namespace RakNet
+{
+    class BitStream;
+}
 
 namespace OpenGMP
 {
-    class WorldTime : public IStreamObject
+    class WorldTime
     {
     public:
         int totalSeconds;

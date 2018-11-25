@@ -1,5 +1,7 @@
 #include "worldTime.hpp"
 
+#include <BitStream.h>
+
 using namespace OpenGMP;
 
 void WorldTime::WriteStream(RakNet::BitStream &stream) const

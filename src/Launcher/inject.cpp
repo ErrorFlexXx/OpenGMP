@@ -126,9 +126,6 @@ bool Inject::StartProcess()
     vector<char> fullpath(strFullpath.begin(), strFullpath.end());
     fullpath.push_back(0);
 
-    LogInfo() << "Starting process: " << startProgram;
-    LogInfo() << "PATH=" << getenv("PATH");
-
     if(!CreateProcessA(nullptr,
                       fullpath.data(),
                       nullptr,
@@ -186,14 +183,18 @@ bool Inject::SetupEnvironmentVariables()
 
     for(const auto &appEnvPair : envAppendVars)
     {
-        char *existing = getenv(appEnvPair.first.c_str());
+        char *existing = nullptr;
+        size_t sz = 0;
+
         string vars;
-        if(existing)
-        {
-            vars.append(existing);
-            vars.append(";");
-        }
         vars.append(appEnvPair.second);
+        if (_dupenv_s(&existing, &sz, appEnvPair.first.c_str()) == 0 && existing != nullptr)
+        {
+            vars.append(";");
+            vars.append(existing);
+            free(existing);
+        }
+
         string set;
         set.append(appEnvPair.first).append("=").append(vars);
         result = (0 == _putenv(set.c_str()) && result);

@@ -80,7 +80,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)../../../../lib/gettext/win/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../../../../lib/gettext/win/include;$(ProjectDir)../../../../lib</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>OPENGMPCLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -102,7 +102,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)../../../../lib/gettext/win/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../../../../lib/gettext/win/include;$(ProjectDir)../../../../lib</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>OPENGMPCLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -177,6 +177,7 @@
     <ClCompile Include="..\..\Systems\menuSystem.cpp" />
     <ClCompile Include="..\..\Systems\networkSystem.cpp" />
     <ClCompile Include="..\..\Systems\playerController.cpp" />
+    <ClCompile Include="..\..\Systems\webStatusSystem.cpp" />
     <ClCompile Include="..\..\Systems\windowSystem.cpp" />
     <ClCompile Include="..\..\Systems\worldSystem.cpp" />
   </ItemGroup>
@@ -195,6 +196,7 @@
     <ClInclude Include="..\..\..\Shared\Objects\client.hpp" />
     <ClInclude Include="..\..\..\Shared\Objects\idObject.hpp" />
     <ClInclude Include="..\..\..\Shared\Objects\player.hpp" />
+    <ClInclude Include="..\..\..\Shared\Objects\server.hpp" />
     <ClInclude Include="..\..\..\Shared\Objects\world.hpp" />
     <ClInclude Include="..\..\..\Shared\Systems\staticContainer.hpp" />
     <ClInclude Include="..\..\..\Shared\Systems\versionSystem.hpp" />
@@ -275,6 +277,7 @@
     <ClInclude Include="..\..\Systems\menuSystem.hpp" />
     <ClInclude Include="..\..\Systems\networkSystem.hpp" />
     <ClInclude Include="..\..\Systems\playerController.hpp" />
+    <ClInclude Include="..\..\Systems\webStatusSystem.hpp" />
     <ClInclude Include="..\..\Systems\windowSystem.hpp" />
     <ClInclude Include="..\..\Systems\worldSystem.hpp" />
     <ClInclude Include="..\..\Types\virtualKeys.hpp" />

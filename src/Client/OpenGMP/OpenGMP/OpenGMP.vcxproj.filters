@@ -212,6 +212,9 @@
     <ClCompile Include="..\..\..\Shared\Types\color.cpp">
       <Filter>Shared\Types</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Systems\webStatusSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Hooks\hGame.hpp">
@@ -503,6 +506,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Shared\Types\color.hpp">
       <Filter>Shared\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Systems\webStatusSystem.hpp">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Objects\server.hpp">
+      <Filter>Shared\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

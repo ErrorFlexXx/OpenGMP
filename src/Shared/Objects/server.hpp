@@ -44,7 +44,9 @@ namespace OpenGMP
         inline void FromJson(const std::string &json)
         {
             nlohmann::json j = nlohmann::json::parse(json);
-            hostname = j["hostname"].get<std::string>(); //Required may not fail
+            std::string hostnameTmp = j["hostname"].get<std::string>(); //Required may not fail
+            if (hostnameTmp.length() > 0) //Do not overwrite with empty hostname!
+                hostname = hostnameTmp;
             webPort  = j["webPort"].get<int>(); //Required may not fail
             try { servername = j["servername"].get<std::string>(); } catch(...) { servername.clear(); } //May fail
             try { gamePort = j["gamePort"].get<int>(); } catch(...) { gamePort = 0; } //May fail
@@ -91,7 +93,7 @@ namespace OpenGMP
 
             for(const char &c : publicKey)
             {
-                sprintf(part, "%02X", static_cast<unsigned char>(c));
+                sprintf_s(part, "%02X", static_cast<unsigned char>(c));
                 pubKeyString.append(part);
             }
             return pubKeyString;

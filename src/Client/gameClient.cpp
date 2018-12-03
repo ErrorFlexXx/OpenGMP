@@ -11,8 +11,6 @@ using namespace std;
 using namespace OpenGMP;
 
 HINSTANCE GameClient::dllInstance = nullptr;
-string GameClient::serverName = "localhost";
-unsigned short GameClient::serverPort = 1760;
 
 GameClient::GameClient()
     : worldContainer(10)
@@ -24,6 +22,7 @@ GameClient::GameClient()
     , menuSystem(*this)
     , worldSystem(*this)
     , playerController(*this)
+    , webStatusSystem(*this)
     , hookGame(*this)
 {}
 
@@ -76,15 +75,4 @@ std::string GameClient::ReadEnvironmentVariable(const char *varName)
         return ret;
     }
     return "";
-}
-
-void GameClient::ReadEnvironmentConnectData()
-{
-    std::string hostname = ReadEnvironmentVariable(hostnameEnvVarName);
-    std::string port = ReadEnvironmentVariable(portEnvVarName);
-
-    if (0 < hostname.length())
-        GameClient::serverName = hostname;
-    if (0 < port.length())
-        GameClient::serverPort = atoi(port.c_str());
 }

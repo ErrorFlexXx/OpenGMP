@@ -6,6 +6,7 @@
 #include <string>
 #include <mutex>
 #include <stdint.h>
+#include <Shared/Objects/server.hpp>
 
 namespace OpenGMP
 {
@@ -26,16 +27,14 @@ namespace OpenGMP
 
         RakNet::SystemAddress serverAddress;        //!< RakNet SystemAddress of the server.
         RakNet::RakPeerInterface *peerInterface;    //!< RakNet PeerInterface object.
+        Server server;                              //!< Server to connect to.
 
     private:
         GameClient &gameClient;
         static bool started;
-        static char public_key[];
         RakNet::SocketDescriptor socketDescriptor;  //!< RakNet SocketDescriptor.
         RakNet::PublicKey pk;
-        std::mutex networkMutex;    //!< Mutex to sync renderer - network threads.
-        std::string hostname;
-        unsigned short port;
+        std::mutex networkMutex;                    //!< Mutex to sync renderer - network threads.
         uint32_t ping;
     };
 }

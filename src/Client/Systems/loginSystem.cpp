@@ -59,7 +59,8 @@ void LoginSystem::Process(RakNet::Packet *packet)
         {
             gameClient.menuSystem.ShowNotification(
                 20,
-                std::string(_("Connection attempt failed")).append(" (Host: ").append(gameClient.serverName).append(" Port: ").append(std::to_string(gameClient.serverPort)).append(")!"),
+                std::string(_("Connection attempt failed!")).append(" Hostname: ").append(gameClient.networkSystem.server.hostname).append(
+                    " Port: ").append(std::to_string(gameClient.networkSystem.server.gamePort)).append("!"),
                 Color(255, 0, 0, 255)
             );
             break;

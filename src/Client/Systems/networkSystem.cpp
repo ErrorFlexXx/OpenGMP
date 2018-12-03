@@ -3,6 +3,7 @@
 #include <BitStream.h>
 #include <GetTime.h>
 #include <MessageIdentifiers.h>
+#include <Shared/Types/constants.hpp>
 #include <Shared/Types/color.hpp>
 #include <Shared/Types/Messages/networkSystemMessages.hpp>
 #include <Shared/Types/Messages/menuSystemMessages.hpp>
@@ -20,28 +21,38 @@ using namespace OpenGMP;
 using namespace RakNet;
 
 bool NetworkSystem::started = false;
-char NetworkSystem::public_key[] = { (char)0x04, (char)0xBB, (char)0x07, (char)0xEC, (char)0x1B, (char)0x19, (char)0x21, (char)0x7A, (char)0xDE, (char)0x0F, (char)0xF8, (char)0xC5, (char)0x89, (char)0x61, (char)0x71, (char)0x94, (char)0xA5, (char)0x22, (char)0x2C, (char)0x4A, (char)0xB1, (char)0x1C, (char)0x1E, (char)0xD2, (char)0x1D, (char)0x03, (char)0x17, (char)0x89, (char)0x5B, (char)0xEF, (char)0x6B, (char)0x06, (char)0x1A, (char)0x3B, (char)0xF7, (char)0xD4, (char)0x78, (char)0xC8, (char)0xE9, (char)0x4E, (char)0x8B, (char)0x3B, (char)0x0E, (char)0xB8, (char)0xE0, (char)0x0D, (char)0x70, (char)0x6B, (char)0xB7, (char)0x71, (char)0x46, (char)0xD5, (char)0x42, (char)0xB6, (char)0xCB, (char)0xAB, (char)0x74, (char)0x3A, (char)0x06, (char)0x3F, (char)0x55, (char)0xA6, (char)0xAD, (char)0x13 };
 
 NetworkSystem::NetworkSystem(GameClient &gameClient)
     : gameClient(gameClient)
-    , hostname("")
-    , port(0)
     , ping(0)
     , peerInterface(RakPeerInterface::GetInstance())
-{
-    pk.remoteServerPublicKey = public_key;
-    pk.publicKeyMode = PKM_USE_KNOWN_PUBLIC_KEY;
-}
+{}
 
 bool NetworkSystem::Startup()
 {
     if (started == false) //Don't start twice
     {
         started = true; //Network system running now.
-        gameClient.ReadEnvironmentConnectData(); //Update connect data
-        hostname = GameClient::serverName;  //Use hostname from GameClient
-        port = GameClient::serverPort;      //Use port from GameClient
-
+        if (!gameClient.webStatusSystem.Startup(server))
+        {
+            gameClient.menuSystem.ShowNotification(
+                20,
+                std::string(_("Network cannot be started! WebStatusSystem Startup failed!")),
+                Color(255, 0, 0, 255)
+            );
+            StartupFailed();
+            return false;
+        }
+        if (!gameClient.webStatusSystem.GetConnectData(server))
+        {
+            gameClient.menuSystem.ShowNotification(
+                20,
+                std::string(_("Network Start failed! Server unreachable!")),
+                Color(255, 0, 0, 255)
+            );
+            StartupFailed();
+            return false;
+        }
         StartupResult result = peerInterface->Startup(1, &socketDescriptor, 1);
         if (result != RAKNET_STARTED)
         {            
@@ -53,8 +64,20 @@ bool NetworkSystem::Startup()
             StartupFailed();
             return false;
         }
-
-        ConnectionAttemptResult conResult = peerInterface->Connect(hostname.c_str(), port, 0, 0, &pk);
+        //Optional password:
+        const char *password = nullptr;
+        if (server.password.length() > 0) //Use password ?
+            password = server.password.c_str();
+        //Optional public key:
+        PublicKey *pubKey = nullptr;
+        if (server.publicKey.size() > 0) //Use public key ?
+        {
+            pubKey = &pk;
+            pubKey->remoteServerPublicKey = server.publicKey.data();
+            pubKey->publicKeyMode = PKM_USE_KNOWN_PUBLIC_KEY;
+        }
+        //Do connect
+        ConnectionAttemptResult conResult = peerInterface->Connect(server.hostname.c_str(), server.gamePort, password, server.password.length(), pubKey);
         if (conResult != CONNECTION_ATTEMPT_STARTED)
         {
             gameClient.menuSystem.ShowNotification(
@@ -67,7 +90,7 @@ bool NetworkSystem::Startup()
         }
         gameClient.menuSystem.ShowNotification(
             20,
-            std::string(_("Connecting to server")).append(" (Host: ").append(gameClient.serverName).append(" Port: ").append(std::to_string(gameClient.serverPort)).append(")."),
+            std::string(_("Connecting to server")).append(" (Host: ").append(server.hostname).append(" Port: ").append(std::to_string(server.gamePort)).append(")."),
             Color(255, 255, 255, 255)
         );
         return true;

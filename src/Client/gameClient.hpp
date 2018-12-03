@@ -13,7 +13,9 @@
 #include "Systems/menuSystem.hpp"
 #include "Systems/worldSystem.hpp"
 #include "Systems/playerController.hpp"
+#include "Systems/webStatusSystem.hpp"
 #include <Shared/Systems/staticContainer.hpp>
+#include <Shared/Objects/server.hpp>
 
 namespace OpenGMP
 {
@@ -25,11 +27,8 @@ namespace OpenGMP
         void Stop();                    // Stops the OpenGMP instance (do cleanup..)
         bool IsGothic2exe();
         std::string ReadEnvironmentVariable(const char *varName);
-        void ReadEnvironmentConnectData();
 
         static HINSTANCE dllInstance;
-        static std::string serverName;
-        static unsigned short serverPort;
         ClientClient client;
         NetworkSystem networkSystem;
         LoginSystem loginSystem;
@@ -37,6 +36,7 @@ namespace OpenGMP
         MenuSystem menuSystem;
         WorldSystem worldSystem;
         PlayerController playerController;
+        WebStatusSystem webStatusSystem;
         HGame hookGame; //GameLoop hooks (Menu & Ingame)
 
         /* Global containers */

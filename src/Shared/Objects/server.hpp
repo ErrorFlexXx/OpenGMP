@@ -34,7 +34,7 @@ namespace OpenGMP
                 {"password", password},
                 {"version", version.version}
             };
-            return j.dump();
+            return j.dump(4);
         }
 
         /**
@@ -93,7 +93,7 @@ namespace OpenGMP
 
             for(const char &c : publicKey)
             {
-                snprintf(part, 2, "%02X", static_cast<unsigned char>(c));
+                snprintf(part, 3, "%02X", static_cast<unsigned char>(c));
                 pubKeyString.append(part);
             }
             return pubKeyString;

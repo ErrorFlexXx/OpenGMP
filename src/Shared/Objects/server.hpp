@@ -93,7 +93,7 @@ namespace OpenGMP
 
             for(const char &c : publicKey)
             {
-                sprintf_s(part, "%02X", static_cast<unsigned char>(c));
+                snprintf(part, 2, "%02X", static_cast<unsigned char>(c));
                 pubKeyString.append(part);
             }
             return pubKeyString;

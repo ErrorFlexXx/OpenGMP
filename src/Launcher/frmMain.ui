@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>OpenGMPFrmMain</class>
- <widget class="QMainWindow" name="OpenGMPFrmMain">
+ <class>FrmMain</class>
+ <widget class="QMainWindow" name="FrmMain">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -87,6 +87,20 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuSettings_2">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionMainSettings"/>
+   </widget>
+   <addaction name="menuSettings"/>
+   <addaction name="menuSettings_2"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -97,6 +111,16 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionMainSettings">
+   <property name="text">
+    <string>Main Settings</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

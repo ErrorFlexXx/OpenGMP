@@ -1,29 +1,42 @@
-#include "openGMPFrmMain.h"
-#include "ui_openGMPFrmMain.h"
+#include "frmMain.h"
+#include "ui_frmMain.h"
 #include "inject.h"
-#include <map>
-#include <string>
+#include "frmMainSettings.h"
+#include <Launcher/Systems/JsonFile.hpp>
 #include <Shared/Types/constants.hpp>
 #include <ZenLib/utils/logger.h>
 #include <qfiledialog.h>
+#include <map>
+#include <string>
 
 using namespace std;
 using namespace httplib;
 using namespace OpenGMP;
 
-OpenGMPFrmMain::OpenGMPFrmMain(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::OpenGMPFrmMain)
+FrmMain::FrmMain(QWidget *parent)
+    : QMainWindow(parent)
+    , config("Settings.json")
+    , ui(new Ui::FrmMain)
 {
     ui->setupUi(this);
+    if(!config.Load())
+        CreateDefaultConfig();
 }
 
-OpenGMPFrmMain::~OpenGMPFrmMain()
+FrmMain::~FrmMain()
 {
     delete ui;
 }
 
-void OpenGMPFrmMain::GetServerlist()
+void FrmMain::CreateDefaultConfig()
+{
+    config.Clear();
+
+    config.WriteBool("SearchForUpdatesOnStart", true);
+    config.Save();
+}
+
+void FrmMain::GetServerlist()
 {
     SSLClient client("raw.githubusercontent.com", 443);
     auto res = client.Get("/ErrorFlexXx/OpenGMP/master/ServerList/serverList.json");
@@ -34,7 +47,7 @@ void OpenGMPFrmMain::GetServerlist()
     }
 }
 
-void OpenGMPFrmMain::on_btnTest_clicked()
+void FrmMain::on_btnTest_clicked()
 {
     static Inject injTest;
     QString newPath = QFileDialog::getExistingDirectory(this, tr("Bitte wählen Sie den Gothic Pfad aus"),
@@ -61,4 +74,15 @@ void OpenGMPFrmMain::on_btnTest_clicked()
         injTest.Start(false);
         }
     GetServerlist();
+}
+
+void FrmMain::on_actionExit_triggered()
+{
+    this->close();
+}
+
+void FrmMain::on_actionMainSettings_triggered()
+{
+    FrmMainSettings frmSettings(this);
+    frmSettings.exec(); //Open modal.
 }

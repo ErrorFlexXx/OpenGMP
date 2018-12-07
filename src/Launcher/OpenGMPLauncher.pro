@@ -35,12 +35,13 @@ SOURCES += main.cpp \
         ../../lib/ZenLib/Utils/logger.cpp \
         inject.cpp \
         Systems/JsonFile.cpp \
-    frmMainSettings.cpp \
-    frmMain.cpp
+        frmMainSettings.cpp \
+        frmMain.cpp
 
 HEADERS +=  \
             Systems/serverStorage.hpp \
             ../Shared/Components/version.hpp \
+            ../Shared/Objects/server.hpp \
             inject.h \
             Systems/JsonFile.hpp \
             frmMainSettings.h \

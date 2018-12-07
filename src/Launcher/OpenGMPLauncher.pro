@@ -28,15 +28,15 @@ QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
 DEFINES += LAUNCHER
 DEFINES += CPPHTTPLIB_OPENSSL_SUPPORT
 
-SOURCES += main.cpp \
-        Systems/serverStorage.cpp \
-        ../Shared/Systems/versionSystem.cpp \
-        ../Shared/Components/version.cpp \
-        ../../lib/ZenLib/Utils/logger.cpp \
-        inject.cpp \
-        Systems/JsonFile.cpp \
-        frmMainSettings.cpp \
-        frmMain.cpp
+SOURCES +=  main.cpp \
+            Systems/serverStorage.cpp \
+            ../Shared/Systems/versionSystem.cpp \
+            ../Shared/Components/version.cpp \
+            ../../lib/ZenLib/utils/logger.cpp \
+            inject.cpp \
+            Systems/JsonFile.cpp \
+            frmMainSettings.cpp \
+            frmMain.cpp
 
 HEADERS +=  \
             Systems/serverStorage.hpp \
@@ -47,12 +47,9 @@ HEADERS +=  \
             frmMainSettings.h \
             frmMain.h
 
-FORMS += \
-    frmMainSettings.ui \
-    frmMain.ui
-
-# Compile libraries:
-# Physfs:
+FORMS +=    \
+            frmMainSettings.ui \
+            frmMain.ui
 
 INCLUDEPATH += ../../lib \
                ../../lib/openssl/include \

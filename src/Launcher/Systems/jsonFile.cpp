@@ -1,10 +1,9 @@
-#include "JsonFile.hpp"
+#include "jsonFile.hpp"
 #include <json/json.hpp>
 #include <ZenLib/utils/logger.h>
 #include <QStandardPaths>
 #include <QFile>
 #include <QString>
-#include <string>
 
 using namespace std;
 using namespace OpenGMP;
@@ -127,4 +126,15 @@ bool JsonFile::ReadBool(const std::string &key, bool &value)
         return false;
     }
     return true;
+}
+
+json JsonFile::ReadJson() const
+{
+    return j;
+}
+
+void JsonFile::WriteJson(json &j)
+{
+    this->j.clear();
+    this->j = j;
 }

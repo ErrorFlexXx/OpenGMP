@@ -19,11 +19,7 @@ namespace OpenGMP
             : version(VersionSystem::version)
         {}
 
-        /**
-         * @brief ToJson parse this object to a json string.
-         * @return a std::string json string.
-         */
-        inline std::string ToJson() const
+        inline nlohmann::json ToJson() const
         {
             nlohmann::json j = {
                 {"servername", servername},
@@ -34,16 +30,20 @@ namespace OpenGMP
                 {"password", password},
                 {"version", version.version}
             };
-            return j.dump(4);
+            return j;
         }
 
         /**
-         * @brief FromJson setup this object from a json string.
-         * @param json std::string json input
+         * @brief ToJson parse this object to a json string.
+         * @return a std::string json string.
          */
-        inline void FromJson(const std::string &json)
+        inline std::string ToJsonString() const
         {
-            nlohmann::json j = nlohmann::json::parse(json);
+            return ToJson().dump(4);
+        }
+
+        inline void FromJson(const nlohmann::json &j)
+        {
             std::string hostnameTmp = j["hostname"].get<std::string>(); //Required may not fail
             if (hostnameTmp.length() > 0) //Do not overwrite with empty hostname!
                 hostname = hostnameTmp;
@@ -53,6 +53,16 @@ namespace OpenGMP
             try { PublicKeyFromHexString(j["pubKey"].get<std::string>()); } catch(...) { publicKey.clear(); } //May fail
             try { password = j["password"].get<std::string>(); } catch(...) { password.clear(); } //May fail
             try { version = j["version"].get<uint32_t>(); } catch(...) { } //May fail
+        }
+
+        /**
+         * @brief FromJson setup this object from a json string.
+         * @param json std::string json input
+         */
+        inline void FromJsonString(const std::string &json)
+        {
+            nlohmann::json j = nlohmann::json::parse(json);
+            FromJson(j);
         }
 
         /**
@@ -97,6 +107,26 @@ namespace OpenGMP
                 pubKeyString.append(part);
             }
             return pubKeyString;
+        }
+
+        /**
+         * @brief operator != checks if the server objects aren't pointing to the same server.
+         * @param rhs right hand side object for comparison.
+         * @return true if hostname or port aren't identical, false otherwise.
+         */
+        bool operator!=(const Server &rhs)
+        {
+            return !(*this == rhs);
+        }
+
+        /**
+         * @brief operator == checks if the server objects are pointing to the same server.
+         * @param rhs right hand side object for comparison.
+         * @return true if hostname and webport are identical, false otherwise.
+         */
+        bool operator==(const Server &rhs) const
+        {
+            return (webPort == rhs.webPort && hostname.compare(rhs.hostname) == 0);
         }
 
         std::string servername;         //!< The name of the server.

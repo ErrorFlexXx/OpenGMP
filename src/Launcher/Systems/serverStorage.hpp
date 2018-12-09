@@ -1,11 +1,11 @@
 #pragma once
 
 #include <string>
-#include <vector>
+#include <list>
 
 namespace OpenGMP
 {
-    class Server;
+    class LServer;
 
     /**
      * @brief The ServerStorage class is used to load and store server objects.
@@ -19,7 +19,7 @@ namespace OpenGMP
          * @param serverlist gets read server items.
          * @return true, on successfull read, false otherwise.
          */
-        static bool LoadCachedServerlist(std::string &configPath, std::vector<Server> &serverlist);
+        static bool LoadCachedServerlist(const std::string &filename, std::list<LServer> &serverlist);
 
         /**
          * @brief StoreCachedServerList strores server elements to a json file.
@@ -27,7 +27,7 @@ namespace OpenGMP
          * @param serverlist to store the server elements in.
          * @return true, on successfull write, false otherwise.
          */
-        static bool StoreCachedServerList(std::string &configPath, std::vector<Server> &serverlist);
+        static bool StoreCachedServerList(const std::string &filename, std::list<LServer> &serverlist);
 
         /**
          * @brief LoadWebServerlist loads server objects from an remote json file.
@@ -36,6 +36,9 @@ namespace OpenGMP
          * @param serverlist to store read elements in.
          * @return true on successfull read, false otherwise.
          */
-        static bool LoadWebServerlist(std::string &host, std::string &url, std::vector<Server> &serverlist);
+        static bool LoadWebServerlist(const std::string &host, const std::string &url, std::list<LServer> &serverlist);
+
+    private:
+        static bool Exists(const LServer &server, const std::list<LServer> &serverlist);
     };
 }

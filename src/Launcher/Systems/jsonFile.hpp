@@ -2,6 +2,7 @@
 
 #include <QDir>
 #include <json/json.hpp>
+#include <string>
 
 namespace OpenGMP
 {
@@ -99,6 +100,18 @@ namespace OpenGMP
          * @return true, if successfully read the value, false otherwise.
          */
         bool ReadBool(const std::string &key, bool &value);
+
+        /**
+         * @brief ReadJson reads a json object from file.
+         * @return the json object.
+         */
+        nlohmann::json ReadJson() const;
+
+        /**
+         * @brief WriteJson writes a json object to file.
+         * @param j the json object.
+         */
+        void WriteJson(nlohmann::json &j);
 
         const QString filename; //!< File, which is used as storage.
         const QDir configDir;   //!< Directory, where the file is stored.

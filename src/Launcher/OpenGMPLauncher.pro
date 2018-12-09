@@ -33,19 +33,29 @@ SOURCES +=  main.cpp \
             ../Shared/Systems/versionSystem.cpp \
             ../Shared/Components/version.cpp \
             ../../lib/ZenLib/utils/logger.cpp \
-            inject.cpp \
-            Systems/JsonFile.cpp \
+            Systems/jsonFile.cpp \
+            Systems/serverCommunicator.cpp \
+            Objects/lserver.cpp \
             frmMainSettings.cpp \
             frmMain.cpp
+
+win32 {
+    SOURCES += inject.cpp
+}
 
 HEADERS +=  \
             Systems/serverStorage.hpp \
             ../Shared/Components/version.hpp \
             ../Shared/Objects/server.hpp \
-            inject.h \
-            Systems/JsonFile.hpp \
+            Systems/jsonFile.hpp \
+            Systems/serverCommunicator.hpp \
+            Objects/lserver.hpp \
             frmMainSettings.h \
             frmMain.h
+
+win32 {
+    HEADERS += inject.h
+}
 
 FORMS +=    \
             frmMainSettings.ui \
@@ -54,9 +64,15 @@ FORMS +=    \
 INCLUDEPATH += ../../lib \
                ../../lib/openssl/include \
                ../
+win32 {
+    LIBS += -luser32 \
+            -lws2_32 \
+            -L../../lib/openssl/lib \
+            -llibsslMD \
+            -llibcryptoMD
+}
 
-LIBS += -luser32 \
-        -lws2_32 \
-        -L../../lib/openssl/lib \
-        -llibsslMD \
-        -llibcryptoMD
+linux {
+    LIBS += -lssl \
+            -lcrypto
+}

@@ -66,5 +66,5 @@ std::string WebStatusSystem::GetStatus() const
 
 std::string WebStatusSystem::GetConnect() const
 {
-    return gameServer.server.ToJson();
+    return gameServer.server.ToJsonString();
 }

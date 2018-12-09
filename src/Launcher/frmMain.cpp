@@ -40,6 +40,7 @@ FrmMain::FrmMain(QWidget *parent)
     connect(serverCommunicatorTask, SIGNAL(finished()), serverCommunicator, SLOT(quit()));              //If the task ends, the thread quits.
     connect(serverCommunicatorTask, SIGNAL(finished()), serverCommunicatorTask, SLOT(deleteLater()));   //Let Qt free the Task
     connect(serverCommunicator, SIGNAL(finished()), serverCommunicator, SLOT(deleteLater()));           //Let Qt free the Thread
+    connect(this, SIGNAL(UpdatedServerList(const std::list<OpenGMP::LServer>&)), serverCommunicatorTask, SLOT(SetServerList(const std::list<OpenGMP::LServer>&)));
     serverCommunicator->start();
 }
 

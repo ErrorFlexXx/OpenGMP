@@ -30,6 +30,13 @@ public:
     std::list<OpenGMP::LServer> serverList;  //!< List of known servers.
     OpenGMP::JsonFile config;               //!< Json parser object for configurations.
 
+signals:
+    /**
+     * @brief UpdatedServerList updates the serverlist for other threads.
+     * @param serverList which is now current.
+     */
+    void UpdatedServerList(const std::list<OpenGMP::LServer> &serverList);
+
 private slots:
     void on_btnTest_clicked();
     void on_actionExit_triggered();

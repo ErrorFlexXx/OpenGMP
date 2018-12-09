@@ -19,12 +19,6 @@ namespace OpenGMP
     public:
         explicit ServerCommunicator(QObject *parent = 0);
 
-        /**
-         * @brief SetServerList sets the serverlist to use with.
-         * @param serverList which is copied to this instance (thread decoupling)
-         */
-        void SetServerList(const std::list<LServer> &serverList);
-
     signals:
         /**
          * @brief UpdateServerEntry signal emitted to main thread, if a server entry got an update.
@@ -47,6 +41,12 @@ namespace OpenGMP
          * @brief UpdateServerLoop worker task. Loop interruptible by run attribute.
          */
         void UpdateServerLoop();
+
+        /**
+         * @brief SetServerList sets the serverlist to use with.
+         * @param serverList which is copied to this instance (thread decoupling)
+         */
+        void SetServerList(const std::list<OpenGMP::LServer> &serverList);
 
     private:
         volatile bool run;              //!< Run flag of UpdateServerLoop.

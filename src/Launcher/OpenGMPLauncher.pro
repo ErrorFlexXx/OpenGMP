@@ -35,6 +35,7 @@ SOURCES +=  main.cpp \
             ../../lib/ZenLib/utils/logger.cpp \
             Systems/jsonFile.cpp \
             Systems/serverCommunicator.cpp \
+            Systems/clientInstallation.cpp \
             Objects/lserver.cpp \
             frmMainSettings.cpp \
             frmMain.cpp
@@ -49,6 +50,7 @@ HEADERS +=  \
             ../Shared/Objects/server.hpp \
             Systems/jsonFile.hpp \
             Systems/serverCommunicator.hpp \
+            Systems/clientInstallation.hpp \
             Objects/lserver.hpp \
             frmMainSettings.h \
             frmMain.h

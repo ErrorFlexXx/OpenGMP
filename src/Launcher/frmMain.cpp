@@ -30,6 +30,7 @@ FrmMain::FrmMain(QWidget *parent)
     if(ServerStorage::LoadWebServerlist("raw.githubusercontent.com", "/ErrorFlexXx/OpenGMP/master/ServerList/serverList.json", serverList))
         ServerStorage::StoreCachedServerList("Serverlist.json", serverList); //Save to local cache.
     UpdateFrmServerList(); //Insert treeView items to form.
+    //Create Updater Thread:
     serverCommunicator      = new QThread();
     serverCommunicatorTask  = new ServerCommunicator(parent);
     serverCommunicatorTask->SetServerList(serverList);

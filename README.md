@@ -6,7 +6,7 @@ Currently it's more like a draft than a working multiplayer solution.
 ## Building the programs
 The repository has to be cloned with --recursive parameter in order to clone all referenced submodules of this project.
 The build system for the server project is implemented with a tool called cmake.
-OpenGMP-Server can be built on windows and linux operating systems.
+OpenGMP-Server can be built on linux operating systems. The client has to be built on windows.
 
 ### Building the server
 To build the server on a linux system, the following tools have to be installed:
@@ -19,30 +19,30 @@ On debian based systems the software can be installed with the following command
 ```
 sudo apt install git cmake build-essential libssl1.0-dev libmysqlclient-dev
 ```
-On a windows system it's needed to have a program for CMake, Git and some build environment like VisualStudio.
-Instead of calling ```make``` you want to open the generated .sln file on windows.
-
 ```
 git clone --recursive https://github.com/ErrorFlexXx/OpenGMP.git
 cd OpenGMP
 mkdir build
 cd build
 cmake ..
-make -j4 # Or open generated sln on windows. 4 are used threads to compile.
+make -j4 # 4 are used threads to compile.
 ```
+Since OpenGMP has builtin encryption by default, it needs to create encryption keys on the first start.
+By default OpenGMP-Server will try to create the keys itself. However, if there are any problems while creating the keys, one can set
+the key directory manually with the following start parameter: `-kd` or `--key-dir` to a custom directory.
+
+Note: All settings, which are given as parameter are saved in a configuration file of the currently logged in user.
+Parameters, which are given to the application, will be remembered and be the new default for any later starts.
+To create or renew keys manually, one can start the server either with `-gk` or `--generate-keys` parameter to create a new public and private key.
+
+Note: The private key has to be kept secret, to support a basic security of the encrypted communication.
+
 
 ### Building the client
 Currently there is only one client implementation and it's designed for the original Gothic II the night of the raven.
 Therefore it has to be compiled with a msvc microsoft compiler. 
 
 To create the project, you'll first have to compile the RakNet library. Open the project `lib/Raknet/Lib/LibStatic/LibStatic.sln` and compile a release and debug build of the project.
-
-Since OpenGMP has built in encryption by default, you need to generate a keypair with the compiled server, before compiling the client.
-For that purpose start the server either with `-gk` or `--generate-keys` parameter to create a new public and private key.
-The public key needs to be pasted to the public_key char array in file `src/Client/Systems/networkSystem.cpp` around line 21.
-On linux operating systems there is a support script named `binFileToAsciHexInitList.sh` copied to the build directory to get a `C/C++` compatible formatted output of the key that can be  pasted in the client source.
-
-Note: The private key has to be kept secret, to support a basic security of the encrypted communication.
 
 After this one can open the .sln project located at src/Client/OpenGMP-Client and compile it.
 

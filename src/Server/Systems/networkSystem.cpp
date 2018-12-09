@@ -3,6 +3,8 @@
 #include "../Systems/netDynamicContainer.hpp"
 #include <Shared/Types/Messages/networkSystemMessages.hpp>
 #include <utils/logger.h>
+#include <fstream>
+#include <iostream>
 
 #if LIBCAT_SECURITY!=1
 #error "Define LIBCAT_SECURITY 1 in lib/RakNet/Source/NativeFeatureIncludesOverrides.h to enable Encryption"
@@ -37,14 +39,26 @@ bool NetworkSystem::ReadEncryptionKeys()
     size_t expectedPubKeySize = cat::EasyHandshake::PUBLIC_KEY_BYTES;
     size_t expectedPrivKeySize = cat::EasyHandshake::PRIVATE_KEY_BYTES;
 
-    FILE *fp = fopen(pubKeyFilepath.c_str(), "r");
-    if(!fp)
+    std::ifstream fp;
+    fp.open(pubKeyFilepath.c_str(), std::ios::in | std::ios::binary);
+    if(!fp.is_open())
     {
-        LogError() << "Cannot open public key file \"" << pubKeyFilepath << "\" for read! Startup failed!";
-        return false;
+        LogWarn() << "Cannot open public key file \"" << pubKeyFilepath << "\" for read! Creating new keys...";
+        if(0 != GenKeys(keyDirectory, publicKeyfileName, privateKeyfileName))
+        {
+            LogError() << "Cannot create keys! Please check or explicitly set the key path! Make sure, it is writable!";
+            return false;
+        }
+        fp.open(pubKeyFilepath.c_str(), std::ios::in | std::ios::binary);
+        if(!fp.is_open())
+        {
+            LogError() << "Cannot read public key! Filepath is: " << pubKeyFilepath;
+            return false;
+        }
     }
-    size_t readBytes = fread(public_key, 1, sizeof(public_key), fp);
-    fclose(fp);
+    fp.read(public_key, sizeof(public_key));
+    size_t readBytes = fp.gcount();
+    fp.close();
 
     if(expectedPubKeySize != readBytes)
     {
@@ -57,14 +71,15 @@ bool NetworkSystem::ReadEncryptionKeys()
     for(size_t i = 0; i < expectedPubKeySize; i++)
         gameServer.server.publicKey.push_back(public_key[i]);
 
-    fp = fopen(privKeyFilepath.c_str(), "r");
-    if(!fp)
+    fp.open(privKeyFilepath.c_str(), std::ios::in | std::ios::binary);
+    if(!fp.is_open())
     {
         LogError() << "Cannot open private key file \"" << privKeyFilepath << "\" for read! Startup failed!";
         return false;
     }
-    readBytes = fread(private_key, 1, sizeof(private_key), fp);
-    fclose(fp);
+    fp.read(private_key, sizeof(private_key));
+    readBytes = fp.gcount();
+    fp.close();
 
     if(expectedPrivKeySize != readBytes)
     {
@@ -175,24 +190,25 @@ int NetworkSystem::GenKeys(const std::string &keyDir,
     handshake.GenerateServerKey(public_key, private_key);
 
     //Write public key to file:
-    FILE *fp = fopen(pubKeyFilepath.c_str(), "w");
-    if(!fp)
+    std::ofstream fp;
+    fp.open(pubKeyFilepath.c_str(), std::ios::out | std::ios::trunc | std::ios::binary);
+    if(!fp.is_open())
     {
         LogError() << "Cannot write public key to file!";
         return 1;
     }
-    fwrite(public_key, sizeof(public_key), 1, fp);
-    fclose(fp);
+    fp.write(public_key, sizeof(public_key));
+    fp.close();
 
     //Write private key to file:
-    fp = fopen(privKeyFilepath.c_str(), "w");
-    if(!fp)
+    fp.open(privKeyFilepath.c_str(), std::ios::out | std::ios::trunc | std::ios::binary);
+    if(!fp.is_open())
     {
         LogError() << "Cannot write private key to file!";
         return 1;
     }
-    fwrite(private_key, sizeof(private_key), 1, fp);
-    fclose(fp);
+    fp.write(private_key, sizeof(private_key));
+    fp.close();
 
     LogInfo() << "New generated keys successfully written to files. Exiting now.";
     return 0;

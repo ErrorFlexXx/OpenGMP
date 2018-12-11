@@ -8,13 +8,11 @@
 #include <Launcher/Systems/serverStorage.hpp>
 #include <Shared/Types/constants.hpp>
 #include <ZenLib/utils/logger.h>
-#include <cpp-httplib/httplib.h>
 #include <qfiledialog.h>
 #include <QMessageBox>
 #include <QDateTime>
 #include <map>
 #include <string>
-#include <Systems/clientInstallation.hpp>
 
 using namespace std;
 using namespace OpenGMP;

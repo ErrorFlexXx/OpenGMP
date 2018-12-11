@@ -1,6 +1,6 @@
+#include <cpp-httplib/httplib.h>
 #include "serverCommunicator.hpp"
 #include <ZenLib/utils/logger.h>
-#include <cpp-httplib/httplib.h>
 #include <QThread>
 #include <QDateTime>
 #include <string>

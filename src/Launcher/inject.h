@@ -93,6 +93,6 @@ private:
     std::list<std::pair<std::string, std::string>> envVars; //!< List of environment variable key pairs.
     std::list<std::pair<std::string, std::string>> envAppendVars; //!< List of environment variable key pairs (values are appended with semicolon).
     bool running;           //!< Running flag of started process.
-    STARTUPINFOA si;         //!< StartupInfo structure for CreateProcess.
+    STARTUPINFOA si;        //!< StartupInfo structure for CreateProcess.
     PROCESS_INFORMATION pi; //!< ProcessInformation for CreateProcess.
 };

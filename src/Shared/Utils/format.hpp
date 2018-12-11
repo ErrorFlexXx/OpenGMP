@@ -11,7 +11,7 @@ namespace OpenGMP
      * @param optional delimiter, which is placed between the bytes.
      * @return a string containing the hex output representation.
      */
-    inline std::string Bin2HexString(const unsigned char *in, size_t length, const std::string &delim = "", bool upper=false)
+    inline std::string Bin2HexString(const unsigned char *in, size_t length, const std::string &delim = "", bool upper = false)
     {
         std::string out;
         char part[3];   //Buffer to create hex output.
@@ -39,7 +39,7 @@ namespace OpenGMP
      * @param optional delimiter, which is placed between the bytes.
      * @return a string containing the hex output representation.
      */
-    inline std::string Bin2HexString(const char *in, size_t length, const std::string &delim = "", bool upper=false)
+    inline std::string Bin2HexString(const char *in, size_t length, const std::string &delim = "", bool upper = false)
     {
         return Bin2HexString(reinterpret_cast<const unsigned char*>(in), length, delim, upper);
     }

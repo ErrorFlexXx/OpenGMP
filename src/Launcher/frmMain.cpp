@@ -84,7 +84,7 @@ void FrmMain::UpdateFrmServerList()
         item->setText(LServer::PortCol, QString::number(server.webPort));
         server.treeItem = item;
         ui->treeServerList->addTopLevelItem(item);
-        for(size_t i = 0; i < LServer::UiListColumns::Max; i++)
+        for(int i = 0; i < LServer::UiListColumns::Max; i++)
             ui->treeServerList->resizeColumnToContents(i);
     }
 }

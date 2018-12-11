@@ -1,4 +1,5 @@
 #include "inject.h"
+#include <Shared/Utils/logger.hpp>
 #include <fstream>
 #include <filesystem>
 #include <vector>

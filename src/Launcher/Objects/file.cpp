@@ -23,9 +23,14 @@ File::File(const string &directory, const string &filename)
 
 bool File::Exists() const
 {
-    string fullpath = Fullpath();
-    ifstream test(fullpath.c_str());
-    return test.good();
+    std::error_code error;
+    bool result = filesystem::exists(Fullpath(), error);
+    if(error)
+    {
+        LogError() << error.message();
+        return false;
+    }
+    return result;
 }
 
 std::string File::Fullpath() const

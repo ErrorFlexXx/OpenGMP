@@ -2,9 +2,9 @@
 
 #include <list>
 #include <string>
-#include <Windows.h>
 #include <stdlib.h> //putenv
 #include <filesystem>
+#include <Windows.h>
 
 /**
  * @brief The Inject class

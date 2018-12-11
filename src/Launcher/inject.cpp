@@ -1,5 +1,4 @@
 #include "inject.h"
-#include <ZenLib/utils/logger.h>
 #include <fstream>
 #include <filesystem>
 #include <vector>

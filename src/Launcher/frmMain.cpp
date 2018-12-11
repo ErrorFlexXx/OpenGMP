@@ -7,7 +7,7 @@
 #include <Launcher/Objects/lserver.hpp>
 #include <Launcher/Systems/serverStorage.hpp>
 #include <Shared/Types/constants.hpp>
-#include <ZenLib/utils/logger.h>
+#include <Shared/Utils/logger.hpp>
 #include <qfiledialog.h>
 #include <QMessageBox>
 #include <QDateTime>
@@ -137,7 +137,6 @@ void FrmMain::on_btnTest_clicked()
 //    }
 //    ServerStorage::LoadCachedServerlist("serverlist.json", serverlist);
 //    ServerStorage::StoreCachedServerList("serverlist.json", serverlist);
-
 }
 
 void FrmMain::on_actionExit_triggered()

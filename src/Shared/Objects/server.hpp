@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <json/json.hpp>
+#include <Shared/Utils/format.hpp>
 #include <Shared/Components/version.hpp>
 #include <Shared/Systems/versionSystem.hpp>
 
@@ -97,16 +98,7 @@ namespace OpenGMP
          */
         inline std::string PublicKeyToHexString() const
         {
-            std::string pubKeyString;
-            char part[3];   //Buffer to create hex output.
-            part[2] = 0;    //Zero terminate
-
-            for(const char &c : publicKey)
-            {
-                snprintf(part, 3, "%02X", static_cast<unsigned char>(c));
-                pubKeyString.append(part);
-            }
-            return pubKeyString;
+            return Bin2HexString(publicKey.data(), publicKey.size());
         }
 
         /**

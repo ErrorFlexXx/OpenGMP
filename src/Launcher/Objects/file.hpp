@@ -60,7 +60,14 @@ namespace OpenGMP
          * @brief MD5 calculates the md5 checksum of this file.
          * @return MD5 checksum in Hex represenatation.
          */
-        std::string MD5(const std::string &delim = "") const;
+        std::string MD5(const std::string &delim = "", bool upper = false) const;
+
+        /**
+         * @brief Touch creates an empty file.
+         * @param overwrite set to true to overwrite the file, if it exists.
+         * @return true if the empty file has been created, false otherwise.
+         */
+        bool Touch(bool overwrite = false) const;
 
     private:
         std::string directory;  //!< Directory this file lives in.

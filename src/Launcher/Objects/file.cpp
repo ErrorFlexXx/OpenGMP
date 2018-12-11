@@ -92,7 +92,7 @@ bool File::Delete() const
     return true;
 }
 
-string File::MD5(const string &delim) const
+string File::MD5(const string &delim, bool upper) const
 {
     unsigned char digest[MD5_DIGEST_LENGTH];
     char *buffer = new char[File::bufferSize];
@@ -127,5 +127,29 @@ string File::MD5(const string &delim) const
     file.close();
     delete[] buffer;
 
-    return Bin2HexString(digest, MD5_DIGEST_LENGTH, delim);
+    return Bin2HexString(digest, MD5_DIGEST_LENGTH, delim, upper);
+}
+
+bool File::Touch(bool overwrite) const
+{
+    ofstream file;
+    if(overwrite)
+        file.open(Fullpath(), std::ios::out | std::ios::trunc);
+    else
+    {
+        if(!Exists())
+            file.open(Fullpath(), std::ios::out);
+        else
+        {
+            LogError() << "File already exists. Use force = true to overwrite.";
+            return false;
+        }
+    }
+    if(file.is_open())
+    {
+        file.close();
+        return true;
+    }
+    LogError() << "Cannot create file: " << Fullpath();
+    return false;
 }

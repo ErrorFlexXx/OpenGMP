@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Launcher/Systems/jsonFile.hpp>
-#include <Launcher/Systems/serverCommunicator.hpp>
+#include <Launcher/Objects/jsonFile.hpp>
 #include <Launcher/Objects/lserver.hpp>
+#include <Launcher/Systems/serverCommunicator.hpp>
 #include <QMainWindow>
 #include <QTimer>
 #include <QThread>

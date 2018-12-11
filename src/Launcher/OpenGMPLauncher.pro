@@ -33,9 +33,9 @@ SOURCES +=  main.cpp \
             ../Shared/Systems/versionSystem.cpp \
             ../Shared/Components/version.cpp \
             ../../lib/ZenLib/utils/logger.cpp \
-            Systems/jsonFile.cpp \
+            Objects/jsonFile.cpp \
+            Objects/file.cpp \
             Systems/serverCommunicator.cpp \
-            Systems/clientInstallation.cpp \
             Objects/lserver.cpp \
             frmMainSettings.cpp \
             frmMain.cpp
@@ -48,9 +48,9 @@ HEADERS +=  \
             Systems/serverStorage.hpp \
             ../Shared/Components/version.hpp \
             ../Shared/Objects/server.hpp \
-            Systems/jsonFile.hpp \
+            Objects/jsonFile.hpp \
+            Objects/file.hpp \
             Systems/serverCommunicator.hpp \
-            Systems/clientInstallation.hpp \
             Objects/lserver.hpp \
             frmMainSettings.h \
             frmMain.h
@@ -76,5 +76,6 @@ win32 {
 
 linux {
     LIBS += -lssl \
-            -lcrypto
+            -lcrypto \
+            -lstdc++fs
 }

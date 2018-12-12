@@ -29,31 +29,34 @@ DEFINES += LAUNCHER
 DEFINES += CPPHTTPLIB_OPENSSL_SUPPORT
 
 SOURCES +=  main.cpp \
+            frmMainSettings.cpp \
+            frmMain.cpp \
             Systems/serverStorage.cpp \
+            Systems/clientStore.cpp \
+            Systems/serverCommunicator.cpp \
+            Objects/jsonFile.cpp \
+            Objects/lserver.cpp \
             ../Shared/Systems/versionSystem.cpp \
             ../Shared/Components/version.cpp \
-            ../../lib/ZenLib/utils/logger.cpp \
-            Objects/jsonFile.cpp \
-            Objects/file.cpp \
-            Systems/serverCommunicator.cpp \
-            Objects/lserver.cpp \
-            frmMainSettings.cpp \
-            frmMain.cpp
+            ../Shared/Objects/file.cpp \
+            ../../lib/ZenLib/utils/logger.cpp
 
 win32 {
     SOURCES += inject.cpp
 }
 
 HEADERS +=  \
+            frmMainSettings.h \
+            frmMain.h \
             Systems/serverStorage.hpp \
+            Systems/serverCommunicator.hpp \
+            Systems/clientStore.hpp \
+            Objects/jsonFile.hpp \
+            Objects/lserver.hpp \
             ../Shared/Components/version.hpp \
             ../Shared/Objects/server.hpp \
-            Objects/jsonFile.hpp \
-            Objects/file.hpp \
-            Systems/serverCommunicator.hpp \
-            Objects/lserver.hpp \
-            frmMainSettings.h \
-            frmMain.h
+            ../Shared/Objects/file.hpp
+
 
 win32 {
     HEADERS += inject.h

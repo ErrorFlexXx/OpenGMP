@@ -2,12 +2,13 @@
 #include "ui_frmMain.h"
 //#include "inject.h"
 #include "frmMainSettings.h"
-#include <Launcher/Objects/file.hpp>
+#include <Shared/Objects/file.hpp>
 #include <Launcher/Objects/jsonFile.hpp>
 #include <Launcher/Objects/lserver.hpp>
 #include <Launcher/Systems/serverStorage.hpp>
 #include <Shared/Types/constants.hpp>
 #include <Shared/Utils/logger.hpp>
+#include "Systems/clientStore.hpp"
 #include <qfiledialog.h>
 #include <QMessageBox>
 #include <QDateTime>
@@ -137,6 +138,8 @@ void FrmMain::on_btnTest_clicked()
 //    }
 //    ServerStorage::LoadCachedServerlist("serverlist.json", serverlist);
 //    ServerStorage::StoreCachedServerList("serverlist.json", serverlist);
+    ClientStore test;
+
 }
 
 void FrmMain::on_actionExit_triggered()

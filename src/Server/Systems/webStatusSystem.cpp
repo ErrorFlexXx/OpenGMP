@@ -29,6 +29,11 @@ bool WebStatusSystem::Startup()
             res.set_content(GetStatus(), "text/plain");
         });
 
+        webServer.Get("/version", [=](const Request &req, Response &res)
+        {
+            res.set_content(GetVersion(), "text/plain");
+        });
+
         webServer.Get("/connect", [=](const Request &req, Response &res)
         {
             res.set_content(GetConnect(), "text/plain");
@@ -61,6 +66,13 @@ std::string WebStatusSystem::GetStatus() const
     output.append(to_string(gameServer.clientContainer.Count()))
           .append("/")
           .append(to_string(gameServer.clientContainer.capacity));
+    return output;
+}
+
+std::string WebStatusSystem::GetVersion() const
+{
+    std::string output;
+    output.append(VersionSystem::GetVersionString(VersionSystem::version.version));
     return output;
 }
 

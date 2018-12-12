@@ -21,6 +21,7 @@ namespace OpenGMP
 
     private:
         std::string GetStatus() const;
+        std::string GetVersion() const;
         std::string GetConnect() const;
         bool setupDone;
     };

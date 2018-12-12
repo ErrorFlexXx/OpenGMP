@@ -27,6 +27,20 @@ namespace OpenGMP
         void UpdateServerEntry(const OpenGMP::LServer &server);
 
         /**
+         * @brief UpdateServerEntryNowOnline signal emitted to main thread, if a server changed its
+         *   state from off- to online.
+         * @param server entry, which values shall be updated in frmMain.
+         */
+        void UpdateServerEntryNowOnline(const OpenGMP::LServer &server);
+
+        /**
+         * @brief UpdateServerEntryNowOffline signal emitted to main thread, if a server changed its
+         *   state from on- to offline.
+         * @param server entry, which values shall be updated in frmMain.
+         */
+        void UpdateServerEntryNowOffline(const OpenGMP::LServer &server);
+
+        /**
          * @brief finished signal is called if the worker loop ends.
          */
         void finished();

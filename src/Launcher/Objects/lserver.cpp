@@ -3,7 +3,8 @@
 using namespace OpenGMP;
 
 LServer::LServer()
-    : treeItem(nullptr)
+    : isOnline(false)
+    , treeItem(nullptr)
 {
     qRegisterMetaType<LServer>();
 }

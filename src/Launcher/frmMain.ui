@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>749</width>
+    <width>801</width>
     <height>399</height>
    </rect>
   </property>
@@ -46,6 +46,11 @@
          <column>
           <property name="text">
            <string>Ping</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Version</string>
           </property>
          </column>
         </widget>
@@ -93,7 +98,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>749</width>
+     <width>801</width>
      <height>22</height>
     </rect>
    </property>

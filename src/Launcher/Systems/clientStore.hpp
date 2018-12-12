@@ -1,9 +1,12 @@
 #pragma once
 
 #include <string>
+#include <list>
 
 namespace OpenGMP
 {
+    class Version;
+
     /**
      * @brief The ClientStore class manages installed client versions
      *   and can download new ones.
@@ -18,11 +21,16 @@ namespace OpenGMP
 
         /**
          * @brief ClientStore creates a client Store with custom installation dir.
-         * @param installationDir to store new and look for existing installations
+         * @param installationDir to store new and look for existing installations.
+         * @param downloadDir to download new files to.
          */
-        ClientStore(const std::string &installationDir);
+        ClientStore(const std::string &installationDir,
+                    const std::string &downloadDir);
+
+
 
     private:
-        std::string installationDir; //!< Directory for installed clients.
+        std::string installationDir;    //!< Directory for installed clients.
+        std::string downloadDir;        //!< Directory for new downloads.
     };
 }

@@ -22,14 +22,15 @@ FrmMain::FrmMain(QWidget *parent)
     : QMainWindow(parent)
     , config("Settings.json")
     , ui(new Ui::FrmMain)
+    , serverListName("Serverlist.json")
 {
     ui->setupUi(this);
     if(!config.Load())
         CreateDefaultConfig();
     serverList.clear();
-    ServerStorage::LoadCachedServerlist("Serverlist.json", serverList);
+    ServerStorage::LoadCachedServerlist(serverListName, serverList);
     if(ServerStorage::LoadWebServerlist("raw.githubusercontent.com", "/ErrorFlexXx/OpenGMP/master/ServerList/serverList.json", serverList))
-        ServerStorage::StoreCachedServerList("Serverlist.json", serverList); //Save to local cache.
+        ServerStorage::StoreCachedServerList(serverListName, serverList); //Save to local cache.
     UpdateFrmServerList(); //Insert treeView items to form.
     //Create Updater Thread:
     serverCommunicator      = new QThread();
@@ -38,6 +39,8 @@ FrmMain::FrmMain(QWidget *parent)
     serverCommunicatorTask->moveToThread(serverCommunicator);
     //Connect Signals:
     connect(serverCommunicatorTask, SIGNAL(UpdateServerEntry(const OpenGMP::LServer)), this, SLOT(UpdateServerEntry(const OpenGMP::LServer)));
+    connect(serverCommunicatorTask, SIGNAL(UpdateServerEntryNowOnline(const OpenGMP::LServer)), this, SLOT(UpdateServerEntryNowOnline(const OpenGMP::LServer)));
+    connect(serverCommunicatorTask, SIGNAL(UpdateServerEntryNowOffline(const OpenGMP::LServer)), this, SLOT(UpdateServerEntryNowOffline(const OpenGMP::LServer)));
     connect(serverCommunicator, SIGNAL(started()), serverCommunicatorTask, SLOT(UpdateServerLoop()) );  //Start the update server loop on thread start.
     connect(serverCommunicatorTask, SIGNAL(finished()), serverCommunicator, SLOT(quit()));              //If the task ends, the thread quits.
     connect(serverCommunicatorTask, SIGNAL(finished()), serverCommunicatorTask, SLOT(deleteLater()));   //Let Qt free the Task
@@ -58,6 +61,48 @@ void FrmMain::UpdateServerEntry(const OpenGMP::LServer &server)
     {
         server.treeItem->setText(OpenGMP::LServer::PlayerCol, server.playerInfo);
         server.treeItem->setText(OpenGMP::LServer::PingCol, server.pingInfo);
+    }
+}
+
+void FrmMain::UpdateServerEntryNowOnline(const OpenGMP::LServer &server)
+{
+    UpdateServerEntry(server); //Enter normal informations
+    if(server.treeItem)
+    {
+        //Enter online informations.
+        server.treeItem->setText(OpenGMP::LServer::ServernameCol, server.servernameInfo);
+        server.treeItem->setText(OpenGMP::LServer::VersionCol, server.versionInfo);
+        for(int i = 0; i < LServer::UiListColumns::Max; i++) //Adjust column widths
+            ui->treeServerList->resizeColumnToContents(i);
+        //Update local store
+        for(LServer &storeServer : serverList)
+        {
+            if(server == storeServer)
+            {
+                storeServer.isOnline = true;
+                storeServer.servername = server.servername;
+                storeServer.version = server.version;
+                break;
+            }
+        }
+        ServerStorage::StoreCachedServerList(serverListName, serverList);
+    }
+}
+
+void FrmMain::UpdateServerEntryNowOffline(const OpenGMP::LServer &server)
+{
+    UpdateServerEntry(server); //Enter normal informations
+
+    for(int i = 0; i < LServer::UiListColumns::Max; i++) //Adjust column widths
+        ui->treeServerList->resizeColumnToContents(i);
+
+    //Update store server online flag.
+    for(LServer &storeServer : serverList)
+    {
+        if(server == storeServer)
+        {
+            storeServer.isOnline = false;
+        }
     }
 }
 
@@ -83,6 +128,8 @@ void FrmMain::UpdateFrmServerList()
         item->setText(LServer::ServernameCol, server.servername.c_str());
         item->setText(LServer::HostnameCol, server.hostname.c_str());
         item->setText(LServer::PortCol, QString::number(server.webPort));
+        item->setText(LServer::VersionCol, VersionSystem::GetVersionString(server.version.version).c_str());
+        item->setText(LServer::PingCol, QString("Contacting"));
         server.treeItem = item;
         ui->treeServerList->addTopLevelItem(item);
         for(int i = 0; i < LServer::UiListColumns::Max; i++)
@@ -138,7 +185,7 @@ void FrmMain::on_btnTest_clicked()
 //    }
 //    ServerStorage::LoadCachedServerlist("serverlist.json", serverlist);
 //    ServerStorage::StoreCachedServerList("serverlist.json", serverlist);
-    ClientStore test;
+    ClientStore testStore;
 
 }
 

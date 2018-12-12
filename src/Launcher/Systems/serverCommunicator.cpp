@@ -38,11 +38,34 @@ void ServerCommunicator::UpdateServerLoop()
             {
                 server.playerInfo = QString(res->body.c_str());
                 server.pingInfo   = QString::number((int)before.msecsTo(after));
+
+                if(!server.isOnline) //Server coming online just now ? - Fetch version.
+                {
+                    httplib::Client client(server.hostname.c_str(), server.webPort, 1);
+                    auto res = client.Get("/connect");
+                    if (res && res->status == 200) //Server available ?
+                    {
+                        Server read;
+                        read.FromJsonString(res->body);
+                        server.isOnline = true;
+                        server.servername = read.servername;
+                        server.servernameInfo = QString(read.servername.c_str());
+                        server.version.version = read.version.version;
+                        server.versionInfo = QString(VersionSystem::GetVersionString(read.version.version).c_str());
+                        emit UpdateServerEntryNowOnline(server);
+                    }
+                }
             }
             else //Server unavailable
             {
                 server.playerInfo = "-";
                 server.pingInfo   = "Offline";
+                if(server.isOnline)
+                {
+                    server.isOnline = false; //Server no longer online.
+                    emit UpdateServerEntryNowOffline(server);
+                }
+
             }
             emit UpdateServerEntry(server);
         }

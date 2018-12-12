@@ -48,8 +48,22 @@ private slots:
      */
     void UpdateServerEntry(const OpenGMP::LServer &server);
 
+    /**
+     * @brief UpdateServerEntryNowOnline same as UpdateServerEntry, but with additional tasks.
+     *   Updates the local store with new server informations (e.g. Name/Version).
+     * @param server
+     */
+    void UpdateServerEntryNowOnline(const OpenGMP::LServer &server);
+
+    /**
+     * @brief UpdateServerEntryNowOffline updates a server entry. Server moved from on-, to offline.
+     * @param server entry to update.
+     */
+    void UpdateServerEntryNowOffline(const OpenGMP::LServer &server);
+
 private:
     Ui::FrmMain *ui;
     OpenGMP::ServerCommunicator *serverCommunicatorTask; //!<Task to update all server entries in a loop.
     QThread *serverCommunicator; //!< Thread to decouple comm. from the ui thread.
+    std::string serverListName; //!< Filename of serverlist.
 };

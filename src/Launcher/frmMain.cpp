@@ -186,7 +186,8 @@ void FrmMain::on_btnTest_clicked()
 //    ServerStorage::LoadCachedServerlist("serverlist.json", serverlist);
 //    ServerStorage::StoreCachedServerList("serverlist.json", serverlist);
     ClientStore testStore;
-
+    LogInfo() << testStore.IsInstalled(serverList.front().version);
+    testStore.Download(serverList.front().version);
 }
 
 void FrmMain::on_actionExit_triggered()

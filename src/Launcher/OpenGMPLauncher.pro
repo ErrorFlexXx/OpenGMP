@@ -35,6 +35,7 @@ SOURCES +=  main.cpp \
             Systems/clientStore.cpp \
             Systems/serverCommunicator.cpp \
             Objects/jsonFile.cpp \
+            Objects/zipFile.cpp \
             Objects/lserver.cpp \
             ../Shared/Systems/versionSystem.cpp \
             ../Shared/Components/version.cpp \
@@ -52,6 +53,7 @@ HEADERS +=  \
             Systems/serverCommunicator.hpp \
             Systems/clientStore.hpp \
             Objects/jsonFile.hpp \
+            Objects/zipFile.hpp \
             Objects/lserver.hpp \
             ../Shared/Components/version.hpp \
             ../Shared/Objects/server.hpp \
@@ -68,6 +70,7 @@ FORMS +=    \
 
 INCLUDEPATH += ../../lib \
                ../../lib/openssl/include \
+               ../../lib/ZenLib/lib/physfs/src/ \
                ../
 win32 {
     LIBS += -luser32 \

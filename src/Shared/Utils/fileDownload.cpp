@@ -1,6 +1,8 @@
 #include "fileDownload.hpp"
 #include <Shared/Utils/url.hpp>
 #include <cpp-httplib/httplib.h>
+#include <thread>
+#include <unistd.h>
 
 using namespace std;
 using namespace OpenGMP;
@@ -11,15 +13,83 @@ FileDownload::FileDownload(const std::string &filename)
 
 FileDownload::FileDownload(const std::string &directory, const std::string &filename)
     : File(directory, filename)
+    , worker(nullptr)
+    , downloadPending(false)
+    , downloadResult(false)
     , redirectCount(0)
 {}
 
-bool FileDownload::Download(const std::string &url)
+FileDownload::~FileDownload()
 {
+    //Wait for thread finish - deleting this object forbidden while
+    //thread is running.
+    while(worker && lock.try_lock() == false) //Thread exists, and lock is locked.
+        usleep(1000); //Wait for thread finish.
+    delete worker;      //Delete the worker thread.
+    worker = nullptr;   //Mark as deleted.
+}
+
+bool FileDownload::DownloadFinished()
+{
+    bool locked = lock.try_lock();
+    if(!locked)
+        return false;
+    lock.unlock();
+    return !downloadPending;
+}
+
+bool FileDownload::DownloadResult()
+{
+    bool locked = lock.try_lock();
+    if(!locked)
+        return false;
+    bool result = downloadResult;
+    if(worker)
+    {
+        delete worker;
+        worker = nullptr;
+    }
+    lock.unlock();
+    return result;
+}
+
+bool FileDownload::Download(const std::string &url, bool blocking)
+{
+    if(!blocking)
+    {
+        if(worker == nullptr)
+        {
+            worker = new std::thread([=]{
+                LogInfo() << "Thread started!";
+                lock_guard<mutex> guard(lock);
+                LogInfo() << "Thread locked!";
+                downloadResult = Download(url, true);
+                downloadPending = false;
+                LogInfo() << "Thread finished!";
+            });
+            worker->detach();
+            while(lock.try_lock() == true) //Wait for thread start.
+            {
+                lock.unlock();
+                usleep(1000);   //Wait for thread start.
+            }
+            return true; //Async download started successfully.
+        }
+        else
+        {
+            LogError() << "Do not start a non blocking download twice!";
+            return false;
+        }
+    }
+    //Blocking:
     Url downloadUrl(url);
-    if(downloadUrl.port == 80)
+    downloadPending = true;
+    if(downloadUrl.protocol.find("http://") != string::npos ||
+       downloadUrl.port == 80) //Http
         return DownloadHttp(url);
-    return DownloadHttps(url); //Default https
+    else //Https
+        return DownloadHttps(url);
+    return false; //Can never happen - compiler happy.
 }
 
 bool FileDownload::DownloadHttp(const std::string &url)
@@ -51,7 +121,7 @@ bool FileDownload::DownloadBase(httplib::Client &client, const Url &url)
                 LogError() << "Detected infinite redirection! Canceled after " << redirectCount << " tries!";
                 return false;
             }
-            return Download(response->get_header_value("Location"));
+            return Download(response->get_header_value("Location"), true);
         }
         else if(response->status == 200) //Ok ?
         {
@@ -69,12 +139,12 @@ bool FileDownload::DownloadBase(httplib::Client &client, const Url &url)
                 return false;
             }
         }
-        else
+        else //Unexpected result
         {
             LogError() << "Download failed! Status: " << response->status << " Message: " << response->body;
             return false;
         }
     }
-    LogError() << "Didn't get a response from host: " << url.host;
+    LogError() << "Didn't get a response from host: " << url.host << ":" << url.port;
     return false;
 }

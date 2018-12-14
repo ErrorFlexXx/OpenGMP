@@ -69,7 +69,7 @@ namespace OpenGMP
          */
         bool Touch(bool overwrite = false) const;
 
-    private:
+    protected:
         std::string directory;  //!< Directory this file lives in.
         std::string filename;   //!< filename of this file.
         static size_t bufferSize;    //!< Size of buffer for file operations.

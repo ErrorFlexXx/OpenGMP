@@ -40,6 +40,7 @@ SOURCES +=  main.cpp \
             ../Shared/Systems/versionSystem.cpp \
             ../Shared/Components/version.cpp \
             ../Shared/Objects/file.cpp \
+            ../Shared/Objects/fileDownload.cpp \
             ../../lib/ZenLib/utils/logger.cpp
 
 win32 {
@@ -57,7 +58,9 @@ HEADERS +=  \
             Objects/lserver.hpp \
             ../Shared/Components/version.hpp \
             ../Shared/Objects/server.hpp \
-            ../Shared/Objects/file.hpp
+            ../Shared/Objects/file.hpp \
+            ../Shared/Objects/fileDownload.hpp \
+            ../Shared/Utils/url.hpp
 
 
 win32 {

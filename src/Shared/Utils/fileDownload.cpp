@@ -110,7 +110,10 @@ bool FileDownload::DownloadHttps(const std::string &url)
 
 bool FileDownload::DownloadBase(httplib::Client &client, const Url &url)
 {
-    auto response = client.Get(url.path.c_str());
+    auto response = client.Get(url.path.c_str(), [=] (uint64_t len, uint64_t total) {
+        ProgressUpdate(len, total);
+        return true;
+    });
     if(response)
     {
         if(response->status == 302) //Redirect ?
@@ -147,4 +150,9 @@ bool FileDownload::DownloadBase(httplib::Client &client, const Url &url)
     }
     LogError() << "Didn't get a response from host: " << url.host << ":" << url.port;
     return false;
+}
+
+void FileDownload::ProgressUpdate(uint64_t len, uint64_t total)
+{
+    LogInfo() << len << "/" << total;
 }

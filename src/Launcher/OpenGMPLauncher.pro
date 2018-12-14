@@ -36,6 +36,7 @@ SOURCES +=  main.cpp \
             Systems/serverCommunicator.cpp \
             Objects/jsonFile.cpp \
             Objects/lserver.cpp \
+            Objects/qFileDownload.cpp \
             ../Shared/Systems/versionSystem.cpp \
             ../Shared/Components/version.cpp \
             ../Shared/Utils/file.cpp \
@@ -54,13 +55,13 @@ HEADERS +=  \
             Systems/clientStore.hpp \
             Objects/jsonFile.hpp \
             Objects/lserver.hpp \
+            Objects/qFileDownload.hpp \
             ../Shared/Components/version.hpp \
             ../Shared/Objects/server.hpp \
             ../Shared/Utils/file.hpp \
             ../Shared/Utils/zipFile.hpp \
             ../Shared/Utils/fileDownload.hpp \
             ../Shared/Utils/url.hpp
-
 
 win32 {
     HEADERS += inject.h

@@ -5,6 +5,7 @@
 
 #define REDIRECT_LIMIT 3 //Allow three times redirection before canceling out.
 
+//Forward declarations:
 namespace std
 {
     class thread;
@@ -19,6 +20,10 @@ namespace OpenGMP
 {
     class Url;
 
+    /**
+     * @brief The FileDownload class implements a blocking and non blocking way of a
+     *   file download.
+     */
     class FileDownload : public File
     {
     public:
@@ -67,6 +72,13 @@ namespace OpenGMP
 
     protected:
         bool DownloadBase(httplib::Client &client, const Url &url);
+
+        /**
+         * @brief ProgressUpdate called from download thread on progress update.
+         * @param len currently downloaded bytes.
+         * @param total total bytes of the download.
+         */
+        virtual void ProgressUpdate(uint64_t len, uint64_t total);
 
     private:
         std::thread *worker;    //!< Worker, if any.

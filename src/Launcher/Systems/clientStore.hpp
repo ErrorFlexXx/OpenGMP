@@ -29,7 +29,6 @@ namespace OpenGMP
     private:
         std::string installationDir;    //!< Directory for installed clients.
         std::string downloadDir;        //!< Directory for new downloads.
-        std::string storeHost;          //!< Host used for client download.
         std::string storeUrl;           //!< Url to release directory
 
         bool CreateStore() const;

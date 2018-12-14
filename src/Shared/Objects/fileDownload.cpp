@@ -69,6 +69,11 @@ bool FileDownload::DownloadBase(httplib::Client &client, const Url &url)
                 return false;
             }
         }
+        else
+        {
+            LogError() << "Download failed! Status: " << response->status << " Message: " << response->body;
+            return false;
+        }
     }
     LogError() << "Didn't get a response from host: " << url.host;
     return false;

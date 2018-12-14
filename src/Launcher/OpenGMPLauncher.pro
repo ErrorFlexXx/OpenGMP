@@ -35,13 +35,12 @@ SOURCES +=  main.cpp \
             Systems/clientStore.cpp \
             Systems/serverCommunicator.cpp \
             Objects/jsonFile.cpp \
-            Objects/zipFile.cpp \
             Objects/lserver.cpp \
             ../Shared/Systems/versionSystem.cpp \
             ../Shared/Components/version.cpp \
-            ../Shared/Objects/file.cpp \
-            ../Shared/Objects/fileDownload.cpp \
-            ../../lib/ZenLib/utils/logger.cpp
+            ../Shared/Utils/file.cpp \
+            ../Shared/Utils/zipFile.cpp \
+            ../Shared/Utils/fileDownload.cpp
 
 win32 {
     SOURCES += inject.cpp
@@ -54,12 +53,12 @@ HEADERS +=  \
             Systems/serverCommunicator.hpp \
             Systems/clientStore.hpp \
             Objects/jsonFile.hpp \
-            Objects/zipFile.hpp \
             Objects/lserver.hpp \
             ../Shared/Components/version.hpp \
             ../Shared/Objects/server.hpp \
-            ../Shared/Objects/file.hpp \
-            ../Shared/Objects/fileDownload.hpp \
+            ../Shared/Utils/file.hpp \
+            ../Shared/Utils/zipFile.hpp \
+            ../Shared/Utils/fileDownload.hpp \
             ../Shared/Utils/url.hpp
 
 

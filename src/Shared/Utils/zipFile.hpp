@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Shared/Objects/file.hpp>
+#include "file.hpp"
 #include <string>
 
 namespace OpenGMP

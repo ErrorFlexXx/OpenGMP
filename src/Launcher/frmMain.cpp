@@ -2,12 +2,13 @@
 #include "ui_frmMain.h"
 //#include "inject.h"
 #include "frmMainSettings.h"
-#include <Shared/Objects/file.hpp>
+#include <Shared/Utils/file.hpp>
 #include <Launcher/Objects/jsonFile.hpp>
 #include <Launcher/Objects/lserver.hpp>
 #include <Launcher/Systems/serverStorage.hpp>
 #include <Shared/Types/constants.hpp>
 #include <Shared/Utils/logger.hpp>
+#include <Shared/Utils/fileDownload.hpp>
 #include "Systems/clientStore.hpp"
 #include <qfiledialog.h>
 #include <QMessageBox>
@@ -185,9 +186,8 @@ void FrmMain::on_btnTest_clicked()
 //    }
 //    ServerStorage::LoadCachedServerlist("serverlist.json", serverlist);
 //    ServerStorage::StoreCachedServerList("serverlist.json", serverlist);
-    ClientStore testStore;
-    LogInfo() << testStore.IsInstalled(serverList.front().version);
-    testStore.Download(serverList.front().version);
+//    ClientStore testStore;
+//    testStore.Download(serverList.front().version);
 }
 
 void FrmMain::on_actionExit_triggered()

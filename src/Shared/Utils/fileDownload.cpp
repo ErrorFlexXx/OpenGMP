@@ -2,7 +2,7 @@
 #include <Shared/Utils/url.hpp>
 #include <cpp-httplib/httplib.h>
 #include <thread>
-#include <unistd.h>
+#include <chrono>
 
 using namespace std;
 using namespace OpenGMP;
@@ -24,7 +24,7 @@ FileDownload::~FileDownload()
     //Wait for thread finish - deleting this object forbidden while
     //thread is running.
     while(worker && lock.try_lock() == false) //Thread exists, and lock is locked.
-        usleep(1000); //Wait for thread finish.
+        std::this_thread::sleep_for(1ms); //Wait for thread finish.
     delete worker;      //Delete the worker thread.
     worker = nullptr;   //Mark as deleted.
 }
@@ -71,7 +71,7 @@ bool FileDownload::Download(const std::string &url, bool blocking)
             while(lock.try_lock() == true) //Wait for thread start.
             {
                 lock.unlock();
-                usleep(1000);   //Wait for thread start.
+                std::this_thread::sleep_for(1ms); //Wait for thread finish.
             }
             return true; //Async download started successfully.
         }
@@ -89,7 +89,6 @@ bool FileDownload::Download(const std::string &url, bool blocking)
         return DownloadHttp(url);
     else //Https
         return DownloadHttps(url);
-    return false; //Can never happen - compiler happy.
 }
 
 bool FileDownload::DownloadHttp(const std::string &url)

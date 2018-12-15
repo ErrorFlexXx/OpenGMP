@@ -77,7 +77,7 @@
     <widget class="QTextEdit" name="txtLog">
      <property name="font">
       <font>
-       <family>Monospace</family>
+       <family>Courier</family>
       </font>
      </property>
      <property name="readOnly">

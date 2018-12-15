@@ -31,6 +31,7 @@ DEFINES += CPPHTTPLIB_OPENSSL_SUPPORT
 SOURCES +=  main.cpp \
             frmMainSettings.cpp \
             frmMain.cpp \
+            frmLogConsole.cpp \
             Systems/serverStorage.cpp \
             Systems/clientStore.cpp \
             Systems/serverCommunicator.cpp \
@@ -41,8 +42,7 @@ SOURCES +=  main.cpp \
             ../Shared/Components/version.cpp \
             ../Shared/Utils/file.cpp \
             ../Shared/Utils/zipFile.cpp \
-            ../Shared/Utils/fileDownload.cpp \
-    frmLogConsole.cpp
+            ../Shared/Utils/fileDownload.cpp
 
 win32 {
     SOURCES += inject.cpp
@@ -51,6 +51,7 @@ win32 {
 HEADERS +=  \
             frmMainSettings.h \
             frmMain.h \
+            frmLogConsole.h \
             Systems/serverStorage.hpp \
             Systems/serverCommunicator.hpp \
             Systems/clientStore.hpp \
@@ -62,8 +63,7 @@ HEADERS +=  \
             ../Shared/Utils/file.hpp \
             ../Shared/Utils/zipFile.hpp \
             ../Shared/Utils/fileDownload.hpp \
-            ../Shared/Utils/url.hpp \
-    frmLogConsole.h
+            ../Shared/Utils/url.hpp
 
 win32 {
     HEADERS += inject.h
@@ -72,7 +72,7 @@ win32 {
 FORMS +=    \
             frmMainSettings.ui \
             frmMain.ui \
-    frmLogConsole.ui
+            frmLogConsole.ui
 
 INCLUDEPATH += ../../lib \
                ../../lib/openssl/include \

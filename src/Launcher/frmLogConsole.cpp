@@ -25,14 +25,6 @@ FrmLogConsole::FrmLogConsole(QWidget *parent) :
         cursor.movePosition(QTextCursor::End);
         ui->txtLog->setTextCursor(cursor);
     });
-    LogDebug() << "Debug";
-    LogInfo() << "Info";
-    LogWarn() << "Warning";
-    LogError() << "Error";
-    LogDebug() << "Debug";
-    LogInfo() << "Info";
-    LogWarn() << "Warning";
-    LogError() << "Error";
 }
 
 FrmLogConsole::~FrmLogConsole()

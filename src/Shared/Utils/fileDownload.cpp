@@ -24,7 +24,7 @@ FileDownload::~FileDownload()
     //Wait for thread finish - deleting this object forbidden while
     //thread is running.
     while(worker && lock.try_lock() == false) //Thread exists, and lock is locked.
-        std::this_thread::sleep_for(1ms); //Wait for thread finish.
+        std::this_thread::sleep_for(std::chrono::milliseconds(1)); //Wait for thread finish.
     delete worker;      //Delete the worker thread.
     worker = nullptr;   //Mark as deleted.
 }
@@ -71,7 +71,7 @@ bool FileDownload::Download(const std::string &url, bool blocking)
             while(lock.try_lock() == true) //Wait for thread start.
             {
                 lock.unlock();
-                std::this_thread::sleep_for(1ms); //Wait for thread finish.
+                std::this_thread::sleep_for(std::chrono::milliseconds(1)); //Wait for thread finish.
             }
             return true; //Async download started successfully.
         }

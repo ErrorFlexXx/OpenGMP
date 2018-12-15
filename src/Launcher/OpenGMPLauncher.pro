@@ -41,7 +41,8 @@ SOURCES +=  main.cpp \
             ../Shared/Components/version.cpp \
             ../Shared/Utils/file.cpp \
             ../Shared/Utils/zipFile.cpp \
-            ../Shared/Utils/fileDownload.cpp
+            ../Shared/Utils/fileDownload.cpp \
+    frmLogConsole.cpp
 
 win32 {
     SOURCES += inject.cpp
@@ -61,7 +62,8 @@ HEADERS +=  \
             ../Shared/Utils/file.hpp \
             ../Shared/Utils/zipFile.hpp \
             ../Shared/Utils/fileDownload.hpp \
-            ../Shared/Utils/url.hpp
+            ../Shared/Utils/url.hpp \
+    frmLogConsole.h
 
 win32 {
     HEADERS += inject.h
@@ -69,7 +71,8 @@ win32 {
 
 FORMS +=    \
             frmMainSettings.ui \
-            frmMain.ui
+            frmMain.ui \
+    frmLogConsole.ui
 
 INCLUDEPATH += ../../lib \
                ../../lib/openssl/include \

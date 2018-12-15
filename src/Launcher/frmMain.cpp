@@ -24,6 +24,7 @@ FrmMain::FrmMain(QWidget *parent)
     , config("Settings.json")
     , ui(new Ui::FrmMain)
     , serverListName("Serverlist.json")
+    , frmLogConsole(parent)
 {
     ui->setupUi(this);
     if(!config.Load())
@@ -186,8 +187,8 @@ void FrmMain::on_btnTest_clicked()
 //    }
 //    ServerStorage::LoadCachedServerlist("serverlist.json", serverlist);
 //    ServerStorage::StoreCachedServerList("serverlist.json", serverlist);
-//    ClientStore testStore;
-//    testStore.Download(serverList.front().version);
+    ClientStore testStore;
+    testStore.Download(serverList.front().version);
 }
 
 void FrmMain::on_actionExit_triggered()
@@ -199,4 +200,9 @@ void FrmMain::on_actionMainSettings_triggered()
 {
     FrmMainSettings frmSettings(this);
     frmSettings.exec(); //Open modal.
+}
+
+void FrmMain::on_actionLog_Console_triggered()
+{
+    frmLogConsole.open();
 }

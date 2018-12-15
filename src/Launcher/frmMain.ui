@@ -114,8 +114,17 @@
     </property>
     <addaction name="actionMainSettings"/>
    </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>?</string>
+    </property>
+    <addaction name="actionLog_Console"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
+   </widget>
    <addaction name="menuSettings"/>
    <addaction name="menuSettings_2"/>
+   <addaction name="menu"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -134,6 +143,16 @@
   <action name="actionMainSettings">
    <property name="text">
     <string>Main Settings</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionLog_Console">
+   <property name="text">
+    <string>Log Console</string>
    </property>
   </action>
  </widget>

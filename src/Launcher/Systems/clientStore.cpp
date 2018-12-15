@@ -39,6 +39,7 @@ void ClientStore::Download(const Version &version)
     std::string downloadUrl = storeUrl;
     downloadUrl.append(VersionSystem::GetVersionString(version.version));
     downloadUrl.append("/Client.zip");
+    LogInfo() << "ClientStore start download to: " << download.Fullpath() << " from " << downloadUrl;
     download.Download(downloadUrl, true);
 }
 

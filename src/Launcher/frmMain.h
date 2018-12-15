@@ -3,6 +3,7 @@
 #include <Launcher/Systems/serverCommunicator.hpp>
 #include <Launcher/Objects/jsonFile.hpp>
 #include <Launcher/Objects/lserver.hpp>
+#include <Launcher/frmLogConsole.h>
 #include <QMainWindow>
 #include <QTimer>
 #include <QThread>
@@ -61,9 +62,12 @@ private slots:
      */
     void UpdateServerEntryNowOffline(const OpenGMP::LServer &server);
 
+    void on_actionLog_Console_triggered();
+
 private:
     Ui::FrmMain *ui;
     OpenGMP::ServerCommunicator *serverCommunicatorTask; //!<Task to update all server entries in a loop.
-    QThread *serverCommunicator; //!< Thread to decouple comm. from the ui thread.
-    std::string serverListName; //!< Filename of serverlist.
+    QThread *serverCommunicator;    //!< Thread to decouple comm. from the ui thread.
+    std::string serverListName;     //!< Filename of serverlist.
+    FrmLogConsole frmLogConsole;    //!< Log Console window.
 };

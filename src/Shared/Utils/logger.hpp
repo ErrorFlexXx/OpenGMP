@@ -81,7 +81,7 @@ namespace OpenGMP
          * @brief SetCallbackFunction installs a callback func. that gets called
          *   every time a log message is ready.
          */
-        void SetCallbackFunction(std::function<void(const std::string&)> callback)
+        void SetCallbackFunction(std::function<void(int, const std::string&)> callback)
         {
             Flush(MessageTypeCount, nullptr, &callback);
         }
@@ -91,7 +91,7 @@ namespace OpenGMP
          */
         void ResetCallbackFunction()
         {
-            Flush(MessageTypeCount, nullptr, reinterpret_cast<std::function<void(const std::string&)>*>(-1));
+            Flush(MessageTypeCount, nullptr, reinterpret_cast<std::function<void(int, const std::string&)>*>(-1));
         }
         
         /**
@@ -221,13 +221,13 @@ namespace OpenGMP
          */
         void Flush(MessageType switchLogLevel = MessageTypeCount,
                    const char *setLogFilepath = nullptr,
-                   std::function<void(const std::string&)> *setCallback = nullptr)
+                   std::function<void(int, const std::string&)> *setCallback = nullptr)
         {
             //Static class arguments (in header only library style)
             static MessageType logLevel = Warning;  //Default: Only output bad news.
             static bool logToFile = false;          //Default: File log disabled
             static std::string logFilepath;         //Default: No file set.
-            static std::function<void(const std::string&)> callback;
+            static std::function<void(int, const std::string&)> callback;
 
             if(switchLogLevel < MessageTypeCount) //Switch requested and valid level ?
             {
@@ -258,8 +258,8 @@ namespace OpenGMP
             }
             else if(setCallback) //Set callback function ?
             {
-                if(setCallback == reinterpret_cast<std::function<void(const std::string&)>*>(-1)) //Reset ?
-                    callback = [] (const std::string&) {};
+                if(setCallback == reinterpret_cast<std::function<void(int, const std::string&)>*>(-1)) //Reset ?
+                    callback = [] (int, const std::string&) {};
                 else
                     callback = *setCallback;
             }
@@ -270,7 +270,7 @@ namespace OpenGMP
                 {
                     //Log callback task:
                     if(callback)
-                        callback(output);
+                        callback(type, output);
                     //Log to std output:
                     if(type >= Warning)
                         std::cerr << output << std::endl;

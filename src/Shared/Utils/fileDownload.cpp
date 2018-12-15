@@ -153,5 +153,5 @@ bool FileDownload::DownloadBase(httplib::Client &client, const Url &url)
 
 void FileDownload::ProgressUpdate(uint64_t len, uint64_t total)
 {
-    LogInfo() << len << "/" << total;
+    ;
 }

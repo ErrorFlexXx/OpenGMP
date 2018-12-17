@@ -43,11 +43,7 @@ SOURCES +=  main.cpp \
             ../Shared/Utils/file.cpp \
             ../Shared/Utils/zipFile.cpp \
             ../Shared/Utils/fileDownload.cpp \
-            ../../lib/ZenLib/lib/physfs/src/*.c
-#            ../../lib/ZenLib/lib/physfs/src/physfs_archiver_zip.c \
-#            ../../lib/ZenLib/lib/physfs/src/physfs_platform_windows.c \
-#            ../../lib/ZenLib/lib/physfs/src/physfs_platform_unix.c \
-#            ../../lib/ZenLib/lib/physfs/src/physfs_platform_posix.c
+            ../../lib/physfs/src/*.c
 
 win32 {
     SOURCES += inject.cpp
@@ -81,11 +77,12 @@ FORMS +=    \
 
 INCLUDEPATH += ../../lib \
                ../../lib/openssl/include \
-               ../../lib/ZenLib/lib/physfs/src/ \
+               ../../lib/physfs/src/ \
                ../
 win32 {
     LIBS += -luser32 \
             -lws2_32 \
+            -ladvapi32 \ #Physfs - OpenProcessToken
             -L../../lib/openssl/lib \
             -llibsslMD \
             -llibcryptoMD

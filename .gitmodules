@@ -18,7 +18,7 @@
 	url = https://github.com/degenerated1123/ZenLib.git
 [submodule "lib/physfs"]
 	path = lib/physfs
-	url = https://github.com/REGoth-project/physfs.git
+	url = https://github.com/Didstopia/physfs.git
 [submodule "lib/cpp-httplib"]
 	path = lib/cpp-httplib
 	url = https://github.com/yhirose/cpp-httplib.git

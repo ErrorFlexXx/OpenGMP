@@ -14,7 +14,7 @@ using namespace OpenGMP;
 
 ClientStore::ClientStore(QObject *parent)
     : QObject(parent)
-    , installationDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).toStdString().append("/Clients"))
+    , installationDir(QStandardPaths::writableLocation(QStandardPaths::DataLocation).toStdString().append("/Clients"))
     , downloadDir(QStandardPaths::writableLocation(QStandardPaths::TempLocation).toStdString())
     , storeUrl("https://github.com/ErrorFlexXx/OpenGMP/releases/download/")
 {

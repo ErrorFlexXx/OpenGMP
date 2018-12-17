@@ -42,7 +42,12 @@ SOURCES +=  main.cpp \
             ../Shared/Components/version.cpp \
             ../Shared/Utils/file.cpp \
             ../Shared/Utils/zipFile.cpp \
-            ../Shared/Utils/fileDownload.cpp
+            ../Shared/Utils/fileDownload.cpp \
+            ../../lib/ZenLib/lib/physfs/src/*.c
+#            ../../lib/ZenLib/lib/physfs/src/physfs_archiver_zip.c \
+#            ../../lib/ZenLib/lib/physfs/src/physfs_platform_windows.c \
+#            ../../lib/ZenLib/lib/physfs/src/physfs_platform_unix.c \
+#            ../../lib/ZenLib/lib/physfs/src/physfs_platform_posix.c
 
 win32 {
     SOURCES += inject.cpp

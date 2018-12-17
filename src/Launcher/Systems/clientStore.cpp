@@ -1,6 +1,7 @@
 #include "clientStore.hpp"
 #include <Shared/Utils/logger.hpp>
 #include <Shared/Utils/fileDownload.hpp>
+#include <Shared/Utils/zipFile.hpp>
 #include <Shared/Components/version.hpp>
 #include <Shared/Systems/versionSystem.hpp>
 #include <experimental/filesystem>
@@ -41,6 +42,12 @@ void ClientStore::Download(const Version &version)
     downloadUrl.append("/Client.zip");
     LogInfo() << "ClientStore start download to: " << download.Fullpath() << " from " << downloadUrl;
     download.Download(downloadUrl, true);
+    ZipFile zip = download;
+    if(zip.Extract(installationDir))
+    {
+        LogInfo() << "Successfully installed Client version " << VersionSystem::GetVersionString(version.version);
+        download.Delete();
+    }
 }
 
 bool ClientStore::CreateStore() const

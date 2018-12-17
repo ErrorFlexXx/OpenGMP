@@ -17,11 +17,12 @@ ClientStore::ClientStore(QObject *parent)
     , installationDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).toStdString().append("/Clients"))
     , downloadDir(QStandardPaths::writableLocation(QStandardPaths::TempLocation).toStdString())
     , storeUrl("https://github.com/ErrorFlexXx/OpenGMP/releases/download/")
-{}
+{
+    CreateStore(); //Take care, store directory is created.
+}
 
 bool ClientStore::IsInstalled(const Version &version) const
 {
-    CreateStore();
     filesystem::path test(installationDir);
     test = test / VersionSystem::GetVersionString(version.version);
     error_code error;
@@ -52,12 +53,16 @@ void ClientStore::Download(const Version &version)
 
 bool ClientStore::CreateStore() const
 {
-    error_code error;
-    filesystem::create_directory(installationDir, error);
-    if(error)
+    if(!filesystem::exists(installationDir))
     {
-        LogError() << "Can't create dir: " << installationDir << ". " << error.message();
-        return false;
+        LogInfo() << "Client storage directory not found. Creating directory: " << installationDir << "...";
+        error_code error;
+        filesystem::create_directories(installationDir, error);
+        if(error)
+        {
+            LogError() << "Can't create dir: " << installationDir << ". " << error.message();
+            return false;
+        }
     }
     return true;
 }

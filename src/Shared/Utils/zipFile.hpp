@@ -12,8 +12,8 @@ namespace OpenGMP
     public:
         ZipFile(const std::string &filename);
 
-        ZipFile(const std::string &filename,
-                const std::string &directory);
+        ZipFile(const std::string &directory,
+                const std::string &filename);
 
         ZipFile(const File &copy);
 

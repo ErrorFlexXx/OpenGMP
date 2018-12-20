@@ -13,6 +13,7 @@
 #include <qfiledialog.h>
 #include <QMessageBox>
 #include <QDateTime>
+#include <QProgressBar>
 #include <map>
 #include <string>
 
@@ -25,6 +26,8 @@ FrmMain::FrmMain(QWidget *parent)
     , ui(new Ui::FrmMain)
     , serverListName("Serverlist.json")
     , frmLogConsole(parent)
+    , progressBar(nullptr)
+    , progressText(nullptr)
 {
     ui->setupUi(this);
     if(!config.Load())
@@ -39,7 +42,7 @@ FrmMain::FrmMain(QWidget *parent)
     serverCommunicatorTask  = new ServerCommunicator(parent);
     serverCommunicatorTask->SetServerList(serverList);
     serverCommunicatorTask->moveToThread(serverCommunicator);
-    //Connect Signals:
+    //Connect Signals (Serverlist update):
     connect(serverCommunicatorTask, SIGNAL(UpdateServerEntry(const OpenGMP::LServer)), this, SLOT(UpdateServerEntry(const OpenGMP::LServer)));
     connect(serverCommunicatorTask, SIGNAL(UpdateServerEntryNowOnline(const OpenGMP::LServer)), this, SLOT(UpdateServerEntryNowOnline(const OpenGMP::LServer)));
     connect(serverCommunicatorTask, SIGNAL(UpdateServerEntryNowOffline(const OpenGMP::LServer)), this, SLOT(UpdateServerEntryNowOffline(const OpenGMP::LServer)));
@@ -49,12 +52,64 @@ FrmMain::FrmMain(QWidget *parent)
     connect(serverCommunicator, SIGNAL(finished()), serverCommunicator, SLOT(deleteLater()));           //Let Qt free the Thread
     connect(this, SIGNAL(UpdatedServerList(const std::list<OpenGMP::LServer>&)), serverCommunicatorTask, SLOT(SetServerList(const std::list<OpenGMP::LServer>&)));
     serverCommunicator->start();
+    //Connect Signals (ClientStore)
+    connect(&clientStore, SIGNAL(ProgressBegin(QString)), this, SLOT(ProgressBegin(QString)));
+    connect(&clientStore, SIGNAL(ProgressUpdate(int, QString)), this, SLOT(ProgressUpdate(int, QString)));
+    connect(&clientStore, SIGNAL(ProgressUpdate(int)), this, SLOT(ProgressUpdate(int)));
+    connect(&clientStore, SIGNAL(ProgressFinished()), this, SLOT(ProgressFinished()));
+    connect(this, SIGNAL(StartClient(OpenGMP::LServer)), &clientStore, SLOT(Start(OpenGMP::LServer)));
+    clientStoreThread = new QThread();
+    clientStore.moveToThread(clientStoreThread);
+    clientStoreThread->start();
 }
 
 FrmMain::~FrmMain()
 {
     serverCommunicatorTask->Stop();
     delete ui;
+}
+
+void FrmMain::ProgressBegin(const QString &text)
+{
+    if(!progressText)
+    {   //Creation:
+        progressText = new QLabel();
+        ui->statusBar->insertPermanentWidget(0, progressText);
+    }
+    progressText->setText(text); //Setup
+
+    if(!progressBar)
+    {   //Creation:
+        progressBar = new QProgressBar();
+        ui->statusBar->insertPermanentWidget(1, progressBar, 1);
+    }
+    progressBar->setMaximum(100); //Setup
+    progressBar->setValue(0);
+
+    ui->statusBar->show();
+}
+
+void FrmMain::ProgressUpdate(int progress, const QString &text)
+{
+    if(progressBar)
+    {
+        progressBar->setValue(progress);
+    }
+    if(progressText)
+    {
+        progressText->setText(text);
+    }
+}
+
+void FrmMain::ProgressUpdate(int progress)
+{
+    if(progressBar)
+        progressBar->setValue(progress);
+}
+
+void FrmMain::ProgressFinished()
+{
+    ui->statusBar->hide();
 }
 
 void FrmMain::UpdateServerEntry(const OpenGMP::LServer &server)
@@ -187,8 +242,7 @@ void FrmMain::on_btnTest_clicked()
 //    }
 //    ServerStorage::LoadCachedServerlist("serverlist.json", serverlist);
 //    ServerStorage::StoreCachedServerList("serverlist.json", serverlist);
-    ClientStore testStore;
-    testStore.Download(serverList.front().version);
+    emit StartClient(*serverList.begin());
 }
 
 void FrmMain::on_actionExit_triggered()

@@ -9,8 +9,8 @@ ZipFile::ZipFile(const std::string &filename)
     : File(filename)
 {}
 
-ZipFile::ZipFile(const std::string &filename, const std::string &directory)
-    : File(filename, directory)
+ZipFile::ZipFile(const std::string &directory, const std::string &filename)
+    : File(directory, filename)
 {}
 
 ZipFile::ZipFile(const File &copy)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Launcher/Systems/serverCommunicator.hpp>
+#include <Launcher/Systems/clientStore.hpp>
 #include <Launcher/Objects/jsonFile.hpp>
 #include <Launcher/Objects/lserver.hpp>
 #include <Launcher/frmLogConsole.h>
@@ -15,6 +16,8 @@ namespace Ui {
 }
 
 class QTreeWidgetItem;
+class QLabel;
+class QProgressBar;
 
 class FrmMain : public QMainWindow
 {
@@ -37,6 +40,33 @@ signals:
      * @param serverList which is now current.
      */
     void UpdatedServerList(const std::list<OpenGMP::LServer> &serverList);
+
+    void StartClient(const OpenGMP::LServer &server);
+
+public slots:
+    /**
+     * @brief ProgressBegin slot initializing a shown progress.
+     * @param text to show initially.
+     */
+    void ProgressBegin(const QString &text);
+
+    /**
+     * @brief ProgressUpdate slot updating a progress visualization on the form.
+     * @param progress percentual progress.
+     * @param text descriptive text.
+     */
+    void ProgressUpdate(int progress, const QString &text);
+
+    /**
+     * @brief ProgressUpdate updating a progress visualization on the form.
+     * @param progress percentual progress.
+     */
+    void ProgressUpdate(int progress);
+
+    /**
+     * @brief ProgressFinished removes the status bar.
+     */
+    void ProgressFinished();
 
 private slots:
     void on_btnTest_clicked();
@@ -70,4 +100,8 @@ private:
     QThread *serverCommunicator;    //!< Thread to decouple comm. from the ui thread.
     std::string serverListName;     //!< Filename of serverlist.
     FrmLogConsole frmLogConsole;    //!< Log Console window.
+    OpenGMP::ClientStore clientStore;   //!< Client store object.
+    QThread *clientStoreThread;     //!< Thread to do ui decoupled actions.
+    QProgressBar *progressBar;
+    QLabel *progressText;
 };

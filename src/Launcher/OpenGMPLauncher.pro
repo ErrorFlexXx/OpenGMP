@@ -38,6 +38,7 @@ SOURCES +=  main.cpp \
             Objects/jsonFile.cpp \
             Objects/lserver.cpp \
             Objects/qFileDownload.cpp \
+            Objects/qZipFile.cpp \
             ../Shared/Systems/versionSystem.cpp \
             ../Shared/Components/version.cpp \
             ../Shared/Utils/file.cpp \
@@ -59,6 +60,7 @@ HEADERS +=  \
             Objects/jsonFile.hpp \
             Objects/lserver.hpp \
             Objects/qFileDownload.hpp \
+            Objects/qZipFile.hpp \
             ../Shared/Components/version.hpp \
             ../Shared/Objects/server.hpp \
             ../Shared/Utils/file.hpp \

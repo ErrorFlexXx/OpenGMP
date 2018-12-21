@@ -37,6 +37,11 @@ bool ClientStore::IsInstalled(const Version &version) const
     return exists;
 }
 
+void ClientStore::SetGothicPath(const std::string &path)
+{
+    gothicDir = path;
+}
+
 void ClientStore::Download(const Version &version)
 {
     FileDownload download(downloadDir, "Client.zip");

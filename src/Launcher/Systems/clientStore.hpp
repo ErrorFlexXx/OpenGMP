@@ -25,6 +25,8 @@ namespace OpenGMP
 
         bool IsInstalled(const Version &version) const;
 
+        void SetGothicPath(const std::string &path);
+
     signals:
         /**
          * @brief ProgressBegin emitted if a progress action starts.
@@ -80,7 +82,8 @@ namespace OpenGMP
         QObject *parent;
         std::string installationDir;    //!< Directory for installed clients.
         std::string downloadDir;        //!< Directory for new downloads.
-        std::string storeUrl;           //!< Url to release directory
+        std::string storeUrl;           //!< Url to release directory.
+        std::string gothicDir;          //!< Path to Gothic II /System directory.
         int maxSubstepProgress;         //!< Progress percentage after current substep finished.
 
         bool CreateStore() const;

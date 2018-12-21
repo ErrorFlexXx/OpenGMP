@@ -41,9 +41,59 @@ signals:
      */
     void UpdatedServerList(const std::list<OpenGMP::LServer> &serverList);
 
+    /**
+     * @brief StartClient signal, that starts a client. Normally linked to ClientStore slot start.
+     * @param server to start a client for.
+     */
     void StartClient(const OpenGMP::LServer &server);
 
-public slots:
+private slots:
+
+    void on_btnTest_clicked();
+
+    /**
+     * @brief StartSelectedClient slot to start a selected client (via contextSelectedItem ptr var.)
+     */
+    void StartSelectedClient();
+
+    /**
+     * @brief customMenuRequested slot for the context menu of the tree widget.
+     * @param pos that was clicked at.
+     */
+    void CustomMenuRequested(QPoint pos);
+
+    /**
+     * @brief TreeWidgetItemDoubleClicked slot for tree widget item double clicked.
+     * @param item that has been double clicked.
+     * @param column. Unused.
+     */
+    void TreeWidgetItemDoubleClicked(QTreeWidgetItem *item, int column);
+
+    /******************************************
+     * Server Communicator update slots:
+     ******************************************/
+    /**
+     * @brief UpdateServerEntry updates the form data of a server entry in the treeView.
+     * @param server object data to update with.
+     */
+    void UpdateServerEntry(const OpenGMP::LServer &server);
+
+    /**
+     * @brief UpdateServerEntryNowOnline same as UpdateServerEntry, but with additional tasks.
+     *   Updates the local store with new server informations (e.g. Name/Version).
+     * @param server
+     */
+    void UpdateServerEntryNowOnline(const OpenGMP::LServer &server);
+
+    /**
+     * @brief UpdateServerEntryNowOffline updates a server entry. Server moved from on-, to offline.
+     * @param server entry to update.
+     */
+    void UpdateServerEntryNowOffline(const OpenGMP::LServer &server);
+
+    /******************************************
+     * Client store progress status bar slots:
+     ******************************************/
     /**
      * @brief ProgressBegin slot initializing a shown progress.
      * @param text to show initially.
@@ -68,31 +118,23 @@ public slots:
      */
     void ProgressFinished();
 
-private slots:
-    void on_btnTest_clicked();
-    void on_actionExit_triggered();
-    void on_actionMainSettings_triggered();
-
+    /*****************
+     * Menu bar slots:
+     *****************/
     /**
-     * @brief UpdateServerEntry updates the form data of a server entry in the treeView.
-     * @param server object data to update with.
+     * @brief on_actionLog_Console_triggered Menu entry opening the log console.
      */
-    void UpdateServerEntry(const OpenGMP::LServer &server);
-
-    /**
-     * @brief UpdateServerEntryNowOnline same as UpdateServerEntry, but with additional tasks.
-     *   Updates the local store with new server informations (e.g. Name/Version).
-     * @param server
-     */
-    void UpdateServerEntryNowOnline(const OpenGMP::LServer &server);
-
-    /**
-     * @brief UpdateServerEntryNowOffline updates a server entry. Server moved from on-, to offline.
-     * @param server entry to update.
-     */
-    void UpdateServerEntryNowOffline(const OpenGMP::LServer &server);
-
     void on_actionLog_Console_triggered();
+
+    /**
+     * @brief on_actionExit_triggered Menu entry closing the application.
+     */
+    void on_actionExit_triggered();
+
+    /**
+     * @brief on_actionMainSettings_triggered Menu entry opening the main settings dialog.
+     */
+    void on_actionMainSettings_triggered();
 
 private:
     Ui::FrmMain *ui;
@@ -102,6 +144,24 @@ private:
     FrmLogConsole frmLogConsole;    //!< Log Console window.
     OpenGMP::ClientStore clientStore;   //!< Client store object.
     QThread *clientStoreThread;     //!< Thread to do ui decoupled actions.
-    QProgressBar *progressBar;
-    QLabel *progressText;
+    QProgressBar *progressBar;      //!< Progressbar located in the status bar.
+    QLabel *progressText;           //!< Text shown in the status bar.
+    QTreeWidgetItem *contextSelectedItem; //!< Currently selected tree item, if any.
+
+    /**
+     * @brief SetupServerCommunicator setup of signal/slots for server communicator thread.
+     *   Does start the actual thread, too.
+     */
+    void SetupServerCommunicator();
+
+    /**
+     * @brief SetupClientStore setup of signal/slots for the client store thread.
+     *   Does start the actual thread, too.
+     */
+    void SetupClientStore();
+
+    /**
+     * @brief SetupTreeViewActions setup of the context menu and double click handler for the serverlist tree view.
+     */
+    void SetupTreeViewActions();
 };
